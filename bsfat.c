@@ -1,12 +1,15 @@
+#include <utime.h>
+#include <unistd.h>
 #include "bsfat.h"
 
 // TODO:
 //
-// allow non consecutive writes
 // implement reading and writing files
+// allow non consecutive writes
 // implement directories
 // implement export
 // implement import
+// createFile itself needs to allocate string filename
 
 // write doxygen
 
@@ -90,7 +93,33 @@ size_t getFreeDiskSpace(BsFat *pFat) {
     return amountFreeBlocks * pFat->blockSize;
 }
 
-BsFile **createFile(BsFat *pFat, size_t szFile, const char *filename, long timestamp) {
+void writeBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer) {
+    if (bIndex > pFat->amountBlocks) {
+        fprintf(stderr, "Block Index too high! Can't write outside the disk!!\n");
+        return;
+    }
+    size_t diskOffset = bIndex * pFat->blockSize;
+    if (pFat->disk + diskOffset > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
+        fprintf(stderr, "Can't write outside the disk!!\n");
+        return;
+    }
+    memcpy(buffer, pFat->disk + diskOffset, pFat->blockSize);
+}
+
+void readBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer) {
+    if (bIndex > pFat->amountBlocks) {
+        fprintf(stderr, "Block Index too high! Can't read outside the disk!!\n");
+        return;
+    }
+    size_t diskOffset = bIndex * pFat->blockSize;
+    if (pFat->disk + diskOffset > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
+        fprintf(stderr, "Can't read outside the disk!!\n");
+        return;
+    }
+    memcpy(pFat->disk + diskOffset, buffer, pFat->blockSize);
+}
+
+BsFile **createFile(BsFat *pFat, size_t szFile, const char *filename, long timestamp, unsigned char* buffer) {
     // Find an available file slot
     BsFile **searchResult = NULL;
     for (size_t i = 0; i < AMOUNT_FILES; i++) {
@@ -172,6 +201,38 @@ BsFile **createFile(BsFat *pFat, size_t szFile, const char *filename, long times
     return searchResult;
 }
 
+int count_path_components(const char *path) {
+    int count = 0;
+    for (int i = 0; path[i]; i++) {
+        if (path[i] == '/')
+            count++;
+    }
+    return count;
+}
+
+BsFile *findFileByPath(BsFat *pFat, const char* path){
+    BsFile **pFile = pFat->files;
+    bool found = false;
+    if (strcmp(path, "/") == 0) {
+        return NULL;
+    }
+    if (count_path_components(path) == 1) {
+        const char *filename = path + 1;
+        do {
+            if (*pFile != NULL && strcmp((*pFile)->filename, filename) == 0) {
+                found = true;
+                break;
+            }
+        } while (++pFile != pFat->files + AMOUNT_FILES);
+    }
+    if (found) {
+        return *pFile;
+    }else {
+        return NULL;
+    }
+
+}
+
 void deleteFile(BsFat *pFat, const char *filename) {
     BsFile **pFile = pFat->files;
     bool found = false;
@@ -229,7 +290,7 @@ void showFat(BsFat *pFat, char *outputMessage) {
     for (size_t bIndex = 0; bIndex < pFat->amountBlocks; bIndex++) {
         unsigned int state = pFat->blocks[bIndex].state;
         if (state == allocated && bufferIndex < 508) {
-            unsigned char clusterIndexChar = pFat->blocks[bIndex].cluster->clusterIndex + '0';
+            char clusterIndexChar = pFat->blocks[bIndex].cluster->clusterIndex + '0';
             buffer[bufferIndex++] = clusterIndexChar;
         } else if (bufferIndex < 508) {
             buffer[bufferIndex++] = letterMap[state]; // 508
@@ -312,7 +373,6 @@ bool checkIntegrity(BsFat *pFat) {
 }
 
 void checkForDefragmentation(BsFat *pFat) {
-    BsFile **pFile = pFat->files;
     unsigned int blocksInCorrectPos = 0;
     int currentFileIndex = -1;
     int currentClusterIndex = -1;
@@ -336,8 +396,8 @@ void checkForDefragmentation(BsFat *pFat) {
             }
         }
         if (pBlock->cluster->next != NULL) {
-            currentFileIndex = pBlock->cluster->fileIndex;
-            currentClusterIndex = pBlock->cluster->clusterIndex;
+            currentFileIndex = (int) pBlock->cluster->fileIndex;
+            currentClusterIndex = (int) pBlock->cluster->clusterIndex;
         } else {
             currentFileIndex = -1;
             currentClusterIndex = -1;
@@ -405,4 +465,147 @@ bool swapBlocks(BsFat *pFat, size_t bIndexA, size_t bIndexB) {
 
     return true;
 }
+
+size_t getAmountEntries(BsFat *pFat, const char* path) {
+    if (strcmp(path, "/") == 0) {
+        size_t amount = 0;
+        for(BsFile **pFile = pFat->files; pFile < pFat->files + AMOUNT_FILES; pFile++) {
+            if (*pFile != NULL) {
+                amount++;
+            }
+        }
+        return amount;
+    }
+    return 2;
+}
+
+/**
+ * @brief Get file attributes (metadata such as permissions, size, etc.).
+ *
+ * @param path The path to the file or directory.
+ * @param stbuf A pointer to the struct where the attributes will be stored.
+ * @param fi A pointer to the fuse_file_info structure containing information about the file.
+ * @return 0 on success, or a negative value on failure.
+ */
+int stegFS_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
+    BsFat *pFat = (BsFat *)fuse_get_context()->private_data;
+
+    // Check if the path corresponds to the root directory
+    if (strcmp(path, "/") == 0) {
+        // Set default values for the root directory
+        stbuf->st_mode = S_IFDIR | 0777; // Directory with 755 permissions
+        stbuf->st_nlink = 2; // Number of hard links (including . and ..)
+        stbuf->st_nlink += getAmountEntries(pFat, path);
+        // Other fields can be set as per your requirements (e.g., st_uid, st_gid, st_size, st_atime, st_mtime, etc.)
+
+        return 0; // Return success
+    }else {
+        BsFile *pFile = findFileByPath(pFat, path);
+        if (pFile != NULL) {
+            stbuf->st_mode = S_IFREG | 0666; // Regular file with 666 permissions
+            stbuf->st_nlink = 1; // Number of hard links (including . and ..)
+            stbuf->st_size = (__off_t) pFile->filesize;
+            stbuf->st_uid = 1000;
+            stbuf->st_gid = 1000;
+
+
+            // Set access time and modification time based on the Unix timestamp
+            time_t timestamp = pFile->timestamp;
+
+            // Set access time (st_atim)
+            stbuf->st_atim.tv_sec = timestamp;
+            stbuf->st_atim.tv_nsec = 0;
+
+            // Set modification time (st_mtim)
+            stbuf->st_mtim.tv_sec = timestamp;
+            stbuf->st_mtim.tv_nsec = 0;
+
+            return 0;
+        }
+        return -ENOENT; // ENOENT indicates "No such file or directory"
+    }
+}
+/**
+ * @brief Read directory entries.
+ *
+ * @param path The path to the directory.
+ * @param buf A buffer to fill with directory entries.
+ * @param filler A function used to add directory entries to the buffer.
+ * @param offset The offset to read from in the directory.
+ * @param fi A pointer to the fuse_file_info structure containing information about the directory.
+ * @return 0 on success, or a negative value on failure.
+ */
+int stegFS_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
+                   enum fuse_readdir_flags flags) {
+    // Add entries for the root directory
+    if (strcmp(path, "/") == 0)
+    {
+        filler(buf, "..", NULL, 0, 0);
+        filler(buf, ".", NULL, 0, 0);
+        BsFat *pFat = (BsFat *)fuse_get_context()->private_data;
+        for(BsFile **pFile = pFat->files; pFile < pFat->files + AMOUNT_FILES; pFile++) {
+            if (*pFile != NULL) {
+                filler(buf, (*pFile)->filename, NULL, 0, 0);
+            }
+        }
+    }
+    return 0;
+}
+
+struct fuse_operations stegfs_fuse_oper = {
+        .getattr = stegFS_getattr,
+        .readdir = stegFS_readdir,
+        //.create = stegFS_create
+};
+
+///**
+// * @brief Open a file.
+// *
+// * @param path The path to the file.
+// * @param fi A pointer to the fuse_file_info structure containing information about the file.
+// * @return 0 on success, or a negative value on failure.
+// */
+//static int stegFS_open(const char *path, struct fuse_file_info *fi);
+//
+///**
+// * @brief Read data from a file.
+// *
+// * @param path The path to the file.
+// * @param buf A buffer to store the read data.
+// * @param size The number of bytes to read.
+// * @param offset The offset to read from in the file.
+// * @param fi A pointer to the fuse_file_info structure containing information about the file.
+// * @return The number of bytes read on success, or a negative value on failure.
+// */
+//static int stegFS_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+//
+///**
+// * @brief Write data to a file.
+// *
+// * @param path The path to the file.
+// * @param buf A buffer containing the data to write.
+// * @param size The number of bytes to write.
+// * @param offset The offset to write to in the file.
+// * @param fi A pointer to the fuse_file_info structure containing information about the file.
+// * @return The number of bytes written on success, or a negative value on failure.
+// */
+//static int stegFS_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+//
+///**
+///**
+// * @brief Create a new directory.
+// *
+// * @param path The path to the new directory.
+// * @param mode The directory mode/permissions.
+// * @return 0 on success, or a negative value on failure.
+// */
+//static int stegFS_mkdir(const char *path, mode_t mode);
+//
+///**
+// * @brief Delete a file.
+// *
+// * @param path The path to the file to be deleted.
+// * @return 0 on success, or a negative value on failure.
+// */
+//static int stegFS_unlink(const char *path);
 

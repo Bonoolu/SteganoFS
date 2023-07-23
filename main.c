@@ -130,7 +130,7 @@ bool testCreateFileValid() {
     long timestamp = time(NULL);
     bool passed = true;
 
-    BsFile **file = createFile(pFat, szFile, filename, timestamp);
+    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
     if (file == NULL) {
         printf("testCreateFileValid test failed: Failed to create file.\n");
         passed = false;
@@ -153,7 +153,7 @@ bool testCreateFileInsufficientMemory() {
     long timestamp = time(NULL);
     bool passed = true;
 
-    BsFile **file = createFile(pFat, szFile, filename, timestamp);
+    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
     if (file != NULL) {
         printf("testCreateFileInsufficientMemory test failed: File created despite insufficient memory.\n");
         passed = false;
@@ -179,7 +179,7 @@ bool testCreateFileNoAvailableFileSlot() {
 
     // Fill all available file slots
     for (size_t i = 0; i < AMOUNT_FILES; i++) {
-        BsFile **file = createFile(pFat, szFile, filename, timestamp);
+        BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
         if (file == NULL) {
             printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
             return false;
@@ -187,7 +187,7 @@ bool testCreateFileNoAvailableFileSlot() {
         printf("Free Space is now: %zu\n", getFreeDiskSpace(pFat));
     }
 
-    BsFile **file = createFile(pFat, szFile, filename, timestamp);
+    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
     if (file != NULL) {
         printf("testCreateFileNoAvailableFileSlot test failed: File created despite no available file slot.\n");
         passed = false;
@@ -210,7 +210,7 @@ bool testCreateFileInsufficientFreeBlocks() {
     long timestamp = time(NULL);
     bool passed = true;
 
-    BsFile **file = createFile(pFat, szFile, filename, timestamp);
+    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
     if (file != NULL) {
         printf("testCreateFileInsufficientFreeBlocks test failed: File created despite insufficient free blocks.\n");
         passed = false;
@@ -232,7 +232,7 @@ bool testCreateFileLinkedList() {
     size_t szFile = 2048u;  // Requires 4 clusters
     const char *filename = "/home/henry/dogs.gif";
     long timestamp = time(NULL);
-    BsFile **file = createFile(pFat, szFile, filename, timestamp);
+    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
     if (file == NULL) {
         printf("testCreateFileLinkedList test failed: createFile failed and returned NULL.\n");
         return false;
@@ -284,7 +284,7 @@ bool testDeleteFileValid() {
     size_t szFile = 512u;
     const char *filename = "/home/henry/cats.gif";
     long timestamp = time(NULL);
-    BsFile **file = createFile(pFat, szFile, filename, timestamp);
+    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
     if (file == NULL) {
         printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
         return false;
@@ -324,7 +324,7 @@ bool testDeleteFileNonExistent() {
     size_t szFile = 512u;
     const char *filename = "/home/henry/cats.gif";
     long timestamp = time(NULL);
-    BsFile **file = createFile(pFat, szFile, filename, timestamp);
+    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
     if (file == NULL) {
         printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
         return false;
@@ -367,7 +367,7 @@ bool testDeleteFileWithClusters() {
     size_t szFile = 512u;
     const char *filename = "/home/henry/cats.gif";
     long timestamp = time(NULL);
-    BsFile **file = createFile(pFat, szFile, filename, timestamp);
+    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
     if (file == NULL) {
         printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
         return false;
@@ -433,8 +433,8 @@ bool testSwapBlocksIntegrity() {
     }
 
     // Swap two allocated Blocks
-    createFile(pFat, 1, "file1", time(NULL));
-    createFile(pFat, 1, "file2", time(NULL));
+    createFile(pFat, 1, "file1", time(NULL), NULL);
+    createFile(pFat, 1, "file2", time(NULL), NULL);
     swapResult = swapBlocks(pFat, 0, 1);
     if (!swapResult || strcmp(pFat->files[pFat->blocks[0].cluster->fileIndex]->filename, "file2") != 0
         || strcmp(pFat->files[pFat->blocks[1].cluster->fileIndex]->filename, "file1") != 0) {
@@ -448,7 +448,7 @@ bool testSwapBlocksIntegrity() {
     }
 
     // Swapping a free block with an allocated block
-    createFile(pFat, 1, "file3", time(NULL));
+    createFile(pFat, 1, "file3", time(NULL), NULL);
     swapResult = swapBlocks(pFat, 2, 3);
     if (!swapResult || strcmp(pFat->files[pFat->blocks[3].cluster->fileIndex]->filename, "file3") != 0) {
         printf("testSwapBlocksIntegrity test failed: Failed to swap a free block with an allocated block.\n");
@@ -500,7 +500,7 @@ bool testSwapBlocksIntegrity() {
     }
 
     // Swapping a free block with a defect block
-    createFile(pFat, 1, "file4", time(NULL));
+    createFile(pFat, 1, "file4", time(NULL), NULL);
     pFat->blocks[10].state = reserved;
 
     swapResult = swapBlocks(pFat, 10, 11);
@@ -524,17 +524,17 @@ bool testDefragmentation() {
     // Create a valid file
     BsFat *pFat = createBsFat(2048, 64);
     size_t szFile = 512u;
-    BsFile **file = createFile(pFat, szFile, "/home/henry/cats.gif", time(NULL));
+    BsFile **file = createFile(pFat, szFile, "/home/henry/cats.gif", time(NULL), NULL);
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
         return false;
     }
-    file = createFile(pFat, szFile, "/home/henry/dogs.gif", time(NULL));
+    file = createFile(pFat, szFile, "dogs.gif", time(NULL), NULL);
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
         return false;
     }
-    file = createFile(pFat, szFile, "/home/henry/birds.gif", time(NULL));
+    file = createFile(pFat, szFile, "birds.gif", time(NULL), NULL);
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
         return false;
@@ -551,8 +551,7 @@ bool testDefragmentation() {
     return true;
 }
 
-int main() {
-
+void runTests() {
     int tests[] = {
             testCreateBsFat(),
             testGetFreeDiskSpaceEmptyFat(),
@@ -585,5 +584,30 @@ int main() {
         pTests++;
     }
     printf("%zu/%zu tests passed!\n", passed, sum);
-    return 0;
+}
+
+int test_fuse(int argc, char** argv){
+    BsFat *pFat = createBsFat(2048, 64);
+    size_t szFile = 512u;
+    BsFile **file = createFile(pFat, szFile, "cats.gif", time(NULL), NULL);
+    if (file == NULL) {
+        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    file = createFile(pFat, szFile, "dogs.gif", time(NULL), NULL);
+    if (file == NULL) {
+        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    file = createFile(pFat, szFile, "birds.gif", time(NULL), NULL);
+    if (file == NULL) {
+        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    return fuse_main(argc, argv, &stegfs_fuse_oper, pFat);
+}
+
+int main(int argc, char** argv) {
+    runTests();
+    return test_fuse(argc, argv);
 }
