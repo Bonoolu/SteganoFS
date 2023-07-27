@@ -55,9 +55,7 @@ BsFat *createBsFat(size_t diskSize, size_t blockSize);
 void freeBsFat(BsFat *pFat);
 size_t getAmountEntries(BsFat *pFat, const char* path);
 size_t getFreeDiskSpace(BsFat *pFat);
-void writeBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer);
-void readBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer);
-BsFile **createFile(BsFat *pFat, size_t szFile, const char *filename, long timestamp, unsigned char* buffer);
+//void readBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer);
 void deleteFile(BsFat *pFat, const char *filename);
 void showFat(BsFat *pFat, char* outputMessage);
 bool checkIntegrity(BsFat *pFat);
@@ -68,7 +66,10 @@ int count_path_components(const char *path);
 BsFile *findFileByPath(BsFat *pFat, const char* path);
 int stegFS_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
 int stegFS_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags);
-//int stegFS_create(const char *path, mode_t mode, struct fuse_file_info *fi);
+BsFile **createFile(BsFat *pFat, const char *filename, long timestamp);
+int stegFS_create(const char *path, mode_t mode, struct fuse_file_info *fi);
+int writeBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer, size_t offset, size_t length);
+int stegFS_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 
 extern struct fuse_operations stegfs_fuse_oper;
 ///**

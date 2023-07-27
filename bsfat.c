@@ -93,145 +93,20 @@ size_t getFreeDiskSpace(BsFat *pFat) {
     return amountFreeBlocks * pFat->blockSize;
 }
 
-void writeBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer) {
-    if (bIndex > pFat->amountBlocks) {
-        fprintf(stderr, "Block Index too high! Can't write outside the disk!!\n");
-        return;
-    }
-    size_t diskOffset = bIndex * pFat->blockSize;
-    if (pFat->disk + diskOffset > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
-        fprintf(stderr, "Can't write outside the disk!!\n");
-        return;
-    }
-    memcpy(buffer, pFat->disk + diskOffset, pFat->blockSize);
-}
+//
+//void readBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer, size_t offset, size_t length) {
+//    if (bIndex > pFat->amountBlocks) {
+//        fprintf(stderr, "Block Index too high! Can't read outside the disk!!\n");
+//        return;
+//    }
+//    size_t diskOffset = bIndex * pFat->blockSize;
+//    if (pFat->disk + diskOffset > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
+//        fprintf(stderr, "Can't read outside the disk!!\n");
+//        return;
+//    }
+//    memcpy(pFat->disk + diskOffset, buffer, pFat->blockSize);
+//}
 
-void readBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer) {
-    if (bIndex > pFat->amountBlocks) {
-        fprintf(stderr, "Block Index too high! Can't read outside the disk!!\n");
-        return;
-    }
-    size_t diskOffset = bIndex * pFat->blockSize;
-    if (pFat->disk + diskOffset > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
-        fprintf(stderr, "Can't read outside the disk!!\n");
-        return;
-    }
-    memcpy(pFat->disk + diskOffset, buffer, pFat->blockSize);
-}
-
-BsFile **createFile(BsFat *pFat, size_t szFile, const char *filename, long timestamp, unsigned char* buffer) {
-    // Find an available file slot
-    BsFile **searchResult = NULL;
-    for (size_t i = 0; i < AMOUNT_FILES; i++) {
-        if (pFat->files[i] == NULL) {
-            searchResult = &pFat->files[i];
-            break;
-        }
-    }
-    if (searchResult == NULL) {
-        fprintf(stderr, "Maximum amount of files are already allocated!\n");
-        return NULL;
-    }
-
-    // Calculate the number of blocks needed for the file
-    size_t amountBlocksToAllocate = szFile / pFat->blockSize;
-    if (szFile % pFat->blockSize != 0) {
-        amountBlocksToAllocate++;
-    }
-
-    // Check if enough consecutive free blocks are available
-    size_t consecutiveFreeBlocks = 0;
-    size_t startBlockIndex = 0;
-    for (size_t bIndex = 0; bIndex < pFat->amountBlocks; bIndex++) {
-        if (pFat->blocks[bIndex].state == free_) {
-            if (consecutiveFreeBlocks == 0) {
-                startBlockIndex = bIndex;
-            }
-            consecutiveFreeBlocks++;
-            if (consecutiveFreeBlocks >= amountBlocksToAllocate) {
-                break;
-            }
-        } else {
-            consecutiveFreeBlocks = 0;
-        }
-    }
-
-    if (consecutiveFreeBlocks < amountBlocksToAllocate) {
-        fprintf(stderr, "There are not enough consecutive free blocks for this file!\n");
-        return NULL;
-    }
-
-    // Allocate the blocks for the file
-    BsCluster *pCluster = (BsCluster *) malloc(amountBlocksToAllocate * sizeof(BsCluster));
-    if (!pCluster) {
-        fprintf(stderr, "Could not allocate memory!\n");
-        return NULL;
-    }
-    memset(pCluster, 0, amountBlocksToAllocate * sizeof(BsCluster));
-
-    size_t clusterIndex = 0;
-    for (size_t bIndex = startBlockIndex; bIndex < startBlockIndex + amountBlocksToAllocate; bIndex++) {
-        pFat->blocks[bIndex].state = allocated;
-        pFat->blocks[bIndex].bIndex = bIndex;
-        pFat->blocks[bIndex].cluster = &pCluster[clusterIndex];
-        pCluster[clusterIndex].bIndex = bIndex;
-        pCluster[clusterIndex].clusterIndex = clusterIndex;
-        pCluster[clusterIndex].fileIndex = searchResult - pFat->files;
-        if (clusterIndex > 0) {
-            pCluster[clusterIndex].prev = pCluster + clusterIndex - 1;
-            pCluster[clusterIndex - 1].next = pCluster + clusterIndex;
-        }
-        clusterIndex++;
-    }
-
-    // Create the file structure and update the file table
-    BsFile *pFile = (BsFile *) malloc(sizeof(BsFile));
-    if (!pFile) {
-        fprintf(stderr, "Could not allocate memory!\n");
-        free(pCluster);
-        return NULL;
-    }
-    pFile->filename = filename;
-    pFile->filesize = szFile;
-    pFile->timestamp = timestamp;
-    pFile->pCluster = pCluster;
-    *searchResult = pFile;
-
-    printf("Created file!\n");
-    return searchResult;
-}
-
-int count_path_components(const char *path) {
-    int count = 0;
-    for (int i = 0; path[i]; i++) {
-        if (path[i] == '/')
-            count++;
-    }
-    return count;
-}
-
-BsFile *findFileByPath(BsFat *pFat, const char* path){
-    BsFile **pFile = pFat->files;
-    bool found = false;
-    if (strcmp(path, "/") == 0) {
-        return NULL;
-    }
-    if (count_path_components(path) == 1) {
-        const char *filename = path + 1;
-        do {
-            if (*pFile != NULL && strcmp((*pFile)->filename, filename) == 0) {
-                found = true;
-                break;
-            }
-        } while (++pFile != pFat->files + AMOUNT_FILES);
-    }
-    if (found) {
-        return *pFile;
-    }else {
-        return NULL;
-    }
-
-}
 
 void deleteFile(BsFat *pFat, const char *filename) {
     BsFile **pFile = pFat->files;
@@ -466,6 +341,39 @@ bool swapBlocks(BsFat *pFat, size_t bIndexA, size_t bIndexB) {
     return true;
 }
 
+int count_path_components(const char *path) {
+    int count = 0;
+    for (int i = 0; path[i]; i++) {
+        if (path[i] == '/')
+            count++;
+    }
+    return count;
+}
+
+
+BsFile *findFileByPath(BsFat *pFat, const char* path){
+    BsFile **pFile = pFat->files;
+    bool found = false;
+    if (strcmp(path, "/") == 0) {
+        return NULL;
+    }
+    if (count_path_components(path) == 1) {
+        const char *filename = path + 1;
+        do {
+            if (*pFile != NULL && strcmp((*pFile)->filename, filename) == 0) {
+                found = true;
+                break;
+            }
+        } while (++pFile != pFat->files + AMOUNT_FILES);
+    }
+    if (found) {
+        return *pFile;
+    }else {
+        return NULL;
+    }
+
+}
+
 size_t getAmountEntries(BsFat *pFat, const char* path) {
     if (strcmp(path, "/") == 0) {
         size_t amount = 0;
@@ -479,14 +387,6 @@ size_t getAmountEntries(BsFat *pFat, const char* path) {
     return 2;
 }
 
-/**
- * @brief Get file attributes (metadata such as permissions, size, etc.).
- *
- * @param path The path to the file or directory.
- * @param stbuf A pointer to the struct where the attributes will be stored.
- * @param fi A pointer to the fuse_file_info structure containing information about the file.
- * @return 0 on success, or a negative value on failure.
- */
 int stegFS_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
     BsFat *pFat = (BsFat *)fuse_get_context()->private_data;
 
@@ -525,16 +425,7 @@ int stegFS_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *
         return -ENOENT; // ENOENT indicates "No such file or directory"
     }
 }
-/**
- * @brief Read directory entries.
- *
- * @param path The path to the directory.
- * @param buf A buffer to fill with directory entries.
- * @param filler A function used to add directory entries to the buffer.
- * @param offset The offset to read from in the directory.
- * @param fi A pointer to the fuse_file_info structure containing information about the directory.
- * @return 0 on success, or a negative value on failure.
- */
+
 int stegFS_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
                    enum fuse_readdir_flags flags) {
     // Add entries for the root directory
@@ -548,14 +439,146 @@ int stegFS_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t of
                 filler(buf, (*pFile)->filename, NULL, 0, 0);
             }
         }
+        return 0;
     }
-    return 0;
+    return -ENOENT;
+}
+
+BsFile **createFile(BsFat *pFat, const char *filename, long timestamp) {
+    // Find an available file slot
+    BsFile **searchResult = NULL;
+    for (size_t i = 0; i < AMOUNT_FILES; i++) {
+        if (pFat->files[i] == NULL) {
+            searchResult = &pFat->files[i];
+            break;
+        }
+    }
+    if (searchResult == NULL) {
+        fprintf(stderr, "Maximum amount of files are already allocated!\n");
+        return NULL;
+    }
+
+    // Create the file structure and update the file table
+    BsFile *pFile = (BsFile *) malloc(sizeof(BsFile));
+    if (!pFile) {
+        fprintf(stderr, "Could not allocate memory!\n");
+        return NULL;
+    }
+    char* dup_filename = strdup(filename);
+    pFile->filename = dup_filename;
+    pFile->filesize = 0;
+    pFile->timestamp = timestamp;
+    pFile->pCluster = NULL;
+    *searchResult = pFile;
+
+    printf("Created file!\n");
+    return searchResult;
+}
+
+int stegFS_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
+    BsFat *pFat = (BsFat *)fuse_get_context()->private_data;
+
+    mode = S_IFREG | 0666;
+    if (count_path_components(path) == 1) {
+        const char *filename = path + 1;
+        BsFile **pFile = createFile(pFat, filename, time(NULL));
+        if (pFile != NULL) {
+            return 0;
+        }
+        return -ENOMEM;
+    }
+    return -ENOENT;
+}
+
+bool allocateNewBlockForFile(BsFat *pFat, BsFile *pFile) {
+    size_t bIndex;
+    for (bIndex = 0; bIndex < pFat->amountBlocks; bIndex++) {
+        if (pFat->blocks[bIndex].state == free_) {
+            break;
+        }
+        if (bIndex == pFat->amountBlocks - 1) {
+            return false;
+        }
+    }
+    // Allocate the block for the file
+    BsCluster *pCluster = (BsCluster *) malloc(sizeof(BsCluster));
+    if (!pCluster) {
+        fprintf(stderr, "Could not allocate memory!\n");
+        return false;
+    }
+    memset(pCluster, 0, sizeof(BsCluster));
+    pFat->blocks[bIndex].state = allocated;
+    pFat->blocks[bIndex].bIndex = bIndex;
+    pFat->blocks[bIndex].cluster = pCluster;
+    pCluster->bIndex = bIndex;
+    int clusterIndex = -1;
+    if (pFile->pCluster == NULL) {
+        pFile->pCluster = pCluster;
+        pCluster->clusterIndex = 0;
+    }
+    pCluster[clusterIndex].clusterIndex = clusterIndex;
+    pCluster[clusterIndex].fileIndex = pFile->;//TODO!
+    if (clusterIndex > 0) {
+        pCluster[clusterIndex].prev = pCluster + clusterIndex - 1;
+        pCluster[clusterIndex - 1].next = pCluster + clusterIndex;
+    }
+}
+
+int writeBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer, size_t offset, size_t length) {
+    if (offset + length > 512) {
+        fprintf(stderr, "Trying to write to the wrong Block! offset+length is higher than 512\n");
+        return -1;
+    }
+    if (bIndex > pFat->amountBlocks) {
+        fprintf(stderr, "Block Index too high! Can't write outside the disk!!\n");
+        return -1;
+    }
+    if (length == 0) {
+        // nothing to do..
+        return 0;
+    }
+    size_t diskOffset = (bIndex * pFat->blockSize) + offset;
+    if (pFat->disk + diskOffset + length > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
+        fprintf(stderr, "Can't write outside the disk!!\n");
+        return -1;
+    }
+    memcpy(buffer + offset, pFat->disk + diskOffset, length);
+    return (int) length;
+}
+
+int stegFS_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
+    if (count_path_components(path) != 1) {
+        return -ENOENT;
+    }
+    BsFat *pFat = (BsFat *)fuse_get_context()->private_data;
+    BsFile *pFile = findFileByPath(pFat, path);
+    if (pFile == NULL) {
+        return -ENOENT;
+    }
+
+
+
+    size_t clusterIndex = 0;
+    for (size_t bIndex = startBlockIndex; bIndex < startBlockIndex + amountBlocksToAllocate; bIndex++) {
+        pFat->blocks[bIndex].state = allocated;
+        pFat->blocks[bIndex].bIndex = bIndex;
+        pFat->blocks[bIndex].cluster = &pCluster[clusterIndex];
+        pCluster[clusterIndex].bIndex = bIndex;
+        pCluster[clusterIndex].clusterIndex = clusterIndex;
+        pCluster[clusterIndex].fileIndex = searchResult - pFat->files;
+        if (clusterIndex > 0) {
+            pCluster[clusterIndex].prev = pCluster + clusterIndex - 1;
+            pCluster[clusterIndex - 1].next = pCluster + clusterIndex;
+        }
+        clusterIndex++;
+    }
+    if ()
 }
 
 struct fuse_operations stegfs_fuse_oper = {
         .getattr = stegFS_getattr,
         .readdir = stegFS_readdir,
-        //.create = stegFS_create
+        .create = stegFS_create
 };
 
 ///**
