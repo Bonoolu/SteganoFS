@@ -22,7 +22,7 @@ struct BsCluster {
     BsCluster *prev;
     BsCluster *next;
     size_t clusterIndex;
-    size_t fileIndex;
+    BsFile *file;
     unsigned int bIndex;
 };
 
@@ -68,7 +68,7 @@ int stegFS_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *
 int stegFS_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags);
 BsFile **createFile(BsFat *pFat, const char *filename, long timestamp);
 int stegFS_create(const char *path, mode_t mode, struct fuse_file_info *fi);
-int writeBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer, size_t offset, size_t length);
+int writeBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
 int stegFS_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 
 extern struct fuse_operations stegfs_fuse_oper;

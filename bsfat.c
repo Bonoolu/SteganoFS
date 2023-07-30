@@ -93,21 +93,6 @@ size_t getFreeDiskSpace(BsFat *pFat) {
     return amountFreeBlocks * pFat->blockSize;
 }
 
-//
-//void readBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer, size_t offset, size_t length) {
-//    if (bIndex > pFat->amountBlocks) {
-//        fprintf(stderr, "Block Index too high! Can't read outside the disk!!\n");
-//        return;
-//    }
-//    size_t diskOffset = bIndex * pFat->blockSize;
-//    if (pFat->disk + diskOffset > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
-//        fprintf(stderr, "Can't read outside the disk!!\n");
-//        return;
-//    }
-//    memcpy(pFat->disk + diskOffset, buffer, pFat->blockSize);
-//}
-
-
 void deleteFile(BsFat *pFat, const char *filename) {
     BsFile **pFile = pFat->files;
     bool found = false;
@@ -208,17 +193,17 @@ bool checkIntegrity(BsFat *pFat) {
     }
 
     // Check if all allocated blocks are associated with a file
-    for (size_t bIndex = 0; bIndex < pFat->amountBlocks; bIndex++) {
-        if (pFat->blocks[bIndex].state == allocated && pFat->blocks[bIndex].cluster != NULL) {
-            size_t fileIndex = pFat->blocks[bIndex].cluster->fileIndex;
-            if (fileIndex >= AMOUNT_FILES || pFat->files[fileIndex] == NULL) {
-                fprintf(stderr,
-                        "Inconsistent file system: Allocated block %zu is associated with an invalid file index.\n",
-                        bIndex);
-                hasIntegrity = false;
-            }
-        }
-    }
+//    for (size_t bIndex = 0; bIndex < pFat->amountBlocks; bIndex++) {
+//        if (pFat->blocks[bIndex].state == allocated && pFat->blocks[bIndex].cluster != NULL) {
+//            size_t fileIndex = pFat->blocks[bIndex].cluster->fileIndex;
+//            if (fileIndex >= AMOUNT_FILES || pFat->files[fileIndex] == NULL) {
+//                fprintf(stderr,
+//                        "Inconsistent file system: Allocated block %zu is associated with an invalid file index.\n",
+//                        bIndex);
+//                hasIntegrity = false;
+//            }
+//        }
+//    }
 
     // Check if all clusters are associated with a file
     for (size_t fileIndex = 0; fileIndex < AMOUNT_FILES; fileIndex++) {
@@ -226,10 +211,10 @@ bool checkIntegrity(BsFat *pFat) {
         if (pFile != NULL) {
             BsCluster *pCluster = pFile->pCluster;
             while (pCluster) {
-                if (pCluster->fileIndex != fileIndex) {
+                if (pCluster->file != pFile) {
                     fprintf(stderr,
-                            "Inconsistent file system: Cluster %zu in file %zu is associated with incorrect file index: %zu\n",
-                            pCluster->clusterIndex, fileIndex, pCluster->fileIndex);
+                            "Inconsistent file system: Cluster %zu in file %s is associated with incorrect file pointer: %s\n",
+                            pCluster->clusterIndex, pCluster->file->filename, pFile->filename);
                     hasIntegrity = false;
                 }
                 pCluster = pCluster->next;
@@ -249,32 +234,32 @@ bool checkIntegrity(BsFat *pFat) {
 
 void checkForDefragmentation(BsFat *pFat) {
     unsigned int blocksInCorrectPos = 0;
-    int currentFileIndex = -1;
+    BsFile *currentFile = NULL;
     int currentClusterIndex = -1;
     for(BsBlock *pBlock = pFat->blocks; pBlock < pFat->blocks + pFat->amountBlocks; pBlock++) {
         if (pBlock->state != allocated) {
-            if (currentFileIndex == -1 || currentClusterIndex == -1) {
+            if (currentFile == NULL || currentClusterIndex == -1) {
                 blocksInCorrectPos++;
             }else {
-                currentFileIndex = -1;
+                currentFile == NULL;
                 currentClusterIndex = -1;
             }
             continue;
         }
-        else if (currentFileIndex == -1 || currentClusterIndex == -1) {
+        else if (currentFile == NULL || currentClusterIndex == -1) {
             if(pBlock->cluster->clusterIndex == 0) {
                 blocksInCorrectPos++;
             }
         } else {
-            if (pBlock->cluster->fileIndex == currentFileIndex && pBlock->cluster->clusterIndex == currentClusterIndex + 1) {
+            if (pBlock->cluster->file == currentFile && pBlock->cluster->clusterIndex == currentClusterIndex + 1) {
                 blocksInCorrectPos++;
             }
         }
         if (pBlock->cluster->next != NULL) {
-            currentFileIndex = (int) pBlock->cluster->fileIndex;
+            currentFile = pBlock->cluster->file;
             currentClusterIndex = (int) pBlock->cluster->clusterIndex;
         } else {
-            currentFileIndex = -1;
+            currentFile = NULL;
             currentClusterIndex = -1;
         }
     }
@@ -497,6 +482,7 @@ bool allocateNewBlockForFile(BsFat *pFat, BsFile *pFile) {
             break;
         }
         if (bIndex == pFat->amountBlocks - 1) {
+            fprintf(stderr, "Partition is full!\n");
             return false;
         }
     }
@@ -510,21 +496,26 @@ bool allocateNewBlockForFile(BsFat *pFat, BsFile *pFile) {
     pFat->blocks[bIndex].state = allocated;
     pFat->blocks[bIndex].bIndex = bIndex;
     pFat->blocks[bIndex].cluster = pCluster;
-    pCluster->bIndex = bIndex;
-    int clusterIndex = -1;
-    if (pFile->pCluster == NULL) {
+    int clusterIndex = 0;
+    BsCluster *lastCluster = pFile->pCluster;
+    while (lastCluster) {
+        clusterIndex++;
+        lastCluster = lastCluster->next;
+    }
+    if (lastCluster != NULL) {
+        pCluster->prev = lastCluster;
+        lastCluster->next = pCluster;
+    } else {
         pFile->pCluster = pCluster;
-        pCluster->clusterIndex = 0;
     }
-    pCluster[clusterIndex].clusterIndex = clusterIndex;
-    pCluster[clusterIndex].fileIndex = pFile->;//TODO!
-    if (clusterIndex > 0) {
-        pCluster[clusterIndex].prev = pCluster + clusterIndex - 1;
-        pCluster[clusterIndex - 1].next = pCluster + clusterIndex;
-    }
+    pCluster->bIndex = bIndex;
+    pCluster->clusterIndex = clusterIndex;
+    pCluster->file = pFile;
+    pFile->filesize += pFat->blockSize;
+    return true;
 }
 
-int writeBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer, size_t offset, size_t length) {
+int writeBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, size_t length) {
     if (offset + length > 512) {
         fprintf(stderr, "Trying to write to the wrong Block! offset+length is higher than 512\n");
         return -1;
@@ -546,7 +537,7 @@ int writeBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer, size_t offset,
     return (int) length;
 }
 
-int stegFS_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
+int stegFS_write(const char *path, const char *buf, size_t size_unsigned, off_t offset, struct fuse_file_info *fi) {
     if (count_path_components(path) != 1) {
         return -ENOENT;
     }
@@ -556,24 +547,64 @@ int stegFS_write(const char *path, const char *buf, size_t size, off_t offset, s
         return -ENOENT;
     }
 
-
-
-    size_t clusterIndex = 0;
-    for (size_t bIndex = startBlockIndex; bIndex < startBlockIndex + amountBlocksToAllocate; bIndex++) {
-        pFat->blocks[bIndex].state = allocated;
-        pFat->blocks[bIndex].bIndex = bIndex;
-        pFat->blocks[bIndex].cluster = &pCluster[clusterIndex];
-        pCluster[clusterIndex].bIndex = bIndex;
-        pCluster[clusterIndex].clusterIndex = clusterIndex;
-        pCluster[clusterIndex].fileIndex = searchResult - pFat->files;
-        if (clusterIndex > 0) {
-            pCluster[clusterIndex].prev = pCluster + clusterIndex - 1;
-            pCluster[clusterIndex - 1].next = pCluster + clusterIndex;
+    // Check if file is already large enough, if no, allocate
+    while (offset + size_unsigned > pFile->filesize) {
+        if (!allocateNewBlockForFile(pFat, pFile)) {
+            return -ENOMEM;
         }
-        clusterIndex++;
     }
-    if ()
+    size_t bytesWritten = 0;
+
+    // Find correct clusterblock to write to
+    BsCluster *pCluster = pFile->pCluster;
+    size_t fileOffset = 0;
+    int size_signed = (int) size_unsigned;
+    while (size_signed > 0) {
+        if (pCluster == NULL) {
+            fprintf(stderr, "Tried to write at an offset for a file which is not large enough, did you forget to allocate?");
+            return -errno;
+        }
+        // First we search for the block where the offset is in
+        if (fileOffset >= offset) {
+            // Next we get the amount of blocks to write
+            size_t amountBytesToWrite;
+            size_t offsetInsideBlock = offset % pFat->blockSize;
+            if (offset + size_signed < fileOffset + pFat->blockSize) {
+                amountBytesToWrite = size_signed;
+            } else {
+                amountBytesToWrite = pFat->blockSize - offsetInsideBlock;
+            }
+            size_t written = writeBlock(pFat,pCluster->bIndex, buf, offset, amountBytesToWrite);
+            bytesWritten += written;
+            if (written != amountBytesToWrite) {
+                fprintf(stderr, "Meant to write %zu bytes in Block %u at block offset %zu (which is disk offset %zu),"
+                                " but %zu bytes were written!\n", amountBytesToWrite, pCluster->bIndex,
+                                offsetInsideBlock, offset, written);
+                return -errno;
+            }
+            offset -= (off_t) written;
+            size_signed -= (int) written;
+        }
+        pCluster = pCluster->next;
+        fileOffset += pFat->blockSize;
+    }
+    return (int) bytesWritten;
 }
+
+
+//
+//void readBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer, size_t offset, size_t length) {
+//    if (bIndex > pFat->amountBlocks) {
+//        fprintf(stderr, "Block Index too high! Can't read outside the disk!!\n");
+//        return;
+//    }
+//    size_t diskOffset = bIndex * pFat->blockSize;
+//    if (pFat->disk + diskOffset > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
+//        fprintf(stderr, "Can't read outside the disk!!\n");
+//        return;
+//    }
+//    memcpy(pFat->disk + diskOffset, buffer, pFat->blockSize);
+//}
 
 struct fuse_operations stegfs_fuse_oper = {
         .getattr = stegFS_getattr,

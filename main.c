@@ -130,7 +130,7 @@ bool testCreateFileValid() {
     long timestamp = time(NULL);
     bool passed = true;
 
-    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
+    BsFile **file = createFile(pFat, filename, timestamp);
     if (file == NULL) {
         printf("testCreateFileValid test failed: Failed to create file.\n");
         passed = false;
@@ -153,7 +153,7 @@ bool testCreateFileInsufficientMemory() {
     long timestamp = time(NULL);
     bool passed = true;
 
-    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
+    BsFile **file = createFile(pFat, filename, timestamp);
     if (file != NULL) {
         printf("testCreateFileInsufficientMemory test failed: File created despite insufficient memory.\n");
         passed = false;
@@ -500,7 +500,7 @@ bool testSwapBlocksIntegrity() {
     }
 
     // Swapping a free block with a defect block
-    createFile(pFat, 1, "file4", time(NULL), NULL);
+    createFile(pFat, "file4", time(NULL));
     pFat->blocks[10].state = reserved;
 
     swapResult = swapBlocks(pFat, 10, 11);
@@ -524,17 +524,17 @@ bool testDefragmentation() {
     // Create a valid file
     BsFat *pFat = createBsFat(2048, 64);
     size_t szFile = 512u;
-    BsFile **file = createFile(pFat, szFile, "/home/henry/cats.gif", time(NULL), NULL);
+    BsFile **file = createFile(pFat, "cats.gif", time(NULL));
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
         return false;
     }
-    file = createFile(pFat, szFile, "dogs.gif", time(NULL), NULL);
+    file = createFile(pFat, "dogs.gif", time(NULL));
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
         return false;
     }
-    file = createFile(pFat, szFile, "birds.gif", time(NULL), NULL);
+    file = createFile(pFat, "birds.gif", time(NULL));
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
         return false;
