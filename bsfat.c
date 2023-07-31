@@ -1,4 +1,3 @@
-#include <utime.h>
 #include <unistd.h>
 #include "bsfat.h"
 
@@ -150,7 +149,7 @@ void showFat(BsFat *pFat, char *outputMessage) {
     for (size_t bIndex = 0; bIndex < pFat->amountBlocks; bIndex++) {
         unsigned int state = pFat->blocks[bIndex].state;
         if (state == allocated && bufferIndex < 508) {
-            char clusterIndexChar = pFat->blocks[bIndex].cluster->clusterIndex + '0';
+            char clusterIndexChar = (char)(pFat->blocks[bIndex].cluster->clusterIndex + '0');
             buffer[bufferIndex++] = clusterIndexChar;
         } else if (bufferIndex < 508) {
             buffer[bufferIndex++] = letterMap[state]; // 508
@@ -241,7 +240,7 @@ void checkForDefragmentation(BsFat *pFat) {
             if (currentFile == NULL || currentClusterIndex == -1) {
                 blocksInCorrectPos++;
             }else {
-                currentFile == NULL;
+                currentFile = NULL;
                 currentClusterIndex = -1;
             }
             continue;
@@ -372,7 +371,7 @@ size_t getAmountEntries(BsFat *pFat, const char* path) {
     return 2;
 }
 
-int stegFS_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
+int stegFS_getattr(const char *path, struct stat *stbuf, __attribute__((unused)) struct fuse_file_info *fi) {
     BsFat *pFat = (BsFat *)fuse_get_context()->private_data;
 
     // Check if the path corresponds to the root directory
@@ -500,6 +499,9 @@ bool allocateNewBlockForFile(BsFat *pFat, BsFile *pFile) {
     BsCluster *lastCluster = pFile->pCluster;
     while (lastCluster) {
         clusterIndex++;
+        if (lastCluster->next == NULL) {
+            break;
+        }
         lastCluster = lastCluster->next;
     }
     if (lastCluster != NULL) {
@@ -533,7 +535,7 @@ int writeBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, si
         fprintf(stderr, "Can't write outside the disk!!\n");
         return -1;
     }
-    memcpy(buffer + offset, pFat->disk + diskOffset, length);
+    memcpy((void*) buffer + offset, pFat->disk + diskOffset, length);
     return (int) length;
 }
 

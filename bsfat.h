@@ -64,10 +64,11 @@ void checkForDefragmentation(BsFat *pFat);
 void defragmentate(BsFat *pFat);
 int count_path_components(const char *path);
 BsFile *findFileByPath(BsFat *pFat, const char* path);
-int stegFS_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
+int stegFS_getattr(const char *path, struct stat *stbuf, __attribute__((unused)) struct fuse_file_info *fi);
 int stegFS_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags);
 BsFile **createFile(BsFat *pFat, const char *filename, long timestamp);
 int stegFS_create(const char *path, mode_t mode, struct fuse_file_info *fi);
+bool allocateNewBlockForFile(BsFat *pFat, BsFile *pFile);
 int writeBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
 int stegFS_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 

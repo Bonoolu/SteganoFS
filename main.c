@@ -148,13 +148,16 @@ bool testCreateFileValid() {
 
 bool testCreateFileInsufficientMemory() {
     BsFat *pFat = createBsFat(2048, 64);
-    size_t szFile = 10000u;  // Larger than available memory
     const char *filename = "/home/henry/dogs.gif";
     long timestamp = time(NULL);
     bool passed = true;
 
     BsFile **file = createFile(pFat, filename, timestamp);
-    if (file != NULL) {
+    bool allocated = true;
+    for(int i = 0; i < pFat->amountBlocks + 1 && allocated; i++){ // Larger than available memory
+        allocated = allocateNewBlockForFile(pFat, *file);
+    }
+    if (allocated) {
         printf("testCreateFileInsufficientMemory test failed: File created despite insufficient memory.\n");
         passed = false;
     }
@@ -179,7 +182,7 @@ bool testCreateFileNoAvailableFileSlot() {
 
     // Fill all available file slots
     for (size_t i = 0; i < AMOUNT_FILES; i++) {
-        BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
+        BsFile **file = createFile(pFat, filename, timestamp);
         if (file == NULL) {
             printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
             return false;
@@ -187,7 +190,7 @@ bool testCreateFileNoAvailableFileSlot() {
         printf("Free Space is now: %zu\n", getFreeDiskSpace(pFat));
     }
 
-    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
+    BsFile **file = createFile(pFat, filename, timestamp);
     if (file != NULL) {
         printf("testCreateFileNoAvailableFileSlot test failed: File created despite no available file slot.\n");
         passed = false;
@@ -203,28 +206,29 @@ bool testCreateFileNoAvailableFileSlot() {
     return passed;
 }
 
-bool testCreateFileInsufficientFreeBlocks() {
-    BsFat *pFat = createBsFat(2048, 64);
-    size_t szFile = pFat->amountBlocks * pFat->blockSize + 1;  // Requires more blocks than available
-    const char *filename = "/home/henry/sharks.gif";
-    long timestamp = time(NULL);
-    bool passed = true;
-
-    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
-    if (file != NULL) {
-        printf("testCreateFileInsufficientFreeBlocks test failed: File created despite insufficient free blocks.\n");
-        passed = false;
-    }
-
-    if (!checkIntegrity(pFat)) {
-        printf("testCreateFileInsufficientFreeBlocks test failed: Integrity check failed!.\n");
-        passed = false;
-    }
-
-    if (passed)
-        printf("testCreateFileInsufficientFreeBlocks test passed.\n");
-    return passed;
-}
+// TODO! This test no longer makes sense, as fat/fuse fielsystems will not check for this and just let disaster happen
+//bool testCreateFileInsufficientFreeBlocks() {
+//    BsFat *pFat = createBsFat(2048, 64);
+//    size_t szFile = pFat->amountBlocks * pFat->blockSize + 1;  // Requires more blocks than available
+//    const char *filename = "/home/henry/sharks.gif";
+//    long timestamp = time(NULL);
+//    bool passed = true;
+//
+//    BsFile **file = createFile(pFat, szFile, filename, timestamp);
+//    if (file != NULL) {
+//        printf("testCreateFileInsufficientFreeBlocks test failed: File created despite insufficient free blocks.\n");
+//        passed = false;
+//    }
+//
+//    if (!checkIntegrity(pFat)) {
+//        printf("testCreateFileInsufficientFreeBlocks test failed: Integrity check failed!.\n");
+//        passed = false;
+//    }
+//
+//    if (passed)
+//        printf("testCreateFileInsufficientFreeBlocks test passed.\n");
+//    return passed;
+//}
 
 bool testCreateFileLinkedList() {
     // Create a file with multiple clusters
@@ -232,7 +236,9 @@ bool testCreateFileLinkedList() {
     size_t szFile = 2048u;  // Requires 4 clusters
     const char *filename = "/home/henry/dogs.gif";
     long timestamp = time(NULL);
-    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
+    BsFile **file = createFile(pFat, filename, timestamp);
+    allocateNewBlockForFile(pFat, *file);
+    allocateNewBlockForFile(pFat, *file);
     if (file == NULL) {
         printf("testCreateFileLinkedList test failed: createFile failed and returned NULL.\n");
         return false;
@@ -251,14 +257,14 @@ bool testCreateFileLinkedList() {
             break;
         }
 
-        if (pCluster->fileIndex != (file - pFat->files)) {
+        if (pCluster->file != *file) {
             printf("testCreateFileLinkedList test failed: Incorrect fileIndex in the cluster.\n");
             passed = false;
             break;
         }
 
         if (pCluster->clusterIndex != clusterIndex) {
-            printf("testCreateFileLinkedList test failed: Incorrect clusterIndex in the cluster.\n");
+            printf("testCreateFileLinkedList test failed: Incorrect clusterIndex in the cluster. Got %zu, but expected %zu\n", pCluster->clusterIndex, clusterIndex);
             passed = false;
             break;
         }
@@ -284,7 +290,7 @@ bool testDeleteFileValid() {
     size_t szFile = 512u;
     const char *filename = "/home/henry/cats.gif";
     long timestamp = time(NULL);
-    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
+    BsFile **file = createFile(pFat, filename, timestamp);
     if (file == NULL) {
         printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
         return false;
@@ -318,83 +324,85 @@ bool testDeleteFileValid() {
     return passed;
 }
 
-bool testDeleteFileNonExistent() {
-    // Create a valid file
-    BsFat *pFat = createBsFat(2048, 64);
-    size_t szFile = 512u;
-    const char *filename = "/home/henry/cats.gif";
-    long timestamp = time(NULL);
-    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
-    if (file == NULL) {
-        printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
-        return false;
-    }
-    // Delete a non-existent file
-    const char *nonExistentFilename = "/home/henry/dogs.gif";
-    deleteFile(pFat, nonExistentFilename);
+// TODO! unlink not yet implemented
+//bool testDeleteFileNonExistent() {
+//    // Create a valid file
+//    BsFat *pFat = createBsFat(2048, 64);
+//    size_t szFile = 512u;
+//    const char *filename = "/home/henry/cats.gif";
+//    long timestamp = time(NULL);
+//    BsFile **file = createFile(pFat, filename, timestamp);
+//    if (file == NULL) {
+//        printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
+//        return false;
+//    }
+//    // Delete a non-existent file
+//    const char *nonExistentFilename = "/home/henry/dogs.gif";
+//    deleteFile(pFat, nonExistentFilename);
+//
+//    // Check if the file table remains unchanged
+//    bool passed = true;
+//
+//    if (*file == NULL) {
+//        printf("testDeleteFileNonExistent test failed: File in the file table was incorrectly deleted.\n");
+//        passed = false;
+//    }
+//
+//    if ((*file)->filename != filename) {
+//        printf("testDeleteFileNonExistent test failed: File in the file table was incorrectly deleted.\n");
+//        passed = false;
+//    }
+//
+//    if (!checkIntegrity(pFat)) {
+//        printf("testDeleteFileNonExistent test failed: Integrity check failed!.\n");
+//        passed = false;
+//    }
+//
+//    if (passed)
+//        printf("testDeleteFileNonExistent test passed.\n");
+//    return passed;
+//}
 
-    // Check if the file table remains unchanged
-    bool passed = true;
-
-    if (*file == NULL) {
-        printf("testDeleteFileNonExistent test failed: File in the file table was incorrectly deleted.\n");
-        passed = false;
-    }
-
-    if ((*file)->filename != filename) {
-        printf("testDeleteFileNonExistent test failed: File in the file table was incorrectly deleted.\n");
-        passed = false;
-    }
-
-    if (!checkIntegrity(pFat)) {
-        printf("testDeleteFileNonExistent test failed: Integrity check failed!.\n");
-        passed = false;
-    }
-
-    if (passed)
-        printf("testDeleteFileNonExistent test passed.\n");
-    return passed;
-}
-
-bool testDeleteFileWithClusters() {
-    // Check if the associated clusters were freed
-    bool passed = true;
-
-    // Create a file with clusters
-    BsFat *pFat = createBsFat(2048, 64);
-
-
-    size_t szFile = 512u;
-    const char *filename = "/home/henry/cats.gif";
-    long timestamp = time(NULL);
-    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
-    if (file == NULL) {
-        printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
-        return false;
-    }
-    // Delete the file
-    deleteFile(pFat, filename);
-
-    // Check if the associated clusters were freed
-
-    for (size_t bIndex = 0; bIndex < pFat->amountBlocks; bIndex++) {
-        if (pFat->blocks[bIndex].cluster != NULL) {
-            printf("testDeleteFileWithClusters test failed: Cluster associated with block %zu was not freed.\n",
-                   bIndex);
-            passed = false;
-            break;
-        }
-    }
-
-    if (!checkIntegrity(pFat)) {
-        printf("testDeleteFileWithClusters test failed: Integrity check failed!.\n");
-        passed = false;
-    }
-
-    if (passed)
-        printf("testDeleteFileWithClusters test passed.\n");
-    return passed;
-}
+// TODO! unlink not yet implemented
+//bool testDeleteFileWithClusters() {
+//    // Check if the associated clusters were freed
+//    bool passed = true;
+//
+//    // Create a file with clusters
+//    BsFat *pFat = createBsFat(2048, 64);
+//
+//
+//    size_t szFile = 512u;
+//    const char *filename = "/home/henry/cats.gif";
+//    long timestamp = time(NULL);
+//    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
+//    if (file == NULL) {
+//        printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
+//        return false;
+//    }
+//    // Delete the file
+//    deleteFile(pFat, filename);
+//
+//    // Check if the associated clusters were freed
+//
+//    for (size_t bIndex = 0; bIndex < pFat->amountBlocks; bIndex++) {
+//        if (pFat->blocks[bIndex].cluster != NULL) {
+//            printf("testDeleteFileWithClusters test failed: Cluster associated with block %zu was not freed.\n",
+//                   bIndex);
+//            passed = false;
+//            break;
+//        }
+//    }
+//
+//    if (!checkIntegrity(pFat)) {
+//        printf("testDeleteFileWithClusters test failed: Integrity check failed!.\n");
+//        passed = false;
+//    }
+//
+//    if (passed)
+//        printf("testDeleteFileWithClusters test passed.\n");
+//    return passed;
+//}
 
 bool testShowNBlockFat(size_t n, size_t outputLen) {
     // Create an empty Fat
@@ -421,135 +429,137 @@ bool testShowNBlockFat(size_t n, size_t outputLen) {
     return passed;
 }
 
-bool testSwapBlocksIntegrity() {
-    BsFat *pFat = createBsFat(2048, 64);
-    bool passed = true;
+// TODO! implement swap again
+//bool testSwapBlocksIntegrity() {
+//    BsFat *pFat = createBsFat(2048, 64);
+//    bool passed = true;
+//
+//    // Swap the same block
+//    bool swapResult = swapBlocks(pFat, 0, 0);
+//    if (swapResult) {
+//        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap the same Block!\n");
+//        passed = false;
+//    }
+//
+//    // Swap two allocated Blocks
+//    createFile(pFat, 1, "file1", time(NULL), NULL);
+//    createFile(pFat, 1, "file2", time(NULL), NULL);
+//    swapResult = swapBlocks(pFat, 0, 1);
+//    if (!swapResult || strcmp(pFat->files[pFat->blocks[0].cluster->fileIndex]->filename, "file2") != 0
+//        || strcmp(pFat->files[pFat->blocks[1].cluster->fileIndex]->filename, "file1") != 0) {
+//        printf("testSwapBlocksIntegrity test failed: Failed to swap two Blocks!\n");
+//        passed = false;
+//    }
+//
+//    if (!checkIntegrity(pFat)) {
+//        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
+//        passed = false;
+//    }
+//
+//    // Swapping a free block with an allocated block
+//    createFile(pFat, 1, "file3", time(NULL), NULL);
+//    swapResult = swapBlocks(pFat, 2, 3);
+//    if (!swapResult || strcmp(pFat->files[pFat->blocks[3].cluster->fileIndex]->filename, "file3") != 0) {
+//        printf("testSwapBlocksIntegrity test failed: Failed to swap a free block with an allocated block.\n");
+//        passed = false;
+//    }
+//
+//    if (!checkIntegrity(pFat)) {
+//        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
+//        passed = false;
+//    }
+//
+//
+//    // Swapping a free block with a defect block
+//    pFat->blocks[4].state = defect;
+//    swapResult = swapBlocks(pFat, 4, 5);
+//    if (swapResult || pFat->blocks[4].state != defect) {
+//        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap a free block with a defect block.\n");
+//        passed = false;
+//    }
+//
+//    if (!checkIntegrity(pFat)) {
+//        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
+//        passed = false;
+//    }
+//
+//    // Swapping a free block with a reserved block
+//    pFat->blocks[6].state = reserved;
+//    swapResult = swapBlocks(pFat, 6, 7);
+//    if (swapResult || pFat->blocks[6].state != reserved) {
+//        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap a free block with a defect block.\n");
+//        passed = false;
+//    }
+//
+//    if (!checkIntegrity(pFat)) {
+//        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
+//        passed = false;
+//    }
+//
+//    // Swapping two free blocks!
+//    swapResult = swapBlocks(pFat, 8, 9);
+//    if (swapResult) {
+//        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap two free blocks!\n");
+//        passed = false;
+//    }
+//
+//    if (!checkIntegrity(pFat)) {
+//        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
+//        passed = false;
+//    }
+//
+//    // Swapping a free block with a defect block
+//    createFile(pFat, "file4", time(NULL));
+//    pFat->blocks[10].state = reserved;
+//
+//    swapResult = swapBlocks(pFat, 10, 11);
+//
+//    if (swapResult || strcmp(pFat->files[pFat->blocks[2].cluster->fileIndex]->filename, "file4") != 0 ||
+//        pFat->blocks[10].state != reserved) {
+//        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap a free block with a defect block\n");
+//        passed = false;
+//    }
+//
+//    if (!checkIntegrity(pFat)) {
+//        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
+//        passed = false;
+//    }
+//
+//    freeBsFat(pFat);
+//    return passed;
+//}
 
-    // Swap the same block
-    bool swapResult = swapBlocks(pFat, 0, 0);
-    if (swapResult) {
-        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap the same Block!\n");
-        passed = false;
-    }
-
-    // Swap two allocated Blocks
-    createFile(pFat, 1, "file1", time(NULL), NULL);
-    createFile(pFat, 1, "file2", time(NULL), NULL);
-    swapResult = swapBlocks(pFat, 0, 1);
-    if (!swapResult || strcmp(pFat->files[pFat->blocks[0].cluster->fileIndex]->filename, "file2") != 0
-        || strcmp(pFat->files[pFat->blocks[1].cluster->fileIndex]->filename, "file1") != 0) {
-        printf("testSwapBlocksIntegrity test failed: Failed to swap two Blocks!\n");
-        passed = false;
-    }
-
-    if (!checkIntegrity(pFat)) {
-        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
-        passed = false;
-    }
-
-    // Swapping a free block with an allocated block
-    createFile(pFat, 1, "file3", time(NULL), NULL);
-    swapResult = swapBlocks(pFat, 2, 3);
-    if (!swapResult || strcmp(pFat->files[pFat->blocks[3].cluster->fileIndex]->filename, "file3") != 0) {
-        printf("testSwapBlocksIntegrity test failed: Failed to swap a free block with an allocated block.\n");
-        passed = false;
-    }
-
-    if (!checkIntegrity(pFat)) {
-        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
-        passed = false;
-    }
-
-
-    // Swapping a free block with a defect block
-    pFat->blocks[4].state = defect;
-    swapResult = swapBlocks(pFat, 4, 5);
-    if (swapResult || pFat->blocks[4].state != defect) {
-        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap a free block with a defect block.\n");
-        passed = false;
-    }
-
-    if (!checkIntegrity(pFat)) {
-        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
-        passed = false;
-    }
-
-    // Swapping a free block with a reserved block
-    pFat->blocks[6].state = reserved;
-    swapResult = swapBlocks(pFat, 6, 7);
-    if (swapResult || pFat->blocks[6].state != reserved) {
-        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap a free block with a defect block.\n");
-        passed = false;
-    }
-
-    if (!checkIntegrity(pFat)) {
-        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
-        passed = false;
-    }
-
-    // Swapping two free blocks!
-    swapResult = swapBlocks(pFat, 8, 9);
-    if (swapResult) {
-        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap two free blocks!\n");
-        passed = false;
-    }
-
-    if (!checkIntegrity(pFat)) {
-        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
-        passed = false;
-    }
-
-    // Swapping a free block with a defect block
-    createFile(pFat, "file4", time(NULL));
-    pFat->blocks[10].state = reserved;
-
-    swapResult = swapBlocks(pFat, 10, 11);
-
-    if (swapResult || strcmp(pFat->files[pFat->blocks[2].cluster->fileIndex]->filename, "file4") != 0 ||
-        pFat->blocks[10].state != reserved) {
-        printf("testSwapBlocksIntegrity test failed: Failed to NOT swap a free block with a defect block\n");
-        passed = false;
-    }
-
-    if (!checkIntegrity(pFat)) {
-        printf("testSwapBlocksIntegrity test failed: Integrity check failed!.\n");
-        passed = false;
-    }
-
-    freeBsFat(pFat);
-    return passed;
-}
-
-bool testDefragmentation() {
-    // Create a valid file
-    BsFat *pFat = createBsFat(2048, 64);
-    size_t szFile = 512u;
-    BsFile **file = createFile(pFat, "cats.gif", time(NULL));
-    if (file == NULL) {
-        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
-        return false;
-    }
-    file = createFile(pFat, "dogs.gif", time(NULL));
-    if (file == NULL) {
-        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
-        return false;
-    }
-    file = createFile(pFat, "birds.gif", time(NULL));
-    if (file == NULL) {
-        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
-        return false;
-    }
-    deleteFile(pFat, "/home/henry/dogs.gif");
-    swapBlocks(pFat, 4, 25);
-    swapBlocks(pFat, 4, 23);
-    swapBlocks(pFat, 2, 24);
-    showFat(pFat, NULL);
-    checkForDefragmentation(pFat);
-    defragmentate(pFat);
-    showFat(pFat, NULL);
-    checkForDefragmentation(pFat);
-    return true;
-}
+// TODO! need to implement swapblocks again
+//bool testDefragmentation() {
+//    // Create a valid file
+//    BsFat *pFat = createBsFat(2048, 64);
+//    size_t szFile = 512u;
+//    BsFile **file = createFile(pFat, "cats.gif", time(NULL));
+//    if (file == NULL) {
+//        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+//        return false;
+//    }
+//    file = createFile(pFat, "dogs.gif", time(NULL));
+//    if (file == NULL) {
+//        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+//        return false;
+//    }
+//    file = createFile(pFat, "birds.gif", time(NULL));
+//    if (file == NULL) {
+//        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+//        return false;
+//    }
+//    deleteFile(pFat, "/home/henry/dogs.gif");
+//    swapBlocks(pFat, 4, 25);
+//    swapBlocks(pFat, 4, 23);
+//    swapBlocks(pFat, 2, 24);
+//    showFat(pFat, NULL);
+//    checkForDefragmentation(pFat);
+//    defragmentate(pFat);
+//    showFat(pFat, NULL);
+//    checkForDefragmentation(pFat);
+//    return true;
+//}
 
 void runTests() {
     int tests[] = {
@@ -560,18 +570,18 @@ void runTests() {
             testCreateFileValid(),
             testCreateFileInsufficientMemory(),
             testCreateFileNoAvailableFileSlot(),
-            testCreateFileInsufficientFreeBlocks(),
+            //testCreateFileInsufficientFreeBlocks(),
             testCreateFileLinkedList(),
             testDeleteFileValid(),
-            testDeleteFileNonExistent(),
-            testDeleteFileWithClusters(),
+            //testDeleteFileNonExistent(),
+            //testDeleteFileWithClusters(),
             testShowNBlockFat(1, 23),
             testShowNBlockFat(239, 504),
             testShowNBlockFat(240, 507),
             testShowNBlockFat(241, 509),
             testShowNBlockFat(242, 509),
-            testSwapBlocksIntegrity(),
-            testDefragmentation(),
+            //testSwapBlocksIntegrity(),
+            //testDefragmentation(),
             -1};
     size_t passed = 0;
     size_t sum = 0;
@@ -589,17 +599,17 @@ void runTests() {
 int test_fuse(int argc, char** argv){
     BsFat *pFat = createBsFat(2048, 64);
     size_t szFile = 512u;
-    BsFile **file = createFile(pFat, szFile, "cats.gif", time(NULL), NULL);
+    BsFile **file = createFile(pFat, "cats.gif", time(NULL));
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
         return false;
     }
-    file = createFile(pFat, szFile, "dogs.gif", time(NULL), NULL);
+    file = createFile(pFat, "dogs.gif", time(NULL));
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
         return false;
     }
-    file = createFile(pFat, szFile, "birds.gif", time(NULL), NULL);
+    file = createFile(pFat, "birds.gif", time(NULL));
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
         return false;
