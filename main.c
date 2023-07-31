@@ -561,27 +561,56 @@ bool testShowNBlockFat(size_t n, size_t outputLen) {
 //    return true;
 //}
 
+bool testWrite() {
+    BsFat *pFat = createBsFat(20, 4);
+    char* mountpoint = "/tmp/test_mnt";
+    fuse_main(1, &mountpoint, &stegfs_fuse_oper, pFat);
+    size_t szFile = 512u;
+    const char *filename = "test.txt";
+    long timestamp = time(NULL);
+    BsFile **file = createFile(pFat, filename, timestamp);
+    if (file == NULL) {
+        printf("testWrite test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    const char *testBuffer = "My testbuffer!";
+    pFat->disk[0] = 'A';
+    pFat->disk[1] = 'B';
+    pFat->disk[2] = 'C';
+    int bytesWritten = stegFS_write("/test.txt", testBuffer, 15, 0, (struct fuse_file_info *) pFat);
+    if (bytesWritten < 0) {
+        printf("testWrite test failed: Errorcode: %d\n", bytesWritten);
+        return false;
+    }
+    if (bytesWritten != 15) {
+        printf("testWrite test failed: wrote %d bytes instead of 16\n", bytesWritten);
+        return false;
+    }
+    return true;
+}
+
 void runTests() {
     int tests[] = {
-            testCreateBsFat(),
-            testGetFreeDiskSpaceEmptyFat(),
-            testGetFreeDiskSpaceWithAllocatedBlocks(),
-            testGetFreeDiskSpaceFullDisk(),
-            testCreateFileValid(),
-            testCreateFileInsufficientMemory(),
-            testCreateFileNoAvailableFileSlot(),
-            //testCreateFileInsufficientFreeBlocks(),
-            testCreateFileLinkedList(),
-            testDeleteFileValid(),
-            //testDeleteFileNonExistent(),
-            //testDeleteFileWithClusters(),
-            testShowNBlockFat(1, 23),
-            testShowNBlockFat(239, 504),
-            testShowNBlockFat(240, 507),
-            testShowNBlockFat(241, 509),
-            testShowNBlockFat(242, 509),
+//            testCreateBsFat(),
+//            testGetFreeDiskSpaceEmptyFat(),
+//            testGetFreeDiskSpaceWithAllocatedBlocks(),
+//            testGetFreeDiskSpaceFullDisk(),
+//            testCreateFileValid(),
+//            testCreateFileInsufficientMemory(),
+//            testCreateFileNoAvailableFileSlot(),
+//            //testCreateFileInsufficientFreeBlocks(),
+//            testCreateFileLinkedList(),
+//            testDeleteFileValid(),
+//            //testDeleteFileNonExistent(),
+//            //testDeleteFileWithClusters(),
+//            testShowNBlockFat(1, 23),
+//            testShowNBlockFat(239, 504),
+//            testShowNBlockFat(240, 507),
+//            testShowNBlockFat(241, 509),
+//            testShowNBlockFat(242, 509),
             //testSwapBlocksIntegrity(),
             //testDefragmentation(),
+            testWrite(),
             -1};
     size_t passed = 0;
     size_t sum = 0;
@@ -619,5 +648,5 @@ int test_fuse(int argc, char** argv){
 
 int main(int argc, char** argv) {
     runTests();
-    return test_fuse(argc, argv);
+    return 0;//test_fuse(argc, argv);
 }

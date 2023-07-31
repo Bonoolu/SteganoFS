@@ -532,10 +532,10 @@ int writeBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, si
     }
     size_t diskOffset = (bIndex * pFat->blockSize) + offset;
     if (pFat->disk + diskOffset + length > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
-        fprintf(stderr, "Can't write outside the disk!!\n");
+        fprintf(stderr, "Can't write outside the disk!!\n"); // TODO BREAKPOINT
         return -1;
     }
-    memcpy((void*) buffer + offset, pFat->disk + diskOffset, length);
+    memcpy(pFat->disk + diskOffset, (void*) buffer + offset, length);
     return (int) length;
 }
 
@@ -543,7 +543,17 @@ int stegFS_write(const char *path, const char *buf, size_t size_unsigned, off_t 
     if (count_path_components(path) != 1) {
         return -ENOENT;
     }
-    BsFat *pFat = (BsFat *)fuse_get_context()->private_data;
+
+    // TODO! UGLY WORKAROUND FOR TESTING REMOVE THIS!!!!!
+    struct fuse_context *private = fuse_get_context();
+    BsFat *pFat;
+    if (private != NULL) {
+        pFat = (BsFat *)(private->private_data);
+    }else {
+        pFat = (BsFat *) fi;
+    }
+    // TODO! UGLY WORKAROUND FOR TESTING REMOVE THIS!!!!!
+
     BsFile *pFile = findFileByPath(pFat, path);
     if (pFile == NULL) {
         return -ENOENT;
@@ -576,15 +586,19 @@ int stegFS_write(const char *path, const char *buf, size_t size_unsigned, off_t 
             } else {
                 amountBytesToWrite = pFat->blockSize - offsetInsideBlock;
             }
-            size_t written = writeBlock(pFat,pCluster->bIndex, buf, offset, amountBytesToWrite);
+            int written = writeBlock(pFat,pCluster->bIndex, buf, offset, amountBytesToWrite);
+            if (written < 0) {
+                return -errno;
+            }
             bytesWritten += written;
             if (written != amountBytesToWrite) {
                 fprintf(stderr, "Meant to write %zu bytes in Block %u at block offset %zu (which is disk offset %zu),"
-                                " but %zu bytes were written!\n", amountBytesToWrite, pCluster->bIndex,
+                                " but %d bytes were written!\n", amountBytesToWrite, pCluster->bIndex,
                                 offsetInsideBlock, offset, written);
                 return -errno;
             }
-            offset -= (off_t) written;
+            offset += (off_t) written;
+            buf += written;
             size_signed -= (int) written;
         }
         pCluster = pCluster->next;
