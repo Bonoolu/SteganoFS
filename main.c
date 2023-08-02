@@ -1,8 +1,8 @@
 #include "bsfat.h"
 
 bool testCreateBsFat() {
-    size_t diskSize = 4096;  // Example disk size
-    size_t blockSize = 512;  // Example block size
+    size_t diskSize = BLOCKSIZE * 4;  // Example disk size
+    size_t blockSize = BLOCKSIZE;  // Example block size
     BsFat *pFat = createBsFat(diskSize, blockSize);
     bool passed = true;
     if (pFat == NULL) {
@@ -65,10 +65,10 @@ bool testCreateBsFat() {
 }
 
 bool testGetFreeDiskSpaceEmptyFat() {
-    BsFat *pFat = createBsFat(1024, 512);
+    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
     size_t freeSpace = getFreeDiskSpace(pFat);
     bool passed;
-    if (freeSpace == 1024) {
+    if (freeSpace == BLOCKSIZE * 4) {
         printf("testGetFreeDiskSpaceEmptyFat test passed.\n");
         passed = true;
     } else {
@@ -81,7 +81,7 @@ bool testGetFreeDiskSpaceEmptyFat() {
 }
 
 bool testGetFreeDiskSpaceWithAllocatedBlocks() {
-    BsFat *pFat = createBsFat(2048, 512);
+    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
     // Allocate some blocks or create files within the filesystem
     // Perform actions to allocate blocks or create files
     for (size_t i = 0; i < 2; i++) {
@@ -89,7 +89,7 @@ bool testGetFreeDiskSpaceWithAllocatedBlocks() {
     }
     size_t freeSpace = getFreeDiskSpace(pFat);
     // Calculate the expected free space based on the allocated blocks/files
-    size_t expectedFreeSpace = 1024;  // Calculate the expected value based on the specific test case
+    size_t expectedFreeSpace = BLOCKSIZE * 2;  // Calculate the expected value based on the specific test case
     bool passed;
     if (freeSpace == expectedFreeSpace) {
         printf("testGetFreeDiskSpaceWithAllocatedBlocks test passed.\n");
@@ -104,7 +104,7 @@ bool testGetFreeDiskSpaceWithAllocatedBlocks() {
 }
 
 bool testGetFreeDiskSpaceFullDisk() {
-    BsFat *pFat = createBsFat(512, 512);
+    BsFat *pFat = createBsFat(BLOCKSIZE, BLOCKSIZE);
     // Allocate all blocks or create files until the disk is full
     pFat->blocks->state = allocated;
     // Perform actions to allocate blocks or create files
@@ -123,7 +123,7 @@ bool testGetFreeDiskSpaceFullDisk() {
 }
 
 bool testCreateFileValid() {
-    BsFat *pFat = createBsFat(2048, 64);
+    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
 
     size_t szFile = 600u;
     const char *filename = "/home/henry/cats.gif";
@@ -147,7 +147,8 @@ bool testCreateFileValid() {
 }
 
 bool testCreateFileInsufficientMemory() {
-    BsFat *pFat = createBsFat(2048, 64);
+    fflush(stdout);
+    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
     const char *filename = "/home/henry/dogs.gif";
     long timestamp = time(NULL);
     bool passed = true;
@@ -169,11 +170,13 @@ bool testCreateFileInsufficientMemory() {
 
     if (passed)
         printf("testCreateFileInsufficientMemory test passed.\n");
+    fflush(stderr);
     return passed;
 }
 
 bool testCreateFileNoAvailableFileSlot() {
-    BsFat *pFat = createBsFat(2048, 64);
+    fflush(stdout);
+    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
     printf("Free Space is now: %zu\n", getFreeDiskSpace(pFat));
     size_t szFile = 64u;
     const char *filename = "/home/henry/bears.gif";
@@ -203,12 +206,13 @@ bool testCreateFileNoAvailableFileSlot() {
 
     if (passed)
         printf("testCreateFileNoAvailableFileSlot test passed.\n");
+    fflush(stderr);
     return passed;
 }
 
 // TODO! This test no longer makes sense, as fat/fuse fielsystems will not check for this and just let disaster happen
 //bool testCreateFileInsufficientFreeBlocks() {
-//    BsFat *pFat = createBsFat(2048, 64);
+//    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
 //    size_t szFile = pFat->amountBlocks * pFat->blockSize + 1;  // Requires more blocks than available
 //    const char *filename = "/home/henry/sharks.gif";
 //    long timestamp = time(NULL);
@@ -232,8 +236,7 @@ bool testCreateFileNoAvailableFileSlot() {
 
 bool testCreateFileLinkedList() {
     // Create a file with multiple clusters
-    BsFat *pFat = createBsFat(4096, 512);
-    size_t szFile = 2048u;  // Requires 4 clusters
+    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
     const char *filename = "/home/henry/dogs.gif";
     long timestamp = time(NULL);
     BsFile **file = createFile(pFat, filename, timestamp);
@@ -286,8 +289,7 @@ bool testCreateFileLinkedList() {
 
 bool testDeleteFileValid() {
     // Create a valid file
-    BsFat *pFat = createBsFat(2048, 64);
-    size_t szFile = 512u;
+    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
     const char *filename = "/home/henry/cats.gif";
     long timestamp = time(NULL);
     BsFile **file = createFile(pFat, filename, timestamp);
@@ -327,8 +329,7 @@ bool testDeleteFileValid() {
 // TODO! unlink not yet implemented
 //bool testDeleteFileNonExistent() {
 //    // Create a valid file
-//    BsFat *pFat = createBsFat(2048, 64);
-//    size_t szFile = 512u;
+//    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
 //    const char *filename = "/home/henry/cats.gif";
 //    long timestamp = time(NULL);
 //    BsFile **file = createFile(pFat, filename, timestamp);
@@ -369,10 +370,9 @@ bool testDeleteFileValid() {
 //    bool passed = true;
 //
 //    // Create a file with clusters
-//    BsFat *pFat = createBsFat(2048, 64);
+//    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
 //
 //
-//    size_t szFile = 512u;
 //    const char *filename = "/home/henry/cats.gif";
 //    long timestamp = time(NULL);
 //    BsFile **file = createFile(pFat, szFile, filename, timestamp, NULL);
@@ -431,7 +431,7 @@ bool testShowNBlockFat(size_t n, size_t outputLen) {
 
 // TODO! implement swap again
 //bool testSwapBlocksIntegrity() {
-//    BsFat *pFat = createBsFat(2048, 64);
+//    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
 //    bool passed = true;
 //
 //    // Swap the same block
@@ -532,7 +532,7 @@ bool testShowNBlockFat(size_t n, size_t outputLen) {
 // TODO! need to implement swapblocks again
 //bool testDefragmentation() {
 //    // Create a valid file
-//    BsFat *pFat = createBsFat(2048, 64);
+//    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
 //    size_t szFile = 512u;
 //    BsFile **file = createFile(pFat, "cats.gif", time(NULL));
 //    if (file == NULL) {
@@ -561,10 +561,9 @@ bool testShowNBlockFat(size_t n, size_t outputLen) {
 //    return true;
 //}
 
-bool testWrite() {
-    BsFat *pFat = createBsFat(20, 4);
-    char* mountpoint = "/tmp/test_mnt";
-    fuse_main(1, &mountpoint, &stegfs_fuse_oper, pFat);
+bool testWriteRead(int argc, char **argv) {
+    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
+    //fuse_main(argc, argv, &stegfs_fuse_oper, pFat);
     size_t szFile = 512u;
     const char *filename = "test.txt";
     long timestamp = time(NULL);
@@ -574,43 +573,47 @@ bool testWrite() {
         return false;
     }
     const char *testBuffer = "My testbuffer!";
-    pFat->disk[0] = 'A';
-    pFat->disk[1] = 'B';
-    pFat->disk[2] = 'C';
     int bytesWritten = stegFS_write("/test.txt", testBuffer, 15, 0, (struct fuse_file_info *) pFat);
     if (bytesWritten < 0) {
         printf("testWrite test failed: Errorcode: %d\n", bytesWritten);
         return false;
     }
     if (bytesWritten != 15) {
-        printf("testWrite test failed: wrote %d bytes instead of 16\n", bytesWritten);
+        printf("testWrite test failed: wrote %d bytes instead of 15\n", bytesWritten);
         return false;
     }
+    printf("Printing pFat->Disk to terminal: %s\n", pFat->disk);
+    checkForDefragmentation(pFat);
+    showFat(pFat, NULL);
+    char output[20];
+    memset(output, 0, 20);
+    stegFS_read("/test.txt", output, 15, 0, (struct fuse_file_info *) pFat);
+    printf("Printing result of stegFS_read: %s\n", output);
     return true;
 }
 
-void runTests() {
+void runTests(int argc, char **argv) {
     int tests[] = {
-//            testCreateBsFat(),
-//            testGetFreeDiskSpaceEmptyFat(),
-//            testGetFreeDiskSpaceWithAllocatedBlocks(),
-//            testGetFreeDiskSpaceFullDisk(),
-//            testCreateFileValid(),
-//            testCreateFileInsufficientMemory(),
-//            testCreateFileNoAvailableFileSlot(),
-//            //testCreateFileInsufficientFreeBlocks(),
-//            testCreateFileLinkedList(),
-//            testDeleteFileValid(),
-//            //testDeleteFileNonExistent(),
-//            //testDeleteFileWithClusters(),
-//            testShowNBlockFat(1, 23),
-//            testShowNBlockFat(239, 504),
-//            testShowNBlockFat(240, 507),
-//            testShowNBlockFat(241, 509),
-//            testShowNBlockFat(242, 509),
-            //testSwapBlocksIntegrity(),
-            //testDefragmentation(),
-            testWrite(),
+            testCreateBsFat(),
+            testGetFreeDiskSpaceEmptyFat(),
+            testGetFreeDiskSpaceWithAllocatedBlocks(),
+            testGetFreeDiskSpaceFullDisk(),
+            testCreateFileValid(),
+            testCreateFileInsufficientMemory(),
+            testCreateFileNoAvailableFileSlot(),
+            //testCreateFileInsufficientFreeBlocks(),
+            testCreateFileLinkedList(),
+            testDeleteFileValid(),
+            //testDeleteFileNonExistent(),
+            //testDeleteFileWithClusters(),
+            testShowNBlockFat(1, 23),
+            testShowNBlockFat(239, 504),
+            testShowNBlockFat(240, 507),
+            testShowNBlockFat(241, 509),
+            testShowNBlockFat(242, 509),
+//            //testSwapBlocksIntegrity(),
+//            //testDefragmentation(),
+            testWriteRead(argc, argv),
             -1};
     size_t passed = 0;
     size_t sum = 0;
@@ -626,8 +629,7 @@ void runTests() {
 }
 
 int test_fuse(int argc, char** argv){
-    BsFat *pFat = createBsFat(2048, 64);
-    size_t szFile = 512u;
+    BsFat *pFat = createBsFat(BLOCKSIZE * 4, BLOCKSIZE);
     BsFile **file = createFile(pFat, "cats.gif", time(NULL));
     if (file == NULL) {
         printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
@@ -647,6 +649,6 @@ int test_fuse(int argc, char** argv){
 }
 
 int main(int argc, char** argv) {
-    runTests();
-    return 0;//test_fuse(argc, argv);
+    runTests(argc, argv);
+    return test_fuse(argc, argv);
 }

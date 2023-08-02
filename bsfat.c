@@ -1,14 +1,14 @@
 #include <unistd.h>
 #include "bsfat.h"
+#define DEBUG // TODO!
+
 
 // TODO:
-//
-// implement reading and writing files
-// allow non consecutive writes
-// implement directories
+// find bug in write
+// implement reading
+// implement unlink
 // implement export
 // implement import
-// createFile itself needs to allocate string filename
 
 // write doxygen
 
@@ -388,7 +388,7 @@ int stegFS_getattr(const char *path, struct stat *stbuf, __attribute__((unused))
         if (pFile != NULL) {
             stbuf->st_mode = S_IFREG | 0666; // Regular file with 666 permissions
             stbuf->st_nlink = 1; // Number of hard links (including . and ..)
-            stbuf->st_size = (__off_t) pFile->filesize;
+            stbuf->st_size = (__off_t) pFile->real_filesize;
             stbuf->st_uid = 1000;
             stbuf->st_gid = 1000;
 
@@ -518,8 +518,8 @@ bool allocateNewBlockForFile(BsFat *pFat, BsFile *pFile) {
 }
 
 int writeBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, size_t length) {
-    if (offset + length > 512) {
-        fprintf(stderr, "Trying to write to the wrong Block! offset+length is higher than 512\n");
+    if (offset + length > BLOCKSIZE) {
+        fprintf(stderr, "Trying to write to the wrong Block! offset+length is higher than %d\n", BLOCKSIZE);
         return -1;
     }
     if (bIndex > pFat->amountBlocks) {
@@ -539,21 +539,44 @@ int writeBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, si
     return (int) length;
 }
 
+int readBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, size_t length){
+    if (offset + length > BLOCKSIZE) {
+        fprintf(stderr, "Trying to read from the wrong Block! offset+length is higher than %d\n", BLOCKSIZE);
+        return -1;
+    }
+    if (bIndex > pFat->amountBlocks) {
+        fprintf(stderr, "Block Index too high! Can't read outside the disk!!\n");
+        return -1;
+    }
+    if (length == 0) {
+        // nothing to do..
+        return 0;
+    }
+    size_t diskOffset = (bIndex * pFat->blockSize) + offset;
+    if (pFat->disk + diskOffset + length > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
+        fprintf(stderr, "Can't read outside the disk!!\n");
+        return -1;
+    }
+    memcpy((void*) buffer + offset, pFat->disk + diskOffset, length);
+    return (int) length;
+}
+
 int stegFS_write(const char *path, const char *buf, size_t size_unsigned, off_t offset, struct fuse_file_info *fi) {
     if (count_path_components(path) != 1) {
         return -ENOENT;
     }
-
-    // TODO! UGLY WORKAROUND FOR TESTING REMOVE THIS!!!!!
     struct fuse_context *private = fuse_get_context();
     BsFat *pFat;
     if (private != NULL) {
         pFat = (BsFat *)(private->private_data);
     }else {
+#ifdef DEBUG
         pFat = (BsFat *) fi;
+#else
+        fprintf(stderr, "Couldn't get fuse context, is null!!\n");
+        return -1;
+#endif
     }
-    // TODO! UGLY WORKAROUND FOR TESTING REMOVE THIS!!!!!
-
     BsFile *pFile = findFileByPath(pFat, path);
     if (pFile == NULL) {
         return -ENOENT;
@@ -565,6 +588,7 @@ int stegFS_write(const char *path, const char *buf, size_t size_unsigned, off_t 
             return -ENOMEM;
         }
     }
+    pFile->real_filesize = offset + size_unsigned;
     size_t bytesWritten = 0;
 
     // Find correct clusterblock to write to
@@ -586,7 +610,7 @@ int stegFS_write(const char *path, const char *buf, size_t size_unsigned, off_t 
             } else {
                 amountBytesToWrite = pFat->blockSize - offsetInsideBlock;
             }
-            int written = writeBlock(pFat,pCluster->bIndex, buf, offset, amountBytesToWrite);
+            int written = writeBlock(pFat,pCluster->bIndex, buf, offsetInsideBlock, amountBytesToWrite);
             if (written < 0) {
                 return -errno;
             }
@@ -607,25 +631,79 @@ int stegFS_write(const char *path, const char *buf, size_t size_unsigned, off_t 
     return (int) bytesWritten;
 }
 
+int stegFS_read(const char *path, char *buf, size_t size_unsigned, off_t offset, struct fuse_file_info *fi) {
+    if (count_path_components(path) != 1) {
+        return -ENOENT;
+    }
+    struct fuse_context *private = fuse_get_context();
+    BsFat *pFat;
+    if (private != NULL) {
+        pFat = (BsFat *)(private->private_data);
+    }else {
+#ifdef DEBUG
+        pFat = (BsFat *) fi;
+#else
+        fprintf(stderr, "Couldn't get fuse context, is null!!\n");
+        return -1;
+#endif
+    }
+    BsFile *pFile = findFileByPath(pFat, path);
+    if (pFile == NULL) {
+        return -ENOENT;
+    }
 
-//
-//void readBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer, size_t offset, size_t length) {
-//    if (bIndex > pFat->amountBlocks) {
-//        fprintf(stderr, "Block Index too high! Can't read outside the disk!!\n");
-//        return;
-//    }
-//    size_t diskOffset = bIndex * pFat->blockSize;
-//    if (pFat->disk + diskOffset > pFat->disk + (pFat->amountBlocks * pFat->blockSize)) {
-//        fprintf(stderr, "Can't read outside the disk!!\n");
-//        return;
-//    }
-//    memcpy(pFat->disk + diskOffset, buffer, pFat->blockSize);
-//}
+    // Check if we read outside file, if yes return 0 bytes readcd
+    if (offset + size_unsigned > pFile->filesize) {
+        return 0;
+    }
+    size_t bytesRead = 0;
+
+    // Find correct clusterblock to write to
+    BsCluster *pCluster = pFile->pCluster;
+    size_t fileOffset = 0;
+    int size_signed = (int) size_unsigned;
+    while (size_signed > 0) {
+        if (pCluster == NULL) {
+            fprintf(stderr, "Tried to write at an offset for a file which is not large enough, did you forget to allocate?");
+            return -errno;
+        }
+        // First we search for the block where the offset is in
+        if (fileOffset >= offset) {
+            // Next we get the amount of bytes to write
+            size_t amountBytesToRead;
+            size_t offsetInsideBlock = offset % pFat->blockSize;
+            if (offset + size_signed < fileOffset + pFat->blockSize) {
+                amountBytesToRead = size_signed;
+            } else {
+                amountBytesToRead = pFat->blockSize - offsetInsideBlock;
+            }
+            int read_ = readBlock(pFat, pCluster->bIndex, buf, offsetInsideBlock, amountBytesToRead);
+            if (read_ < 0) {
+                return -errno;
+            }
+            bytesRead += read_;
+            if (read_ != amountBytesToRead) {
+                fprintf(stderr, "Meant to read %zu bytes from Block %u at block offset %zu (which is disk offset %zu),"
+                                " but %d bytes were read!\n", amountBytesToRead, pCluster->bIndex,
+                        offsetInsideBlock, offset, read_);
+                return -errno;
+            }
+            offset += (off_t) read_;
+            buf += read_;
+            size_signed -= (int) read_;
+        }
+        pCluster = pCluster->next;
+        fileOffset += pFat->blockSize;
+    }
+    return (int) bytesRead;
+}
 
 struct fuse_operations stegfs_fuse_oper = {
         .getattr = stegFS_getattr,
         .readdir = stegFS_readdir,
-        .create = stegFS_create
+        .create = stegFS_create,
+        .write = stegFS_write,
+        .read = stegFS_read
 };
 
 ///**
