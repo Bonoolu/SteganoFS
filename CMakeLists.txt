@@ -9,7 +9,7 @@ add_compile_options(-D_FILE_OFFSET_BITS=64)
 find_package(PkgConfig REQUIRED)
 pkg_search_module(FUSE REQUIRED fuse3)
 
-add_executable(steganoFS_C main.c bsfat.h bsfat.c)
+add_executable(steganoFS_C tests.c steganoFS.h steganoFS.c)
 
 # Link the FUSE library to your executable
 target_link_libraries(steganoFS_C PRIVATE ${FUSE_LIBRARIES})

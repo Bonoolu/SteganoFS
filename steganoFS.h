@@ -11,72 +11,65 @@
 #include <fuse3/fuse.h>
 #include <errno.h>
 
-#define AMOUNT_FILES 10
+#define AMOUNT_ROOT_FILES 10
 #define BLOCKSIZE 4096
 
-typedef struct BsCluster BsCluster;
-typedef struct BsFile BsFile;
-typedef struct BsBlock BsBlock;
-typedef struct BsFat BsFat;
+typedef struct HiddenFile HiddenFile;
+typedef struct HiddenCluster HiddenCluster;
+typedef struct HiddenFat HiddenFat;
 
-struct BsCluster {
-    BsCluster *prev;
-    BsCluster *next;
-    size_t clusterIndex;
-    BsFile *file;
-    unsigned int bIndex;
-};
-
-struct BsFile {
+struct HiddenFile {
     const char *filename;
     size_t filesize;
     size_t real_filesize;
     long timestamp;
-    BsCluster *pCluster;
+    HiddenCluster *hiddenCluster;
 };
 
-struct BsBlock {
+struct HiddenCluster{
     size_t bIndex;
     unsigned int state;
-    BsCluster *cluster;
+    HiddenCluster *prev;
+    HiddenCluster *next;
+    size_t clusterIndex;
+    HiddenFile *file;
 };
 
 enum State {
     free_ = 0, reserved = 1, defect = 2, allocated = 3
 };
 
-struct BsFat {
+struct HiddenFat {
     size_t blockSize;
     size_t amountBlocks;
     unsigned char *disk;
-    BsBlock *blocks;
-    BsFile *files[AMOUNT_FILES];
+    HiddenCluster *clusters;
+    HiddenFile *files[AMOUNT_ROOT_FILES];
 };
 
-BsFat *createBsFat(size_t diskSize, size_t blockSize);
-void freeBsFat(BsFat *pFat);
-size_t getAmountEntries(BsFat *pFat, const char* path);
-size_t getFreeDiskSpace(BsFat *pFat);
-//void readBlock(BsFat *pFat, size_t bIndex, unsigned char* buffer);
-void deleteFile(BsFat *pFat, const char *filename);
-void showFat(BsFat *pFat, char* outputMessage);
-bool checkIntegrity(BsFat *pFat);
-bool swapBlocks(BsFat *pFat, size_t bIndexA, size_t bIndexB);
-void checkForDefragmentation(BsFat *pFat);
-//void defragmentate(BsFat *pFat);
-int count_path_components(const char *path);
-BsFile *findFileByPath(BsFat *pFat, const char* path);
-int stegFS_getattr(const char *path, struct stat *stbuf, __attribute__((unused)) struct fuse_file_info *fi);
-int stegFS_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags);
-BsFile **createFile(BsFat *pFat, const char *filename, long timestamp);
-int stegFS_create(const char *path, mode_t mode, struct fuse_file_info *fi);
-bool allocateNewBlockForFile(BsFat *pFat, BsFile *pFile);
-int writeBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
-int stegFS_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
-int readBlock(BsFat *pFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
-int stegFS_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize);
+void freeHiddenFat(HiddenFat *hiddenFat);
+size_t getAmountEntries(HiddenFat *hiddenFat, const char* path);
+size_t getFreeDiskSpace(HiddenFat *hiddenFat);
+void deleteHiddenFile(HiddenFat *hiddenFat, const char *filename);
+void showHiddenFat(HiddenFat *hiddenFat, char* outputMessage);
+bool checkIntegrity(HiddenFat *hiddenFat);
+bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB);
+void checkForDefragmentation(HiddenFat *hiddenFat);
+void defragmentate(HiddenFat *hiddenFat);
+int countPathComponents(const char *path);
+HiddenFile *findFileByPath(HiddenFat *hiddenFat, const char* path);
+int getattrSteganoFS(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
+int readdirSteganoFS(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags);
+HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long timestamp);
+int createSteganoFS(const char *path, mode_t mode, struct fuse_file_info *fi);
+bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *hiddenFile);
+int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
+int writeSteganoFS(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
+int readSteganoFS(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 
-extern struct fuse_operations stegfs_fuse_oper;
+extern struct fuse_operations fuseOperationsSteagnoFS;
 ///**
 // * @brief Delete a file.
 // */
