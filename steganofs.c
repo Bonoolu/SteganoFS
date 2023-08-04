@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include "steganofs.h"
+
 #define DEBUG // TODO!
 
 // TODO:
@@ -10,7 +11,7 @@
 // write doxygen
 
 int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
-    HiddenFat *hiddenFat = (HiddenFat *)fuse_get_context()->private_data;
+    HiddenFat *hiddenFat = (HiddenFat *) fuse_get_context()->private_data;
 
     // Check if the path corresponds to the root directory
     if (strcmp(path, "/") == 0) {
@@ -21,7 +22,7 @@ int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
         // Other fields can be set as per your requirements (e.g., st_uid, st_gid, st_size, st_atime, st_mtime, etc.)
 
         return 0; // Return success
-    }else {
+    } else {
         HiddenFile *hiddenFile = findFileByPath(hiddenFat, path);
         if (hiddenFile != NULL) {
             stbuf->st_mode = S_IFREG | 0666; // Regular file with 666 permissions
@@ -51,12 +52,11 @@ int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
 int readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
             enum fuse_readdir_flags flags) {
     // Add entries for the root directory
-    if (strcmp(path, "/") == 0)
-    {
+    if (strcmp(path, "/") == 0) {
         filler(buf, "..", NULL, 0, 0);
         filler(buf, ".", NULL, 0, 0);
-        HiddenFat *hiddenFat = (HiddenFat *)fuse_get_context()->private_data;
-        for(HiddenFile **pFile = hiddenFat->files; pFile < hiddenFat->files + AMOUNT_ROOT_FILES; pFile++) {
+        HiddenFat *hiddenFat = (HiddenFat *) fuse_get_context()->private_data;
+        for (HiddenFile **pFile = hiddenFat->files; pFile < hiddenFat->files + AMOUNT_ROOT_FILES; pFile++) {
             if (*pFile != NULL) {
                 filler(buf, (*pFile)->filename, NULL, 0, 0);
             }
@@ -67,7 +67,7 @@ int readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, s
 }
 
 int create(const char *path, mode_t mode, struct fuse_file_info *fi) {
-    HiddenFat *hiddenFat = (HiddenFat *)fuse_get_context()->private_data;
+    HiddenFat *hiddenFat = (HiddenFat *) fuse_get_context()->private_data;
 
     mode = S_IFREG | 0666;
     if (countPathComponents(path) == 1) {
@@ -88,8 +88,8 @@ int write_(const char *path, const char *buf, size_t size, off_t offset, struct 
     struct fuse_context *private = fuse_get_context();
     HiddenFat *hiddenFat;
     if (private != NULL) {
-        hiddenFat = (HiddenFat *)(private->private_data);
-    }else {
+        hiddenFat = (HiddenFat *) (private->private_data);
+    } else {
 #ifdef DEBUG
         hiddenFat = (HiddenFat *) fi;
 #else
@@ -117,7 +117,8 @@ int write_(const char *path, const char *buf, size_t size, off_t offset, struct 
     int size_signed = (int) size;
     while (size_signed > 0) {
         if (hiddenCluster == NULL) {
-            fprintf(stderr, "Tried to write at an offset for a file which is not large enough, did you forget to allocate?");
+            fprintf(stderr,
+                    "Tried to write at an offset for a file which is not large enough, did you forget to allocate?");
             return -errno;
         }
         // First we search for the block where the offset is in
@@ -130,7 +131,7 @@ int write_(const char *path, const char *buf, size_t size, off_t offset, struct 
             } else {
                 amountBytesToWrite = hiddenFat->blockSize - offsetInsideBlock;
             }
-            int written = writeBlock(hiddenFat,hiddenCluster->bIndex, buf, offsetInsideBlock, amountBytesToWrite);
+            int written = writeBlock(hiddenFat, hiddenCluster->bIndex, buf, offsetInsideBlock, amountBytesToWrite);
             if (written < 0) {
                 return -errno;
             }
@@ -138,7 +139,7 @@ int write_(const char *path, const char *buf, size_t size, off_t offset, struct 
             if (written != amountBytesToWrite) {
                 fprintf(stderr, "Meant to write %zu bytes in Block %zu at block offset %zu (which is disk offset %zu),"
                                 " but %d bytes were written!\n", amountBytesToWrite, hiddenCluster->bIndex,
-                                offsetInsideBlock, offset, written);
+                        offsetInsideBlock, offset, written);
                 return -errno;
             }
             offset += (off_t) written;
@@ -158,8 +159,8 @@ int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
     struct fuse_context *private = fuse_get_context();
     HiddenFat *hiddenFat;
     if (private != NULL) {
-        hiddenFat = (HiddenFat *)(private->private_data);
-    }else {
+        hiddenFat = (HiddenFat *) (private->private_data);
+    } else {
 #ifdef DEBUG
         hiddenFat = (HiddenFat *) fi;
 #else
@@ -184,7 +185,8 @@ int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
     int size_signed = (int) size;
     while (size_signed > 0) {
         if (hiddenCluster == NULL) {
-            fprintf(stderr, "Tried to write at an offset for a file which is not large enough, did you forget to allocate?");
+            fprintf(stderr,
+                    "Tried to write at an offset for a file which is not large enough, did you forget to allocate?");
             return -errno;
         }
         // First we search for the block where the offset is in
@@ -218,12 +220,33 @@ int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
     return (int) bytesRead;
 }
 
+int unlink(const char *path) {
+    if (countPathComponents(path) != 1) {
+        return -ENOENT;
+    }
+    struct fuse_context *private = fuse_get_context();
+    HiddenFat *hiddenFat;
+    if (private != NULL) {
+        hiddenFat = (HiddenFat *) (private->private_data);
+    } else {
+        fprintf(stderr, "Couldn't get fuse context, is null!!\n");
+        return -1;
+    }
+    HiddenFile *pFile = findFileByPath(hiddenFat, path);
+    if (pFile == NULL) {
+        return -ENOENT;
+    }
+    const char *filename = path + 1;
+    return deleteHiddenFile(hiddenFat, filename);
+}
+
 struct fuse_operations fuseOperations = {
         .getattr = getattr,
         .readdir = readdir,
         .create = create,
         .write = write_,
-        .read = read_
+        .read = read_,
+        .unlink = unlink
 };
 
 ///**

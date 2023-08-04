@@ -24,14 +24,23 @@ struct HiddenFat {
 
 // HiddenFat
 HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize);
+
 void freeHiddenFat(HiddenFat *hiddenFat);
-size_t getAmountEntries(HiddenFat *hiddenFat, const char* path);
+
+size_t getAmountEntries(HiddenFat *hiddenFat, const char *path);
+
 size_t getFreeDiskSpace(HiddenFat *hiddenFat);
-void showHiddenFat(HiddenFat *hiddenFat, char* outputMessage);
+
+void showHiddenFat(HiddenFat *hiddenFat, char *outputMessage);
+
 bool checkIntegrity(HiddenFat *hiddenFat);
+
 void checkForDefragmentation(HiddenFat *hiddenFat);
+
 void defragmentate(HiddenFat *hiddenFat);
-int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
-int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
+
+int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length);
+
+int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length);
 
 #endif //STEGANOFS_HIDDENFAT_H

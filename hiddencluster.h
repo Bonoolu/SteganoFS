@@ -15,7 +15,7 @@ enum State {
     free_ = 0, reserved = 1, defect = 2, allocated = 3
 };
 
-struct HiddenCluster{
+struct HiddenCluster {
     size_t bIndex;
     size_t clusterIndex;
     unsigned int state;
@@ -25,6 +25,7 @@ struct HiddenCluster{
 };
 
 bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB);
+
 bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *hiddenFile);
 
 #endif //STEGANOFS_HIDDENCLUSTER_H

@@ -159,7 +159,7 @@ bool testCreateFileInsufficientMemory() {
         return false;
     }
     bool allocated = true;
-    for(int i = 0; i < hiddenFat->amountBlocks + 1 && allocated; i++){ // Larger than available memory
+    for (int i = 0; i < hiddenFat->amountBlocks + 1 && allocated; i++) { // Larger than available memory
         allocated = extendHiddenCluster(hiddenFat, *hiddenFile);
     }
     if (allocated) {
@@ -269,7 +269,8 @@ bool testCreateFileLinkedList() {
         }
 
         if (hiddenCluster->clusterIndex != clusterIndex) {
-            printf("testCreateFileLinkedList test failed: Incorrect clusterIndex in the cluster. Got %zu, but expected %zu\n", hiddenCluster->clusterIndex, clusterIndex);
+            printf("testCreateFileLinkedList test failed: Incorrect clusterIndex in the cluster. Got %zu, but expected %zu\n",
+                   hiddenCluster->clusterIndex, clusterIndex);
             passed = false;
             break;
         }
@@ -328,83 +329,85 @@ bool testDeleteFileValid() {
     return passed;
 }
 
-// TODO! unlink not yet implemented
-//bool testDeleteFileNonExistent() {
-//    // Create a valid file
-//    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
-//    const char *hiddenFilename = "cats.gif";
-//    long timestamp = time(NULL);
-//    BsFile **hiddenFile = createFile(hiddenFat, hiddenFilename, timestamp);
-//    if (hiddenFile == NULL) {
-//        printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
-//        return false;
-//    }
-//    // Delete a non-existent file
-//    const char *nonExistentFilename = "/home/henry/dogs.gif";
-//    deleteFile(hiddenFat, nonExistentFilename);
-//
-//    // Check if the file table remains unchanged
-//    bool passed = true;
-//
-//    if (*hiddenFile == NULL) {
-//        printf("testDeleteFileNonExistent test failed: File in the file table was incorrectly deleted.\n");
-//        passed = false;
-//    }
-//
-//    if ((*hiddenFile)->filename != filename) {
-//        printf("testDeleteFileNonExistent test failed: File in the file table was incorrectly deleted.\n");
-//        passed = false;
-//    }
-//
-//    if (!checkIntegrity(hiddenFat)) {
-//        printf("testDeleteFileNonExistent test failed: Integrity check failed!.\n");
-//        passed = false;
-//    }
-//
-//    if (passed)
-//        printf("testDeleteFileNonExistent test passed.\n");
-//    return passed;
-//}
+bool testDeleteFileNonExistent() {
+    // Create a valid file
+    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    const char *hiddenFilename = "cats.gif";
+    long timestamp = time(NULL);
+    HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
+    if (hiddenFile == NULL) {
+        printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    // Delete a non-existent file
+    const char *nonExistentFilename = "dogs.gif";
+    deleteHiddenFile(hiddenFat, nonExistentFilename);
 
-// TODO! unlink not yet implemented
-//bool testDeleteFileWithClusters() {
-//    // Check if the associated clusters were freed
-//    bool passed = true;
-//
-//    // Create a file with clusters
-//    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
-//
-//
-//    const char *hiddenFilename = "cats.gif";
-//    long timestamp = time(NULL);
-//    BsFile **hiddenFile = createFile(hiddenFat, szFile, hiddenFilename, timestamp, NULL);
-//    if (hiddenFile == NULL) {
-//        printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
-//        return false;
-//    }
-//    // Delete the file
-//    deleteFile(hiddenFat, filename);
-//
-//    // Check if the associated clusters were freed
-//
-//    for (size_t bIndex = 0; bIndex < hiddenFat->amountBlocks; bIndex++) {
-//        if (hiddenFat->blocks[bIndex].cluster != NULL) {
-//            printf("testDeleteFileWithClusters test failed: Cluster associated with block %zu was not freed.\n",
-//                   bIndex);
-//            passed = false;
-//            break;
-//        }
-//    }
-//
-//    if (!checkIntegrity(hiddenFat)) {
-//        printf("testDeleteFileWithClusters test failed: Integrity check failed!.\n");
-//        passed = false;
-//    }
-//
-//    if (passed)
-//        printf("testDeleteFileWithClusters test passed.\n");
-//    return passed;
-//}
+    // Check if the file table remains unchanged
+    bool passed = true;
+
+    if (*hiddenFile == NULL) {
+        printf("testDeleteFileNonExistent test failed: File in the file table was incorrectly deleted.\n");
+        passed = false;
+    }
+
+    if (strcmp((*hiddenFile)->filename, hiddenFilename) != 0) {
+        printf("testDeleteFileNonExistent test failed: File in the file table was incorrectly deleted.\n");
+        passed = false;
+    }
+
+    if (!checkIntegrity(hiddenFat)) {
+        printf("testDeleteFileNonExistent test failed: Integrity check failed!.\n");
+        passed = false;
+    }
+
+    if (passed)
+        printf("testDeleteFileNonExistent test passed.\n");
+    return passed;
+}
+
+bool testDeleteFileWithClusters() {
+    // Check if the associated clusters were freed
+    bool passed = true;
+
+    // Create a file with clusters
+    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+
+
+    const char *hiddenFilename = "cats.gif";
+    long timestamp = time(NULL);
+    HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
+    if (hiddenFile == NULL) {
+        printf("testDeleteFileValid test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    const char *testBuffer = "My testbuffer!";
+    write_("/cats.gif", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
+
+    // Delete the file
+    deleteHiddenFile(hiddenFat, hiddenFilename);
+
+    // Check if the associated clusters were freed
+    unsigned char zeroBlock[BLOCKSIZE];
+    memset(zeroBlock, 0, sizeof zeroBlock);
+    for (size_t bIndex = 0; bIndex < hiddenFat->amountBlocks; bIndex++) {
+        if (memcmp(zeroBlock, hiddenFat->disk + (bIndex * BLOCKSIZE), BLOCKSIZE) != 0) {
+            printf("testDeleteFileWithClusters test failed: Cluster associated with block %zu was not freed.\n",
+                   bIndex);
+            passed = false;
+            break;
+        }
+    }
+
+    if (!checkIntegrity(hiddenFat)) {
+        printf("testDeleteFileWithClusters test failed: Integrity check failed!.\n");
+        passed = false;
+    }
+
+    if (passed)
+        printf("testDeleteFileWithClusters test passed.\n");
+    return passed;
+}
 
 bool testShowNBlockFat(size_t n, size_t outputLen) {
     // Create an empty Fat
@@ -603,9 +606,6 @@ void runTests(int argc, char **argv) {
             testCreateFileNoAvailableFileSlot(),
             //testCreateFileInsufficientFreeBlocks(),
             testCreateFileLinkedList(),
-            //testDeleteFileValid(),
-            //testDeleteFileNonExistent(),
-            //testDeleteFileWithClusters(),
             testShowNBlockFat(1, 23),
             testShowNBlockFat(239, 504),
             testShowNBlockFat(240, 507),
@@ -614,6 +614,9 @@ void runTests(int argc, char **argv) {
 //            //testSwahiddenClustersIntegrity(),
 //            //testDefragmentation(),
             testWriteRead(argc, argv),
+            testDeleteFileValid(),
+            testDeleteFileNonExistent(),
+            testDeleteFileWithClusters(),
             -1};
     size_t passed = 0;
     size_t sum = 0;
@@ -628,7 +631,7 @@ void runTests(int argc, char **argv) {
     printf("%zu/%zu tests passed!\n", passed, sum);
 }
 
-int test_fuse(int argc, char** argv){
+int test_fuse(int argc, char **argv) {
     HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, "cats.gif", time(NULL));
     if (hiddenFile == NULL) {
@@ -648,8 +651,8 @@ int test_fuse(int argc, char** argv){
     return fuse_main(argc, argv, &fuseOperations, hiddenFat);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     runTests(argc, argv);
     calculateSizeOnDisk();
-    return 0;//test_fuse(argc, argv);
+    return test_fuse(argc, argv);
 }

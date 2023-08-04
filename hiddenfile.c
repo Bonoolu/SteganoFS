@@ -1,29 +1,31 @@
 #include "hiddenfile.h"
 
-void deleteHiddenFile(HiddenFat *hiddenFat, const char *filename) {
-//    BsFile **pFile = hiddenFat->files;
-//    bool found = false;
-//    do {
-//        if (*pFile != NULL && strcmp((*pFile)->filename, filename) == 0) {
-//            found = true;
-//            break;
-//        }
-//    } while (++pFile != hiddenFat->files + AMOUNT_FILES);
-//
-//    if (found) {
-//        BsBlock *hiddenCluster = (*pFile)->hiddenCluster;
-//        while (hiddenCluster) {
-//            hiddenFat->blocks[hiddenCluster->bIndex].state = free_;
-//            hiddenFat->blocks[hiddenCluster->bIndex].prev  = NULL;
-//            pCluster = pCluster->next;
-//        }
-//        free((*pFile)->pCluster);
-//        free(*pFile);
-//        *pFile = NULL;
-//        printf("Deleted File!\n");
-//    } else {
-//        fprintf(stderr, "Could not find file: %s\n", filename);
-//    }
+int deleteHiddenFile(HiddenFat *hiddenFat, const char *filename) {
+    HiddenFile **pFile = hiddenFat->files;
+    bool found = false;
+    do {
+        if (*pFile != NULL && strcmp((*pFile)->filename, filename) == 0) {
+            found = true;
+            break;
+        }
+    } while (++pFile != hiddenFat->files + AMOUNT_ROOT_FILES);
+
+    if (found) {
+        HiddenCluster *hiddenCluster = (*pFile)->hiddenCluster;
+        while (hiddenCluster) {
+            HiddenCluster *tmpCluster = hiddenCluster->next;
+            memset(hiddenFat->disk + (BLOCKSIZE * hiddenCluster->bIndex), 0, BLOCKSIZE);
+            memset(hiddenCluster, 0, sizeof(HiddenCluster));
+            hiddenCluster = tmpCluster;
+        }
+        free(*pFile);
+        *pFile = NULL;
+        printf("Deleted File!\n");
+        return 0;
+    } else {
+        fprintf(stderr, "Could not find file: %s\n", filename);
+        return -ENOENT;
+    }
 }
 
 int countPathComponents(const char *path) {

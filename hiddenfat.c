@@ -111,7 +111,7 @@ void showHiddenFat(HiddenFat *hiddenFat, char *outputMessage) {
     for (size_t bIndex = 0; bIndex < hiddenFat->amountBlocks; bIndex++) {
         unsigned int state = hiddenFat->clusters[bIndex].state;
         if (state == allocated && bufferIndex < 508) {
-            char clusterIndexChar = (char)(hiddenFat->clusters[bIndex].clusterIndex + '0');
+            char clusterIndexChar = (char) (hiddenFat->clusters[bIndex].clusterIndex + '0');
             buffer[bufferIndex++] = clusterIndexChar;
         } else if (bufferIndex < 508) {
             buffer[bufferIndex++] = letterMap[state]; // 508
@@ -146,7 +146,8 @@ bool checkIntegrity(HiddenFat *hiddenFat) {
     bool hasIntegrity = true;
     // Check if all allocated blocks are associated with a cluster
     for (size_t bIndex = 0; bIndex < hiddenFat->amountBlocks; bIndex++) {
-        if (hiddenFat->clusters[bIndex].state == allocated && hiddenFat->clusters[bIndex].prev == NULL && hiddenFat->clusters[bIndex].next == NULL) {
+        if (hiddenFat->clusters[bIndex].state == allocated && hiddenFat->clusters[bIndex].prev == NULL &&
+            hiddenFat->clusters[bIndex].next == NULL) {
             fprintf(stderr, "Inconsistent file system: Allocated block %zu is not associated with a cluster.\n",
                     bIndex);
             hasIntegrity = false;
@@ -172,7 +173,8 @@ bool checkIntegrity(HiddenFat *hiddenFat) {
 
     // Check if all free blocks are not associated with a cluster
     for (size_t bIndex = 0; bIndex < hiddenFat->amountBlocks; bIndex++) {
-        if (hiddenFat->clusters[bIndex].state == free_ && (hiddenFat->clusters[bIndex].prev != NULL || hiddenFat->clusters[bIndex].next != NULL)) {
+        if (hiddenFat->clusters[bIndex].state == free_ &&
+            (hiddenFat->clusters[bIndex].prev != NULL || hiddenFat->clusters[bIndex].next != NULL)) {
             fprintf(stderr, "Inconsistent file system: Free block %zu is associated with a cluster.\n", bIndex);
             hasIntegrity = false;
         }
@@ -184,18 +186,18 @@ void checkForDefragmentation(HiddenFat *hiddenFat) {
     unsigned int blocksInCorrectPos = 0;
     HiddenFile *currentFile = NULL;
     int currentClusterIndex = -1;
-    for(HiddenCluster *hiddenCluster = hiddenFat->clusters; hiddenCluster < hiddenFat->clusters + hiddenFat->amountBlocks; hiddenCluster++) {
+    for (HiddenCluster *hiddenCluster = hiddenFat->clusters;
+         hiddenCluster < hiddenFat->clusters + hiddenFat->amountBlocks; hiddenCluster++) {
         if (hiddenCluster->state != allocated) {
             if (currentFile == NULL || currentClusterIndex == -1) {
                 blocksInCorrectPos++;
-            }else {
+            } else {
                 currentFile = NULL;
                 currentClusterIndex = -1;
             }
             continue;
-        }
-        else if (currentFile == NULL || currentClusterIndex == -1) {
-            if(hiddenCluster->clusterIndex == 0) {
+        } else if (currentFile == NULL || currentClusterIndex == -1) {
+            if (hiddenCluster->clusterIndex == 0) {
                 blocksInCorrectPos++;
             }
         } else {
@@ -231,10 +233,10 @@ void defragmentate(HiddenFat *hiddenFat) {
     }
 }
 
-size_t getAmountEntries(HiddenFat *hiddenFat, const char* path) {
+size_t getAmountEntries(HiddenFat *hiddenFat, const char *path) {
     if (strcmp(path, "/") == 0) {
         size_t amount = 0;
-        for(HiddenFile **pFile = hiddenFat->files; pFile < hiddenFat->files + AMOUNT_ROOT_FILES; pFile++) {
+        for (HiddenFile **pFile = hiddenFat->files; pFile < hiddenFat->files + AMOUNT_ROOT_FILES; pFile++) {
             if (*pFile != NULL) {
                 amount++;
             }
@@ -244,7 +246,7 @@ size_t getAmountEntries(HiddenFat *hiddenFat, const char* path) {
     return 2;
 }
 
-int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length) {
+int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length) {
     if (offset + length > BLOCKSIZE) {
         fprintf(stderr, "Trying to write to the wrong Block! offset+length is higher than %d\n", BLOCKSIZE);
         return -1;
@@ -262,11 +264,11 @@ int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t o
         fprintf(stderr, "Can't write outside the disk!!\n"); // TODO BREAKPOINT
         return -1;
     }
-    memcpy(hiddenFat->disk + diskOffset, (void*) buffer + offset, length);
+    memcpy(hiddenFat->disk + diskOffset, (void *) buffer + offset, length);
     return (int) length;
 }
 
-int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length){
+int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length) {
     if (offset + length > BLOCKSIZE) {
         fprintf(stderr, "Trying to read from the wrong Block! offset+length is higher than %d\n", BLOCKSIZE);
         return -1;
@@ -284,6 +286,6 @@ int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t of
         fprintf(stderr, "Can't read outside the disk!!\n");
         return -1;
     }
-    memcpy((void*) buffer + offset, hiddenFat->disk + diskOffset, length);
+    memcpy((void *) buffer + offset, hiddenFat->disk + diskOffset, length);
     return (int) length;
 }

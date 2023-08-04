@@ -36,10 +36,10 @@ struct __attribute__((__packed__)) PackedFile {
     u_int64_t real_filesize;
     u_int32_t timestamp;
     u_int32_t hiddenCluster;
-    char filename[12];
+    u_int8_t filename[12];
 };
 
-const unsigned char MAGICBYTES[4] = {'S','T','F','S'};
+//const unsigned char MAGICBYTES[4] = {'S','T','F','S'};
 
 void calculateSizeOnDisk();
 
