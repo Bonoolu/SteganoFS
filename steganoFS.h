@@ -3,70 +3,16 @@
 
 #define FUSE_USE_VERSION 31
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <time.h>
 #include <fuse3/fuse.h>
 #include <errno.h>
+#include "hiddenFat.h"
+#include "HiddenFile.h"
+#include "HiddenCluster.h"
 
-#define AMOUNT_ROOT_FILES 10
-#define BLOCKSIZE 4096
-
-typedef struct HiddenFile HiddenFile;
-typedef struct HiddenCluster HiddenCluster;
-typedef struct HiddenFat HiddenFat;
-
-struct HiddenFile {
-    const char *filename;
-    size_t filesize;
-    size_t real_filesize;
-    long timestamp;
-    HiddenCluster *hiddenCluster;
-};
-
-struct HiddenCluster{
-    size_t bIndex;
-    unsigned int state;
-    HiddenCluster *prev;
-    HiddenCluster *next;
-    size_t clusterIndex;
-    HiddenFile *file;
-};
-
-enum State {
-    free_ = 0, reserved = 1, defect = 2, allocated = 3
-};
-
-struct HiddenFat {
-    size_t blockSize;
-    size_t amountBlocks;
-    unsigned char *disk;
-    HiddenCluster *clusters;
-    HiddenFile *files[AMOUNT_ROOT_FILES];
-};
-
-HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize);
-void freeHiddenFat(HiddenFat *hiddenFat);
-size_t getAmountEntries(HiddenFat *hiddenFat, const char* path);
-size_t getFreeDiskSpace(HiddenFat *hiddenFat);
-void deleteHiddenFile(HiddenFat *hiddenFat, const char *filename);
-void showHiddenFat(HiddenFat *hiddenFat, char* outputMessage);
-bool checkIntegrity(HiddenFat *hiddenFat);
-bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB);
-void checkForDefragmentation(HiddenFat *hiddenFat);
-void defragmentate(HiddenFat *hiddenFat);
-int countPathComponents(const char *path);
-HiddenFile *findFileByPath(HiddenFat *hiddenFat, const char* path);
-int getattrSteganoFS(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
+int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
 int readdirSteganoFS(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags);
-HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long timestamp);
 int createSteganoFS(const char *path, mode_t mode, struct fuse_file_info *fi);
-bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *hiddenFile);
-int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
 int writeSteganoFS(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
-int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
 int readSteganoFS(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 
 extern struct fuse_operations fuseOperationsSteagnoFS;
