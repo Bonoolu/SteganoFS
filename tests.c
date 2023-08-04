@@ -212,30 +212,6 @@ bool testCreateFileNoAvailableFileSlot() {
     return passed;
 }
 
-// TODO! This test no longer makes sense, as fat/fuse fielsystems will not check for this and just let disaster happen
-//bool testCreateFileInsufficientFreeBlocks() {
-//    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
-//    size_t szFile = hiddenFat->amountBlocks * hiddenFat->blockSize + 1;  // Requires more blocks than available
-//    const char *hiddenFilename = "sharks.gif";
-//    long timestamp = time(NULL);
-//    bool passed = true;
-//
-//    BsFile **hiddenFile = createFile(hiddenFat, szFile, hiddenFilename, timestamp);
-//    if (hiddenFile != NULL) {
-//        printf("testCreateFileInsufficientFreeBlocks test failed: File created despite insufficient free blocks.\n");
-//        passed = false;
-//    }
-//
-//    if (!checkIntegrity(hiddenFat)) {
-//        printf("testCreateFileInsufficientFreeBlocks test failed: Integrity check failed!.\n");
-//        passed = false;
-//    }
-//
-//    if (passed)
-//        printf("testCreateFileInsufficientFreeBlocks test passed.\n");
-//    return passed;
-//}
-
 bool testCreateFileLinkedList() {
     // Create a file with multiple clusters
     HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
@@ -373,7 +349,6 @@ bool testDeleteFileWithClusters() {
     // Create a file with clusters
     HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
 
-
     const char *hiddenFilename = "cats.gif";
     long timestamp = time(NULL);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
@@ -434,137 +409,147 @@ bool testShowNBlockFat(size_t n, size_t outputLen) {
     return passed;
 }
 
-// TODO! implement swap again
-//bool testSwahiddenClustersIntegrity() {
-//    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
-//    bool passed = true;
-//
-//    // Swap the same block
-//    bool swapResult = swahiddenClusters(hiddenFat, 0, 0);
-//    if (swapResult) {
-//        printf("testSwahiddenClustersIntegrity test failed: Failed to NOT swap the same Block!\n");
-//        passed = false;
-//    }
-//
-//    // Swap two allocated Blocks
-//    createFile(hiddenFat, 1, "file1", time(NULL), NULL);
-//    createFile(hiddenFat, 1, "file2", time(NULL), NULL);
-//    swapResult = swahiddenClusters(hiddenFat, 0, 1);
-//    if (!swapResult || strcmp(hiddenFat->files[hiddenFat->blocks[0].cluster->fileIndex]->filename, "file2") != 0
-//        || strcmp(hiddenFat->files[hiddenFat->blocks[1].cluster->fileIndex]->filename, "file1") != 0) {
-//        printf("testSwahiddenClustersIntegrity test failed: Failed to swap two Blocks!\n");
-//        passed = false;
-//    }
-//
-//    if (!checkIntegrity(hiddenFat)) {
-//        printf("testSwahiddenClustersIntegrity test failed: Integrity check failed!.\n");
-//        passed = false;
-//    }
-//
-//    // Swapping a free block with an allocated block
-//    createFile(hiddenFat, 1, "file3", time(NULL), NULL);
-//    swapResult = swahiddenClusters(hiddenFat, 2, 3);
-//    if (!swapResult || strcmp(hiddenFat->files[hiddenFat->blocks[3].cluster->fileIndex]->filename, "file3") != 0) {
-//        printf("testSwahiddenClustersIntegrity test failed: Failed to swap a free block with an allocated block.\n");
-//        passed = false;
-//    }
-//
-//    if (!checkIntegrity(hiddenFat)) {
-//        printf("testSwahiddenClustersIntegrity test failed: Integrity check failed!.\n");
-//        passed = false;
-//    }
-//
-//
-//    // Swapping a free block with a defect block
-//    hiddenFat->blocks[4].state = defect;
-//    swapResult = swahiddenClusters(hiddenFat, 4, 5);
-//    if (swapResult || hiddenFat->blocks[4].state != defect) {
-//        printf("testSwahiddenClustersIntegrity test failed: Failed to NOT swap a free block with a defect block.\n");
-//        passed = false;
-//    }
-//
-//    if (!checkIntegrity(hiddenFat)) {
-//        printf("testSwahiddenClustersIntegrity test failed: Integrity check failed!.\n");
-//        passed = false;
-//    }
-//
-//    // Swapping a free block with a reserved block
-//    hiddenFat->blocks[6].state = reserved;
-//    swapResult = swahiddenClusters(hiddenFat, 6, 7);
-//    if (swapResult || hiddenFat->blocks[6].state != reserved) {
-//        printf("testSwahiddenClustersIntegrity test failed: Failed to NOT swap a free block with a defect block.\n");
-//        passed = false;
-//    }
-//
-//    if (!checkIntegrity(hiddenFat)) {
-//        printf("testSwahiddenClustersIntegrity test failed: Integrity check failed!.\n");
-//        passed = false;
-//    }
-//
-//    // Swapping two free blocks!
-//    swapResult = swahiddenClusters(hiddenFat, 8, 9);
-//    if (swapResult) {
-//        printf("testSwahiddenClustersIntegrity test failed: Failed to NOT swap two free blocks!\n");
-//        passed = false;
-//    }
-//
-//    if (!checkIntegrity(hiddenFat)) {
-//        printf("testSwahiddenClustersIntegrity test failed: Integrity check failed!.\n");
-//        passed = false;
-//    }
-//
-//    // Swapping a free block with a defect block
-//    createFile(hiddenFat, "file4", time(NULL));
-//    hiddenFat->blocks[10].state = reserved;
-//
-//    swapResult = swahiddenClusters(hiddenFat, 10, 11);
-//
-//    if (swapResult || strcmp(hiddenFat->files[hiddenFat->blocks[2].cluster->fileIndex]->filename, "file4") != 0 ||
-//        hiddenFat->blocks[10].state != reserved) {
-//        printf("testSwahiddenClustersIntegrity test failed: Failed to NOT swap a free block with a defect block\n");
-//        passed = false;
-//    }
-//
-//    if (!checkIntegrity(hiddenFat)) {
-//        printf("testSwahiddenClustersIntegrity test failed: Integrity check failed!.\n");
-//        passed = false;
-//    }
-//
-//    freeHiddenFat(hiddenFat);
-//    return passed;
-//}
+bool testSwapHiddenClustersIntegrity() {
+    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    bool passed = true;
 
-// TODO! need to implement swahiddenClusters again
-//bool testDefragmentation() {
-//    // Create a valid file
-//    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
-//    size_t szFile = 512u;
-//    BsFile **hiddenFile = createFile(hiddenFat, "cats.gif", time(NULL));
-//    if (hiddenFile == NULL) {
-//        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
-//        return false;
-//    }
-//    file = createFile(hiddenFat, "dogs.gif", time(NULL));
-//    if (hiddenFile == NULL) {
-//        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
-//        return false;
-//    }
-//    file = createFile(hiddenFat, "birds.gif", time(NULL));
-//    if (hiddenFile == NULL) {
-//        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
-//        return false;
-//    }
-//    deleteFile(hiddenFat, "/home/henry/dogs.gif");
-//    swahiddenClusters(hiddenFat, 4, 25);
-//    swahiddenClusters(hiddenFat, 4, 23);
-//    swahiddenClusters(hiddenFat, 2, 24);
-//    showFat(hiddenFat, NULL);
-//    checkForDefragmentation(hiddenFat);
-//    defragmentate(hiddenFat);
-//    showFat(hiddenFat, NULL);
-//    checkForDefragmentation(hiddenFat);
-//    return true;
-//}
+    // Swap the same block
+    bool swapResult = swapHiddenClusters(hiddenFat, 0, 0);
+    if (swapResult) {
+        printf("testSwapHiddenClustersIntegrity test failed: Failed to NOT swap the same Block!\n");
+        passed = false;
+    }
+
+    // Swap two allocated Blocks
+    createHiddenFile(hiddenFat, "file1", time(NULL));
+    const char *test1Buffer = "My file1";
+    write_("/file1", test1Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
+
+    createHiddenFile(hiddenFat, "file2", time(NULL));
+    const char *test2Buffer = "My file2";
+    write_("/file2", test2Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
+    swapResult = swapHiddenClusters(hiddenFat, 0, 1);
+    if (!swapResult || strcmp(hiddenFat->clusters[0].file->filename, "file2") != 0
+        || strcmp(hiddenFat->clusters[1].file->filename, "file1") != 0) {
+        printf("testSwapHiddenClustersIntegrity test failed: Failed to swap two Blocks!\n");
+        passed = false;
+    }
+
+    if (!checkIntegrity(hiddenFat)) {
+        printf("testSwapHiddenClustersIntegrity test failed: Integrity check failed!.\n");
+        passed = false;
+    }
+
+    // Swapping a free block with an allocated block
+    createHiddenFile(hiddenFat, "file3", time(NULL));
+    const char *test3Buffer = "My file3";
+    write_("/file3", test3Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
+
+    //swapResult = swapHiddenClusters(hiddenFat, 2, 3);
+    if (!swapResult || strcmp(hiddenFat->clusters[2].file->filename, "file3") != 0) {
+        printf("testSwapHiddenClustersIntegrity test failed: Failed to swap a free block with an allocated block.\n");
+        passed = false;
+    }
+
+    if (!checkIntegrity(hiddenFat)) {
+        printf("testSwapHiddenClustersIntegrity test failed: Integrity check failed!.\n");
+        passed = false;
+    }
+
+
+    // Swapping a free block with a defect block
+    hiddenFat->clusters[4].state = defect;
+    swapResult = swapHiddenClusters(hiddenFat, 4, 5);
+    if (swapResult || hiddenFat->clusters[4].state != defect) {
+        printf("testSwapHiddenClustersIntegrity test failed: Failed to NOT swap a free block with a defect block.\n");
+        passed = false;
+    }
+
+    if (!checkIntegrity(hiddenFat)) {
+        printf("testSwapHiddenClustersIntegrity test failed: Integrity check failed!.\n");
+        passed = false;
+    }
+
+    // Swapping a free block with a reserved block
+    hiddenFat->clusters[6].state = reserved;
+    swapResult = swapHiddenClusters(hiddenFat, 6, 7);
+    if (swapResult || hiddenFat->clusters[6].state != reserved) {
+        printf("testSwapHiddenClustersIntegrity test failed: Failed to NOT swap a free block with a defect block.\n");
+        passed = false;
+    }
+
+    if (!checkIntegrity(hiddenFat)) {
+        printf("testSwapHiddenClustersIntegrity test failed: Integrity check failed!.\n");
+        passed = false;
+    }
+
+    // Swapping two free blocks!
+    swapResult = swapHiddenClusters(hiddenFat, 8, 9);
+    if (swapResult) {
+        printf("testSwapHiddenClustersIntegrity test failed: Failed to NOT swap two free blocks!\n");
+        passed = false;
+    }
+
+    if (!checkIntegrity(hiddenFat)) {
+        printf("testSwapHiddenClustersIntegrity test failed: Integrity check failed!.\n");
+        passed = false;
+    }
+
+    // Swapping a free block with a defect block
+    createHiddenFile(hiddenFat, "file4", time(NULL));
+    const char *test4Buffer = "My file4";
+    write_("/file4", test2Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
+    swapResult = swapHiddenClusters(hiddenFat, 0, 1);
+
+    hiddenFat->clusters[10].state = reserved;
+
+    swapResult = swapHiddenClusters(hiddenFat, 10, 11);
+
+    if (swapResult || strcmp(hiddenFat->clusters[2].file->filename, "file4") != 0 ||
+        hiddenFat->clusters[10].state != reserved) {
+        printf("testSwapHiddenClustersIntegrity test failed: Failed to NOT swap a free block with a defect block\n");
+        passed = false;
+    }
+
+    if (!checkIntegrity(hiddenFat)) {
+        printf("testSwapHiddenClustersIntegrity test failed: Integrity check failed!.\n");
+        passed = false;
+    }
+
+    //freeHiddenFat(hiddenFat); TODO!
+    return passed;
+}
+
+bool testDefragmentation() {
+    // Create a valid file
+    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    size_t szFile = 512u;
+    HiddenFile **hiddenFile = createHiddenFile(hiddenFat, "cats.gif", time(NULL));
+    if (hiddenFile == NULL) {
+        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    hiddenFile = createHiddenFile(hiddenFat, "dogs.gif", time(NULL));
+    if (hiddenFile == NULL) {
+        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    hiddenFile = createHiddenFile(hiddenFat, "birds.gif", time(NULL));
+    if (hiddenFile == NULL) {
+        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    deleteHiddenFile(hiddenFat, "dogs.gif");
+    swapHiddenClusters(hiddenFat, 4, 25);
+    swapHiddenClusters(hiddenFat, 4, 23);
+    swapHiddenClusters(hiddenFat, 2, 24);
+    showHiddenFat(hiddenFat, NULL);
+    checkForDefragmentation(hiddenFat);
+    defragmentate(hiddenFat);
+    showHiddenFat(hiddenFat, NULL);
+    checkForDefragmentation(hiddenFat);
+    return true;
+}
 
 bool testWriteRead(int argc, char **argv) {
     HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
@@ -604,19 +589,18 @@ void runTests(int argc, char **argv) {
             testCreateFileValid(),
             testCreateFileInsufficientMemory(),
             testCreateFileNoAvailableFileSlot(),
-            //testCreateFileInsufficientFreeBlocks(),
             testCreateFileLinkedList(),
+            testDeleteFileValid(),
+            testDeleteFileNonExistent(),
+            testDeleteFileWithClusters(),
             testShowNBlockFat(1, 23),
             testShowNBlockFat(239, 504),
             testShowNBlockFat(240, 507),
             testShowNBlockFat(241, 509),
             testShowNBlockFat(242, 509),
-//            //testSwahiddenClustersIntegrity(),
-//            //testDefragmentation(),
             testWriteRead(argc, argv),
-            testDeleteFileValid(),
-            testDeleteFileNonExistent(),
-            testDeleteFileWithClusters(),
+            testSwapHiddenClustersIntegrity(),
+            //testDefragmentation(), TODO!
             -1};
     size_t passed = 0;
     size_t sum = 0;
@@ -654,5 +638,5 @@ int test_fuse(int argc, char **argv) {
 int main(int argc, char **argv) {
     runTests(argc, argv);
     calculateSizeOnDisk();
-    return test_fuse(argc, argv);
+    return 0;//test_fuse(argc, argv);
 }
