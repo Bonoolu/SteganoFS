@@ -1,4 +1,5 @@
-#include "steganoFS.h"
+#include "steganofs.h"
+#include "ramdiskloader.h"
 
 bool testCreateHiddenFat() {
     size_t diskSize = BLOCKSIZE * 4;  // Example disk size
@@ -125,7 +126,7 @@ bool testGetFreeDiskSpaceFullDisk() {
 bool testCreateFileValid() {
     HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
 
-    const char *hiddenFilename = "/home/henry/cats.gif";
+    const char *hiddenFilename = "cats.gif";
     long timestamp = time(NULL);
     bool passed = true;
 
@@ -148,11 +149,15 @@ bool testCreateFileValid() {
 bool testCreateFileInsufficientMemory() {
     fflush(stdout);
     HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
-    const char *hiddenFilename = "/home/henry/dogs.gif";
+    const char *hiddenFilename = "dogs.gif";
     long timestamp = time(NULL);
     bool passed = true;
 
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
+    if (hiddenFile == NULL) {
+        printf("testCreateFileInsufficientMemory test failed: createHiddenFile failed and returned NULL.\n");
+        return false;
+    }
     bool allocated = true;
     for(int i = 0; i < hiddenFat->amountBlocks + 1 && allocated; i++){ // Larger than available memory
         allocated = extendHiddenCluster(hiddenFat, *hiddenFile);
@@ -177,7 +182,7 @@ bool testCreateFileNoAvailableFileSlot() {
     fflush(stdout);
     HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
     printf("Free Space is now: %zu\n", getFreeDiskSpace(hiddenFat));
-    const char *hiddenFilename = "/home/henry/bears.gif";
+    const char *hiddenFilename = "bears.gif";
     long timestamp = time(NULL);
     bool passed = true;
 
@@ -211,7 +216,7 @@ bool testCreateFileNoAvailableFileSlot() {
 //bool testCreateFileInsufficientFreeBlocks() {
 //    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
 //    size_t szFile = hiddenFat->amountBlocks * hiddenFat->blockSize + 1;  // Requires more blocks than available
-//    const char *hiddenFilename = "/home/henry/sharks.gif";
+//    const char *hiddenFilename = "sharks.gif";
 //    long timestamp = time(NULL);
 //    bool passed = true;
 //
@@ -234,15 +239,15 @@ bool testCreateFileNoAvailableFileSlot() {
 bool testCreateFileLinkedList() {
     // Create a file with multiple clusters
     HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
-    const char *hiddenFilename = "/home/henry/dogs.gif";
+    const char *hiddenFilename = "dogs.gif";
     long timestamp = time(NULL);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
-    extendHiddenCluster(hiddenFat, *hiddenFile);
-    extendHiddenCluster(hiddenFat, *hiddenFile);
     if (hiddenFile == NULL) {
         printf("testCreateFileLinkedList test failed: createHiddenFile failed and returned NULL.\n");
         return false;
     }
+    extendHiddenCluster(hiddenFat, *hiddenFile);
+    extendHiddenCluster(hiddenFat, *hiddenFile);
 
     // Verify the linked list inside the clusters
     bool passed = true;
@@ -287,7 +292,7 @@ bool testCreateFileLinkedList() {
 bool testDeleteFileValid() {
     // Create a valid file
     HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
-    const char *hiddenFilename = "/home/henry/cats.gif";
+    const char *hiddenFilename = "cats.gif";
     long timestamp = time(NULL);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
     if (hiddenFile == NULL) {
@@ -327,7 +332,7 @@ bool testDeleteFileValid() {
 //bool testDeleteFileNonExistent() {
 //    // Create a valid file
 //    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
-//    const char *hiddenFilename = "/home/henry/cats.gif";
+//    const char *hiddenFilename = "cats.gif";
 //    long timestamp = time(NULL);
 //    BsFile **hiddenFile = createFile(hiddenFat, hiddenFilename, timestamp);
 //    if (hiddenFile == NULL) {
@@ -370,7 +375,7 @@ bool testDeleteFileValid() {
 //    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
 //
 //
-//    const char *hiddenFilename = "/home/henry/cats.gif";
+//    const char *hiddenFilename = "cats.gif";
 //    long timestamp = time(NULL);
 //    BsFile **hiddenFile = createFile(hiddenFat, szFile, hiddenFilename, timestamp, NULL);
 //    if (hiddenFile == NULL) {
@@ -568,7 +573,7 @@ bool testWriteRead(int argc, char **argv) {
         return false;
     }
     const char *testBuffer = "My testbuffer!";
-    int bytesWritten = writeSteganoFS("/test.txt", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
+    int bytesWritten = write_("/test.txt", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
     if (bytesWritten < 0) {
         printf("testWrite test failed: Errorcode: %d\n", bytesWritten);
         return false;
@@ -582,8 +587,8 @@ bool testWriteRead(int argc, char **argv) {
     showHiddenFat(hiddenFat, NULL);
     char output[20];
     memset(output, 0, 20);
-    readSteganoFS("/test.txt", output, 15, 0, (struct fuse_file_info *) hiddenFat);
-    printf("Printing result of readSteganoFS: %s\n", output);
+    read_("/test.txt", output, 15, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of read_: %s\n", output);
     return true;
 }
 
@@ -640,10 +645,11 @@ int test_fuse(int argc, char** argv){
         printf("testDefragmentation test failed: createHiddenFile failed and returned NULL.\n");
         return false;
     }
-    return fuse_main(argc, argv, &fuseOperationsSteagnoFS, hiddenFat);
+    return fuse_main(argc, argv, &fuseOperations, hiddenFat);
 }
 
 int main(int argc, char** argv) {
     runTests(argc, argv);
-    return test_fuse(argc, argv);
+    calculateSizeOnDisk();
+    return 0;//test_fuse(argc, argv);
 }

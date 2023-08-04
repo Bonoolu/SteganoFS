@@ -5,21 +5,22 @@
 
 #include <fuse3/fuse.h>
 #include <errno.h>
-#include "hiddenFat.h"
-#include "HiddenFile.h"
-#include "HiddenCluster.h"
+#include "hiddenfat.h"
+#include "hiddenfile.h"
+#include "hiddencluster.h"
 
 int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
-int readdirSteganoFS(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags);
-int createSteganoFS(const char *path, mode_t mode, struct fuse_file_info *fi);
-int writeSteganoFS(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
-int readSteganoFS(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+int readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags);
+int create(const char *path, mode_t mode, struct fuse_file_info *fi);
+int write_(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+int stegFS_unlink(const char *path);
 
-extern struct fuse_operations fuseOperationsSteagnoFS;
+extern struct fuse_operations fuseOperations;
 ///**
 // * @brief Delete a file.
 // */
-//static int stegFS_unlink(const char *path);
+//static
 //
 ///**
 // * @brief Delete a directory.

@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include "steganoFS.h"
+#include "steganofs.h"
 #define DEBUG // TODO!
 
 // TODO:
@@ -48,8 +48,8 @@ int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
     }
 }
 
-int readdirSteganoFS(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
-                     enum fuse_readdir_flags flags) {
+int readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
+            enum fuse_readdir_flags flags) {
     // Add entries for the root directory
     if (strcmp(path, "/") == 0)
     {
@@ -66,7 +66,7 @@ int readdirSteganoFS(const char *path, void *buf, fuse_fill_dir_t filler, off_t 
     return -ENOENT;
 }
 
-int createSteganoFS(const char *path, mode_t mode, struct fuse_file_info *fi) {
+int create(const char *path, mode_t mode, struct fuse_file_info *fi) {
     HiddenFat *hiddenFat = (HiddenFat *)fuse_get_context()->private_data;
 
     mode = S_IFREG | 0666;
@@ -81,7 +81,7 @@ int createSteganoFS(const char *path, mode_t mode, struct fuse_file_info *fi) {
     return -ENOENT;
 }
 
-int writeSteganoFS(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
+int write_(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
     if (countPathComponents(path) != 1) {
         return -ENOENT;
     }
@@ -151,7 +151,7 @@ int writeSteganoFS(const char *path, const char *buf, size_t size, off_t offset,
     return (int) bytesWritten;
 }
 
-int readSteganoFS(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
+int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
     if (countPathComponents(path) != 1) {
         return -ENOENT;
     }
@@ -218,12 +218,12 @@ int readSteganoFS(const char *path, char *buf, size_t size, off_t offset, struct
     return (int) bytesRead;
 }
 
-struct fuse_operations fuseOperationsSteagnoFS = {
+struct fuse_operations fuseOperations = {
         .getattr = getattr,
-        .readdir = readdirSteganoFS,
-        .create = createSteganoFS,
-        .write = writeSteganoFS,
-        .read = readSteganoFS
+        .readdir = readdir,
+        .create = create,
+        .write = write_,
+        .read = read_
 };
 
 ///**

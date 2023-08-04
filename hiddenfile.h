@@ -1,18 +1,18 @@
 #ifndef STEGANOFS_HIDDENFILE_H
 #define STEGANOFS_HIDDENFILE_H
 
-#include "hiddenFat.h"
+#include "hiddenfat.h"
 
 typedef struct HiddenFat HiddenFat;
 typedef struct HiddenCluster HiddenCluster;
 typedef struct HiddenFile HiddenFile;
 
 struct HiddenFile {
-    const char *filename;
     size_t filesize;
     size_t real_filesize;
     long timestamp;
     HiddenCluster *hiddenCluster;
+    char filename[12];
 };
 
 void deleteHiddenFile(HiddenFat *hiddenFat, const char *filename);

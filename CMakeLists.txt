@@ -9,13 +9,15 @@ add_compile_options(-D_FILE_OFFSET_BITS=64)
 find_package(PkgConfig REQUIRED)
 pkg_search_module(FUSE REQUIRED fuse3)
 
-add_executable(steganoFS_C tests.c steganoFS.h steganoFS.c
-        hiddenFat.h
-        hiddenFat.c
-        HiddenFile.c
-        HiddenFile.h
-        HiddenCluster.c
-        HiddenCluster.h)
+add_executable(steganoFS_C tests.c steganofs.h steganofs.c
+        hiddenfat.h
+        hiddenfat.c
+        hiddenfile.c
+        hiddenfile.h
+        hiddencluster.c
+        hiddencluster.h
+        ramdiskloader.c
+        ramdiskloader.h)
 
 # Link the FUSE library to your executable
 target_link_libraries(steganoFS_C PRIVATE ${FUSE_LIBRARIES})

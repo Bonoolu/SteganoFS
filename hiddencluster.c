@@ -1,4 +1,4 @@
-#include "HiddenCluster.h"
+#include "hiddencluster.h"
 
 
 bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *pFile) {
@@ -38,7 +38,7 @@ bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *pFile) {
 
 
 bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB) {
-    //TODO! check if bIndex i s out of range
+    //TODO! check if bIndex is out of range
     if (bIndexA == bIndexB) {
         fprintf(stderr, "Swapping the same block is not possible!\n");
         return false;

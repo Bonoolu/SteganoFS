@@ -4,7 +4,7 @@
 #define AMOUNT_ROOT_FILES 10
 #define BLOCKSIZE 4096
 
-#include "HiddenCluster.h"
+#include "hiddencluster.h"
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -23,7 +23,7 @@ struct HiddenFat {
 };
 
 // HiddenFat
-HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize);// unsigned char *buf,
+HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize);
 void freeHiddenFat(HiddenFat *hiddenFat);
 size_t getAmountEntries(HiddenFat *hiddenFat, const char* path);
 size_t getFreeDiskSpace(HiddenFat *hiddenFat);
@@ -33,6 +33,5 @@ void checkForDefragmentation(HiddenFat *hiddenFat);
 void defragmentate(HiddenFat *hiddenFat);
 int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
 int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char* buffer, size_t offset, size_t length);
-
 
 #endif //STEGANOFS_HIDDENFAT_H

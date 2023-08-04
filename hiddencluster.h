@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-#include "hiddenFat.h"
-#include "HiddenFile.h"
+#include "hiddenfat.h"
+#include "hiddenfile.h"
 
 typedef struct HiddenFat HiddenFat;
 typedef struct HiddenCluster HiddenCluster;
@@ -17,10 +17,10 @@ enum State {
 
 struct HiddenCluster{
     size_t bIndex;
+    size_t clusterIndex;
     unsigned int state;
     HiddenCluster *prev;
     HiddenCluster *next;
-    size_t clusterIndex;
     HiddenFile *file;
 };
 

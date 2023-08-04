@@ -1,9 +1,4 @@
-//
-// Created by Group 80 on 8/4/23.
-//
-
-#include "HiddenFile.h"
-
+#include "hiddenfile.h"
 
 void deleteHiddenFile(HiddenFat *hiddenFat, const char *filename) {
 //    BsFile **pFile = hiddenFat->files;
@@ -31,7 +26,6 @@ void deleteHiddenFile(HiddenFat *hiddenFat, const char *filename) {
 //    }
 }
 
-
 int countPathComponents(const char *path) {
     int count = 0;
     for (int i = 0; path[i]; i++) {
@@ -41,7 +35,7 @@ int countPathComponents(const char *path) {
     return count;
 }
 
-HiddenFile *findFileByPath(HiddenFat *hiddenFat, const char* path){
+HiddenFile *findFileByPath(HiddenFat *hiddenFat, const char *path) {
     HiddenFile **pFile = hiddenFat->files;
     bool found = false;
     if (strcmp(path, "/") == 0) {
@@ -58,11 +52,10 @@ HiddenFile *findFileByPath(HiddenFat *hiddenFat, const char* path){
     }
     if (found) {
         return *pFile;
-    }else {
+    } else {
         return NULL;
     }
 }
-
 
 HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long timestamp) {
     // Find an available file slot
@@ -77,6 +70,10 @@ HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long t
         fprintf(stderr, "Maximum amount of files are already allocated!\n");
         return NULL;
     }
+    if (strlen(filename) > 11) {
+        fprintf(stderr, "Filename too long\n");
+        return NULL;
+    }
 
     // Create the file structure and update the file table
     HiddenFile *pFile = (HiddenFile *) malloc(sizeof(HiddenFile));
@@ -84,8 +81,8 @@ HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long t
         fprintf(stderr, "Could not allocate memory!\n");
         return NULL;
     }
-    char* dup_filename = strdup(filename);
-    pFile->filename = dup_filename;
+    memset(pFile->filename, 0, 12);
+    strncpy(pFile->filename, filename, 12);
     pFile->filesize = 0;
     pFile->timestamp = timestamp;
     pFile->hiddenCluster = NULL;

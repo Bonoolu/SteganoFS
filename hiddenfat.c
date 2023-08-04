@@ -1,6 +1,6 @@
-#include "hiddenFat.h"
+#include "hiddenfat.h"
 
-HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) { //unsigned char *buf,
+HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) {
     if (diskSize == 0 || blockSize == 0) {
         fprintf(stderr, "Disk size and blockSize each can not be zero!\n");
         exit(1);
@@ -9,7 +9,12 @@ HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) { //unsigned char 
         fprintf(stderr, "Disk size is not dividable by block size!\n");
         exit(1);
     }
-    //memset(buf, 0, diskSize);
+    unsigned char *disk = (unsigned char *) malloc(diskSize * sizeof(unsigned char));
+    if (!disk) {
+        fprintf(stderr, "Could not allocate memory!\n");
+        exit(1);
+    }
+    memset(disk, 0, diskSize);
     size_t amountBlocks = diskSize / blockSize;
     HiddenCluster *clusters = (HiddenCluster *) malloc(amountBlocks * sizeof(HiddenCluster));
     if (!clusters) {
@@ -28,7 +33,7 @@ HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) { //unsigned char 
     memset(hiddenFat->files, 0, AMOUNT_ROOT_FILES * sizeof(HiddenFile *));
     hiddenFat->blockSize = blockSize;
     hiddenFat->amountBlocks = amountBlocks;
-    //hiddenFat->disk = buf;
+    hiddenFat->disk = disk;
     hiddenFat->clusters = clusters;
     return hiddenFat;
 }
