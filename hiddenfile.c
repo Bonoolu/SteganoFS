@@ -14,8 +14,10 @@ int deleteHiddenFile(HiddenFat *hiddenFat, const char *filename) {
         HiddenCluster *hiddenCluster = (*pFile)->hiddenCluster;
         while (hiddenCluster) {
             HiddenCluster *tmpCluster = hiddenCluster->next;
-            memset(hiddenFat->disk + (BLOCKSIZE * hiddenCluster->bIndex), 0, BLOCKSIZE);
+            size_t tmpBIndex = hiddenCluster->bIndex;
+            memset(hiddenFat->disk + (hiddenFat->blockSize * hiddenCluster->bIndex), 0, hiddenFat->blockSize);
             memset(hiddenCluster, 0, sizeof(HiddenCluster));
+            hiddenCluster->bIndex = tmpBIndex;
             hiddenCluster = tmpCluster;
         }
         free(*pFile);

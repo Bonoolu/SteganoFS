@@ -13,6 +13,7 @@ typedef struct PackedCluster PackedCluster;
 typedef struct PackedFile PackedFile;
 typedef struct PackedFat PackedFat;
 
+// 23 Bytes
 struct __attribute__((__packed__)) PackedFat {
     u_int16_t blockSize;
     u_int64_t amountBlocks;
@@ -22,6 +23,7 @@ struct __attribute__((__packed__)) PackedFat {
     u_int32_t disk;
 };
 
+// 23 Bytes
 struct __attribute__((__packed__)) PackedCluster{
     u_int64_t bIndex;
     u_int16_t clusterIndex;
@@ -31,6 +33,7 @@ struct __attribute__((__packed__)) PackedCluster{
     u_int32_t file;
 };
 
+// 36 Bytes
 struct __attribute__((__packed__)) PackedFile {
     u_int64_t filesize;
     u_int64_t real_filesize;
@@ -40,7 +43,5 @@ struct __attribute__((__packed__)) PackedFile {
 };
 
 //const unsigned char MAGICBYTES[4] = {'S','T','F','S'};
-
-void calculateSizeOnDisk();
 
 #endif //STEGANOFS_RAMDISKLOADER_H

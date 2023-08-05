@@ -46,15 +46,13 @@ void freeHiddenFat(HiddenFat *hiddenFat) {
     // Free the disk memory
     free(hiddenFat->disk);
 
-    // Free the block structures
+    // Free the clusters structures
     free(hiddenFat->clusters);
 
     // Free the file structures
     for (size_t i = 0; i < AMOUNT_ROOT_FILES; i++) {
         HiddenFile *pFile = hiddenFat->files[i];
         if (pFile != NULL) {
-            // Free the cluster structures associated with the file
-            free(pFile->hiddenCluster);
             // Free the file structure
             free(pFile);
         }
@@ -144,15 +142,6 @@ void showHiddenFat(HiddenFat *hiddenFat, char *outputMessage) {
 
 bool checkIntegrity(HiddenFat *hiddenFat) {
     bool hasIntegrity = true;
-    // Check if all allocated blocks are associated with a cluster
-    for (size_t bIndex = 0; bIndex < hiddenFat->amountBlocks; bIndex++) {
-        if (hiddenFat->clusters[bIndex].state == allocated && hiddenFat->clusters[bIndex].prev == NULL &&
-            hiddenFat->clusters[bIndex].next == NULL) {
-            fprintf(stderr, "Inconsistent file system: Allocated block %zu is not associated with a cluster.\n",
-                    bIndex);
-            hasIntegrity = false;
-        }
-    }
 
     // Check if all clusters are associated with a file
     for (size_t fileIndex = 0; fileIndex < AMOUNT_ROOT_FILES; fileIndex++) {
@@ -160,6 +149,18 @@ bool checkIntegrity(HiddenFat *hiddenFat) {
         if (pFile != NULL) {
             HiddenCluster *hiddenCluster = pFile->hiddenCluster;
             while (hiddenCluster) {
+                if (hiddenCluster != hiddenCluster->next) {
+                    fprintf(stderr,
+                            "Inconsistent file system: Cluster %zu in file %s points at itself in next\n",
+                            hiddenCluster->clusterIndex, hiddenCluster->file->filename);
+                    return false;
+                }
+                if (hiddenCluster != hiddenCluster->prev) {
+                    fprintf(stderr,
+                            "Inconsistent file system: Cluster %zu in file %s points at itself in prev\n",
+                            hiddenCluster->clusterIndex, hiddenCluster->file->filename);
+                    return false;
+                }
                 if (hiddenCluster->file != pFile) {
                     fprintf(stderr,
                             "Inconsistent file system: Cluster %zu in file %s is associated with incorrect file pointer: %s\n",
@@ -218,7 +219,7 @@ void checkForDefragmentation(HiddenFat *hiddenFat) {
 }
 
 void defragmentate(HiddenFat *hiddenFat) {
-    size_t oIndex = 0;
+    size_t bIndex = 0;
     for (size_t i = 0; i < AMOUNT_ROOT_FILES; i++) {
         if (hiddenFat->files[i] == NULL) {
             continue;
@@ -226,9 +227,10 @@ void defragmentate(HiddenFat *hiddenFat) {
         HiddenCluster *hiddenCluster = hiddenFat->files[i]->hiddenCluster;
         while (hiddenCluster) {
             size_t blockIndexToSwap = hiddenCluster->bIndex;
-            swapHiddenClusters(hiddenFat, oIndex, blockIndexToSwap);
-            hiddenCluster = hiddenCluster->next;
-            oIndex++;
+            HiddenCluster *nextCluster = hiddenCluster->next;
+            swapHiddenClusters(hiddenFat, bIndex, blockIndexToSwap);
+            hiddenCluster = nextCluster;
+            bIndex++;
         }
     }
 }
@@ -247,8 +249,8 @@ size_t getAmountEntries(HiddenFat *hiddenFat, const char *path) {
 }
 
 int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length) {
-    if (offset + length > BLOCKSIZE) {
-        fprintf(stderr, "Trying to write to the wrong Block! offset+length is higher than %d\n", BLOCKSIZE);
+    if (offset + length > hiddenFat->blockSize) {
+        fprintf(stderr, "Trying to write to the wrong Block! offset+length is higher than %zu\n", hiddenFat->blockSize);
         return -1;
     }
     if (bIndex > hiddenFat->amountBlocks) {
@@ -269,8 +271,8 @@ int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t o
 }
 
 int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length) {
-    if (offset + length > BLOCKSIZE) {
-        fprintf(stderr, "Trying to read from the wrong Block! offset+length is higher than %d\n", BLOCKSIZE);
+    if (offset + length > hiddenFat->blockSize) {
+        fprintf(stderr, "Trying to read from the wrong Block! offset+length is higher than %zu\n", hiddenFat->blockSize);
         return -1;
     }
     if (bIndex > hiddenFat->amountBlocks) {

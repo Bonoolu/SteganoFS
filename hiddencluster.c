@@ -38,7 +38,6 @@ bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *pFile) {
 
 
 bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB) {
-    //TODO! check if bIndex is out of range
     if (bIndexA == bIndexB) {
         fprintf(stderr, "Swapping the same block is not possible!\n");
         return false;
@@ -60,20 +59,51 @@ bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB) {
         return false;
     }
 
-    // Swap the state
-    unsigned int tempState = hiddenFat->clusters[bIndexA].state;
+    size_t clusterIndexClusterA = hiddenFat->clusters[bIndexA].clusterIndex;
+    unsigned int stateClusterA = hiddenFat->clusters[bIndexA].state;
+    HiddenCluster *prevClusterA = hiddenFat->clusters[bIndexA].prev;
+    HiddenCluster *nextClusterA = hiddenFat->clusters[bIndexA].next;
+    HiddenFile *fileClusterA = hiddenFat->clusters[bIndexA].file;
+
+    hiddenFat->clusters[bIndexA].clusterIndex = hiddenFat->clusters[bIndexB].clusterIndex;
     hiddenFat->clusters[bIndexA].state = hiddenFat->clusters[bIndexB].state;
-    hiddenFat->clusters[bIndexB].state = tempState;
+    hiddenFat->clusters[bIndexA].prev = hiddenFat->clusters[bIndexB].prev;
+    hiddenFat->clusters[bIndexA].next = hiddenFat->clusters[bIndexB].next;
+    hiddenFat->clusters[bIndexA].file = hiddenFat->clusters[bIndexB].file;
 
-    // Update the block indices in the cluster structure if applicable
-    hiddenFat->clusters[bIndexA].bIndex = bIndexA;
-    hiddenFat->clusters[bIndexB].bIndex = bIndexB;
+    hiddenFat->clusters[bIndexB].clusterIndex = clusterIndexClusterA;
+    hiddenFat->clusters[bIndexB].state = stateClusterA;
+    hiddenFat->clusters[bIndexB].prev = prevClusterA;
+    hiddenFat->clusters[bIndexB].next = nextClusterA;
+    hiddenFat->clusters[bIndexB].file = fileClusterA;
 
+    if (hiddenFat->clusters[bIndexA].prev != NULL) {
+        hiddenFat->clusters[bIndexA].prev->next = &(hiddenFat->clusters[bIndexA]);
+    } else if (hiddenFat->clusters[bIndexA].file != NULL) {
+        hiddenFat->clusters[bIndexA].file->hiddenCluster = &(hiddenFat->clusters[bIndexA]);
+    }
+
+    if (hiddenFat->clusters[bIndexA].next != NULL) {
+        hiddenFat->clusters[bIndexA].next->prev = &(hiddenFat->clusters[bIndexA]);
+    }
+
+    if (hiddenFat->clusters[bIndexB].prev != NULL) {
+        hiddenFat->clusters[bIndexB].prev->next = &(hiddenFat->clusters[bIndexB]);
+    } else if (hiddenFat->clusters[bIndexB].file != NULL) {
+        hiddenFat->clusters[bIndexB].file->hiddenCluster = &(hiddenFat->clusters[bIndexB]);
+    }
+
+    if (hiddenFat->clusters[bIndexB].next != NULL && hiddenFat->clusters[bIndexB].next != &(hiddenFat->clusters[bIndexB])) {
+        hiddenFat->clusters[bIndexB].next->prev = &(hiddenFat->clusters[bIndexB]);
+    }
+
+
+    size_t blockSize = hiddenFat->blockSize;
     // Swap blocks on disk
-    unsigned char buffer[BLOCKSIZE];
-    memcpy(buffer, hiddenFat->disk + (BLOCKSIZE * bIndexA), BLOCKSIZE);
-    memcpy(hiddenFat->disk + (BLOCKSIZE * bIndexA), hiddenFat->disk + (BLOCKSIZE * bIndexB), BLOCKSIZE);
-    memcpy(hiddenFat->disk + (BLOCKSIZE * bIndexB), buffer, BLOCKSIZE);
+    unsigned char bufferA[blockSize];
+    memcpy(bufferA, hiddenFat->disk + (blockSize * bIndexA), blockSize);
+    memcpy(hiddenFat->disk + (blockSize * bIndexA), hiddenFat->disk + (blockSize * bIndexB), blockSize);
+    memcpy(hiddenFat->disk + (blockSize * bIndexB), bufferA, blockSize);
 
     return true;
 }
