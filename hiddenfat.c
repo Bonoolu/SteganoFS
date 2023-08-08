@@ -149,13 +149,13 @@ bool checkIntegrity(HiddenFat *hiddenFat) {
         if (pFile != NULL) {
             HiddenCluster *hiddenCluster = pFile->hiddenCluster;
             while (hiddenCluster) {
-                if (hiddenCluster != hiddenCluster->next) {
+                if (hiddenCluster == hiddenCluster->next) {
                     fprintf(stderr,
                             "Inconsistent file system: Cluster %zu in file %s points at itself in next\n",
                             hiddenCluster->clusterIndex, hiddenCluster->file->filename);
                     return false;
                 }
-                if (hiddenCluster != hiddenCluster->prev) {
+                if (hiddenCluster == hiddenCluster->prev) {
                     fprintf(stderr,
                             "Inconsistent file system: Cluster %zu in file %s points at itself in prev\n",
                             hiddenCluster->clusterIndex, hiddenCluster->file->filename);
@@ -227,9 +227,11 @@ void defragmentate(HiddenFat *hiddenFat) {
         HiddenCluster *hiddenCluster = hiddenFat->files[i]->hiddenCluster;
         while (hiddenCluster) {
             size_t blockIndexToSwap = hiddenCluster->bIndex;
-            HiddenCluster *nextCluster = hiddenCluster->next;
-            swapHiddenClusters(hiddenFat, bIndex, blockIndexToSwap);
-            hiddenCluster = nextCluster;
+            if (swapHiddenClusters(hiddenFat, bIndex, blockIndexToSwap)) {
+                hiddenCluster = hiddenFat->clusters[bIndex].next;
+            }else {
+                hiddenCluster = hiddenCluster->next;;
+            }
             bIndex++;
         }
     }

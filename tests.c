@@ -528,19 +528,6 @@ bool testSwapHiddenClustersIntegrity() {
 bool testDefragmentation() {
     // Create a valid file
     HiddenFat *hiddenFat = createHiddenFat(48, 4);
-    HiddenCluster *cl0 = hiddenFat->clusters + 0;
-    HiddenCluster *cl1 = hiddenFat->clusters + 1;
-    HiddenCluster *cl2 = hiddenFat->clusters + 2;
-    HiddenCluster *cl3 = hiddenFat->clusters + 3;
-    HiddenCluster *cl4 = hiddenFat->clusters + 4;
-    HiddenCluster *cl5 = hiddenFat->clusters + 5;
-    HiddenCluster *cl6 = hiddenFat->clusters + 6;
-    HiddenCluster *cl7 = hiddenFat->clusters + 7;
-    HiddenCluster *cl8 = hiddenFat->clusters + 8;
-    HiddenCluster *cl9 = hiddenFat->clusters + 9;
-    HiddenCluster *cl10 = hiddenFat->clusters + 10;
-    HiddenCluster *cl11 = hiddenFat->clusters + 11;
-    HiddenCluster *cl12 = hiddenFat->clusters + 12;
 
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, "cats.gif", time(NULL));
     if (hiddenFile == NULL) {
@@ -549,59 +536,59 @@ bool testDefragmentation() {
     }
     const char *catBuffer = "cat0cat1";
     write_("/cats.gif", catBuffer, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-//
-//    hiddenFile = createHiddenFile(hiddenFat, "dog.gif", time(NULL));
-//    if (hiddenFile == NULL) {
-//        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
-//        return false;
-//    }
-//    const char *dogBuffer = "dog";
-//    write_("/dog.gif", dogBuffer, strlen(dogBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-//
-//    hiddenFile = createHiddenFile(hiddenFat, "birds.gif", time(NULL));
-//    if (hiddenFile == NULL) {
-//        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
-//        return false;
-//    }
-//    const char *birdBuffer = "bird0bird1";
-//    write_("/birds.gif", birdBuffer, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+
+    hiddenFile = createHiddenFile(hiddenFat, "dog.gif", time(NULL));
+    if (hiddenFile == NULL) {
+        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    const char *dogBuffer = "dog";
+    write_("/dog.gif", dogBuffer, strlen(dogBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+
+    hiddenFile = createHiddenFile(hiddenFat, "birds.gif", time(NULL));
+    if (hiddenFile == NULL) {
+        printf("testDefragmentation test failed: createFile failed and returned NULL.\n");
+        return false;
+    }
+    const char *birdBuffer = "bird0bird1";
+    write_("/birds.gif", birdBuffer, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
 
     showHiddenFat(hiddenFat, NULL);
     char output[20];
     memset(output, 0, 20);
     read_("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
     printf("Printing result of read_: %s\n", output);
-//    memset(output, 0, 20);
-//    read_("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-//    printf("Printing result of read_: %s\n", output);
+    memset(output, 0, 20);
+    read_("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of read_: %s\n", output);
 
-//    HiddenFile *dog = findFileByPath(hiddenFat, "/dog.gif");
+    HiddenFile *dog = findFileByPath(hiddenFat, "/dog.gif");
     HiddenFile *cat = findFileByPath(hiddenFat, "/cats.gif");
-//    HiddenFile *bird = findFileByPath(hiddenFat, "/birds.gif");
+    HiddenFile *bird = findFileByPath(hiddenFat, "/birds.gif");
 
-//    deleteHiddenFile(hiddenFat, "dog.gif");
-    swapHiddenClusters(hiddenFat, 1, 2);
-//    swapHiddenClusters(hiddenFat, 6, 3);
-//    swapHiddenClusters(hiddenFat, 5, 4);
+    deleteHiddenFile(hiddenFat, "dog.gif");
+    swapHiddenClusters(hiddenFat, 0, 1);
+    swapHiddenClusters(hiddenFat, 6, 3);
+    swapHiddenClusters(hiddenFat, 5, 4);
 
     memset(output, 0, 20);
     read_("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
     printf("Printing result of read_: %s\n", output);
-//    memset(output, 0, 20);
-//    read_("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-//    printf("Printing result of read_: %s\n", output);
+    memset(output, 0, 20);
+    read_("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of read_: %s\n", output);
     showHiddenFat(hiddenFat, NULL);
-//    checkForDefragmentation(hiddenFat);
-//    defragmentate(hiddenFat);
-//    showHiddenFat(hiddenFat, NULL);
-//    checkForDefragmentation(hiddenFat);
-//
-//    memset(output, 0, 20);
-//    read_("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-//    printf("Printing result of read_: %s\n", output);
-//    memset(output, 0, 20);
-//    read_("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-//    printf("Printing result of read_: %s\n", output);
+    checkForDefragmentation(hiddenFat);
+    defragmentate(hiddenFat);
+    showHiddenFat(hiddenFat, NULL);
+    checkForDefragmentation(hiddenFat);
+
+    memset(output, 0, 20);
+    read_("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of read_: %s\n", output);
+    memset(output, 0, 20);
+    read_("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of read_: %s\n", output);
     bool integrity = checkIntegrity(hiddenFat);
     freeHiddenFat(hiddenFat);
     return integrity;
@@ -638,24 +625,24 @@ bool testWriteRead(int argc, char **argv) {
 
 void runTests(int argc, char **argv) {
     int tests[] = {
-//            testCreateHiddenFat(),
-//            testGetFreeDiskSpaceEmptyFat(),
-//            testGetFreeDiskSpaceWithAllocatedBlocks(),
-//            testGetFreeDiskSpaceFullDisk(),
-//            testCreateFileValid(),
-//            testCreateFileInsufficientMemory(),
-//            testCreateFileNoAvailableFileSlot(),
-//            testCreateFileLinkedList(),
-//            testDeleteFileValid(),
-//            testDeleteFileNonExistent(),
-//            testDeleteFileWithClusters(),
-//            testShowNBlockFat(1, 23),
-//            testShowNBlockFat(239, 504),
-//            testShowNBlockFat(240, 507),
-//            testShowNBlockFat(241, 509),
-//            testShowNBlockFat(242, 509),
-//            testWriteRead(argc, argv),
-//            testSwapHiddenClustersIntegrity(),
+            testCreateHiddenFat(),
+            testGetFreeDiskSpaceEmptyFat(),
+            testGetFreeDiskSpaceWithAllocatedBlocks(),
+            testGetFreeDiskSpaceFullDisk(),
+            testCreateFileValid(),
+            testCreateFileInsufficientMemory(),
+            testCreateFileNoAvailableFileSlot(),
+            testCreateFileLinkedList(),
+            testDeleteFileValid(),
+            testDeleteFileNonExistent(),
+            testDeleteFileWithClusters(),
+            testShowNBlockFat(1, 23),
+            testShowNBlockFat(239, 504),
+            testShowNBlockFat(240, 507),
+            testShowNBlockFat(241, 509),
+            testShowNBlockFat(242, 509),
+            testWriteRead(argc, argv),
+            testSwapHiddenClustersIntegrity(),
             testDefragmentation(),
             -1};
     size_t passed = 0;

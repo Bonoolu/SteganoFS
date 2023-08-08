@@ -77,6 +77,19 @@ bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB) {
     hiddenFat->clusters[bIndexB].next = nextClusterA;
     hiddenFat->clusters[bIndexB].file = fileClusterA;
 
+    if (hiddenFat->clusters[bIndexA].next == &(hiddenFat->clusters[bIndexA])) {
+        hiddenFat->clusters[bIndexA].next = &(hiddenFat->clusters[bIndexB]);
+    }
+    if (hiddenFat->clusters[bIndexA].prev == &(hiddenFat->clusters[bIndexA])) {
+        hiddenFat->clusters[bIndexA].prev = &(hiddenFat->clusters[bIndexB]);
+    }
+    if (hiddenFat->clusters[bIndexB].next == &(hiddenFat->clusters[bIndexB])) {
+        hiddenFat->clusters[bIndexB].next = &(hiddenFat->clusters[bIndexA]);
+    }
+    if (hiddenFat->clusters[bIndexB].prev == &(hiddenFat->clusters[bIndexB])) {
+        hiddenFat->clusters[bIndexB].prev = &(hiddenFat->clusters[bIndexA]);
+    }
+
     if (hiddenFat->clusters[bIndexA].prev != NULL) {
         hiddenFat->clusters[bIndexA].prev->next = &(hiddenFat->clusters[bIndexA]);
     } else if (hiddenFat->clusters[bIndexA].file != NULL) {
@@ -93,7 +106,7 @@ bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB) {
         hiddenFat->clusters[bIndexB].file->hiddenCluster = &(hiddenFat->clusters[bIndexB]);
     }
 
-    if (hiddenFat->clusters[bIndexB].next != NULL && hiddenFat->clusters[bIndexB].next != &(hiddenFat->clusters[bIndexB])) {
+    if (hiddenFat->clusters[bIndexB].next != NULL) {
         hiddenFat->clusters[bIndexB].next->prev = &(hiddenFat->clusters[bIndexB]);
     }
 
