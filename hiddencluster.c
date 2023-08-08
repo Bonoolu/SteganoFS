@@ -39,7 +39,7 @@ bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *pFile) {
 
 bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB) {
     if (bIndexA == bIndexB) {
-        fprintf(stderr, "Swapping the same block is not possible!\n");
+        // fprintf(stderr, "Swapping the same block is not possible!\n");
         return false;
     }
     if (bIndexA >= hiddenFat->amountBlocks || bIndexB >= hiddenFat->amountBlocks) {
@@ -47,7 +47,7 @@ bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB) {
         return false;
     }
     if (hiddenFat->clusters[bIndexA].state == free_ && hiddenFat->clusters[bIndexB].state == free_) {
-        fprintf(stderr, "No need to swap two free Blocks!\n");
+        // fprintf(stderr, "No need to swap two free Blocks!\n");
         return false;
     }
     if (hiddenFat->clusters[bIndexA].state == reserved || hiddenFat->clusters[bIndexB].state == reserved) {

@@ -566,10 +566,26 @@ bool testDefragmentation() {
     HiddenFile *cat = findFileByPath(hiddenFat, "/cats.gif");
     HiddenFile *bird = findFileByPath(hiddenFat, "/birds.gif");
 
+    size_t a = 0, b = 0;
+    srand(time(NULL));
+
+    // shuffle blocks 1000 times
+    for(size_t i = 0; i < 1000; i++) {
+        a = rand() % 12;
+        b = rand() % 12;
+        swapHiddenClusters(hiddenFat, a, b);
+    }
+
+    // delete a file
     deleteHiddenFile(hiddenFat, "dog.gif");
-    swapHiddenClusters(hiddenFat, 0, 1);
-    swapHiddenClusters(hiddenFat, 6, 3);
-    swapHiddenClusters(hiddenFat, 5, 4);
+
+    // shuffle again
+    for(size_t i = 0; i < 1000; i++) {
+        a = rand() % 12;
+        b = rand() % 12;
+        swapHiddenClusters(hiddenFat, a, b);
+    }
+
 
     memset(output, 0, 20);
     read_("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
