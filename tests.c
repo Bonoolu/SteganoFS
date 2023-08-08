@@ -696,5 +696,5 @@ int test_fuse(int argc, char **argv) {
 
 int main(int argc, char **argv) {
     runTests(argc, argv);
-    return 0;//test_fuse(argc, argv);
+    return test_fuse(argc, argv);
 }

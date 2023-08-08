@@ -2,7 +2,7 @@
 #define STEGANOFS_HIDDENFAT_H
 
 #define AMOUNT_ROOT_FILES 10
-#define BLOCKSIZE 4096
+#define BLOCKSIZE 512
 
 #include "hiddencluster.h"
 #include <stddef.h>

@@ -4,7 +4,6 @@
 #define DEBUG // TODO!
 
 // TODO:
-// implement unlink
 // implement export
 // implement import
 
@@ -173,9 +172,14 @@ int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
         return -ENOENT;
     }
 
-    // Check if we read outside file, if yes return 0 bytes readcd
+    // Check if we read outside file, if yes try to truncate size var to filesize
     if (offset + size > pFile->filesize) {
-        return 0;
+        int delta = (int)(pFile->filesize) - (int)(offset);
+        if (delta >= 0) {
+            size = delta;
+        }else { // if even the offset is higher then the filesize, we simply return 0 bytes read
+            return 0;
+        }
     }
     size_t bytesRead = 0;
 
