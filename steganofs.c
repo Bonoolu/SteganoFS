@@ -244,7 +244,7 @@ int unlink(const char *path) {
     return deleteHiddenFile(hiddenFat, filename);
 }
 
-int statfs(const char *path, struct statvfs *stbuf, struct fuse_file_info *fi) {
+int statfs(const char *path, struct statvfs *stbuf) {
 
     if (!stbuf) {
         return -EINVAL;  // Invalid argument
