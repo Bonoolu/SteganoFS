@@ -2,8 +2,8 @@
 #include "ramdiskloader.h"
 
 bool testCreateHiddenFat() {
-    size_t diskSize = BLOCKSIZE * 4;  // Example disk size
-    size_t blockSize = BLOCKSIZE;  // Example block size
+    size_t diskSize = BLOCK_SIZE * 4;  // Example disk size
+    size_t blockSize = BLOCK_SIZE;  // Example block size
     HiddenFat *hiddenFat = createHiddenFat(diskSize, blockSize);
     bool passed = true;
     if (hiddenFat == NULL) {
@@ -66,10 +66,10 @@ bool testCreateHiddenFat() {
 }
 
 bool testGetFreeDiskSpaceEmptyFat() {
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
     size_t freeSpace = getFreeDiskSpace(hiddenFat);
     bool passed;
-    if (freeSpace == BLOCKSIZE * 4) {
+    if (freeSpace == BLOCK_SIZE * 4) {
         printf("testGetFreeDiskSpaceEmptyFat test passed.\n");
         passed = true;
     } else {
@@ -82,7 +82,7 @@ bool testGetFreeDiskSpaceEmptyFat() {
 }
 
 bool testGetFreeDiskSpaceWithAllocatedBlocks() {
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
     // Allocate some blocks or create files within the filesystem
     // Perform actions to allocate blocks or create files
     for (size_t i = 0; i < 2; i++) {
@@ -90,7 +90,7 @@ bool testGetFreeDiskSpaceWithAllocatedBlocks() {
     }
     size_t freeSpace = getFreeDiskSpace(hiddenFat);
     // Calculate the expected free space based on the allocated blocks/files
-    size_t expectedFreeSpace = BLOCKSIZE * 2;  // Calculate the expected value based on the specific test case
+    size_t expectedFreeSpace = BLOCK_SIZE * 2;  // Calculate the expected value based on the specific test case
     bool passed;
     if (freeSpace == expectedFreeSpace) {
         printf("testGetFreeDiskSpaceWithAllocatedBlocks test passed.\n");
@@ -105,7 +105,7 @@ bool testGetFreeDiskSpaceWithAllocatedBlocks() {
 }
 
 bool testGetFreeDiskSpaceFullDisk() {
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE, BLOCK_SIZE);
     // Allocate all blocks or create files until the disk is full
     hiddenFat->clusters->state = allocated;
     // Perform actions to allocate blocks or create files
@@ -124,7 +124,7 @@ bool testGetFreeDiskSpaceFullDisk() {
 }
 
 bool testCreateFileValid() {
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
 
     const char *hiddenFilename = "cats.gif";
     long timestamp = time(NULL);
@@ -148,7 +148,7 @@ bool testCreateFileValid() {
 
 bool testCreateFileInsufficientMemory() {
     fflush(stdout);
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
     const char *hiddenFilename = "dogs.gif";
     long timestamp = time(NULL);
     bool passed = true;
@@ -180,7 +180,7 @@ bool testCreateFileInsufficientMemory() {
 
 bool testCreateFileNoAvailableFileSlot() {
     fflush(stdout);
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
     printf("Free Space is now: %zu\n", getFreeDiskSpace(hiddenFat));
     const char *hiddenFilename = "bears.gif";
     long timestamp = time(NULL);
@@ -214,7 +214,7 @@ bool testCreateFileNoAvailableFileSlot() {
 
 bool testCreateFileLinkedList() {
     // Create a file with multiple clusters
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
     const char *hiddenFilename = "dogs.gif";
     long timestamp = time(NULL);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
@@ -268,7 +268,7 @@ bool testCreateFileLinkedList() {
 
 bool testDeleteFileValid() {
     // Create a valid file
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
     const char *hiddenFilename = "cats.gif";
     long timestamp = time(NULL);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
@@ -307,7 +307,7 @@ bool testDeleteFileValid() {
 
 bool testDeleteFileNonExistent() {
     // Create a valid file
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
     const char *hiddenFilename = "cats.gif";
     long timestamp = time(NULL);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
@@ -347,7 +347,7 @@ bool testDeleteFileWithClusters() {
     bool passed = true;
 
     // Create a file with clusters
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
 
     const char *hiddenFilename = "cats.gif";
     long timestamp = time(NULL);
@@ -363,10 +363,10 @@ bool testDeleteFileWithClusters() {
     deleteHiddenFile(hiddenFat, hiddenFilename);
 
     // Check if the associated clusters were freed
-    unsigned char zeroBlock[BLOCKSIZE];
+    unsigned char zeroBlock[BLOCK_SIZE];
     memset(zeroBlock, 0, sizeof zeroBlock);
     for (size_t bIndex = 0; bIndex < hiddenFat->amountBlocks; bIndex++) {
-        if (memcmp(zeroBlock, hiddenFat->disk + (bIndex * BLOCKSIZE), BLOCKSIZE) != 0) {
+        if (memcmp(zeroBlock, hiddenFat->disk + (bIndex * BLOCK_SIZE), BLOCK_SIZE) != 0) {
             printf("testDeleteFileWithClusters test failed: Cluster associated with block %zu was not freed.\n",
                    bIndex);
             passed = false;
@@ -410,7 +410,7 @@ bool testShowNBlockFat(size_t n, size_t outputLen) {
 }
 
 bool testSwapHiddenClustersIntegrity() {
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 20, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 20, BLOCK_SIZE);
     bool passed = true;
 
     // Swap the same block
@@ -611,7 +611,7 @@ bool testDefragmentation() {
 }
 
 bool testWriteRead(int argc, char **argv) {
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
     const char *hiddenFilename = "test.txt";
     long timestamp = time(NULL);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
@@ -675,7 +675,7 @@ void runTests(int argc, char **argv) {
 }
 
 int test_fuse(int argc, char **argv) {
-    HiddenFat *hiddenFat = createHiddenFat(BLOCKSIZE * 4, BLOCKSIZE);
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 100000, BLOCK_SIZE);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, "cats.gif", time(NULL));
     if (hiddenFile == NULL) {
         printf("testDefragmentation test failed: createHiddenFile failed and returned NULL.\n");

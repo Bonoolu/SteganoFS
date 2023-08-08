@@ -74,7 +74,7 @@ HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long t
         fprintf(stderr, "Maximum amount of files are already allocated!\n");
         return NULL;
     }
-    if (strlen(filename) > 11) {
+    if (strlen(filename) > MAX_FILENAME_LENGTH - 1) {
         fprintf(stderr, "Filename too long\n");
         return NULL;
     }
@@ -85,8 +85,8 @@ HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long t
         fprintf(stderr, "Could not allocate memory!\n");
         return NULL;
     }
-    memset(pFile->filename, 0, 12);
-    strncpy(pFile->filename, filename, 12);
+    memset(pFile->filename, 0, MAX_FILENAME_LENGTH);
+    strncpy(pFile->filename, filename, MAX_FILENAME_LENGTH);
     pFile->filesize = 0;
     pFile->timestamp = timestamp;
     pFile->hiddenCluster = NULL;

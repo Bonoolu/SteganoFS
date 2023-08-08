@@ -22,6 +22,8 @@ int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
 
 int unlink(const char *path);
 
+int statfs(const char *path, struct statvfs *stbuf, struct fuse_file_info *fi);
+
 extern struct fuse_operations fuseOperations;
 ///**
 // * @brief Delete a file.

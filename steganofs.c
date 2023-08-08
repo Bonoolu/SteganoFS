@@ -244,13 +244,39 @@ int unlink(const char *path) {
     return deleteHiddenFile(hiddenFat, filename);
 }
 
+int statfs(const char *path, struct statvfs *stbuf, struct fuse_file_info *fi) {
+
+    if (!stbuf) {
+        return -EINVAL;  // Invalid argument
+    }
+
+    struct fuse_context *private = fuse_get_context();
+    HiddenFat *hiddenFat;
+    if (private != NULL) {
+        hiddenFat = (HiddenFat *) (private->private_data);
+    } else {
+        fprintf(stderr, "Couldn't get fuse context, is null!!\n");
+        return -1;
+    }
+
+    stbuf->f_bsize = BLOCK_SIZE;    // Filesystem block size
+    stbuf->f_frsize = BLOCK_SIZE;   // Fundamental filesystem block size
+    stbuf->f_blocks = hiddenFat->amountBlocks; // Total data blocks in filesystem
+    stbuf->f_bfree = getFreeDiskSpace(hiddenFat) / BLOCK_SIZE;   // Free blocks
+    stbuf->f_bavail = getFreeDiskSpace(hiddenFat) / BLOCK_SIZE;  // Free blocks available to non-superuser
+    stbuf->f_namemax = MAX_FILENAME_LENGTH;
+
+    return 0; // Success
+}
+
 struct fuse_operations fuseOperations = {
         .getattr = getattr,
         .readdir = readdir,
         .create = create,
         .write = write_,
         .read = read_,
-        .unlink = unlink
+        .unlink = unlink,
+        .statfs = statfs
 };
 
 ///**
