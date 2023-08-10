@@ -1,11 +1,12 @@
 #include <unistd.h>
 #include "steganofs.h"
 
-#define DEBUG // TODO!
-
 // TODO:
 // implement export
 // implement import
+// errorcodes durchleifen und korrekte errorcodes setzten
+// debug flag/-d verwenden um stderr etwas zu unterdruecken
+// gui testen
 
 // write doxygen
 
@@ -18,8 +19,6 @@ int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
         stbuf->st_mode = S_IFDIR | 0777; // Directory with 755 permissions
         stbuf->st_nlink = 2; // Number of hard links (including . and ..)
         stbuf->st_nlink += getAmountEntries(hiddenFat, path);
-        // Other fields can be set as per your requirements (e.g., st_uid, st_gid, st_size, st_atime, st_mtime, etc.)
-
         return 0; // Return success
     } else {
         HiddenFile *hiddenFile = findFileByPath(hiddenFat, path);
@@ -259,11 +258,11 @@ int statfs(const char *path, struct statvfs *stbuf) {
         return -1;
     }
 
-    stbuf->f_bsize = BLOCK_SIZE;    // Filesystem block size
-    stbuf->f_frsize = BLOCK_SIZE;   // Fundamental filesystem block size
+    stbuf->f_bsize = hiddenFat->blockSize;    // Filesystem block size
+    stbuf->f_frsize = hiddenFat->blockSize;   // Fundamental filesystem block size
     stbuf->f_blocks = hiddenFat->amountBlocks; // Total data blocks in filesystem
-    stbuf->f_bfree = getFreeDiskSpace(hiddenFat) / BLOCK_SIZE;   // Free blocks
-    stbuf->f_bavail = getFreeDiskSpace(hiddenFat) / BLOCK_SIZE;  // Free blocks available to non-superuser
+    stbuf->f_bfree = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;   // Free blocks
+    stbuf->f_bavail = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;  // Free blocks available to non-superuser
     stbuf->f_namemax = MAX_FILENAME_LENGTH;
 
     return 0; // Success

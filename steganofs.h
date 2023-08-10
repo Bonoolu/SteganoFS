@@ -2,6 +2,11 @@
 #define BSFAT_H
 
 #define FUSE_USE_VERSION 31
+#define AMOUNT_ROOT_FILES 16
+#define BLOCK_SIZE 512
+#define MAX_FILENAME_LENGTH 12
+#define DEBUG
+
 
 #include <fuse3/fuse.h>
 #include <errno.h>
