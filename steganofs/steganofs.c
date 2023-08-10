@@ -10,7 +10,7 @@
 
 // write doxygen
 
-int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
+int stgfs_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
     HiddenFat *hiddenFat = (HiddenFat *) fuse_get_context()->private_data;
 
     // Check if the path corresponds to the root directory
@@ -47,8 +47,8 @@ int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
     }
 }
 
-int readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
-            enum fuse_readdir_flags flags) {
+int stgfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
+                  enum fuse_readdir_flags flags) {
     // Add entries for the root directory
     if (strcmp(path, "/") == 0) {
         filler(buf, "..", NULL, 0, 0);
@@ -64,7 +64,7 @@ int readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, s
     return -ENOENT;
 }
 
-int create(const char *path, mode_t mode, struct fuse_file_info *fi) {
+int stgfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
     HiddenFat *hiddenFat = (HiddenFat *) fuse_get_context()->private_data;
 
     mode = S_IFREG | 0666;
@@ -79,7 +79,7 @@ int create(const char *path, mode_t mode, struct fuse_file_info *fi) {
     return -ENOENT;
 }
 
-int write_(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
+int stgfs_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
     if (countPathComponents(path) != 1) {
         return -ENOENT;
     }
@@ -150,7 +150,7 @@ int write_(const char *path, const char *buf, size_t size, off_t offset, struct 
     return (int) bytesWritten;
 }
 
-int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
+int stgfs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
     if (countPathComponents(path) != 1) {
         return -ENOENT;
     }
@@ -223,7 +223,7 @@ int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
     return (int) bytesRead;
 }
 
-int unlink(const char *path) {
+int stgfs_unlink(const char *path) {
     if (countPathComponents(path) != 1) {
         return -ENOENT;
     }
@@ -243,7 +243,7 @@ int unlink(const char *path) {
     return deleteHiddenFile(hiddenFat, filename);
 }
 
-int statfs(const char *path, struct statvfs *stbuf) {
+int stgfs_statfs(const char *path, struct statvfs *stbuf) {
 
     if (!stbuf) {
         return -EINVAL;  // Invalid argument
@@ -269,13 +269,13 @@ int statfs(const char *path, struct statvfs *stbuf) {
 }
 
 struct fuse_operations fuseOperations = {
-        .getattr = getattr,
-        .readdir = readdir,
-        .create = create,
-        .write = write_,
-        .read = read_,
-        .unlink = unlink,
-        .statfs = statfs
+        .getattr = stgfs_getattr,
+        .readdir = stgfs_readdir,
+        .create = stgfs_create,
+        .write = stgfs_write,
+        .read = stgfs_read,
+        .unlink = stgfs_unlink,
+        .statfs = stgfs_statfs
 };
 
 ///**

@@ -1,6 +1,11 @@
-#include <iostream>
+#include "SteganoFsAdapter.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    SteganoFsAdapter steganoFsAdapter("/Path/to/Pictures/");
+    steganoFsAdapter.loadRamdisk();
+    steganoFsAdapter.getFilesystemVector();
+    //steganoFsAdapter.mount("/home/admin/test_mnt");
+    //steganoFsAdapter.umount();
+    //steganoFsAdapter.unloadRamdisk();
     return 0;
 }

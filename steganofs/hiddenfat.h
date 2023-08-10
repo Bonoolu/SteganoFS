@@ -33,7 +33,7 @@ void showHiddenFat(HiddenFat *hiddenFat, char *outputMessage);
 
 bool checkIntegrity(HiddenFat *hiddenFat);
 
-void checkForDefragmentation(HiddenFat *hiddenFat);
+float checkForDefragmentation(HiddenFat *hiddenFat);
 
 void defragmentate(HiddenFat *hiddenFat);
 

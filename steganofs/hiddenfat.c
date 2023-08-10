@@ -183,7 +183,7 @@ bool checkIntegrity(HiddenFat *hiddenFat) {
     return hasIntegrity;
 }
 
-void checkForDefragmentation(HiddenFat *hiddenFat) {
+float checkForDefragmentation(HiddenFat *hiddenFat) {
     unsigned int blocksInCorrectPos = 0;
     HiddenFile *currentFile = NULL;
     int currentClusterIndex = -1;
@@ -216,6 +216,7 @@ void checkForDefragmentation(HiddenFat *hiddenFat) {
     }
     float fragmentation = 100.0f - ((float) blocksInCorrectPos / (float) hiddenFat->amountBlocks * 100.0f);
     printf("Current fragmentation in percent: %.2f\n", fragmentation);
+    return fragmentation;
 }
 
 void defragmentate(HiddenFat *hiddenFat) {

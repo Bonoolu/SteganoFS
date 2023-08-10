@@ -14,20 +14,20 @@
 #include "hiddenfile.h"
 #include "hiddencluster.h"
 
-int getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
+int stgfs_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
 
-int readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
-            enum fuse_readdir_flags flags);
+int stgfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
+                  enum fuse_readdir_flags flags);
 
-int create(const char *path, mode_t mode, struct fuse_file_info *fi);
+int stgfs_create(const char *path, mode_t mode, struct fuse_file_info *fi);
 
-int write_(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+int stgfs_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 
-int read_(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+int stgfs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 
-int unlink(const char *path);
+int stgfs_unlink(const char *path);
 
-int statfs(const char *path, struct statvfs *stbuf);
+int stgfs_statfs(const char *path, struct statvfs *stbuf);
 
 extern struct fuse_operations fuseOperations;
 ///**

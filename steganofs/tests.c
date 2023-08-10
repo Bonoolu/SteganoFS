@@ -7,7 +7,7 @@ bool testCreateHiddenFat() {
     HiddenFat *hiddenFat = createHiddenFat(diskSize, blockSize);
     bool passed = true;
     if (hiddenFat == NULL) {
-        printf("testCreateHiddenFat test failed: Failed to create the HiddenFat structure.\n");
+        printf("testCreateHiddenFat test failed: Failed to stgfs_create the HiddenFat structure.\n");
         passed = false;
     }
 
@@ -132,7 +132,7 @@ bool testCreateFileValid() {
 
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
     if (hiddenFile == NULL) {
-        printf("testCreateFileValid test failed: Failed to create file.\n");
+        printf("testCreateFileValid test failed: Failed to stgfs_create file.\n");
         passed = false;
     }
 
@@ -357,7 +357,7 @@ bool testDeleteFileWithClusters() {
         return false;
     }
     const char *testBuffer = "My testbuffer!";
-    write_("/cats.gif", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
+    stgfs_write("/cats.gif", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
 
     // Delete the file
     deleteHiddenFile(hiddenFat, hiddenFilename);
@@ -423,11 +423,11 @@ bool testSwapHiddenClustersIntegrity() {
     // Swap two allocated Blocks
     createHiddenFile(hiddenFat, "file1", time(NULL));
     const char *test1Buffer = "My file1";
-    write_("/file1", test1Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
+    stgfs_write("/file1", test1Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
 
     createHiddenFile(hiddenFat, "file2", time(NULL));
     const char *test2Buffer = "My file2";
-    write_("/file2", test2Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
+    stgfs_write("/file2", test2Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
     swapResult = swapHiddenClusters(hiddenFat, 0, 1);
     fflush(stdout);
     fflush(stderr);
@@ -447,7 +447,7 @@ bool testSwapHiddenClustersIntegrity() {
     // Swapping a free block with an allocated block
     createHiddenFile(hiddenFat, "file3", time(NULL));
     const char *test3Buffer = "My file3";
-    write_("/file3", test3Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
+    stgfs_write("/file3", test3Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
 
     //swapResult = swapHiddenClusters(hiddenFat, 2, 3);
     if (!swapResult || strcmp(hiddenFat->clusters[2].file->filename, "file3") != 0) {
@@ -502,7 +502,7 @@ bool testSwapHiddenClustersIntegrity() {
     // Swapping a free block with a defect block
     createHiddenFile(hiddenFat, "file4", time(NULL));
     const char *test4Buffer = "My file4";
-    write_("/file4", test2Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
+    stgfs_write("/file4", test2Buffer, 9, 0, (struct fuse_file_info *) hiddenFat);
     size_t bIndex = findFileByPath(hiddenFat ,"/file4")->hiddenCluster->bIndex;
     swapResult = swapHiddenClusters(hiddenFat, 0, 1);
 
@@ -535,7 +535,7 @@ bool testDefragmentation() {
         return false;
     }
     const char *catBuffer = "cat0cat1";
-    write_("/cats.gif", catBuffer, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    stgfs_write("/cats.gif", catBuffer, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
 
     hiddenFile = createHiddenFile(hiddenFat, "dog.gif", time(NULL));
     if (hiddenFile == NULL) {
@@ -543,7 +543,7 @@ bool testDefragmentation() {
         return false;
     }
     const char *dogBuffer = "dog";
-    write_("/dog.gif", dogBuffer, strlen(dogBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    stgfs_write("/dog.gif", dogBuffer, strlen(dogBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
 
     hiddenFile = createHiddenFile(hiddenFat, "birds.gif", time(NULL));
     if (hiddenFile == NULL) {
@@ -551,16 +551,16 @@ bool testDefragmentation() {
         return false;
     }
     const char *birdBuffer = "bird0bird1";
-    write_("/birds.gif", birdBuffer, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    stgfs_write("/birds.gif", birdBuffer, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
 
     showHiddenFat(hiddenFat, NULL);
     char output[20];
     memset(output, 0, 20);
-    read_("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-    printf("Printing result of read_: %s\n", output);
+    stgfs_read("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of stgfs_read: %s\n", output);
     memset(output, 0, 20);
-    read_("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-    printf("Printing result of read_: %s\n", output);
+    stgfs_read("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of stgfs_read: %s\n", output);
 
     HiddenFile *dog = findFileByPath(hiddenFat, "/dog.gif");
     HiddenFile *cat = findFileByPath(hiddenFat, "/cats.gif");
@@ -588,11 +588,11 @@ bool testDefragmentation() {
 
 
     memset(output, 0, 20);
-    read_("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-    printf("Printing result of read_: %s\n", output);
+    stgfs_read("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of stgfs_read: %s\n", output);
     memset(output, 0, 20);
-    read_("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-    printf("Printing result of read_: %s\n", output);
+    stgfs_read("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of stgfs_read: %s\n", output);
     showHiddenFat(hiddenFat, NULL);
     checkForDefragmentation(hiddenFat);
     defragmentate(hiddenFat);
@@ -600,11 +600,11 @@ bool testDefragmentation() {
     checkForDefragmentation(hiddenFat);
 
     memset(output, 0, 20);
-    read_("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-    printf("Printing result of read_: %s\n", output);
+    stgfs_read("/cats.gif", output, strlen(catBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of stgfs_read: %s\n", output);
     memset(output, 0, 20);
-    read_("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
-    printf("Printing result of read_: %s\n", output);
+    stgfs_read("/birds.gif", output, strlen(birdBuffer) + 1, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of stgfs_read: %s\n", output);
     bool integrity = checkIntegrity(hiddenFat);
     freeHiddenFat(hiddenFat);
     return integrity;
@@ -620,7 +620,7 @@ bool testWriteRead(int argc, char **argv) {
         return false;
     }
     const char *testBuffer = "My testbuffer!";
-    int bytesWritten = write_("/test.txt", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
+    int bytesWritten = stgfs_write("/test.txt", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
     if (bytesWritten < 0) {
         printf("testWrite test failed: Errorcode: %d\n", bytesWritten);
         return false;
@@ -634,8 +634,8 @@ bool testWriteRead(int argc, char **argv) {
     showHiddenFat(hiddenFat, NULL);
     char output[20];
     memset(output, 0, 20);
-    read_("/test.txt", output, 15, 0, (struct fuse_file_info *) hiddenFat);
-    printf("Printing result of read_: %s\n", output);
+    stgfs_read("/test.txt", output, 15, 0, (struct fuse_file_info *) hiddenFat);
+    printf("Printing result of stgfs_read: %s\n", output);
     return checkIntegrity(hiddenFat);
 }
 
@@ -693,8 +693,8 @@ int test_fuse(int argc, char **argv) {
     }
     return fuse_main(argc, argv, &fuseOperations, hiddenFat);
 }
-
-int main(int argc, char **argv) {
-    runTests(argc, argv);
-    return test_fuse(argc, argv);
-}
+//
+//int main(int argc, char **argv) {
+//    runTests(argc, argv);
+//    return test_fuse(argc, argv);
+//}

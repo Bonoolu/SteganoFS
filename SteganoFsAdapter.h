@@ -2,8 +2,13 @@
 #define STEGANO_FS_ADAPTER_STEGANOFSADAPTER_H
 
 #include <string>
+#include <vector>
 #include <sys/statfs.h>
-#include "steganofs/steganofs.h"
+#include <utility>
+
+extern "C" {
+    #include "steganofs.h"
+}
 
 class SteganoFsAdapter {
 private:
@@ -12,15 +17,16 @@ private:
     bool m_isMounted = false;
     HiddenFat *m_hiddenFat = nullptr;
 public:
-    SteganoFsAdapter(std::string  steganoImageFolder);
+    explicit SteganoFsAdapter(std::string  steganoImageFolder);
     ~SteganoFsAdapter();
     bool loadRamdisk();
     bool mount(const std::string& mntPoint);
     bool unloadRamdisk();
-    bool umount(const std::string& mntPoint);
+    bool umount();
     float getFragmentationInPercent();
+    std::vector<size_t> getFilesystemVector();
     bool checkFilesystemIntegrity();
-    bool defragmentate();
+    bool defragmentateFilesystem();
     struct statfs getFilesystemInfo();
 };
 
