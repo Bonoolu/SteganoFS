@@ -1,5 +1,7 @@
-#ifndef BSFAT_H
-#define BSFAT_H
+#ifndef STEGANOFS_H
+#define STEGANOFS_H
+
+#ifndef __cplusplus
 
 #define FUSE_USE_VERSION 31
 #define AMOUNT_ROOT_FILES 16
@@ -7,12 +9,12 @@
 #define MAX_FILENAME_LENGTH 12
 #define DEBUG
 
-
 #include <fuse3/fuse.h>
 #include <errno.h>
 #include "hiddenfat.h"
 #include "hiddenfile.h"
 #include "hiddencluster.h"
+
 
 int stgfs_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
 
@@ -30,6 +32,32 @@ int stgfs_unlink(const char *path);
 int stgfs_statfs(const char *path, struct statvfs *stbuf);
 
 extern struct fuse_operations fuseOperations;
+
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+    typedef struct HiddenCluster HiddenCluster;
+    typedef struct HiddenFile HiddenFile;
+    typedef struct HiddenFat HiddenFat;
+#endif
+
+HiddenFat *steganofs_load_ramdisk();
+
+HiddenFat *steganofs_unload_ramdisk();
+
+void steganofs_show_fragmentation(HiddenFat *hiddenFat, char *outputMessage);
+
+bool steganofs_check_integrity(HiddenFat *hiddenFat);
+
+float steganofs_defragmentation_percent(HiddenFat *hiddenFat);
+
+void steganofs_defragmentate_filesystem(HiddenFat *hiddenFat);
+
+#ifdef __cplusplus
+}
+#endif
+
 ///**
 // * @brief Delete a file.
 // */
@@ -119,4 +147,4 @@ extern struct fuse_operations fuseOperations;
 // */
 //static int stegFS_readlink(const char *path, char *buf, size_t size);
 
-#endif
+#endif // STEGANOFS_H

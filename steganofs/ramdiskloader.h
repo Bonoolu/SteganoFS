@@ -1,3 +1,4 @@
+#ifndef __cplusplus
 #ifndef STEGANOFS_RAMDISKLOADER_H
 #define STEGANOFS_RAMDISKLOADER_H
 
@@ -45,3 +46,4 @@ struct __attribute__((__packed__)) PackedFile {
 //const unsigned char MAGICBYTES[4] = {'S','T','F','S'};
 
 #endif //STEGANOFS_RAMDISKLOADER_H
+#endif // __cplusplus

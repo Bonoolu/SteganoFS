@@ -1,3 +1,4 @@
+#ifndef __cplusplus
 #ifndef STEGANOFS_HIDDENFAT_H
 #define STEGANOFS_HIDDENFAT_H
 
@@ -42,3 +43,4 @@ int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t o
 int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length);
 
 #endif //STEGANOFS_HIDDENFAT_H
+#endif // __cplusplus

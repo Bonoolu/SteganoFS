@@ -278,6 +278,26 @@ struct fuse_operations fuseOperations = {
         .statfs = stgfs_statfs
 };
 
+HiddenFat *steganofs_load_ramdisk() {
+    return createHiddenFat(5120000, 512);
+}
+
+void steganofs_show_fragmentation(HiddenFat *hiddenFat, char *outputMessage) {
+    showHiddenFat(hiddenFat, outputMessage);
+}
+
+bool steganofs_check_integrity(HiddenFat *hiddenFat) {
+    return checkIntegrity(hiddenFat);
+}
+
+float steganofs_defragmentation_percent(HiddenFat *hiddenFat) {
+    return checkForDefragmentation(hiddenFat);
+}
+
+void steganofs_defragmentate_filesystem(HiddenFat *hiddenFat) {
+    defragmentate(hiddenFat);
+}
+
 ///**
 // * @brief Open a file.
 // *
@@ -288,31 +308,6 @@ struct fuse_operations fuseOperations = {
 //static int stegFS_open(const char *path, struct fuse_file_info *fi);
 //
 ///**
-// * @brief Read data from a file.
-// *
-// * @param path The path to the file.
-// * @param buf A buffer to store the read data.
-// * @param size The number of bytes to read.
-// * @param offset The offset to read from in the file.
-// * @param fi A pointer to the fuse_file_info structure containing information about the file.
-// * @return The number of bytes read on success, or a negative value on failure.
-// */
-//static int stegFS_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
-//
-///**
-// * @brief Write data to a file.
-// *
-// * @param path The path to the file.
-// * @param buf A buffer containing the data to write.
-// * @param size The number of bytes to write.
-// * @param offset The offset to write to in the file.
-// * @param fi A pointer to the fuse_file_info structure containing information about the file.
-// * @return The number of bytes written on success, or a negative value on failure.
-// */
-//static int stegFS_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
-//
-///**
-///**
 // * @brief Create a new directory.
 // *
 // * @param path The path to the new directory.
@@ -321,11 +316,5 @@ struct fuse_operations fuseOperations = {
 // */
 //static int stegFS_mkdir(const char *path, mode_t mode);
 //
-///**
-// * @brief Delete a file.
-// *
-// * @param path The path to the file to be deleted.
-// * @return 0 on success, or a negative value on failure.
-// */
-//static int stegFS_unlink(const char *path);
+
 

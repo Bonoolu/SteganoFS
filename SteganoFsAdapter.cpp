@@ -6,7 +6,7 @@ m_steganoImageFolder(std::move(steganoImageFolder)){
 }
 
 bool SteganoFsAdapter::loadRamdisk() {
-    m_hiddenFat = createHiddenFat(5120000, 512);
+    m_hiddenFat = steganofs_load_ramdisk();
     return m_hiddenFat != nullptr;
 }
 
@@ -25,25 +25,23 @@ bool SteganoFsAdapter::umount() {
     return false;
 }
 
-
 float SteganoFsAdapter::getFragmentationInPercent() {
-    return checkForDefragmentation(m_hiddenFat);
+    return steganofs_defragmentation_percent(m_hiddenFat);
 }
 
 std::vector<size_t> SteganoFsAdapter::getFilesystemVector() {
-    // please implement me
-    showHiddenFat(m_hiddenFat, nullptr);// temporarily show filesystem
+    // please implement me properly
+    steganofs_show_fragmentation(m_hiddenFat, nullptr);
     return std::vector<size_t>();
 }
 
-
 bool SteganoFsAdapter::checkFilesystemIntegrity() {
-    return checkIntegrity(m_hiddenFat);
+    return steganofs_check_integrity(m_hiddenFat);
 }
 
 bool SteganoFsAdapter::defragmentateFilesystem() {
-    defragmentate(m_hiddenFat);
-    return checkIntegrity(m_hiddenFat);
+    steganofs_defragmentate_filesystem(m_hiddenFat);
+    return steganofs_check_integrity(m_hiddenFat);
 }
 
 struct statfs SteganoFsAdapter::getFilesystemInfo() {
@@ -53,7 +51,9 @@ struct statfs SteganoFsAdapter::getFilesystemInfo() {
 }
 
 SteganoFsAdapter::~SteganoFsAdapter() {
-    if (m_hiddenFat != nullptr) {
-        freeHiddenFat(m_hiddenFat);
+    if (m_hiddenFat != nullptr && m_isMounted) {
+        SteganoFsAdapter::umount();
+    } else if (m_hiddenFat != nullptr) {
+        SteganoFsAdapter::unloadRamdisk();
     }
 }

@@ -1,3 +1,4 @@
+#ifndef __cplusplus
 #ifndef STEGANOFS_HIDDENFILE_H
 #define STEGANOFS_HIDDENFILE_H
 
@@ -25,3 +26,4 @@ HiddenFile *findFileByPath(HiddenFat *hiddenFat, const char *path);
 HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long timestamp);
 
 #endif //STEGANOFS_HIDDENFILE_H
+#endif // __cplusplus
