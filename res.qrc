@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/assets/stylesheet">
+        <file>assets/stylesheet/Webmas.qss</file>
+        <file>assets/stylesheet/Toolery.qss</file>
+        <file>assets/stylesheet/Darkeum.qss</file>
+        <file>assets/stylesheet/WordOffice.qss</file>
+    </qresource>
+    <qresource prefix="/assets/img">
+        <file>assets/img/files-and-folders.png</file>
+        <file>assets/img/delete.png</file>
+        <file>assets/img/new-document.png</file>
+        <file>assets/img/preview.png</file>
+        <file>assets/img/reorder.png</file>
+        <file>assets/img/scissors.png</file>
+        <file>assets/img/delete(1).png</file>
+        <file>assets/img/document.png</file>
+        <file>assets/img/folder.png</file>
+        <file>assets/img/preview (2).png</file>
+        <file>assets/img/scissors(1).png</file>
+        <file>assets/img/copy.png</file>
+        <file>assets/img/paste.png</file>
+    </qresource>
+</RCC>

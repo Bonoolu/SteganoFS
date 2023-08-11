@@ -7,6 +7,7 @@
 #include <QTreeView>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QListWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,12 +25,21 @@ private slots:
     void on_treeView_clicked(const QModelIndex &index);
     void handleSearchTextChanged(const QString &searchText);
     void refreshView();
-    void handlePathTextEditFinished(const QString &newPath);
+//    void handlePathTextEditFinished(const QString &newPath);
+
+//    void on_DisplayComboBox_activated(int index);
+
+//    void on_previewToolButton_triggered(QAction *arg1);
+
+    void on_pathLineEdit_editingFinished();
+
+    void on_DisplayComboBox_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;
     QFileSystemModel *m_dirmodel;
     QFileSystemModel *m_filemodel;
+    QListWidget *listWidget;
     QTreeView *treeView;
     QLineEdit *searchLineEdit;
     QPushButton *refreshButton;
