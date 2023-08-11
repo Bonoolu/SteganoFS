@@ -1,4 +1,4 @@
-#include "SteganoFsAdapter.h"
+#include "cpp-wrapper/SteganoFsAdapter.h"
 
 int main(int argc, char **argv) {
     SteganoFsAdapter steganoFsAdapter("/Path/to/Pictures/");

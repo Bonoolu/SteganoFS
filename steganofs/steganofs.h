@@ -46,6 +46,10 @@ HiddenFat *steganofs_load_ramdisk();
 
 HiddenFat *steganofs_unload_ramdisk();
 
+bool steganofs_mount();
+
+void steganofs_umount();
+
 void steganofs_show_fragmentation(HiddenFat *hiddenFat, char *outputMessage);
 
 bool steganofs_check_integrity(HiddenFat *hiddenFat);
