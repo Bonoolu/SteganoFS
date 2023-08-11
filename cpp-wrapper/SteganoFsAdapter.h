@@ -7,7 +7,7 @@
 #include <utility>
 
 extern "C" {
-    #include "steganofs.h"
+    #include "../steganofs/steganofs.h"
 }
 
 class SteganoFsAdapter {

@@ -1,5 +1,5 @@
-#include "steganofs.h"
-#include "ramdiskloader.h"
+#include "../../steganofs/steganofs.h"
+#include "../../steganofs/ramdiskloader.h"
 
 bool testCreateHiddenFat() {
     size_t diskSize = BLOCK_SIZE * 4;  // Example disk size
@@ -693,8 +693,8 @@ int test_fuse(int argc, char **argv) {
     }
     return fuse_main(argc, argv, &fuseOperations, hiddenFat);
 }
-//
-//int main(int argc, char **argv) {
-//    runTests(argc, argv);
-//    return test_fuse(argc, argv);
-//}
+
+int main(int argc, char **argv) {
+    runTests(argc, argv);
+    return 0;//test_fuse(argc, argv);
+}
