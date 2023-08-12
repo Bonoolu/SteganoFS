@@ -1,7 +1,6 @@
 #include "steganofs.h"
 
 // TODO:
-// implement export
 // implement import
 // errorcodes durchleifen und korrekte errorcodes setzten
 // debug flag/-d verwenden um stderr etwas zu unterdruecken
@@ -277,16 +276,14 @@ struct fuse_operations fuseOperations = {
         .statfs = stgfs_statfs
 };
 
-HiddenFat *steganofs_load_ramdisk() {
-    return createHiddenFat(5120000, 512);
+HiddenFat *steganofs_create_new_ramdisk(size_t diskSize) {
+    size_t amountBlocks = diskSize / BLOCK_SIZE;
+    return createHiddenFat(amountBlocks * diskSize, BLOCK_SIZE);
 }
 
-void steganofs_unload_ramdisk(HiddenFat *hiddenFat) {
-    struct SerializedFilesystem serializedFilesystem = serializeFilesystem(hiddenFat);
-    FILE *file = fopen("/tmp/filesystem.bin", "wb"); // TODO!
-    fwrite(serializedFilesystem.buf, serializedFilesystem.size, 1, file);
-    fflush(file);
-    fclose(file);
+struct HiddenFat *steganofs_load_ramdisk(const char *steganoImageFolder) {
+    struct SerializedFilesystem serializedFilesystem = stegano_read(steganoImageFolder, RAW);
+    return loadRamdisk(serializedFilesystem);
 }
 
 void steganofs_show_fragmentation(HiddenFat *hiddenFat, char *outputMessage) {

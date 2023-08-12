@@ -6,7 +6,7 @@ m_steganoImageFolder(std::move(steganoImageFolder)){
 }
 
 bool SteganoFsAdapter::loadRamdisk() {
-    m_hiddenFat = steganofs_load_ramdisk();
+    m_hiddenFat = steganofs_load_ramdisk(m_steganoImageFolder.c_str());
     return m_hiddenFat != nullptr;
 }
 

@@ -8,7 +8,9 @@ add_compile_options(-D_FILE_OFFSET_BITS=64)
 find_package(PkgConfig REQUIRED)
 pkg_search_module(FUSE REQUIRED fuse3)
 
-add_library(steganofs steganofs.h steganofs.c hiddencluster.c hiddenfat.c hiddenfile.c ramdiskloader.c)
+add_library(steganofs steganofs.h steganofs.c hiddencluster.c hiddenfat.c hiddenfile.c ramdiskloader.c
+        ../stegano_providers/raw/raw_provider.c
+        ../stegano_providers/stegano_provider.c)
 
 # Link the FUSE library to your executable
 target_link_libraries(steganofs PRIVATE ${FUSE_LIBRARIES})
@@ -25,5 +27,8 @@ install(
 
 install(
         FILES steganofs.h hiddencluster.h hiddenfat.h hiddenfile.h ramdiskloader.h
+        ../stegano_providers/filetype.h
+        ../stegano_providers/raw/raw_provider.h
+        ../stegano_providers/stegano_provider.h
         DESTINATION include/steganofs
 )

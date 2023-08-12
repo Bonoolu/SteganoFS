@@ -69,6 +69,7 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
     return serializedFilesystem;
 }
 
-//HiddenFat *deserializeFilesystem(struct SerializedFilesystem serializedFilesystem) {
-//
-//}
+HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem) {
+    // please implement me
+    return NULL;
+}

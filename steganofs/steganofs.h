@@ -15,6 +15,7 @@
 #include "hiddenfile.h"
 #include "hiddencluster.h"
 #include "ramdiskloader.h"
+#include "../stegano_providers/stegano_provider.h"
 
 
 int stgfs_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
@@ -41,9 +42,10 @@ extern "C" {
     typedef struct HiddenCluster HiddenCluster;
     typedef struct HiddenFile HiddenFile;
     typedef struct HiddenFat HiddenFat;
+    typedef enum Filetype Filetype;
 #endif
 
-void steganofs_unload_ramdisk(HiddenFat *hiddenFat);
+struct HiddenFat *steganofs_load_ramdisk(const char *steganoImageFolder);
 
 //HiddenFat *steganofs_unload_ramdisk();
 

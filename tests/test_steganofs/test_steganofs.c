@@ -654,7 +654,7 @@ bool testRamdiskloader() {
         printf("testRamdiskloader test failed: Errorcode: %d\n", bytesWritten);
         return false;
     }
-    steganofs_unload_ramdisk(hiddenFat);
+    steganofs_serialize_ramdisk_to_file(hiddenFat, "");
     return true;
 }
 

@@ -50,7 +50,7 @@ struct SerializedFilesystem {
 
 struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat);
 
-//HiddenFat *loadFilesystem(struct SerializedFilesystem serializedFilesystem);
+HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem);
 
 //const unsigned char MAGICBYTES[4] = {'S','T','F','S'};
 
