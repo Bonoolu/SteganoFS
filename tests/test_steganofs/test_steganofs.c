@@ -639,6 +639,25 @@ bool testWriteRead(int argc, char **argv) {
     return checkIntegrity(hiddenFat);
 }
 
+bool testRamdiskloader() {
+    HiddenFat *hiddenFat = createHiddenFat(BLOCK_SIZE * 4, BLOCK_SIZE);
+    const char *hiddenFilename = "test.txt";
+    long timestamp = time(NULL);
+    HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
+    if (hiddenFile == NULL) {
+        printf("testRamdiskloader test failed: createHiddenFile failed and returned NULL.\n");
+        return false;
+    }
+    const char *testBuffer = "My testbuffer!";
+    int bytesWritten = stgfs_write("/test.txt", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
+    if (bytesWritten < 0) {
+        printf("testRamdiskloader test failed: Errorcode: %d\n", bytesWritten);
+        return false;
+    }
+    steganofs_unload_ramdisk(hiddenFat);
+    return true;
+}
+
 void runTests(int argc, char **argv) {
     int tests[] = {
             testCreateHiddenFat(),
@@ -660,6 +679,7 @@ void runTests(int argc, char **argv) {
             testWriteRead(argc, argv),
             testSwapHiddenClustersIntegrity(),
             testDefragmentation(),
+            testRamdiskloader(),
             -1};
     size_t passed = 0;
     size_t sum = 0;

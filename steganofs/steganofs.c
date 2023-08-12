@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include "steganofs.h"
 
 // TODO:
@@ -280,6 +279,14 @@ struct fuse_operations fuseOperations = {
 
 HiddenFat *steganofs_load_ramdisk() {
     return createHiddenFat(5120000, 512);
+}
+
+void steganofs_unload_ramdisk(HiddenFat *hiddenFat) {
+    struct SerializedFilesystem serializedFilesystem = serializeFilesystem(hiddenFat);
+    FILE *file = fopen("/tmp/filesystem.bin", "wb"); // TODO!
+    fwrite(serializedFilesystem.buf, serializedFilesystem.size, 1, file);
+    fflush(file);
+    fclose(file);
 }
 
 void steganofs_show_fragmentation(HiddenFat *hiddenFat, char *outputMessage) {

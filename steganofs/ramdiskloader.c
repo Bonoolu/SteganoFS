@@ -1,13 +1,13 @@
 #include "ramdiskloader.h"
 
-struct FilesystemBuffer unloadFilesystem(HiddenFat *hiddenFat) {
+struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
     size_t sizePackedFat = sizeof(PackedFat);
     size_t sizePackedClusters = sizeof(PackedCluster) * hiddenFat->amountBlocks;
     size_t sizePackedFiles = sizeof(PackedFile) * AMOUNT_ROOT_FILES;
     size_t sizeBlocks = hiddenFat->amountBlocks * hiddenFat->blockSize;
 
     size_t offsetPackedFat = 0;
-    size_t offsetPackedCluster = sizePackedFat;
+    size_t offsetPackedCluster = offsetPackedFat + sizePackedFat;
     size_t offsetPackedFiles = offsetPackedCluster + sizePackedClusters;
     size_t offsetBlocks = offsetPackedFiles + sizePackedFiles;
 
@@ -16,7 +16,7 @@ struct FilesystemBuffer unloadFilesystem(HiddenFat *hiddenFat) {
     unsigned char *bufferFilesystem = malloc(sizeFilesystem);
     memset(bufferFilesystem, 0, sizeFilesystem);
 
-    PackedFat *packedFat = (PackedFat*) bufferFilesystem;
+    PackedFat *packedFat = (PackedFat*) (bufferFilesystem + offsetPackedFat);
     PackedCluster *packedClusters = (PackedCluster*) (bufferFilesystem + offsetPackedCluster);
     PackedFile *packedFiles = (PackedFile*) (bufferFilesystem + offsetPackedFiles);
     unsigned char *disk = bufferFilesystem + offsetBlocks;
@@ -28,15 +28,47 @@ struct FilesystemBuffer unloadFilesystem(HiddenFat *hiddenFat) {
     packedFat->files = offsetPackedFiles;
     packedFat->disk = offsetBlocks;
 
-    // TODO! You should iterate over the files as they have a 1 to n relation with the clusters, much easier to implement
-    for (size_t i = 0; i < hiddenFat->amountBlocks; i++) {
-        packedClusters[i].bIndex = hiddenFat->clusters[i].bIndex;
-        packedClusters[i].clusterIndex = hiddenFat->clusters[i].clusterIndex;
-        packedClusters[i].state = hiddenFat->
+    PackedFile *fileIterator = packedFiles;
+    for (HiddenFile **hiddenFile = hiddenFat->files; hiddenFile < hiddenFat->files + AMOUNT_ROOT_FILES; hiddenFile++) {
+        if (*hiddenFile == NULL) {
+            continue;
+        }
+        fileIterator->filesize = (*hiddenFile)->filesize;
+        if ((*hiddenFile)->hiddenCluster == NULL) {
+            fileIterator->hiddenCluster = - 1;
+        }else {
+            fileIterator->hiddenCluster = (int64_t)((*hiddenFile)->hiddenCluster->bIndex);
+        }
+        strncpy(fileIterator->filename, (*hiddenFile)->filename, MAX_FILENAME_LENGTH - 1);
+        fileIterator->real_filesize = (*hiddenFile)->real_filesize;
+        fileIterator->timestamp = (*hiddenFile)->timestamp;
+
+
+        HiddenCluster *hiddenCluster = (*hiddenFile)->hiddenCluster;
+        while(hiddenCluster) {
+            size_t bIndex = hiddenCluster->bIndex;
+            packedClusters[bIndex].bIndex = hiddenCluster->bIndex;
+            packedClusters[bIndex].clusterIndex = hiddenCluster->clusterIndex;
+            packedClusters[bIndex].state = hiddenCluster->state;
+            packedClusters[bIndex].file = fileIterator - packedFiles;
+            if (hiddenCluster->prev == NULL) {
+                packedClusters[bIndex].prev = -1;
+            }else {
+                packedClusters[bIndex].prev = (int64_t) hiddenCluster->prev->bIndex;
+            }
+            if (hiddenCluster->next == NULL) {
+                packedClusters[bIndex].next = -1;
+            }else {
+                packedClusters[bIndex].next = (int64_t) hiddenCluster->next->bIndex;
+            }
+            hiddenCluster = hiddenCluster->next;
+        }
     }
-
+    memcpy(disk, hiddenFat->disk, hiddenFat->amountBlocks * hiddenFat->blockSize);
+    struct SerializedFilesystem serializedFilesystem = {.size = sizeFilesystem, .buf = bufferFilesystem};
+    return serializedFilesystem;
 }
 
-HiddenFat *loadFilesystem(struct FilesystemBuffer filesystemBuffer) {
-
-}
+//HiddenFat *deserializeFilesystem(struct SerializedFilesystem serializedFilesystem) {
+//
+//}

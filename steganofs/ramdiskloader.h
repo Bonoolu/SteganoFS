@@ -29,8 +29,8 @@ struct __attribute__((__packed__)) PackedCluster{
     u_int64_t bIndex;
     u_int16_t clusterIndex;
     u_int8_t state;
-    u_int32_t prev;
-    u_int32_t next;
+    int64_t prev;
+    int64_t next;
     u_int32_t file;
 };
 
@@ -39,18 +39,18 @@ struct __attribute__((__packed__)) PackedFile {
     u_int64_t filesize;
     u_int64_t real_filesize;
     u_int32_t timestamp;
-    u_int32_t hiddenCluster;
-    u_int8_t filename[12];
+    int64_t hiddenCluster;
+    char filename[12];
 };
 
-struct FilesystemBuffer {
+struct SerializedFilesystem {
     size_t size;
     unsigned char *buf;
 };
 
-struct FilesystemBuffer unloadFilesystem(HiddenFat *hiddenFat);
+struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat);
 
-HiddenFat *loadFilesystem(struct FilesystemBuffer filesystemBuffer);
+//HiddenFat *loadFilesystem(struct SerializedFilesystem serializedFilesystem);
 
 //const unsigned char MAGICBYTES[4] = {'S','T','F','S'};
 

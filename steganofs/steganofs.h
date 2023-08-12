@@ -14,6 +14,7 @@
 #include "hiddenfat.h"
 #include "hiddenfile.h"
 #include "hiddencluster.h"
+#include "ramdiskloader.h"
 
 
 int stgfs_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
@@ -42,9 +43,9 @@ extern "C" {
     typedef struct HiddenFat HiddenFat;
 #endif
 
-HiddenFat *steganofs_load_ramdisk();
+void steganofs_unload_ramdisk(HiddenFat *hiddenFat);
 
-HiddenFat *steganofs_unload_ramdisk();
+//HiddenFat *steganofs_unload_ramdisk();
 
 bool steganofs_mount();
 
