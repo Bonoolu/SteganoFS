@@ -43,6 +43,15 @@ struct __attribute__((__packed__)) PackedFile {
     u_int8_t filename[12];
 };
 
+struct FilesystemBuffer {
+    size_t size;
+    unsigned char *buf;
+};
+
+struct FilesystemBuffer unloadFilesystem(HiddenFat *hiddenFat);
+
+HiddenFat *loadFilesystem(struct FilesystemBuffer filesystemBuffer);
+
 //const unsigned char MAGICBYTES[4] = {'S','T','F','S'};
 
 #endif //STEGANOFS_RAMDISKLOADER_H
