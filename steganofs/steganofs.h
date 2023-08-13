@@ -12,7 +12,6 @@
 #include <fuse3/fuse.h>
 #include <errno.h>
 #include <sys/mount.h>
-#include <pthread.h>
 #include "hiddenfat.h"
 #include "hiddenfile.h"
 #include "hiddencluster.h"
