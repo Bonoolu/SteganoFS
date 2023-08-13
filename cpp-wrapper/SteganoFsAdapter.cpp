@@ -5,24 +5,29 @@ m_steganoImageFolder(std::move(steganoImageFolder)){
 
 }
 
+bool SteganoFsAdapter::formatNewRamdisk(size_t diskSize) {
+    m_hiddenFat = steganofs_create_new_ramdisk(diskSize);
+    return m_hiddenFat != nullptr;
+}
+
 bool SteganoFsAdapter::loadRamdisk() {
     m_hiddenFat = steganofs_load_ramdisk(m_steganoImageFolder.c_str());
     return m_hiddenFat != nullptr;
 }
 
 bool SteganoFsAdapter::mount(const std::string &mntPoint) {
-    // please implement me
-    return false;
+    if (m_isMounted) return true;
+    m_isMounted = steganofs_mount(m_hiddenFat, mntPoint.c_str());
+    if (m_isMounted) m_mountPath = mntPoint;
+    return m_isMounted;
 }
 
 bool SteganoFsAdapter::unloadRamdisk() {
-    // please implement me
-    return false;
+    return steganofs_unload_ramdisk(m_hiddenFat, m_steganoImageFolder.c_str());
 }
 
 bool SteganoFsAdapter::umount() {
-    // please implement me
-    return false;
+    return steganofs_umount(m_mountPath.c_str());
 }
 
 float SteganoFsAdapter::getFragmentationInPercent() {
@@ -30,9 +35,14 @@ float SteganoFsAdapter::getFragmentationInPercent() {
 }
 
 std::vector<size_t> SteganoFsAdapter::getFilesystemVector() {
-    // please implement me properly
-    steganofs_show_fragmentation(m_hiddenFat, nullptr);
-    return std::vector<size_t>();
+    size_t *array = nullptr;
+    size_t length = steganofs_fragmentation_array(m_hiddenFat, &array);
+    if (length == 0) {
+        return {};
+    }
+    std::vector<size_t> vector(array, array + (sizeof(size_t) * length)  / sizeof array[0]);
+    delete(array);
+    return vector;
 }
 
 bool SteganoFsAdapter::checkFilesystemIntegrity() {

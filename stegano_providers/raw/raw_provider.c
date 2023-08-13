@@ -19,11 +19,13 @@ struct SerializedFilesystem read_raw(const char *path) {
     return serializedFilesystem;
 }
 
-void write_raw(struct SerializedFilesystem serializedFilesystem, const char *path) {
+bool write_raw(struct SerializedFilesystem serializedFilesystem, const char *path) {
     FILE *file = fopen(path, "wb");
     if (file) {
-        fwrite(serializedFilesystem.buf, serializedFilesystem.size, 1, file);
+        size_t written = fwrite(serializedFilesystem.buf, serializedFilesystem.size, 1, file);
         fflush(file);
         fclose(file);
+        return written == 1;
     }
+    return false;
 }

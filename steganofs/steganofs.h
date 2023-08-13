@@ -4,13 +4,15 @@
 #ifndef __cplusplus
 
 #define FUSE_USE_VERSION 31
-#define AMOUNT_ROOT_FILES 16
-#define BLOCK_SIZE 512
-#define MAX_FILENAME_LENGTH 12
-#define DEBUG
+#define STEGANOFS_AMOUNT_ROOT_FILES 16
+#define STEGANOFS_BLOCK_SIZE 512
+#define STEGANOFS_MAX_FILENAME_LENGTH 12
+#define STEGANOFS_DEBUG
 
 #include <fuse3/fuse.h>
 #include <errno.h>
+#include <sys/mount.h>
+#include <pthread.h>
 #include "hiddenfat.h"
 #include "hiddenfile.h"
 #include "hiddencluster.h"
@@ -42,18 +44,21 @@ extern "C" {
     typedef struct HiddenCluster HiddenCluster;
     typedef struct HiddenFile HiddenFile;
     typedef struct HiddenFat HiddenFat;
-    typedef enum Filetype Filetype;
 #endif
+
+struct HiddenFat *steganofs_create_new_ramdisk(size_t diskSize);
 
 struct HiddenFat *steganofs_load_ramdisk(const char *steganoImageFolder);
 
-//HiddenFat *steganofs_unload_ramdisk();
+bool steganofs_unload_ramdisk(HiddenFat *hiddenFat, const char *steganoFolder);
 
-bool steganofs_mount();
+bool steganofs_mount(struct HiddenFat *hiddenFat, const char *mnt_point);
 
-void steganofs_umount();
+bool steganofs_umount(const char *mnt_point);
 
 void steganofs_show_fragmentation(HiddenFat *hiddenFat, char *outputMessage);
+
+size_t steganofs_fragmentation_array(HiddenFat *hiddenFat, size_t **array);
 
 bool steganofs_check_integrity(HiddenFat *hiddenFat);
 

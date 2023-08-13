@@ -4,8 +4,6 @@
 // implement import
 // errorcodes durchleifen und korrekte errorcodes setzten
 // debug flag/-d verwenden um stderr etwas zu unterdruecken
-// gui testen
-
 // write doxygen
 
 int stgfs_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
@@ -52,7 +50,7 @@ int stgfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t off
         filler(buf, "..", NULL, 0, 0);
         filler(buf, ".", NULL, 0, 0);
         HiddenFat *hiddenFat = (HiddenFat *) fuse_get_context()->private_data;
-        for (HiddenFile **pFile = hiddenFat->files; pFile < hiddenFat->files + AMOUNT_ROOT_FILES; pFile++) {
+        for (HiddenFile **pFile = hiddenFat->files; pFile < hiddenFat->files + STEGANOFS_AMOUNT_ROOT_FILES; pFile++) {
             if (*pFile != NULL) {
                 filler(buf, (*pFile)->filename, NULL, 0, 0);
             }
@@ -86,7 +84,7 @@ int stgfs_write(const char *path, const char *buf, size_t size, off_t offset, st
     if (private != NULL) {
         hiddenFat = (HiddenFat *) (private->private_data);
     } else {
-#ifdef DEBUG
+#ifdef STEGANOFS_DEBUG
         hiddenFat = (HiddenFat *) fi;
 #else
         fprintf(stderr, "Couldn't get fuse context, is null!!\n");
@@ -157,7 +155,7 @@ int stgfs_read(const char *path, char *buf, size_t size, off_t offset, struct fu
     if (private != NULL) {
         hiddenFat = (HiddenFat *) (private->private_data);
     } else {
-#ifdef DEBUG
+#ifdef STEGANOFS_DEBUG
         hiddenFat = (HiddenFat *) fi;
 #else
         fprintf(stderr, "Couldn't get fuse context, is null!!\n");
@@ -261,7 +259,7 @@ int stgfs_statfs(const char *path, struct statvfs *stbuf) {
     stbuf->f_blocks = hiddenFat->amountBlocks; // Total data blocks in filesystem
     stbuf->f_bfree = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;   // Free blocks
     stbuf->f_bavail = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;  // Free blocks available to non-superuser
-    stbuf->f_namemax = MAX_FILENAME_LENGTH;
+    stbuf->f_namemax = STEGANOFS_MAX_FILENAME_LENGTH;
 
     return 0; // Success
 }
@@ -276,18 +274,51 @@ struct fuse_operations fuseOperations = {
         .statfs = stgfs_statfs
 };
 
-HiddenFat *steganofs_create_new_ramdisk(size_t diskSize) {
-    size_t amountBlocks = diskSize / BLOCK_SIZE;
-    return createHiddenFat(amountBlocks * diskSize, BLOCK_SIZE);
+struct HiddenFat *steganofs_create_new_ramdisk(size_t diskSize) {
+    size_t amountBlocks = diskSize / STEGANOFS_BLOCK_SIZE;
+    return createHiddenFat(amountBlocks * STEGANOFS_BLOCK_SIZE, STEGANOFS_BLOCK_SIZE);
 }
 
 struct HiddenFat *steganofs_load_ramdisk(const char *steganoImageFolder) {
-    struct SerializedFilesystem serializedFilesystem = stegano_read(steganoImageFolder, RAW);
+    struct SerializedFilesystem serializedFilesystem = stegano_provider_read(steganoImageFolder, RAW);
+    if (serializedFilesystem.size == 0) return NULL;
     return loadRamdisk(serializedFilesystem);
+}
+
+bool steganofs_unload_ramdisk(struct HiddenFat *hiddenFat, const char *steganoImageFolder) {
+    struct SerializedFilesystem serializedFilesystem = serializeFilesystem(hiddenFat);
+    if (serializedFilesystem.size == 0) return false;
+    return stegano_provider_write(serializedFilesystem, steganoImageFolder, RAW);
+}
+
+
+bool steganofs_mount(struct HiddenFat *hiddenFat, const char *mnt_point) {
+    int argc = 1;
+    const char * argv[] = {mnt_point};
+
+    struct fuse_args args = FUSE_ARGS_INIT(argc, (char**) argv);
+    struct fuse *fuse_struct = fuse_new(&args, &fuseOperations, sizeof(fuseOperations), hiddenFat);
+    if (fuse_struct == NULL) {
+        return false;
+    }
+    int status = fuse_mount(fuse_struct, mnt_point);
+    if (status != 0) {
+        return false;
+    }
+    status = fuse_loop(fuse_struct);
+    return status == 0;
+}
+
+bool steganofs_umount(const char *mnt_point) {
+    return umount2(mnt_point, MNT_FORCE) == 0;
 }
 
 void steganofs_show_fragmentation(HiddenFat *hiddenFat, char *outputMessage) {
     showHiddenFat(hiddenFat, outputMessage);
+}
+
+size_t steganofs_fragmentation_array(HiddenFat *hiddenFat, size_t **array) {
+    return getFragmentationArray(hiddenFat, array);
 }
 
 bool steganofs_check_integrity(HiddenFat *hiddenFat) {
@@ -295,7 +326,7 @@ bool steganofs_check_integrity(HiddenFat *hiddenFat) {
 }
 
 float steganofs_defragmentation_percent(HiddenFat *hiddenFat) {
-    return checkForDefragmentation(hiddenFat);
+    return checkForFragmentation(hiddenFat);
 }
 
 void steganofs_defragmentate_filesystem(HiddenFat *hiddenFat) {

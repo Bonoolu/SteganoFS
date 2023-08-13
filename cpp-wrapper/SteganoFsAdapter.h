@@ -19,6 +19,7 @@ private:
 public:
     explicit SteganoFsAdapter(std::string  steganoImageFolder);
     ~SteganoFsAdapter();
+    bool formatNewRamdisk(size_t diskSize);
     bool loadRamdisk();
     bool mount(const std::string& mntPoint);
     bool unloadRamdisk();

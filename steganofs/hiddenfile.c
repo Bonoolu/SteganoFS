@@ -8,7 +8,7 @@ int deleteHiddenFile(HiddenFat *hiddenFat, const char *filename) {
             found = true;
             break;
         }
-    } while (++pFile != hiddenFat->files + AMOUNT_ROOT_FILES);
+    } while (++pFile != hiddenFat->files + STEGANOFS_AMOUNT_ROOT_FILES);
 
     if (found) {
         HiddenCluster *hiddenCluster = (*pFile)->hiddenCluster;
@@ -52,7 +52,7 @@ HiddenFile *findFileByPath(HiddenFat *hiddenFat, const char *path) {
                 found = true;
                 break;
             }
-        } while (++pFile != hiddenFat->files + AMOUNT_ROOT_FILES);
+        } while (++pFile != hiddenFat->files + STEGANOFS_AMOUNT_ROOT_FILES);
     }
     if (found) {
         return *pFile;
@@ -64,7 +64,7 @@ HiddenFile *findFileByPath(HiddenFat *hiddenFat, const char *path) {
 HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long timestamp) {
     // Find an available file slot
     HiddenFile **searchResult = NULL;
-    for (size_t i = 0; i < AMOUNT_ROOT_FILES; i++) {
+    for (size_t i = 0; i < STEGANOFS_AMOUNT_ROOT_FILES; i++) {
         if (hiddenFat->files[i] == NULL) {
             searchResult = &hiddenFat->files[i];
             break;
@@ -74,7 +74,7 @@ HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long t
         fprintf(stderr, "Maximum amount of files are already allocated!\n");
         return NULL;
     }
-    if (strlen(filename) > MAX_FILENAME_LENGTH - 1) {
+    if (strlen(filename) > STEGANOFS_MAX_FILENAME_LENGTH - 1) {
         fprintf(stderr, "Filename too long\n");
         return NULL;
     }
@@ -85,8 +85,8 @@ HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long t
         fprintf(stderr, "Could not allocate memory!\n");
         return NULL;
     }
-    memset(pFile->filename, 0, MAX_FILENAME_LENGTH);
-    strncpy(pFile->filename, filename, MAX_FILENAME_LENGTH);
+    memset(pFile->filename, 0, STEGANOFS_MAX_FILENAME_LENGTH);
+    strncpy(pFile->filename, filename, STEGANOFS_MAX_FILENAME_LENGTH);
     pFile->filesize = 0;
     pFile->timestamp = timestamp;
     pFile->hiddenCluster = NULL;

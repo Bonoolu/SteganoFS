@@ -18,7 +18,7 @@ struct HiddenFat {
     size_t amountBlocks;
     unsigned char *disk;
     HiddenCluster *clusters;
-    HiddenFile *files[AMOUNT_ROOT_FILES];
+    HiddenFile *files[STEGANOFS_AMOUNT_ROOT_FILES];
 };
 
 // HiddenFat
@@ -34,13 +34,15 @@ void showHiddenFat(HiddenFat *hiddenFat, char *outputMessage);
 
 bool checkIntegrity(HiddenFat *hiddenFat);
 
-float checkForDefragmentation(HiddenFat *hiddenFat);
+float checkForFragmentation(HiddenFat *hiddenFat);
 
 void defragmentate(HiddenFat *hiddenFat);
 
 int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length);
 
 int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length);
+
+size_t getFragmentationArray(HiddenFat *hiddenFat, size_t **array);
 
 #endif //STEGANOFS_HIDDENFAT_H
 #endif // __cplusplus

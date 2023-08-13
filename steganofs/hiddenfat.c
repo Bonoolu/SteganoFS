@@ -30,7 +30,7 @@ HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) {
         fprintf(stderr, "Could not allocate memory!\n");
         exit(1);
     }
-    memset(hiddenFat->files, 0, AMOUNT_ROOT_FILES * sizeof(HiddenFile *));
+    memset(hiddenFat->files, 0, STEGANOFS_AMOUNT_ROOT_FILES * sizeof(HiddenFile *));
     hiddenFat->blockSize = blockSize;
     hiddenFat->amountBlocks = amountBlocks;
     hiddenFat->disk = disk;
@@ -50,7 +50,7 @@ void freeHiddenFat(HiddenFat *hiddenFat) {
     free(hiddenFat->clusters);
 
     // Free the file structures
-    for (size_t i = 0; i < AMOUNT_ROOT_FILES; i++) {
+    for (size_t i = 0; i < STEGANOFS_AMOUNT_ROOT_FILES; i++) {
         HiddenFile *pFile = hiddenFat->files[i];
         if (pFile != NULL) {
             // Free the file structure
@@ -144,7 +144,7 @@ bool checkIntegrity(HiddenFat *hiddenFat) {
     bool hasIntegrity = true;
 
     // Check if all clusters are associated with a file
-    for (size_t fileIndex = 0; fileIndex < AMOUNT_ROOT_FILES; fileIndex++) {
+    for (size_t fileIndex = 0; fileIndex < STEGANOFS_AMOUNT_ROOT_FILES; fileIndex++) {
         HiddenFile *pFile = hiddenFat->files[fileIndex];
         if (pFile != NULL) {
             HiddenCluster *hiddenCluster = pFile->hiddenCluster;
@@ -183,7 +183,7 @@ bool checkIntegrity(HiddenFat *hiddenFat) {
     return hasIntegrity;
 }
 
-float checkForDefragmentation(HiddenFat *hiddenFat) {
+float checkForFragmentation(HiddenFat *hiddenFat) {
     unsigned int blocksInCorrectPos = 0;
     HiddenFile *currentFile = NULL;
     int currentClusterIndex = -1;
@@ -221,7 +221,7 @@ float checkForDefragmentation(HiddenFat *hiddenFat) {
 
 void defragmentate(HiddenFat *hiddenFat) {
     size_t bIndex = 0;
-    for (size_t i = 0; i < AMOUNT_ROOT_FILES; i++) {
+    for (size_t i = 0; i < STEGANOFS_AMOUNT_ROOT_FILES; i++) {
         if (hiddenFat->files[i] == NULL) {
             continue;
         }
@@ -238,10 +238,32 @@ void defragmentate(HiddenFat *hiddenFat) {
     }
 }
 
+size_t getFragmentationArray(HiddenFat *hiddenFat, size_t **array) {
+    *array = malloc(hiddenFat->amountBlocks * sizeof(size_t));
+    memset(*array, 0, hiddenFat->amountBlocks * sizeof(size_t));
+    if (*array == NULL) {
+        return 0;
+    }
+    size_t bIndex = 0;
+    for (size_t i = 0; i < STEGANOFS_AMOUNT_ROOT_FILES; i++) {
+        if (hiddenFat->files[i] == NULL) {
+            continue;
+        }
+        HiddenCluster *hiddenCluster = hiddenFat->files[i]->hiddenCluster;
+        while (hiddenCluster) {
+            size_t blockIndexCluster = hiddenCluster->bIndex;
+            (*array)[blockIndexCluster] = bIndex;
+            bIndex++;
+            hiddenCluster = hiddenCluster->next;
+        }
+    }
+    return hiddenFat->amountBlocks;
+}
+
 size_t getAmountEntries(HiddenFat *hiddenFat, const char *path) {
     if (strcmp(path, "/") == 0) {
         size_t amount = 0;
-        for (HiddenFile **pFile = hiddenFat->files; pFile < hiddenFat->files + AMOUNT_ROOT_FILES; pFile++) {
+        for (HiddenFile **pFile = hiddenFat->files; pFile < hiddenFat->files + STEGANOFS_AMOUNT_ROOT_FILES; pFile++) {
             if (*pFile != NULL) {
                 amount++;
             }

@@ -3,7 +3,7 @@
 struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
     size_t sizePackedFat = sizeof(PackedFat);
     size_t sizePackedClusters = sizeof(PackedCluster) * hiddenFat->amountBlocks;
-    size_t sizePackedFiles = sizeof(PackedFile) * AMOUNT_ROOT_FILES;
+    size_t sizePackedFiles = sizeof(PackedFile) * STEGANOFS_AMOUNT_ROOT_FILES;
     size_t sizeBlocks = hiddenFat->amountBlocks * hiddenFat->blockSize;
 
     size_t offsetPackedFat = 0;
@@ -24,12 +24,12 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
     packedFat->blockSize = hiddenFat->blockSize;
     packedFat->amountBlocks = hiddenFat->amountBlocks;
     packedFat->clusters = offsetPackedCluster;
-    packedFat->amount_root_files = AMOUNT_ROOT_FILES;
+    packedFat->amount_root_files = STEGANOFS_AMOUNT_ROOT_FILES;
     packedFat->files = offsetPackedFiles;
     packedFat->disk = offsetBlocks;
 
     PackedFile *fileIterator = packedFiles;
-    for (HiddenFile **hiddenFile = hiddenFat->files; hiddenFile < hiddenFat->files + AMOUNT_ROOT_FILES; hiddenFile++) {
+    for (HiddenFile **hiddenFile = hiddenFat->files; hiddenFile < hiddenFat->files + STEGANOFS_AMOUNT_ROOT_FILES; hiddenFile++) {
         if (*hiddenFile == NULL) {
             continue;
         }
@@ -39,7 +39,7 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
         }else {
             fileIterator->hiddenCluster = (int64_t)((*hiddenFile)->hiddenCluster->bIndex);
         }
-        strncpy(fileIterator->filename, (*hiddenFile)->filename, MAX_FILENAME_LENGTH - 1);
+        strncpy(fileIterator->filename, (*hiddenFile)->filename, STEGANOFS_MAX_FILENAME_LENGTH - 1);
         fileIterator->real_filesize = (*hiddenFile)->real_filesize;
         fileIterator->timestamp = (*hiddenFile)->timestamp;
 
