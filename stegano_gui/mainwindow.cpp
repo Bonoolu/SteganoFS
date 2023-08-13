@@ -18,12 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
     m_lightmode_on = 0;
 
     // DARK STYLE
-    QFile file(":/assets/stylesheet/assets/stylesheet/Darkeum.qss");
+    QFile file(":/assets/stylesheet/Darkeum.qss");
     file.open(QFile::ReadOnly);
 
     m_darkstyle = QLatin1String(file.readAll());
 
-    QFile file2(":/assets/stylesheet/assets/stylesheet/Darkeum_light.qss");
+    QFile file2(":/assets/stylesheet/Darkeum_light.qss");
     file2.open(QFile::ReadOnly);
 
     m_lightstyle = QLatin1String(file2.readAll());
@@ -247,14 +247,14 @@ void MainWindow::on_darkModePushButton_clicked()
         qApp->setStyleSheet(m_lightstyle);
         m_lightmode_on = 1;
 
-        ui->newFolderPushButton->setIcon(QIcon(":/assets/img/light/assets/img/light/folder.png"));
-        ui->newFilePushButton->setIcon(QIcon(":/assets/img/light/assets/img/light/document.png"));
-        ui->deletePushButton->setIcon(QIcon(":/assets/img/light/assets/img/light/delete.png"));
-        ui->cutPushButton->setIcon(QIcon(":/assets/img/light/assets/img/light/scissors.png"));
-        ui->copyPushButton->setIcon(QIcon(":/assets/img/light/assets/img/light/copy.png"));
-        ui->pastePushButton->setIcon(QIcon(":/assets/img/light/assets/img/light/paste.png"));
-        ui->previewToolButton->setIcon(QIcon(":/assets/img/light/assets/img/light/preview.png"));
-        ui->darkModePushButton->setIcon(QIcon(":/assets/img/light/assets/img/light/night-mode.png"));
+        ui->newFolderPushButton->setIcon(QIcon(":/assets/img/light/folder.png"));
+        ui->newFilePushButton->setIcon(QIcon(":/assets/img/light/document.png"));
+        ui->deletePushButton->setIcon(QIcon(":/assets/img/light/delete.png"));
+        ui->cutPushButton->setIcon(QIcon(":/assets/img/light/scissors.png"));
+        ui->copyPushButton->setIcon(QIcon(":/assets/img/light/copy.png"));
+        ui->pastePushButton->setIcon(QIcon(":/assets/img/light/paste.png"));
+        ui->previewToolButton->setIcon(QIcon(":/assets/img/light/preview.png"));
+        ui->darkModePushButton->setIcon(QIcon(":/assets/img/light/night-mode.png"));
 
 
     } else {
@@ -262,14 +262,14 @@ void MainWindow::on_darkModePushButton_clicked()
         qApp->setStyleSheet(m_darkstyle);
         m_lightmode_on = 0;
 
-        ui->newFolderPushButton->setIcon(QIcon(":/assets/img/assets/img/folder.png"));
-        ui->newFilePushButton->setIcon(QIcon(":/assets/img/assets/img/document.png"));
-        ui->deletePushButton->setIcon(QIcon(":/assets/img/assets/img//delete(1).png"));
-        ui->cutPushButton->setIcon(QIcon(":/assets/img/assets/img/scissors(1).png"));
-        ui->copyPushButton->setIcon(QIcon(":/assets/img/assets/img/copy.png"));
-        ui->pastePushButton->setIcon(QIcon(":/assets/img/assets/img/paste.png"));
-        ui->previewToolButton->setIcon(QIcon(":/assets/img/assets/img/preview (2).png"));
-        ui->darkModePushButton->setIcon(QIcon(":/assets/img/assets/img/light-bulb.png"));
+        ui->newFolderPushButton->setIcon(QIcon(":/assets/img/folder.png"));
+        ui->newFilePushButton->setIcon(QIcon(":/assets/img/document.png"));
+        ui->deletePushButton->setIcon(QIcon(":/assets/img//delete(1).png"));
+        ui->cutPushButton->setIcon(QIcon(":/assets/img/scissors(1).png"));
+        ui->copyPushButton->setIcon(QIcon(":/assets/img/copy.png"));
+        ui->pastePushButton->setIcon(QIcon(":/assets/img/paste.png"));
+        ui->previewToolButton->setIcon(QIcon(":/assets/img/preview (2).png"));
+        ui->darkModePushButton->setIcon(QIcon(":/assets/img/light-bulb.png"));
     }
 
 }

@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     Example::example();
 
     //open qss file
-    QFile file(":/assets/stylesheet/assets/stylesheet/Darkeum.qss");
+    QFile file(":/assets/stylesheet/Darkeum.qss");
     file.open(QFile::ReadOnly);
 
     QString styleSheet { QLatin1String(file.readAll()) };

@@ -43,6 +43,7 @@ else()
     else()
         add_executable(steganoExplorer
             ${PROJECT_SOURCES}
+            res.qrc
         )
     endif()
 endif()

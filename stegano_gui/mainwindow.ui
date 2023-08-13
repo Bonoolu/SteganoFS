@@ -50,7 +50,7 @@
              </property>
              <property name="icon">
               <iconset resource="res.qrc">
-               <normaloff>:/assets/img/assets/img/folder.png</normaloff>:/assets/img/assets/img/folder.png</iconset>
+               <normaloff>:/assets/img/folder.png</normaloff>:/assets/img/folder.png</iconset>
              </property>
             </widget>
            </item>
@@ -73,7 +73,7 @@
              </property>
              <property name="icon">
               <iconset resource="res.qrc">
-               <normaloff>:/assets/img/assets/img/document.png</normaloff>:/assets/img/assets/img/document.png</iconset>
+               <normaloff>:/assets/img/document.png</normaloff>:/assets/img/document.png</iconset>
              </property>
             </widget>
            </item>
@@ -109,7 +109,7 @@
              </property>
              <property name="icon">
               <iconset resource="res.qrc">
-               <normaloff>:/assets/img/assets/img/delete(1).png</normaloff>:/assets/img/assets/img/delete(1).png</iconset>
+               <normaloff>:/assets/img/delete(1).png</normaloff>:/assets/img/delete(1).png</iconset>
              </property>
             </widget>
            </item>
@@ -138,7 +138,7 @@
              </property>
              <property name="icon">
               <iconset resource="res.qrc">
-               <normaloff>:/assets/img/assets/img/scissors(1).png</normaloff>:/assets/img/assets/img/scissors(1).png</iconset>
+               <normaloff>:/assets/img/scissors(1).png</normaloff>:/assets/img/scissors(1).png</iconset>
              </property>
             </widget>
            </item>
@@ -167,7 +167,7 @@
              </property>
              <property name="icon">
               <iconset resource="res.qrc">
-               <normaloff>:/assets/img/assets/img/copy.png</normaloff>:/assets/img/assets/img/copy.png</iconset>
+               <normaloff>:/assets/img/copy.png</normaloff>:/assets/img/copy.png</iconset>
              </property>
             </widget>
            </item>
@@ -196,7 +196,7 @@
              </property>
              <property name="icon">
               <iconset resource="res.qrc">
-               <normaloff>:/assets/img/assets/img/paste.png</normaloff>:/assets/img/assets/img/paste.png</iconset>
+               <normaloff>:/assets/img/paste.png</normaloff>:/assets/img/paste.png</iconset>
              </property>
             </widget>
            </item>
@@ -238,7 +238,7 @@
              </property>
              <property name="icon">
               <iconset resource="res.qrc">
-               <normaloff>:/assets/img/assets/img/preview (2).png</normaloff>:/assets/img/assets/img/preview (2).png</iconset>
+               <normaloff>:/assets/img/preview (2).png</normaloff>:/assets/img/preview (2).png</iconset>
              </property>
             </widget>
            </item>
@@ -252,7 +252,7 @@
              </property>
              <property name="icon">
               <iconset resource="res.qrc">
-               <normaloff>:/assets/img/assets/img/light-bulb.png</normaloff>:/assets/img/assets/img/light-bulb.png</iconset>
+               <normaloff>:/assets/img/light-bulb.png</normaloff>:/assets/img/light-bulb.png</iconset>
              </property>
             </widget>
            </item>
