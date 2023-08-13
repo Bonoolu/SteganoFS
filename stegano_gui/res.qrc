@@ -4,14 +4,9 @@
         <file>assets/stylesheet/Toolery.qss</file>
         <file>assets/stylesheet/Darkeum.qss</file>
         <file>assets/stylesheet/WordOffice.qss</file>
+        <file>assets/stylesheet/Darkeum_light.qss</file>
     </qresource>
     <qresource prefix="/assets/img">
-        <file>assets/img/files-and-folders.png</file>
-        <file>assets/img/delete.png</file>
-        <file>assets/img/new-document.png</file>
-        <file>assets/img/preview.png</file>
-        <file>assets/img/reorder.png</file>
-        <file>assets/img/scissors.png</file>
         <file>assets/img/delete(1).png</file>
         <file>assets/img/document.png</file>
         <file>assets/img/folder.png</file>
@@ -19,5 +14,18 @@
         <file>assets/img/scissors(1).png</file>
         <file>assets/img/copy.png</file>
         <file>assets/img/paste.png</file>
+        <file>assets/img/light-bulb.png</file>
+        <file>assets/img/night-mode.png</file>
+    </qresource>
+    <qresource prefix="/assets/img/light">
+        <file>assets/img/light/copy.png</file>
+        <file>assets/img/light/delete.png</file>
+        <file>assets/img/light/document.png</file>
+        <file>assets/img/light/folder.png</file>
+        <file>assets/img/light/light-bulb.png</file>
+        <file>assets/img/light/night-mode.png</file>
+        <file>assets/img/light/paste.png</file>
+        <file>assets/img/light/preview.png</file>
+        <file>assets/img/light/scissors.png</file>
     </qresource>
 </RCC>
