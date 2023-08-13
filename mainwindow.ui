@@ -42,6 +42,9 @@
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
+             <property name="toolTip">
+              <string>Create new folder</string>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -61,6 +64,9 @@
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="toolTip">
+              <string>Create new file</string>
              </property>
              <property name="text">
               <string/>
@@ -94,6 +100,9 @@
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="toolTip">
+              <string>Delete Selection</string>
              </property>
              <property name="text">
               <string/>
@@ -145,7 +154,7 @@
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="toolTip">
-              <string>Cut selection</string>
+              <string>Copy</string>
              </property>
              <property name="whatsThis">
               <string>cut selected files</string>
@@ -174,7 +183,7 @@
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="toolTip">
-              <string>Cut selection</string>
+              <string>Paste</string>
              </property>
              <property name="whatsThis">
               <string>cut selected files</string>
@@ -230,6 +239,20 @@
              <property name="icon">
               <iconset resource="res.qrc">
                <normaloff>:/assets/img/assets/img/preview (2).png</normaloff>:/assets/img/assets/img/preview (2).png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="darkModePushButton">
+             <property name="toolTip">
+              <string>Light Mode</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="res.qrc">
+               <normaloff>:/assets/img/assets/img/light-bulb.png</normaloff>:/assets/img/assets/img/light-bulb.png</iconset>
              </property>
             </widget>
            </item>
@@ -324,7 +347,11 @@
          <widget class="QListWidget" name="listWidget"/>
         </item>
         <item>
-         <widget class="QListView" name="listView"/>
+         <widget class="QLabel" name="previewLabel">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
