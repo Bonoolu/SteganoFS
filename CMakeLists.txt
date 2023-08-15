@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
-project(steganofs_main)
+project(adapter_dummy)
 
-add_subdirectory(steganofs)
-add_subdirectory(stegano_gui)
-add_subdirectory(tests)
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(adapter_dummy main.cpp SteganoFsAdapter.cpp SteganoFsAdapter.h)
