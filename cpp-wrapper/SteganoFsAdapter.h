@@ -19,10 +19,10 @@ private:
 public:
     explicit SteganoFsAdapter(std::string  steganoImageFolder);
     ~SteganoFsAdapter();
-    bool formatNewRamdisk(size_t diskSize);
-    bool loadRamdisk();
+    bool createNewFilesystem(size_t diskSize);
+    bool loadFilesytemFromSteganoProvider();
     bool mount(const std::string& mntPoint);
-    bool unloadRamdisk();
+    bool writeFilesystemToSteganoProvider();
     bool umount();
     float getFragmentationInPercent();
     std::vector<size_t> getFilesystemVector();

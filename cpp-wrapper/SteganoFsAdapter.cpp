@@ -5,12 +5,12 @@ m_steganoImageFolder(std::move(steganoImageFolder)){
 
 }
 
-bool SteganoFsAdapter::formatNewRamdisk(size_t diskSize) {
+bool SteganoFsAdapter::createNewFilesystem(size_t diskSize) {
     m_hiddenFat = steganofs_create_new_ramdisk(diskSize);
     return m_hiddenFat != nullptr;
 }
 
-bool SteganoFsAdapter::loadRamdisk() {
+bool SteganoFsAdapter::loadFilesytemFromSteganoProvider() {
     m_hiddenFat = steganofs_load_ramdisk(m_steganoImageFolder.c_str());
     return m_hiddenFat != nullptr;
 }
@@ -22,7 +22,7 @@ bool SteganoFsAdapter::mount(const std::string &mntPoint) {
     return m_isMounted;
 }
 
-bool SteganoFsAdapter::unloadRamdisk() {
+bool SteganoFsAdapter::writeFilesystemToSteganoProvider() {
     return steganofs_unload_ramdisk(m_hiddenFat, m_steganoImageFolder.c_str());
 }
 
@@ -64,6 +64,6 @@ SteganoFsAdapter::~SteganoFsAdapter() {
     if (m_hiddenFat != nullptr && m_isMounted) {
         SteganoFsAdapter::umount();
     } else if (m_hiddenFat != nullptr) {
-        SteganoFsAdapter::unloadRamdisk();
+        SteganoFsAdapter::writeFilesystemToSteganoProvider();
     }
 }

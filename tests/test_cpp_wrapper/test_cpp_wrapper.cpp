@@ -4,7 +4,7 @@
 int main(int argc, char **argv) {
     SteganoFsAdapter steganoFsAdapter("/tmp/filesystem.bin");
     //steganoFsAdapter.loadRamdisk();
-    bool status = steganoFsAdapter.formatNewRamdisk(5120000);
+    bool status = steganoFsAdapter.createNewFilesystem(5120000);
     if (!status) {
         std::cout << "Creating new Ramdisk failed!" << std::endl;
     }
@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
     if (!status) {
         std::cout << "Unmounting to /home/admin/test_mnt failed!" << std::endl;
     }
-    status = steganoFsAdapter.unloadRamdisk();
+    status = steganoFsAdapter.writeFilesystemToSteganoProvider();
     if (!status) {
         std::cout << "Unloading Ramdisk failed!" << std::endl;
     }
