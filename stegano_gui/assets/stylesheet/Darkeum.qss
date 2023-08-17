@@ -143,6 +143,7 @@ QToolTip
 	background-color: #26264f;
 	color: #ffffff;
         border-color: #1a0539;
+        border-radius: 3px;
 
 }
 
@@ -150,17 +151,18 @@ QToolTip
 /*-----QPushButton-----*/
 QPushButton
 {
-	background-color: #607cff;
+        background-color: transparent;
 	color: #ffffff;
         border: none;
 	padding: 5px;
+        border-radius: 5px;
 
 }
 
 
 QPushButton::disabled
 {
-	background-color: #404040;
+        background-color: rgba(0,0,0,0.3);
 	color: #656565;
 
 
@@ -169,7 +171,7 @@ QPushButton::disabled
 
 QPushButton::hover
 {
-	background-color: #8399ff;
+        background-color: rgba(255,255,255,0.3);
 	color: #ffffff;
 	padding: 5px;
 
@@ -178,7 +180,7 @@ QPushButton::hover
 
 QPushButton::pressed
 {
-	background-color: #4969ff;
+        background-color: rgba(255,255,255,0.6);
 	color: #ffffff;
 	padding: 5px;
 
@@ -188,45 +190,32 @@ QPushButton::pressed
 /*-----QToolButton-----*/
 QToolButton
 {
-	background-color: #607cff;
+        background-color: transparent;
 	color: #ffffff;
-	border-width: 1px;
-	border-radius: 3px;
-        border-color: #1a0539;
-	padding: 3px;
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
 
 }
 
 
 QToolButton::disabled
 {
-	background-color: #404040;
-	color: #656565;
-        border-color: #1a0539;
+        background-color: rgba(0,0,0,0.3);
 
 }
 
 
 QToolButton::hover
 {
-	background-color: #8399ff;
-	color: #ffffff;
-	border-width: 1px;
-	border-radius: 3px;
-        border-color: #1a0539;
-	padding: 3px;
+        background-color: rgba(255,255,255,0.3);
 
 }
 
 
 QToolButton::pressed
 {
-	background-color: #4969ff;
-	color: #ffffff;
-	border-width: 1px;
-	border-radius: 3px;
-        border-color: #1a0539;
-	padding: 3px;
+        background-color: rgba(255,255,255,0.3);
 
 }
 
@@ -235,11 +224,10 @@ QToolButton::pressed
 QComboBox
 {
     background-color: #607cff;
-    border: 1px solid;
-    border-radius: 3px;
-    padding-left: 6px;
+    border-radius: 5px;
+    padding: 5px;
     color: #ffffff;
-    height: 20px;
+
 
 }
 
@@ -295,7 +283,7 @@ QComboBox::drop-down
 
 QComboBox::down-arrow
 {
-    image: url(://arrow-down.png);
+    image: url(:/assets/img/assets/img/arrow-down.png);
     width: 8px;
     height: 8px;
 }

@@ -365,15 +365,26 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
     <property name="title">
      <string>Datei</string>
     </property>
+    <widget class="QMenu" name="menuRamdisk">
+     <property name="title">
+      <string>Ramdisk...</string>
+     </property>
+     <addaction name="actionCreate_new"/>
+     <addaction name="actionLoad"/>
+     <addaction name="actionUnload"/>
+    </widget>
     <addaction name="actionNeue_Datei"/>
     <addaction name="actionNeuer_Ordner"/>
+    <addaction name="separator"/>
+    <addaction name="menuRamdisk"/>
+    <addaction name="actionLoad_Ramdisk"/>
    </widget>
    <widget class="QMenu" name="menuAnsicht">
     <property name="title">
@@ -403,7 +414,27 @@
   </action>
   <action name="actionNeuer_Ordner">
    <property name="text">
-    <string>Neuer Ordner...</string>
+    <string>New Folder...</string>
+   </property>
+  </action>
+  <action name="actionLoad_Ramdisk">
+   <property name="text">
+    <string>Defragment</string>
+   </property>
+  </action>
+  <action name="actionCreate_new">
+   <property name="text">
+    <string>Create new</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Load</string>
+   </property>
+  </action>
+  <action name="actionUnload">
+   <property name="text">
+    <string>Unload</string>
    </property>
   </action>
  </widget>

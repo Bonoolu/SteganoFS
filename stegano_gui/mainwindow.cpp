@@ -6,6 +6,10 @@
 #include <QDebug>
 #include <QIcon>
 #include <QPixmap>
+#include <QDialog>
+#include "createramdiskdialog.h"
+
+SteganoFsAdapter steganoFsAdapter("/home/minaboo/Bilder/example/");
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent)
@@ -14,7 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("Stegano File Explorer");
 
+
+
+
     m_preview_on = 0;
+
     m_lightmode_on = 0;
 
     // DARK STYLE
@@ -94,6 +102,9 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::updateListWidget(QString sPath){
+
+    ui->listWidget->clear();
+
     ui->listWidget->setViewMode(QListWidget::IconMode);
     ui->listWidget->setIconSize(QSize(200,150));
     ui->listWidget->setResizeMode(QListWidget::Adjust);
@@ -273,3 +284,31 @@ void MainWindow::on_darkModePushButton_clicked()
     }
 
 }
+
+
+/*
+    bool formatNewRamdisk(size_t diskSize);
+    bool loadRamdisk();
+    bool mount(const std::string& mntPoint);
+    bool unloadRamdisk();
+    bool umount();
+    float getFragmentationInPercent();
+    std::vector<size_t> getFilesystemVector();
+    bool checkFilesystemIntegrity();
+    bool defragmentateFilesystem();
+    struct statfs getFilesystemInfo();
+
+*/
+
+
+void MainWindow::on_actionCreate_new_triggered()
+{
+    CreateRamdiskDialog *dlg = new CreateRamdiskDialog;
+    dlg->exec();
+    qDebug() << "New Ramdisk created: " <<  dlg->getValue();
+
+    delete dlg;
+
+
+}
+

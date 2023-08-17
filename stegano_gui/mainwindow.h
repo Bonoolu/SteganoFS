@@ -8,6 +8,9 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QListWidget>
+#include "../cpp-wrapper/SteganoFsAdapter.h"
+#include <QDebug>
+#include "createramdiskdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,6 +23,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 
 private slots:
     void on_treeView_clicked(const QModelIndex &index);
@@ -42,8 +46,13 @@ private slots:
 
     void on_darkModePushButton_clicked();
 
+    void on_actionCreate_new_triggered();
+
 private:
     Ui::MainWindow *ui;
+    //CreateRamdiskDialog *m_CRDdlg;
+
+
 
     QString m_darkstyle;
     QString m_lightstyle;

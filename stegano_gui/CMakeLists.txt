@@ -21,12 +21,15 @@ set(PROJECT_SOURCES
         example.h
         ../cpp-wrapper/SteganoFsAdapter.cpp
         ../cpp-wrapper/SteganoFsAdapter.h
+        res.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(steganoExplorer
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        mainwindow.ui
+        createramdiskdialog.ui
         res.qrc
     )
 # Define target properties for Android with Qt 6 as:
@@ -43,6 +46,8 @@ else()
     else()
         add_executable(steganoExplorer
             ${PROJECT_SOURCES}
+            createramdiskdialog.h createramdiskdialog.cpp createramdiskdialog.ui
+
         )
     endif()
 endif()
