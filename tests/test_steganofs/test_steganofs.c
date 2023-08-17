@@ -639,7 +639,7 @@ bool testWriteRead(int argc, char **argv) {
 }
 
 bool testRamdiskloader() {
-    HiddenFat *hiddenFat = createHiddenFat(STEGANOFS_BLOCK_SIZE * 4, STEGANOFS_BLOCK_SIZE);
+    HiddenFat *hiddenFat = createHiddenFat(10 * 4, 4);
     const char *hiddenFilename = "test.txt";
     long timestamp = time(NULL);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
@@ -650,11 +650,43 @@ bool testRamdiskloader() {
     const char *testBuffer = "My testbuffer!";
     int bytesWritten = stgfs_write("/test.txt", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
     if (bytesWritten < 0) {
-        printf("testRamdiskloader test failed: Errorcode: %d\n", bytesWritten);
+        printf("testRamdiskloader test failed: createHiddenFile failed. Errorcode: %d\n", bytesWritten);
         return false;
     }
-    steganofs_unload_ramdisk(hiddenFat, "/tmp/filesystem.bin");
-    return true;
+
+    hiddenFilename = "test2.txt";
+    hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
+    if (hiddenFile == NULL) {
+        printf("testRamdiskloader test failed: createHiddenFile failed and returned NULL.\n");
+        return false;
+    }
+    testBuffer = "My testbuffer2!";
+    bytesWritten = stgfs_write("/test2.txt", testBuffer, 16, 0, (struct fuse_file_info *) hiddenFat);
+    if (bytesWritten < 0) {
+        printf("testRamdiskloader test failed: createHiddenFile failed. Errorcode: %d\n", bytesWritten);
+        return false;
+    }
+    showHiddenFat(hiddenFat, NULL);
+    bool ret = steganofs_unload_ramdisk(hiddenFat, "/tmp/filesystem.bin");
+    if (bytesWritten < 0) {
+        printf("testRamdiskloader test failed: Unloading ramdisk failed!");
+        return false;
+    }
+    freeHiddenFat(hiddenFat);
+    hiddenFat = steganofs_load_ramdisk("/tmp/filesystem.bin");
+    ret = steganofs_unload_ramdisk(hiddenFat, "/tmp/filesystem2.bin");
+    if (bytesWritten < 0) {
+        printf("testRamdiskloader test failed: Loading ramdisk failed!");
+        return false;
+    }
+    showHiddenFat(hiddenFat, NULL);
+    ret = checkIntegrity(hiddenFat);
+    if (bytesWritten < 0) {
+        printf("testRamdiskloader test failed: Integrity check failed!!");
+        return false;
+    }
+    freeHiddenFat(hiddenFat);
+    return ret;
 }
 
 void runTests(int argc, char **argv) {

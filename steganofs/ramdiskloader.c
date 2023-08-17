@@ -28,20 +28,21 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
     packedFat->filesOffset = offsetPackedFiles;
     packedFat->diskOffset = offsetBlocks;
 
-    PackedFile *fileIterator = packedFiles;
+    PackedFile *packedFileIterator = packedFiles;
     for (HiddenFile **hiddenFile = hiddenFat->files; hiddenFile < hiddenFat->files + STEGANOFS_AMOUNT_ROOT_FILES; hiddenFile++) {
         if (*hiddenFile == NULL) {
+            packedFileIterator++;
             continue;
         }
-        fileIterator->filesize = (*hiddenFile)->filesize;
+        packedFileIterator->filesize = (*hiddenFile)->filesize;
         if ((*hiddenFile)->hiddenCluster == NULL) {
-            fileIterator->hiddenClusterBIndex = - 1;
+            packedFileIterator->hiddenClusterBIndex = - 1;
         }else {
-            fileIterator->hiddenClusterBIndex = (int64_t)((*hiddenFile)->hiddenCluster->bIndex);
+            packedFileIterator->hiddenClusterBIndex = (int64_t)((*hiddenFile)->hiddenCluster->bIndex);
         }
-        strncpy(fileIterator->filename, (*hiddenFile)->filename, STEGANOFS_MAX_FILENAME_LENGTH - 1);
-        fileIterator->real_filesize = (*hiddenFile)->real_filesize;
-        fileIterator->timestamp = (*hiddenFile)->timestamp;
+        strncpy(packedFileIterator->filename, (*hiddenFile)->filename, STEGANOFS_MAX_FILENAME_LENGTH - 1);
+        packedFileIterator->real_filesize = (*hiddenFile)->real_filesize;
+        packedFileIterator->timestamp = (*hiddenFile)->timestamp;
 
 
         HiddenCluster *hiddenCluster = (*hiddenFile)->hiddenCluster;
@@ -50,7 +51,7 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
             packedClusters[bIndex].bIndex = hiddenCluster->bIndex;
             packedClusters[bIndex].clusterIndex = hiddenCluster->clusterIndex;
             packedClusters[bIndex].state = hiddenCluster->state;
-            packedClusters[bIndex].fileOffset = fileIterator - packedFiles;
+            packedClusters[bIndex].fileOffset = packedFileIterator - packedFiles;
             if (hiddenCluster->prev == NULL) {
                 packedClusters[bIndex].prevClusterBIndex = -1;
             }else {
@@ -63,6 +64,7 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
             }
             hiddenCluster = hiddenCluster->next;
         }
+        packedFileIterator++;
     }
     memcpy(disk, hiddenFat->disk, hiddenFat->amountBlocks * hiddenFat->blockSize);
     struct SerializedFilesystem serializedFilesystem = {.size = sizeFilesystem, .buf = bufferFilesystem};
@@ -71,53 +73,56 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
 
 HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem) {
     PackedFat *packedFat = (PackedFat*) serializedFilesystem.buf;
-    PackedCluster *packedClusters = (PackedCluster*) serializedFilesystem.buf + packedFat->clustersOffset;
-    PackedFile *packedFiles = (PackedFile*) serializedFilesystem.buf + packedFat->filesOffset;
+    PackedCluster *packedClusters = (PackedCluster*) (serializedFilesystem.buf + packedFat->clustersOffset);
+    PackedFile *packedFiles = (PackedFile*) (serializedFilesystem.buf + packedFat->filesOffset);
     unsigned char *disk = serializedFilesystem.buf + packedFat->diskOffset;
 
     HiddenFat *hiddenFat = createHiddenFat(packedFat->blockSize * packedFat->amountBlocks, packedFat->blockSize);
 
-    HiddenFile **fileIterator = hiddenFat->files;
+    HiddenFile **hiddenFileIterator = hiddenFat->files;
     struct PackedFile emptyFile;
     memset(&emptyFile, 0, sizeof(PackedFile));
     for (PackedFile *packedFile = packedFiles; packedFile < packedFiles + STEGANOFS_AMOUNT_ROOT_FILES; packedFile++) {
         if (memcmp(packedFile, &emptyFile, sizeof(PackedFile)) == 0) {
+            hiddenFileIterator++;
             continue;
         }
-        *fileIterator = malloc(sizeof(HiddenFile));
-        (*fileIterator)->filesize = (packedFile)->filesize;
+        *hiddenFileIterator = malloc(sizeof(HiddenFile));
+        memset(*hiddenFileIterator, 0, sizeof(HiddenFile));
+        (*hiddenFileIterator)->filesize = (packedFile)->filesize;
         if (packedFile->hiddenClusterBIndex == -1) {
-            (*fileIterator)->hiddenCluster = NULL;
+            (*hiddenFileIterator)->hiddenCluster = NULL;
         }else {
-            (*fileIterator)->hiddenCluster = hiddenFat->clusters + packedFile->hiddenClusterBIndex;
+            (*hiddenFileIterator)->hiddenCluster = hiddenFat->clusters + packedFile->hiddenClusterBIndex;
         }
-        strncpy(packedFile->filename, (*fileIterator)->filename,STEGANOFS_MAX_FILENAME_LENGTH - 1);
-        (*fileIterator)->real_filesize = packedFile->real_filesize;
-        (*fileIterator)->timestamp = packedFile->timestamp;
+        strncpy((*hiddenFileIterator)->filename, packedFile->filename, STEGANOFS_MAX_FILENAME_LENGTH - 1);
+        (*hiddenFileIterator)->real_filesize = packedFile->real_filesize;
+        (*hiddenFileIterator)->timestamp = packedFile->timestamp;
 
-        HiddenCluster *hiddenCluster = (*fileIterator)->hiddenCluster;
-        // TODO: continue from here
-        while(hiddenCluster) {
-            size_t bIndex = hiddenCluster->bIndex;
-            packedClusters[bIndex].bIndex = hiddenCluster->bIndex;
-            packedClusters[bIndex].clusterIndex = hiddenCluster->clusterIndex;
-            packedClusters[bIndex].state = hiddenCluster->state;
-            packedClusters[bIndex].fileOffset = fileIterator - packedFiles;
-            if (hiddenCluster->prev == NULL) {
-                packedClusters[bIndex].prevClusterBIndex = -1;
+        HiddenCluster *hiddenCluster = (*hiddenFileIterator)->hiddenCluster;
+        size_t bIndex = 0;
+        while(hiddenCluster != NULL && bIndex != -1) {
+            bIndex = hiddenCluster->bIndex;
+            hiddenCluster->bIndex = packedClusters[bIndex].bIndex;
+            hiddenCluster->clusterIndex = packedClusters[bIndex].clusterIndex;
+            hiddenCluster->state = packedClusters[bIndex].state;
+            hiddenCluster->file = *hiddenFileIterator;
+            if (packedClusters[bIndex].prevClusterBIndex == -1) {
+                hiddenCluster->prev = NULL;
             }else {
-                packedClusters[bIndex].prevClusterBIndex = (int64_t) hiddenCluster->prev->bIndex;
+               hiddenCluster->prev = hiddenFat->clusters + packedClusters[bIndex].prevClusterBIndex;
             }
-            if (hiddenCluster->next == NULL) {
-                packedClusters[bIndex].nextClusterBIndex = -1;
+            if (packedClusters[bIndex].nextClusterBIndex == -1) {
+                hiddenCluster->next = NULL;
             }else {
-                packedClusters[bIndex].nextClusterBIndex = (int64_t) hiddenCluster->next->bIndex;
+                hiddenCluster->next = hiddenFat->clusters + packedClusters[bIndex].nextClusterBIndex;
             }
             hiddenCluster = hiddenCluster->next;
+            bIndex = packedClusters[bIndex].nextClusterBIndex;
         }
+        hiddenFileIterator++;
     }
-    memcpy(disk, hiddenFat->disk, hiddenFat->amountBlocks * hiddenFat->blockSize);
+    memcpy(hiddenFat->disk, disk, hiddenFat->amountBlocks * hiddenFat->blockSize);
 
-
-    return NULL;
+    return hiddenFat;
 }
