@@ -3,3 +3,4 @@ project(steganofs_main)
 
 add_subdirectory(test_cpp_wrapper)
 add_subdirectory(test_steganofs)
+add_subdirectory(test_bmp_provider)

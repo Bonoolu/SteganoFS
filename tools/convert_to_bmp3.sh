@@ -1,5 +1,6 @@
 #!/bin/bash
 # you need to install ffmpeg for this to work
+
 convert "$1" -define bmp:format=bmp3 \
 -define bmp:colormap=0 \
 -strip -alpha off \

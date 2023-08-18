@@ -51,7 +51,6 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
             packedClusters[bIndex].bIndex = hiddenCluster->bIndex;
             packedClusters[bIndex].clusterIndex = hiddenCluster->clusterIndex;
             packedClusters[bIndex].state = hiddenCluster->state;
-            packedClusters[bIndex].fileOffset = packedFileIterator - packedFiles;
             if (hiddenCluster->prev == NULL) {
                 packedClusters[bIndex].prevClusterBIndex = -1;
             }else {
@@ -82,7 +81,7 @@ HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem) {
     HiddenFile **hiddenFileIterator = hiddenFat->files;
     struct PackedFile emptyFile;
     memset(&emptyFile, 0, sizeof(PackedFile));
-    for (PackedFile *packedFile = packedFiles; packedFile < packedFiles + STEGANOFS_AMOUNT_ROOT_FILES; packedFile++) {
+    for (PackedFile *packedFile = packedFiles; packedFile < packedFiles + packedFat->amount_root_files; packedFile++) {
         if (memcmp(packedFile, &emptyFile, sizeof(PackedFile)) == 0) {
             hiddenFileIterator++;
             continue;

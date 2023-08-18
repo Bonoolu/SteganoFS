@@ -29,7 +29,6 @@ struct __attribute__((__packed__)) PackedCluster{
     u_int8_t state;
     int64_t prevClusterBIndex;
     int64_t nextClusterBIndex;
-    u_int32_t fileOffset;
 };
 
 struct __attribute__((__packed__)) PackedFile {
@@ -48,8 +47,6 @@ struct SerializedFilesystem {
 struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat);
 
 HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem);
-
-//const unsigned char MAGICBYTES[4] = {'S','T','F','S'};
 
 #endif //STEGANOFS_RAMDISKLOADER_H
 #endif // __cplusplus
