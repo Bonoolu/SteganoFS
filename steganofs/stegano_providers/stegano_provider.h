@@ -6,6 +6,7 @@
 #include "stegano_file.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <dirent.h>
 #include <ctype.h>
 #include <unistd.h>
 

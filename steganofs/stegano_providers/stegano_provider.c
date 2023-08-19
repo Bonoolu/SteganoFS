@@ -1,7 +1,7 @@
 #include "stegano_provider.h"
 
 struct SteganoProvider providers[] = {
-        {.extension = "BIN", .providerRead = &read_raw, .providerWrite = &write_raw},
+        {.extension = "STEGANOFS", .providerRead = &read_raw, .providerWrite = &write_raw},
         {.extension = "BMP", .providerRead = &read_bmp, .providerWrite = &write_bmp}
 };
 
@@ -14,7 +14,9 @@ struct SerializedFilesystem stegano_provider_read(const char *path) {
     struct SerializedFilesystem serializedFilesystem = {.buf = NULL, .size = 0};
 
     if(filepath_stat.st_mode & S_IFDIR) {
-        // if directory, iterate over it and count files with correct extension
+        DIR *directory;
+        struct dirent *diren;
+        directory = opendir(path);
         size_t amount_stegano_files;
         // create array which holds all valid SteganoFiles
         // iterate over array and fill each payloads by calling the respective providers
@@ -22,9 +24,6 @@ struct SerializedFilesystem stegano_provider_read(const char *path) {
         // return Serialized Filesystem
     }
 
-    if (strlen(path) < 3) {
-        return serializedFilesystem;
-    }
     const char *dot = strrchr(path, '.');
     if (dot == NULL) {
         return serializedFilesystem;
@@ -68,9 +67,6 @@ bool stegano_provider_write(struct SerializedFilesystem serializedFilesystem, co
         // return Serialized Filesystem
     }
 
-    if (strlen(path) < 3) {
-        return false;
-    }
     const char *dot = strrchr(path, '.');
     if (dot == NULL) {
         return false;

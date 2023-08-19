@@ -667,18 +667,18 @@ bool testRamdiskloader() {
         return false;
     }
     showHiddenFat(hiddenFat, NULL);
-    bool ret = steganofs_unload_ramdisk(hiddenFat, "/tmp/filesystem.bin");
+    bool ret = steganofs_unload_ramdisk(hiddenFat, "/tmp/filesystem.steganofs");
     if (!ret) {
         printf("testRamdiskloader test failed: Unloading ramdisk failed!\n");
         return false;
     }
     freeHiddenFat(hiddenFat);
-    hiddenFat = steganofs_load_ramdisk("/tmp/filesystem.bin");
+    hiddenFat = steganofs_load_ramdisk("/tmp/filesystem.steganofs");
     if (hiddenFat == NULL) {
         printf("testRamdiskloader test failed: Loading ramdisk failed!\n");
         return false;
     }
-    ret = steganofs_unload_ramdisk(hiddenFat, "/tmp/filesystem2.bin");
+    ret = steganofs_unload_ramdisk(hiddenFat, "/tmp/filesystem2.steganofs");
     if (!ret) {
         printf("testRamdiskloader test failed: Unloading ramdisk failed!\n");
         return false;
