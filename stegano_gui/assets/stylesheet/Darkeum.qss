@@ -143,6 +143,7 @@ QToolTip
 	background-color: #26264f;
 	color: #ffffff;
         border-color: #1a0539;
+        border-radius: 5px;
 
 }
 
@@ -150,17 +151,18 @@ QToolTip
 /*-----QPushButton-----*/
 QPushButton
 {
-	background-color: #607cff;
+        background-color: transparent;
 	color: #ffffff;
         border: none;
 	padding: 5px;
+        border-radius: 5px;
 
 }
 
 
 QPushButton::disabled
 {
-	background-color: #404040;
+        background-color: rgba(0,0,0,0.3);
 	color: #656565;
 
 
@@ -169,7 +171,7 @@ QPushButton::disabled
 
 QPushButton::hover
 {
-	background-color: #8399ff;
+        background-color: rgba(255,255,255,0.3);
 	color: #ffffff;
 	padding: 5px;
 
@@ -178,7 +180,7 @@ QPushButton::hover
 
 QPushButton::pressed
 {
-	background-color: #4969ff;
+        background-color: rgba(255,255,255,0.6);
 	color: #ffffff;
 	padding: 5px;
 
@@ -188,45 +190,32 @@ QPushButton::pressed
 /*-----QToolButton-----*/
 QToolButton
 {
-	background-color: #607cff;
+        background-color: transparent;
 	color: #ffffff;
-	border-width: 1px;
-	border-radius: 3px;
-        border-color: #1a0539;
-	padding: 3px;
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
 
 }
 
 
 QToolButton::disabled
 {
-	background-color: #404040;
-	color: #656565;
-        border-color: #1a0539;
+        background-color: rgba(0,0,0,0.3);
 
 }
 
 
 QToolButton::hover
 {
-	background-color: #8399ff;
-	color: #ffffff;
-	border-width: 1px;
-	border-radius: 3px;
-        border-color: #1a0539;
-	padding: 3px;
+        background-color: rgba(255,255,255,0.3);
 
 }
 
 
 QToolButton::pressed
 {
-	background-color: #4969ff;
-	color: #ffffff;
-	border-width: 1px;
-	border-radius: 3px;
-        border-color: #1a0539;
-	padding: 3px;
+        background-color: rgba(255,255,255,0.3);
 
 }
 
@@ -235,11 +224,10 @@ QToolButton::pressed
 QComboBox
 {
     background-color: #607cff;
-    border: 1px solid;
-    border-radius: 3px;
-    padding-left: 6px;
+    border-radius: 5px;
+    padding: 5px;
     color: #ffffff;
-    height: 20px;
+
 
 }
 
@@ -295,7 +283,7 @@ QComboBox::drop-down
 
 QComboBox::down-arrow
 {
-    image: url(://arrow-down.png);
+    image: url(:/assets/img/assets/img/arrow-down.png);
     width: 8px;
     height: 8px;
 }
@@ -394,7 +382,7 @@ QSpinBox::down-arrow,
 QDoubleSpinBox::down-arrow,
 QDateTimeEdit::down-arrow
 {
-    image: url(://arrow-down.png);
+    image: url(:/assets/img/assets/img/arrow-down.png);
     width: 7px;
 
 }
@@ -404,7 +392,7 @@ QSpinBox::up-arrow,
 QDoubleSpinBox::up-arrow,
 QDateTimeEdit::up-arrow
 {
-    image: url(://arrow-up.png);
+    image: url(:/assets/img/assets/img/arrow-up.png);
     width: 7px;
 
 }
@@ -416,7 +404,7 @@ QLineEdit
 	background-color: #525251;
 	color: #ffffff;
 	border-width: 1px;
-	border-radius: 3px;
+        border-radius:13px;
         border-color: #1a0539;
 	padding: 2px;
 
@@ -428,7 +416,6 @@ QLineEdit::disabled
 	background-color: #404040;
 	color: #656565;
 	border-width: 1px;
-	border-radius: 3px;
         border-color: #1a0539;
 	padding: 2px;
 
@@ -440,6 +427,7 @@ QTextEdit
 {
 	background-color: #ffffff;
 	color: #010201;
+        border-radius:13px;
         border-color: #1a0539;
 
 }
@@ -458,18 +446,23 @@ QTextEdit::disabled
 QGroupBox 
 {
     border: 1px solid #607cff;
-    background-color: #607cff;
+    background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9);
     margin-top: 22px;
+
+    border-radius: 10px;
 
 }
 
 
 QGroupBox::title  
 {
-    background-color: #607cff;
-    color: #ffffff;
+    background-color: transparent;
+    color: #607cff;
     subcontrol-origin: margin;
-    subcontrol-position: top left;
+    subcontrol-position: top center;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
     padding: 5px;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
@@ -631,6 +624,7 @@ QTableView::item:selected:disabled
 
 }
 
+
 /*-----QListWidget-----*/
 /*QListWidget {
         background-color: #242526;
@@ -689,7 +683,7 @@ QHeaderView::section:checked:disabled
 QHeaderView::section::vertical::first,
 QHeaderView::section::vertical::only-one
 {
-    border-top: 1px solid #353635;
+    border-top: 1px solid transparent;
 
 }
 
@@ -712,6 +706,7 @@ QHeaderView::section::horizontal::only-one
 QHeaderView::section::horizontal
 {
     border-left: 1px solid #353635;
+    background-color: red;
 
 }
 

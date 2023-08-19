@@ -6,6 +6,11 @@
 #include <QDebug>
 #include <QIcon>
 #include <QPixmap>
+#include <QDialog>
+#include <iostream>
+#include "createramdiskdialog.h"
+
+SteganoFsAdapter steganoFsAdapter("/home/minaboo/Bilder/example/");
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent)
@@ -14,8 +19,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("Stegano File Explorer");
 
+    m_CRDdlg = new CreateRamdiskDialog;
+
+
     m_preview_on = 0;
+
     m_lightmode_on = 0;
+
+    ui->statusbar->show();
 
     // DARK STYLE
     QFile file(":/assets/stylesheet/Darkeum.qss");
@@ -53,17 +64,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    //QHeaderView *header =
-    //ui->treeView->setHeader()
-
-    //ui->listWidget->hide();
-    /*ui->listWidget->setSortingEnabled(true);
-
-    // TESTING LISTWIDGET
-    for (int i = 0; i < 10; i++){
-        ui->listWidget->addItem("File " + QString::number(i));
-    }*/
-
     ui->listWidget->hide();
     ui->listWidget->setSortingEnabled(true);
 
@@ -76,15 +76,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->listWidget->setResizeMode(QListWidget::Adjust);
 
 
-
+    // CONNECT SLOTS & SIGNALS
 
     connect(ui->searchLineEdit, &QLineEdit::textChanged, this, &MainWindow::handleSearchTextChanged);
 
     connect(ui->refreshButton, &QPushButton::clicked, this, &MainWindow::refreshView);
 
-    // doesn't work
-    //connect(ui->pathLineEdit, &QLineEdit::editingFinished, this, &MainWindow::on_pathLineEdit_editingFinished);
-    //qDebug() << m_filemodel.head;
+    // connect(m_CRDdlg, &CreateRamdiskDialog::accepted, this, &MainWindow::createNewRamdisk);
 
 }
 
@@ -93,7 +91,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::updateListWidget(QString sPath){
+
+    ui->listWidget->clear();
+
     ui->listWidget->setViewMode(QListWidget::IconMode);
     ui->listWidget->setIconSize(QSize(200,150));
     ui->listWidget->setResizeMode(QListWidget::Adjust);
@@ -139,17 +141,6 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
     ui->pathLineEdit->setText(sPath);
 
     updateListWidget(sPath);
-
-
-//    for (int i = 1; i <= 6 ; i++) {
-//        QString path ="D:\\Mina\\Bilder\\SFS_example\\" + QString::number(i) + ".jpeg";
-
-//        QListWidgetItem *item = new QListWidgetItem(QIcon(path), QString(QString::number(i) + ".jpeg"));
-
-//        ui->listWidget->addItem(item);
-//    }
-
-
 
 }
 
@@ -206,8 +197,9 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
     QString fullPath = m_currentDir + "/" + current->text();
     qDebug() << "Test currentItemChanged : " << fullPath;
     QImage img = QImage(fullPath);
-    //qiimg = img.scaled(200,150,Qt::KeepAspectRatio);
+    //img = img.scaled(500,250,Qt::KeepAspectRatio);
     QPixmap pixmap = QPixmap::fromImage(img, Qt::AutoColor);
+    ui->previewLabel->setMaximumWidth(500);
     ui->previewLabel->setPixmap(pixmap);
     ui->previewLabel->setScaledContents(true);
     //ui->previewLabel->setText("PREVIEW");
@@ -223,10 +215,14 @@ void MainWindow::on_previewToolButton_clicked()
 {
     if (m_preview_on == 0){
 
+        ui->centralwidget->setBaseSize(QSize(ui->centralwidget->width() + 500, ui->centralwidget->height()));
+
         ui->previewLabel->show();
         m_preview_on = 1;
 
     } else {
+
+        ui->centralwidget->setBaseSize(QSize(ui->centralwidget->width() - 500, ui->centralwidget->height()));
 
         ui->previewLabel->hide();
         m_preview_on = 0;
@@ -246,6 +242,7 @@ void MainWindow::on_darkModePushButton_clicked()
     if (m_lightmode_on == 0){
         qApp->setStyleSheet(m_lightstyle);
         m_lightmode_on = 1;
+        m_CRDdlg->setLightmodeOn(1);
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/light/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/light/document.png"));
@@ -273,3 +270,36 @@ void MainWindow::on_darkModePushButton_clicked()
     }
 
 }
+
+
+/*
+    bool formatNewRamdisk(size_t diskSize);
+    bool loadRamdisk();
+    bool mount(const std::string& mntPoint);
+    bool unloadRamdisk();
+    bool umount();
+    float getFragmentationInPercent();
+    std::vector<size_t> getFilesystemVector();
+    bool checkFilesystemIntegrity();
+    bool defragmentateFilesystem();
+    struct statfs getFilesystemInfo();
+
+*/
+
+
+void MainWindow::on_actionCreate_new_triggered()
+{
+
+    /*m_CRDdlg->exec();
+
+    delete m_CRDdlg;*/
+
+    if (m_CRDdlg->exec() == QDialog::Accepted) {
+        std::cout << "New Ramdisk created: " <<  steganoFsAdapter.createNewFilesystem(m_CRDdlg->getValue()) << "/n";
+        ui->statusbar->showMessage(QString("New Ramdisk created!"), 10000);
+    }
+
+
+}
+
+
