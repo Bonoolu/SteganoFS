@@ -41,6 +41,7 @@ struct __attribute__((__packed__)) PackedFile {
 
 struct SerializedFilesystem {
     size_t size;
+    bool rle;
     unsigned char *buf;
 };
 

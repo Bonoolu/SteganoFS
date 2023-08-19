@@ -1,6 +1,7 @@
 #ifndef STEGANOFS_MAIN_STEGANO_PROVIDER_H
 #define STEGANOFS_MAIN_STEGANO_PROVIDER_H
 
+#include "../../steganofs/ramdiskloader.h"
 #include "raw/raw_provider.h"
 #include "bmp/bmp_provider.h"
 #include "stegano_file.h"

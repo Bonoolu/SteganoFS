@@ -16,6 +16,7 @@
 #include "hiddenfile.h"
 #include "hiddencluster.h"
 #include "ramdiskloader.h"
+#include "runlengthencoding.h"
 #include "stegano_providers/stegano_provider.h"
 
 
