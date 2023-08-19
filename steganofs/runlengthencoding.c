@@ -39,7 +39,6 @@ void run_length_encoding(struct SerializedFilesystem serialFilesystem) {
                 writeIndex += moveSize;
                 dataBlockBegin = readIndex;
                 rangesCount++;
-                //firstDataBlock = false;
                 zeroRanges->offsetTo = readIndex;
                 zeroRanges->next = malloc(sizeof(struct LinkedList));
                 memset(zeroRanges->next, 0, sizeof(struct LinkedList));
@@ -68,7 +67,6 @@ void run_length_encoding(struct SerializedFilesystem serialFilesystem) {
         new_buffer[writeIndexNewBuffer] = zeroRanges->offsetFrom;
         new_buffer[writeIndexNewBuffer + 8] = zeroRanges->offsetTo;
         printf("From: %zu, To: %zu\n", zeroRanges->offsetFrom,zeroRanges->offsetTo);
-        fflush(stdout);
         writeIndexNewBuffer += 16;
         zeroRanges = zeroRanges->next;
     }
@@ -80,4 +78,12 @@ void run_length_encoding(struct SerializedFilesystem serialFilesystem) {
     free(serialFilesystem.buf);
     serialFilesystem.buf = new_buffer;
     serialFilesystem.size = buffer_length + header_length;
+    serialFilesystem.rle = true;
+}
+
+void run_length_decoding(struct SerializedFilesystem serializedFilesystem) {
+    if (!serializedFilesystem.rle) {
+        return;
+    }
+
 }
