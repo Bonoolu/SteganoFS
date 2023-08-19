@@ -9,6 +9,7 @@
 #include <QDialog>
 #include <iostream>
 #include "createramdiskdialog.h"
+#include <string>
 
 SteganoFsAdapter steganoFsAdapter("/home/minaboo/Bilder/example/");
 
@@ -20,6 +21,11 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle("Stegano File Explorer");
 
     m_CRDdlg = new CreateRamdiskDialog;
+    m_CRDdlg->setLightmodeOn(false);
+
+    m_DefragDlg = new DefragmentDialog;
+    m_DefragDlg->setLightmode_on(false);
+    //m_DefragDlg->setAdapter(&steganoFsAdapter);
 
 
     m_preview_on = 0;
@@ -242,7 +248,9 @@ void MainWindow::on_darkModePushButton_clicked()
     if (m_lightmode_on == 0){
         qApp->setStyleSheet(m_lightstyle);
         m_lightmode_on = 1;
-        m_CRDdlg->setLightmodeOn(1);
+        m_CRDdlg->setLightmodeOn(true);
+        m_DefragDlg->setLightmode_on(true);
+        qDebug() << m_CRDdlg->lightmodeOn() << "(lightmode CRDdlg) \n";
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/light/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/light/document.png"));
@@ -258,6 +266,8 @@ void MainWindow::on_darkModePushButton_clicked()
 
         qApp->setStyleSheet(m_darkstyle);
         m_lightmode_on = 0;
+        m_CRDdlg->setLightmodeOn(false);
+        m_DefragDlg->setLightmode_on(false);
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/document.png"));
@@ -267,6 +277,7 @@ void MainWindow::on_darkModePushButton_clicked()
         ui->pastePushButton->setIcon(QIcon(":/assets/img/paste.png"));
         ui->previewToolButton->setIcon(QIcon(":/assets/img/preview (2).png"));
         ui->darkModePushButton->setIcon(QIcon(":/assets/img/light-bulb.png"));
+        qDebug() << m_CRDdlg->lightmodeOn() << "(lightmode CRDdlg) \n";
     }
 
 }
@@ -290,16 +301,58 @@ void MainWindow::on_darkModePushButton_clicked()
 void MainWindow::on_actionCreate_new_triggered()
 {
 
-    /*m_CRDdlg->exec();
-
-    delete m_CRDdlg;*/
-
     if (m_CRDdlg->exec() == QDialog::Accepted) {
-        std::cout << "New Ramdisk created: " <<  steganoFsAdapter.createNewFilesystem(m_CRDdlg->getValue()) << "/n";
-        ui->statusbar->showMessage(QString("New Ramdisk created!"), 10000);
+        steganoFsAdapter.createNewFilesystem(m_CRDdlg->getValue());
+        ui->statusbar->showMessage(QString("New Ramdisk created! Size: ") + QString::number(m_CRDdlg->getValue()), 10000);
+    } else {
+        std::cout << "No Ramdisk created. ";
     }
 
 
 }
 
+
+
+void MainWindow::on_actionLoad_triggered()
+{
+    std::string s = steganoFsAdapter.steganoImageFolder();
+    steganoFsAdapter.loadFilesytemFromSteganoProvider();
+    ui->statusbar->showMessage(QString("Filesystem loaded: ") + QString::fromStdString(s), 10000);
+}
+
+
+
+
+void MainWindow::on_actionDefragment_triggered()
+{
+    //float fragmentation = steganoFsAdapter.getFragmentationInPercent();
+    m_DefragDlg->setFragmentation(steganoFsAdapter.getFragmentationInPercent());
+    m_DefragDlg->exec();
+}
+
+
+void MainWindow::on_actionNeuer_Ordner_triggered()
+{
+
+}
+
+
+void MainWindow::on_actionShow_Filesystem_information_triggered()
+{
+
+}
+
+
+void MainWindow::on_actionMount_triggered()
+{
+    std::string s = steganoFsAdapter.steganoImageFolder() + "anything";
+    steganoFsAdapter.mount(s);
+}
+
+
+void MainWindow::on_actionUnmount_triggered()
+{
+    std::string s = steganoFsAdapter.steganoImageFolder() + "anything";
+    steganoFsAdapter.umount();
+}
 

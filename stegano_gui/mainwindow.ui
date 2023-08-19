@@ -49,7 +49,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="res.qrc">
+              <iconset>
                <normaloff>:/assets/img/folder.png</normaloff>:/assets/img/folder.png</iconset>
              </property>
             </widget>
@@ -72,7 +72,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="res.qrc">
+              <iconset>
                <normaloff>:/assets/img/document.png</normaloff>:/assets/img/document.png</iconset>
              </property>
             </widget>
@@ -108,7 +108,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="res.qrc">
+              <iconset>
                <normaloff>:/assets/img/delete(1).png</normaloff>:/assets/img/delete(1).png</iconset>
              </property>
             </widget>
@@ -137,7 +137,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="res.qrc">
+              <iconset>
                <normaloff>:/assets/img/scissors(1).png</normaloff>:/assets/img/scissors(1).png</iconset>
              </property>
             </widget>
@@ -166,7 +166,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="res.qrc">
+              <iconset>
                <normaloff>:/assets/img/copy.png</normaloff>:/assets/img/copy.png</iconset>
              </property>
             </widget>
@@ -195,7 +195,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="res.qrc">
+              <iconset>
                <normaloff>:/assets/img/paste.png</normaloff>:/assets/img/paste.png</iconset>
              </property>
             </widget>
@@ -237,7 +237,7 @@
               <string>Neuer Ordner</string>
              </property>
              <property name="icon">
-              <iconset resource="res.qrc">
+              <iconset>
                <normaloff>:/assets/img/preview (2).png</normaloff>:/assets/img/preview (2).png</iconset>
              </property>
             </widget>
@@ -251,7 +251,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="res.qrc">
+              <iconset>
                <normaloff>:/assets/img/light-bulb.png</normaloff>:/assets/img/light-bulb.png</iconset>
              </property>
             </widget>
@@ -392,24 +392,26 @@
     </property>
     <widget class="QMenu" name="menuRamdisk">
      <property name="title">
-      <string>Ramdisk...</string>
+      <string>Filesystem...</string>
      </property>
      <addaction name="actionCreate_new"/>
      <addaction name="actionLoad"/>
-     <addaction name="actionUnload"/>
     </widget>
     <addaction name="actionNeue_Datei"/>
     <addaction name="actionNeuer_Ordner"/>
     <addaction name="separator"/>
     <addaction name="menuRamdisk"/>
-    <addaction name="actionLoad_Ramdisk"/>
+    <addaction name="actionDefragment"/>
+    <addaction name="actionShow_Filesystem_information"/>
+    <addaction name="separator"/>
+    <addaction name="actionMount"/>
+    <addaction name="actionUnmount"/>
    </widget>
    <widget class="QMenu" name="menuAnsicht">
     <property name="title">
      <string>Ansicht</string>
     </property>
     <addaction name="actionVorschau_anzeigen"/>
-    <addaction name="actionSortierung_ndern"/>
    </widget>
    <addaction name="menuDatei"/>
    <addaction name="menuAnsicht"/>
@@ -435,7 +437,7 @@
     <string>New Folder...</string>
    </property>
   </action>
-  <action name="actionLoad_Ramdisk">
+  <action name="actionDefragment">
    <property name="text">
     <string>Defragment</string>
    </property>
@@ -455,9 +457,22 @@
     <string>Unload</string>
    </property>
   </action>
+  <action name="actionShow_Filesystem_information">
+   <property name="text">
+    <string>Show Filesystem information</string>
+   </property>
+  </action>
+  <action name="actionMount">
+   <property name="text">
+    <string>Mount...</string>
+   </property>
+  </action>
+  <action name="actionUnmount">
+   <property name="text">
+    <string>Unmount...</string>
+   </property>
+  </action>
  </widget>
- <resources>
-  <include location="res.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -28,8 +28,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(steganoExplorer
             MANUAL_FINALIZATION
             ${PROJECT_SOURCES}
-            mainwindow.ui
             createramdiskdialog.ui
+            defragmentdialog.ui
+            mainwindow.ui
             res.qrc
     )
     # Define target properties for Android with Qt 6 as:
@@ -47,6 +48,7 @@ else()
         add_executable(steganoExplorer
                 ${PROJECT_SOURCES}
                 createramdiskdialog.h createramdiskdialog.cpp createramdiskdialog.ui
+                defragmentdialog.h defragmentdialog.cpp defragmentdialog.ui
 
         )
     endif()

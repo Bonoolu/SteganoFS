@@ -283,7 +283,7 @@ QComboBox::drop-down
 
 QComboBox::down-arrow
 {
-    image: url(:/assets/img/assets/img/arrow-down.png);
+    image: url(:/assets/img/arrow-down.png);
     width: 8px;
     height: 8px;
 }
@@ -382,7 +382,7 @@ QSpinBox::down-arrow,
 QDoubleSpinBox::down-arrow,
 QDateTimeEdit::down-arrow
 {
-    image: url(:/assets/img/assets/img/arrow-down.png);
+    image: url(:/assets/img/arrow-down.png);
     width: 7px;
 
 }
@@ -392,7 +392,7 @@ QSpinBox::up-arrow,
 QDoubleSpinBox::up-arrow,
 QDateTimeEdit::up-arrow
 {
-    image: url(:/assets/img/assets/img/arrow-up.png);
+    image: url(:/assets/img/arrow-up.png);
     width: 7px;
 
 }
@@ -1184,4 +1184,23 @@ QStatusBar
 
 }
 
+/*-----QInputDialog-----*/
+
+QInputDialog
+{
+    background-color: #0a0a0a;
+    color: #ffffff;
+}
+
+QDialog, QMessageBox
+{
+    background-color: #0a0a0a;
+    color: #ffffff;
+}
+
+QDialogButtonBox
+{
+    background-color: #0a0a0a;
+    color: #ffffff;
+}
 

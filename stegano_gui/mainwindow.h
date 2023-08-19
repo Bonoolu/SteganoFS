@@ -11,6 +11,7 @@
 #include "../cpp-wrapper/SteganoFsAdapter.h"
 #include <QDebug>
 #include "createramdiskdialog.h"
+#include "defragmentdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -49,9 +50,22 @@ private slots:
     void on_actionCreate_new_triggered();
 
     //void createNewRamdisk();
+    void on_actionLoad_triggered();
+
+    void on_actionDefragment_triggered();
+
+    void on_actionNeuer_Ordner_triggered();
+
+    void on_actionShow_Filesystem_information_triggered();
+
+    void on_actionMount_triggered();
+
+    void on_actionUnmount_triggered();
+
 private:
     Ui::MainWindow *ui;
     CreateRamdiskDialog *m_CRDdlg;
+    DefragmentDialog *m_DefragDlg;
 
 
 
