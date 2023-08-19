@@ -10,6 +10,7 @@
 #include <iostream>
 #include "createramdiskdialog.h"
 #include <string>
+#include <thread>
 
 SteganoFsAdapter steganoFsAdapter("/home/minaboo/Bilder/example/");
 
@@ -346,13 +347,20 @@ void MainWindow::on_actionShow_Filesystem_information_triggered()
 void MainWindow::on_actionMount_triggered()
 {
     std::string s = steganoFsAdapter.steganoImageFolder() + "anything";
-    steganoFsAdapter.mount(s);
+
+//    std::thread t1([steganoFsAdapter](){
+//        steganoFsAdapter.mount(s);
+//    });
+
+    std::thread t1(steganoFsAdapter.mount(s));
+
+    t1.join();
+
 }
 
 
 void MainWindow::on_actionUnmount_triggered()
 {
-    std::string s = steganoFsAdapter.steganoImageFolder() + "anything";
     steganoFsAdapter.umount();
 }
 

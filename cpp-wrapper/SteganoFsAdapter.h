@@ -33,6 +33,7 @@ public:
     bool checkFilesystemIntegrity();
     bool defragmentateFilesystem();
     struct statfs getFilesystemInfo();
+    std::string steganoImageFolder() const;
 };
 
 #endif //STEGANO_FS_ADAPTER_STEGANOFSADAPTER_H

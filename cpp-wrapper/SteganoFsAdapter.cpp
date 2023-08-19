@@ -1,5 +1,10 @@
 #include "SteganoFsAdapter.h"
 
+std::string SteganoFsAdapter::steganoImageFolder() const
+{
+    return m_steganoImageFolder;
+}
+
 SteganoFsAdapter::SteganoFsAdapter(std::string steganoImageFolder) :
 m_steganoImageFolder(std::move(steganoImageFolder)){
 
