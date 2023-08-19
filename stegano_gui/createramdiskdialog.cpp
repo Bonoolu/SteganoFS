@@ -8,7 +8,8 @@ CreateRamdiskDialog::CreateRamdiskDialog(QWidget *parent) :
     ui(new Ui::CreateRamdiskDialog)
 {
     ui->setupUi(this);
-    this->value = ui->ramdiskSizeSpinBox->value();
+    m_value = 0;
+    m_lightmodeon = 0;
 
 }
 
@@ -19,10 +20,8 @@ CreateRamdiskDialog::~CreateRamdiskDialog()
 
 void CreateRamdiskDialog::on_buttonBox_accepted()
 {
-    SteganoFsAdapter steganoFsAdapter("/example/path/to/pictures");
-    qDebug() << "New Ramdisk created: " <<  steganoFsAdapter.formatNewRamdisk(ui->ramdiskSizeSpinBox->value());
 
-    qDebug() << "New Ramdisk created with size " << ui->ramdiskSizeSpinBox->value() ;
+    emit accepted();
 
 }
 
@@ -34,6 +33,17 @@ void CreateRamdiskDialog::on_buttonBox_rejected()
 }
 
 int CreateRamdiskDialog::getValue(){
-    return value;
+    return m_value;
+}
+
+void CreateRamdiskDialog::setLightmodeOn(bool b)
+{
+    m_lightmodeon = b;
+}
+
+
+void CreateRamdiskDialog::on_ramdiskSizeSpinBox_valueChanged(int arg1)
+{
+    m_value = ui->ramdiskSizeSpinBox->value();
 }
 

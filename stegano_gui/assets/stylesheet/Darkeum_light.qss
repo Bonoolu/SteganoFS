@@ -418,7 +418,7 @@ QLineEdit
         background-color: #fcfcfc;
         color: #000000;
         border: 1px solid #cccccc;
-        border-radius: 30px;
+        border-radius: 13px;
 	padding: 2px;
 
 }
@@ -429,7 +429,6 @@ QLineEdit::disabled
         background-color: #cccccc;
         color: #999999;
 	border-width: 1px;
-        border-radius: 13px;
         border-color: #b5d0eb;
 	padding: 2px;
 
@@ -441,6 +440,7 @@ QTextEdit
 {
         background-color: #ffffff;
 	color: #010201;
+        border-radius:13px;
         border-color: #b5d0eb;
 
 }
@@ -461,6 +461,7 @@ QGroupBox
     border: 1px solid #1073b4;
     background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891);
     margin-top: 22px;
+
     border-radius: 10px;
 
 }
@@ -471,6 +472,8 @@ QGroupBox::title
     background-color: transparent;
     color: #1073b4;
     text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
     subcontrol-origin: margin;
     subcontrol-position: top center;
 
@@ -634,6 +637,14 @@ QTableView::item:selected:disabled
     border: 2px solid #fcfcfc;
     color: #999999;
 
+}
+
+QTableView QTableCornerButton::section {
+    background: transparent;
+}
+
+QHeaderView::section {
+    background: transparent !important;
 }
 
 /*-----QListWidget-----*/
@@ -1189,7 +1200,7 @@ QProgressBar::chunk:disabled {
 QStatusBar
 {
         background-color: #fafafa;
-        color: #ffffff;
+        color: #999999;
         border-color: #b5d0eb;
 
 }

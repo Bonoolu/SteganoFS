@@ -48,9 +48,10 @@ private slots:
 
     void on_actionCreate_new_triggered();
 
+    //void createNewRamdisk();
 private:
     Ui::MainWindow *ui;
-    //CreateRamdiskDialog *m_CRDdlg;
+    CreateRamdiskDialog *m_CRDdlg;
 
 
 

@@ -17,6 +17,7 @@
         <file>assets/img/light-bulb.png</file>
         <file>assets/img/night-mode.png</file>
         <file>assets/img/arrow-down.png</file>
+        <file>assets/img/arrow-up.png</file>
     </qresource>
     <qresource prefix="/assets/img/light">
         <file>assets/img/light/copy.png</file>
@@ -29,5 +30,6 @@
         <file>assets/img/light/preview.png</file>
         <file>assets/img/light/scissors.png</file>
         <file>assets/img/light/arrow-down.png</file>
+        <file>assets/img/light/arrow-up.png</file>
     </qresource>
 </RCC>
