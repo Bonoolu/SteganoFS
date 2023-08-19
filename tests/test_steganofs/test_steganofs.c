@@ -668,21 +668,25 @@ bool testRamdiskloader() {
     }
     showHiddenFat(hiddenFat, NULL);
     bool ret = steganofs_unload_ramdisk(hiddenFat, "/tmp/filesystem.bin");
-    if (bytesWritten < 0) {
-        printf("testRamdiskloader test failed: Unloading ramdisk failed!");
+    if (!ret) {
+        printf("testRamdiskloader test failed: Unloading ramdisk failed!\n");
         return false;
     }
     freeHiddenFat(hiddenFat);
     hiddenFat = steganofs_load_ramdisk("/tmp/filesystem.bin");
+    if (hiddenFat == NULL) {
+        printf("testRamdiskloader test failed: Loading ramdisk failed!\n");
+        return false;
+    }
     ret = steganofs_unload_ramdisk(hiddenFat, "/tmp/filesystem2.bin");
-    if (bytesWritten < 0) {
-        printf("testRamdiskloader test failed: Loading ramdisk failed!");
+    if (!ret) {
+        printf("testRamdiskloader test failed: Unloading ramdisk failed!\n");
         return false;
     }
     showHiddenFat(hiddenFat, NULL);
     ret = checkIntegrity(hiddenFat);
-    if (bytesWritten < 0) {
-        printf("testRamdiskloader test failed: Integrity check failed!!");
+    if (!ret) {
+        printf("testRamdiskloader test failed: Integrity check failed!\n");
         return false;
     }
     freeHiddenFat(hiddenFat);

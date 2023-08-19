@@ -16,7 +16,7 @@
 #include "hiddenfile.h"
 #include "hiddencluster.h"
 #include "ramdiskloader.h"
-#include "../stegano_providers/stegano_provider.h"
+#include "stegano_providers/stegano_provider.h"
 
 
 int stgfs_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);

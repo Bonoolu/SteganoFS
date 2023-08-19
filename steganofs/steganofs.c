@@ -1,7 +1,6 @@
 #include "steganofs.h"
 
 // TODO:
-// implement import
 // errorcodes durchleifen und korrekte errorcodes setzten
 // debug flag/-d verwenden um stderr etwas zu unterdruecken
 // write doxygen
@@ -280,7 +279,7 @@ struct HiddenFat *steganofs_create_new_ramdisk(size_t diskSize) {
 }
 
 struct HiddenFat *steganofs_load_ramdisk(const char *steganoImageFolder) {
-    struct SerializedFilesystem serializedFilesystem = stegano_provider_read(steganoImageFolder, RAW);
+    struct SerializedFilesystem serializedFilesystem = stegano_provider_read(steganoImageFolder);
     if (serializedFilesystem.size == 0) return NULL;
     return loadRamdisk(serializedFilesystem);
 }
@@ -288,7 +287,7 @@ struct HiddenFat *steganofs_load_ramdisk(const char *steganoImageFolder) {
 bool steganofs_unload_ramdisk(struct HiddenFat *hiddenFat, const char *steganoImageFolder) {
     struct SerializedFilesystem serializedFilesystem = serializeFilesystem(hiddenFat);
     if (serializedFilesystem.size == 0) return false;
-    return stegano_provider_write(serializedFilesystem, steganoImageFolder, RAW);
+    return stegano_provider_write(serializedFilesystem, steganoImageFolder);
 }
 
 
