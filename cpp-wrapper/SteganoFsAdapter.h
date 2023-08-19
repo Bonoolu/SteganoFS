@@ -4,11 +4,14 @@
 #include <string>
 #include <vector>
 #include <sys/statfs.h>
+#include <iostream>
+#include <filesystem>
 #include <utility>
 
-
-extern "C" {
-    #include "../steganofs/steganofs.h"
+namespace SteganoFS {
+    extern "C" {
+#include "../steganofs/steganofs.h"
+    }
 }
 
 class SteganoFsAdapter {
@@ -16,7 +19,7 @@ private:
     std::string m_mountPath;
     std::string m_steganoImageFolder;
     bool m_isMounted = false;
-    HiddenFat *m_hiddenFat = nullptr;
+    SteganoFS::HiddenFat *m_hiddenFat = nullptr;
 public:
     explicit SteganoFsAdapter(std::string  steganoImageFolder);
     ~SteganoFsAdapter();
