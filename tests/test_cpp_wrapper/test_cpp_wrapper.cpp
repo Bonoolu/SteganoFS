@@ -30,14 +30,14 @@ int main(int argc, char **argv) {
     std::cout << std::endl;
 
 
-//    status = steganoFsAdapter.mount("/home/admin/test_mnt");
-//    if (!status) {
-//        std::cout << "Mounting to /home/admin/test_mnt failed!" << std::endl;
-//    }
-//    status = steganoFsAdapter.umount();
-//    if (!status) {
-//        std::cout << "Unmounting to /home/admin/test_mnt failed!" << std::endl;
-//    }
+    status = steganoFsAdapter.mount("/home/admin/test_mnt");
+    if (!status) {
+        std::cout << "Mounting to /home/admin/test_mnt failed!" << std::endl;
+    }
+    status = steganoFsAdapter.umount();
+    if (!status) {
+        std::cout << "Unmounting to /home/admin/test_mnt failed!" << std::endl;
+    }
 //    status = steganoFsAdapter.writeFilesystemToSteganoProvider();
 //    if (!status) {
 //        std::cout << "Unloading Ramdisk failed!" << std::endl;

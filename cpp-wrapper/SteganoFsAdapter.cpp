@@ -156,7 +156,7 @@ struct statfs SteganoFsAdapter::getFilesystemInfo() {
     return stfs;
 }
 
-SteganoFsAdapter::~SteganoFsAdapter() {
+SteganoFsAdapter::~SteganoFsAdapter() { //TODO!
 //    if (m_hiddenFat != nullptr && m_isMounted) {
 //        SteganoFsAdapter::umount();
 //    } else if (m_hiddenFat != nullptr) {

@@ -1,7 +1,7 @@
 #include "runlengthencoding.h"
 
-void run_length_encoding(struct SerializedFilesystem serialFilesystem) {
-    if (serialFilesystem.rle) {
+void run_length_encoding(struct SerializedFilesystem *serialFilesystem) {
+    if (serialFilesystem->rle) {
         return;
     }
     size_t readIndex = 0;
@@ -20,9 +20,10 @@ void run_length_encoding(struct SerializedFilesystem serialFilesystem) {
 
     struct LinkedList *zeroRangesBegin = &linkedList;
     struct LinkedList *zeroRanges = &linkedList;
-    while (readIndex < serialFilesystem.size) {
-        unsigned char *currentReadPointer = serialFilesystem.buf + readIndex;
-        if (serialFilesystem.buf[readIndex] == 0) {
+    printf("Previous Disk size: %zu\n", serialFilesystem->size);
+    while (readIndex < serialFilesystem->size) {
+        unsigned char *currentReadPointer = serialFilesystem->buf + readIndex;
+        if (serialFilesystem->buf[readIndex] == 0) {
             zeroCount++;
             if (zeroCount == 1) {
                 zeroRanges->offsetFrom = readIndex;
@@ -32,15 +33,15 @@ void run_length_encoding(struct SerializedFilesystem serialFilesystem) {
         } else {
             if (zeroCount > 16) {
                 printf("Copying over bytes %zu to %zu  (%zu bytes)\n", dataBlockBegin, zeroRanges->offsetFrom, zeroRanges->offsetFrom - dataBlockBegin);
-                unsigned char *moveFrom = serialFilesystem.buf + dataBlockBegin;
-                unsigned char *moveTo = serialFilesystem.buf + writeIndex;
+                unsigned char *moveFrom = serialFilesystem->buf + dataBlockBegin;
+                unsigned char *moveTo = serialFilesystem->buf + writeIndex;
                 size_t moveSize = zeroRanges->offsetFrom - dataBlockBegin;
                 memmove(moveTo, moveFrom, moveSize);
                 writeIndex += moveSize;
                 dataBlockBegin = readIndex;
                 rangesCount++;
                 zeroRanges->offsetTo = readIndex;
-                zeroRanges->next = malloc(sizeof(struct LinkedList));
+                zeroRanges->next = malloc(sizeof(struct LinkedList)); // TODO!
                 memset(zeroRanges->next, 0, sizeof(struct LinkedList));
                 zeroRanges = zeroRanges->next;
             }
@@ -50,10 +51,11 @@ void run_length_encoding(struct SerializedFilesystem serialFilesystem) {
     }
 
     if (dataBlockBegin != 0) {
-        printf("Datablock begin was: %zu. Copying over %zu bytes\n", dataBlockBegin, serialFilesystem.size - dataBlockBegin);
-        for (size_t i = dataBlockBegin; i < serialFilesystem.size; i++) {
-            serialFilesystem.buf[writeIndex++] = serialFilesystem.buf[readIndex++];
-        }
+        size_t length = serialFilesystem->size - dataBlockBegin;
+        unsigned char *moveFrom = serialFilesystem->buf + length;
+        unsigned char *moveTo = serialFilesystem->buf + writeIndex;
+        memmove(moveTo, moveFrom, length);
+        printf("Datablock begin was: %zu. Copying over %zu bytes\n", dataBlockBegin, length);
     }
 
     size_t buffer_length = writeIndex;
@@ -64,8 +66,8 @@ void run_length_encoding(struct SerializedFilesystem serialFilesystem) {
     zeroRanges = zeroRangesBegin;
     size_t writeIndexNewBuffer = 0;
     while (zeroRanges != zero_ranges_end) {
-        new_buffer[writeIndexNewBuffer] = zeroRanges->offsetFrom;
-        new_buffer[writeIndexNewBuffer + 8] = zeroRanges->offsetTo;
+        *((uint64_t*) &(new_buffer[writeIndexNewBuffer])) = zeroRanges->offsetFrom;
+        *((uint64_t*) &(new_buffer[writeIndexNewBuffer + 8])) = zeroRanges->offsetTo;
         printf("From: %zu, To: %zu\n", zeroRanges->offsetFrom,zeroRanges->offsetTo);
         writeIndexNewBuffer += 16;
         zeroRanges = zeroRanges->next;
@@ -74,16 +76,56 @@ void run_length_encoding(struct SerializedFilesystem serialFilesystem) {
     writeIndexNewBuffer += 8;
     printf("Wrote %zu Bytes as header to buffer!\n", writeIndexNewBuffer);
     printf("Wrote %zu Bytes as Data.\n", buffer_length);
-    memcpy(new_buffer + writeIndexNewBuffer, serialFilesystem.buf, buffer_length);
-    free(serialFilesystem.buf);
-    serialFilesystem.buf = new_buffer;
-    serialFilesystem.size = buffer_length + header_length;
-    serialFilesystem.rle = true;
+    memcpy(new_buffer + writeIndexNewBuffer, serialFilesystem->buf, buffer_length);
+    free(serialFilesystem->buf);
+    serialFilesystem->buf = new_buffer;
+    serialFilesystem->size = buffer_length + header_length;
+    serialFilesystem->rle = true;
 }
 
-void run_length_decoding(struct SerializedFilesystem serializedFilesystem) {
-    if (!serializedFilesystem.rle) {
+void run_length_decoding(struct SerializedFilesystem *serializedFilesystem) {
+    if (!serializedFilesystem->rle) {
         return;
     }
-
+    const uint64_t *zeroRanges = (uint64_t*) serializedFilesystem->buf;
+    uint64_t *lengthPointer = (uint64_t*) serializedFilesystem->buf;
+    size_t amountZerosToPlace = 0;
+    while((lengthPointer == zeroRanges || *lengthPointer != 0) && lengthPointer < (uint64_t*) ((serializedFilesystem->buf + serializedFilesystem->size) - 3)) {
+        uint64_t from = lengthPointer[0];
+        uint64_t to = lengthPointer[1];
+        amountZerosToPlace += (to - from);
+        lengthPointer += 2;
+    }
+    const size_t zeroRangesLength = lengthPointer - zeroRanges;
+    unsigned char *encodedBuffer = serializedFilesystem->buf + ((zeroRangesLength + 1) * 8);
+    size_t encodedBufferLength = serializedFilesystem->size - ((zeroRangesLength + 1) * 8);
+    printf("Length of Ranges: %zu\n", zeroRangesLength);
+    printf("Amount Zeros to place: %zu\n", amountZerosToPlace);
+    printf("Length of DataBuffer: %zu\n", encodedBufferLength);
+    printf("Length of decoded Filesystem: %zu\n", encodedBufferLength + amountZerosToPlace);
+    size_t decodedFilesystemLength = encodedBufferLength + amountZerosToPlace;
+    unsigned char *decodedFilesystem = malloc(decodedFilesystemLength);
+    memset(decodedFilesystem, 0, decodedFilesystemLength);
+    lengthPointer = (uint64_t*) zeroRanges;
+    unsigned char *readPointer = (unsigned char*) encodedBuffer;
+    unsigned char *writePointer = decodedFilesystem;
+    while((lengthPointer == zeroRanges || *lengthPointer != 0) && lengthPointer < (uint64_t*) ((serializedFilesystem->buf + serializedFilesystem->size) - 3)) {
+        uint64_t from = lengthPointer[0];
+        uint64_t to = lengthPointer[1];
+        size_t length = from - (writePointer - decodedFilesystem);
+        printf("Wrote %zu bytes! to offset:%zu\n", length, writePointer - decodedFilesystem);
+        memcpy(writePointer, readPointer, length);
+        writePointer = decodedFilesystem + to;
+        readPointer += length;
+        lengthPointer += 2;
+    }
+    lengthPointer--;
+    if (*lengthPointer < decodedFilesystemLength) {
+        printf("Wrote %zu bytes! to offset:%zu\n", decodedFilesystemLength - *lengthPointer, writePointer - decodedFilesystem);
+        memcpy(writePointer, readPointer, decodedFilesystemLength - *lengthPointer);
+    }
+    free(serializedFilesystem->buf);
+    serializedFilesystem->buf = decodedFilesystem;
+    serializedFilesystem->size = decodedFilesystemLength;
+    serializedFilesystem->rle = false;
 }
