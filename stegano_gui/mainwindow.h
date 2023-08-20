@@ -71,7 +71,7 @@ private:
     Ui::MainWindow *ui;
     CreateRamdiskDialog *m_CRDdlg;
     DefragmentDialog *m_DefragDlg;
-    SteganoFsAdapter *steganoFsAdapter = new SteganoFsAdapter("/home/minaboo/Bilder/example/");
+    SteganoFsAdapter *steganoFsAdapter = new SteganoFsAdapter("filesystem.steganofs");
     Worker *m_worker;
     QThread *m_thread;
 

@@ -360,20 +360,23 @@ void MainWindow::on_actionShow_Filesystem_information_triggered()
 
 void MainWindow::on_actionMount_triggered()
 {
-    std::string s = steganoFsAdapter->steganoImageFolder() + "anything";
+    std::string s = "/home/minaboo/Bilder/example/anything/";
 
     auto path = m_filemodel->rootPath();
     m_filemodel->setRootPath("");
 
-//    std::thread t1([this, s](){
-//        steganoFsAdapter->mount(s);
-//    });
+    //    std::thread t1([this, s](){
+     //       steganoFsAdapter->mount(s);
+
+    //    });
 
 
 //    t1.join();
     m_thread->start();
     QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(SteganoFsAdapter, *steganoFsAdapter), Q_ARG(std::string, s));
     //m_worker->mountFolder(steganoFsAdapter, s);
+
+
 
     m_filemodel->setRootPath(path);
 
