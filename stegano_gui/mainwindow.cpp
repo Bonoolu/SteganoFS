@@ -13,7 +13,8 @@
 #include <thread>
 #include <QThread>
 #include <QMetaObject>
-
+#include "../cpp-wrapper/SteganoFsAdapter.h"
+Q_DECLARE_METATYPE(SteganoFsAdapter*)
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -23,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("Stegano File Explorer");
 
+    //qRegisterMetaType(SteganoFsAdapter*);
 
     m_CRDdlg = new CreateRamdiskDialog;
     m_CRDdlg->setLightmodeOn(false);
@@ -360,7 +362,7 @@ void MainWindow::on_actionShow_Filesystem_information_triggered()
 
 void MainWindow::on_actionMount_triggered()
 {
-    std::string s = "/home/minaboo/Bilder/example/anything/";
+    std::string s = "/home/admin/test_mnt";
 
     auto path = m_filemodel->rootPath();
     m_filemodel->setRootPath("");
@@ -373,7 +375,8 @@ void MainWindow::on_actionMount_triggered()
 
 //    t1.join();
     m_thread->start();
-    QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(SteganoFsAdapter, *steganoFsAdapter), Q_ARG(std::string, s));
+    QVariant qSteganoFSAdapter = QVariant::fromValue(steganoFsAdapter);
+    QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, QString(s.c_str())));
     //m_worker->mountFolder(steganoFsAdapter, s);
 
 

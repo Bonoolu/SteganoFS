@@ -14,7 +14,7 @@ signals:
     void mountFinished();
 
 public slots:
-    void mountFolder(SteganoFsAdapter *adapt, std::string s);
+    void mountFolder(QVariant qAdapt, QString s);
 
 };
 
