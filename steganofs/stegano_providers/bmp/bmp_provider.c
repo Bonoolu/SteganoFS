@@ -1,14 +1,16 @@
 #include "bmp_provider.h"
 
-static void exract_payload_from_generic_buffer(unsigned char **payload_buffer, size_t *payloadLength,
+void exract_payload_from_generic_buffer(unsigned char **payload_buffer, size_t *payloadLength,
                                                const unsigned char *data, size_t dataLength) {
     *payloadLength = dataLength / 8;
     *payload_buffer = malloc(*payloadLength);
     memset(*payload_buffer, 0, *payloadLength);
     for (size_t i = 0; i < *payloadLength; i++) {
-        (*payload_buffer)[i] = 0xFF;
+        unsigned char *currentByteToWriteTo = (*payload_buffer) + i;
+        *currentByteToWriteTo = 0x00;
         for (size_t bit = 0; bit < 8; bit++) {
-            (*payload_buffer)[i] &= ((data[(i * 8) + bit] & 0x01) << bit);
+            unsigned char currentBitToWrite = ((data[(i * 8) + bit] & 0x01));
+            *currentByteToWriteTo ^= currentBitToWrite << bit;
         }
     }
 }
@@ -68,8 +70,10 @@ bool write_bmp(struct SteganoFile steganoFile) {
             return false;
         }
         fread(pixeldata, pixel_data_length, 1, file);
+        fflush(file);
+        fclose(file);
         embedd_payload(&steganoFile, pixeldata, pixel_data_length);
-        rewind(file);
+        fopen(steganoFile.path, "wb");
         fseek(file, 36, 0);
         size_t bytes_written = fwrite(pixeldata, pixel_data_length, 1, file);
         fflush(file);

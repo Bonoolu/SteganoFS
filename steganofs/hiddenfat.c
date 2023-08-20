@@ -141,6 +141,12 @@ void showHiddenFat(HiddenFat *hiddenFat, char *outputMessage) {
 }
 
 bool checkIntegrity(HiddenFat *hiddenFat) {
+    if (hiddenFat == NULL) {
+        fprintf(stderr,
+                "HiddenFat is NULL! No filesystem to check!\n");
+
+        return false;
+    }
     bool hasIntegrity = true;
 
     // Check if all clusters are associated with a file
@@ -230,7 +236,7 @@ void defragmentate(HiddenFat *hiddenFat) {
             size_t blockIndexToSwap = hiddenCluster->bIndex;
             if (swapHiddenClusters(hiddenFat, bIndex, blockIndexToSwap)) {
                 hiddenCluster = hiddenFat->clusters[bIndex].next;
-            }else {
+            } else {
                 hiddenCluster = hiddenCluster->next;;
             }
             bIndex++;
@@ -297,7 +303,8 @@ int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t o
 
 int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length) {
     if (offset + length > hiddenFat->blockSize) {
-        fprintf(stderr, "Trying to read from the wrong Block! offset+length is higher than %zu\n", hiddenFat->blockSize);
+        fprintf(stderr, "Trying to read from the wrong Block! offset+length is higher than %zu\n",
+                hiddenFat->blockSize);
         return -1;
     }
     if (bIndex > hiddenFat->amountBlocks) {
