@@ -13,8 +13,8 @@ CreateRamdiskDialog::CreateRamdiskDialog(QWidget *parent) :
 
 
     ui->buttonBox->setStyleSheet("background-color: #607cff; color: white; padding: 2px 7px ; ");
-    ui->newRamdiskLabel->setStyleSheet("background-color: transparent; color: black;");
-    ui->ramdiskSizeSpinBox->setStyleSheet("background-color: transparent; color: black;");
+    ui->newRamdiskLabel->setStyleSheet("background-color: transparent; color: #fafafa;");
+    ui->ramdiskSizeSpinBox->setStyleSheet("background-color: transparent; color: #fafafa;");
     this->setStyleSheet("background-color: #111111; color: #fafafa;");
 
 

@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_DefragDlg = new DefragmentDialog;
     m_DefragDlg->setLightmode_on(false);
-    //m_DefragDlg->setAdapter(&steganoFsAdapter);
+    m_DefragDlg->setAdapter(&steganoFsAdapter);
 
 
     m_preview_on = 0;
@@ -345,7 +345,7 @@ void MainWindow::on_actionShow_Filesystem_information_triggered()
 
 
 void MainWindow::on_actionMount_triggered()
-{
+{/*
     std::string s = steganoFsAdapter.steganoImageFolder() + "anything";
 
 //    std::thread t1([steganoFsAdapter](){
@@ -354,7 +354,7 @@ void MainWindow::on_actionMount_triggered()
 
     std::thread t1(steganoFsAdapter.mount(s));
 
-    t1.join();
+    t1.join();*/
 
 }
 
