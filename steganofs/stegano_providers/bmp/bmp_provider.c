@@ -1,28 +1,39 @@
 #include "bmp_provider.h"
 
-void extract_payload(struct SteganoFile *steganoFile, const unsigned char *pixeldata, size_t pixel_data_length) {
-    steganoFile->payload_length = pixel_data_length / 8;
-    steganoFile->payload = malloc(steganoFile->payload_length);
-    memset(steganoFile->payload, 0, steganoFile->payload_length);
-    for(size_t i = 0; i < steganoFile->payload_length; i++) {
-        steganoFile->payload[i] = 0xFF;
+static void exract_payload_from_generic_buffer(unsigned char **payload_buffer, size_t *payloadLength,
+                                               const unsigned char *data, size_t dataLength) {
+    *payloadLength = dataLength / 8;
+    *payload_buffer = malloc(*payloadLength);
+    memset(*payload_buffer, 0, *payloadLength);
+    for (size_t i = 0; i < *payloadLength; i++) {
+        (*payload_buffer)[i] = 0xFF;
         for (size_t bit = 0; bit < 8; bit++) {
-            steganoFile->payload[i] &= ((pixeldata[(i * 8) + bit] & 0x01) << bit);
+            (*payload_buffer)[i] &= ((data[(i * 8) + bit] & 0x01) << bit);
+        }
+    }
+}
+
+void extract_payload(struct SteganoFile *steganoFile, const unsigned char *pixeldata, size_t pixel_data_length) {
+    exract_payload_from_generic_buffer(&(steganoFile->payload), &steganoFile->payload_length, pixeldata,
+                                       pixel_data_length);
+}
+
+void embedd_payload_in_generic_buffer(unsigned char *payload_buffer, size_t payloadLength,
+                                      unsigned char *data, size_t dataLength) {
+    for (size_t i = 0; i < payloadLength; i++) {
+        unsigned char byteToWrite = payload_buffer[i];
+        for (size_t bitIndex = 0; bitIndex < 8; bitIndex++) {
+            unsigned char currentBit = data[(i * 8) + bitIndex] & 0x01;
+            unsigned char bitToWrite = (byteToWrite >> bitIndex) & 0x01;
+            if (bitToWrite != currentBit) {
+                data[(i * 8) + bitIndex] ^= 1;
+            }
         }
     }
 }
 
 void embedd_payload(struct SteganoFile *steganoFile, unsigned char *pixeldata, size_t pixel_data_length) {
-    for(size_t i = 0; i < steganoFile->payload_length; i++) {
-        unsigned char byteToWrite = steganoFile->payload[i];
-        for (size_t bitIndex = 0; bitIndex < 8; bitIndex++) {
-            unsigned char currentBit = pixeldata[(i * 8) + bitIndex] & 0x01;
-            unsigned char bitToWrite = (byteToWrite >> bitIndex) & 0x01;
-            if (bitToWrite != currentBit) {
-                pixeldata[(i * 8) + bitIndex] ^= 1;
-            }
-        }
-    }
+    embedd_payload_in_generic_buffer(steganoFile->payload, steganoFile->payload_length, pixeldata, pixel_data_length);
 }
 
 struct SteganoFile read_bmp(const char *path) {
