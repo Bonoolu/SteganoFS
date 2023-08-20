@@ -11,8 +11,10 @@
 #include "createramdiskdialog.h"
 #include <string>
 #include <thread>
+#include <QThread>
+#include <QMetaObject>
 
-SteganoFsAdapter steganoFsAdapter("/home/minaboo/Bilder/example/");
+
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent)
@@ -21,13 +23,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("Stegano File Explorer");
 
+
     m_CRDdlg = new CreateRamdiskDialog;
     m_CRDdlg->setLightmodeOn(false);
 
     m_DefragDlg = new DefragmentDialog;
     m_DefragDlg->setLightmode_on(false);
-    m_DefragDlg->setAdapter(&steganoFsAdapter);
+    m_DefragDlg->setAdapter(steganoFsAdapter);
 
+    m_worker = new Worker();
+    m_thread = new QThread();
+
+    m_worker->moveToThread(m_thread);
 
     m_preview_on = 0;
 
@@ -47,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_lightstyle = QLatin1String(file2.readAll());
 
     // LEFT SIDE - DISPLAYING FOLDERS
-    QString sPath = "D:\\Mina\\Bilder\\SFS_example\\";
+    QString sPath = "/home/minaboo/Bilder/example";
     m_dirmodel = new QFileSystemModel(this);
     m_dirmodel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
     m_dirmodel->setRootPath(sPath);
@@ -91,10 +98,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connect(m_CRDdlg, &CreateRamdiskDialog::accepted, this, &MainWindow::createNewRamdisk);
 
+
 }
 
 MainWindow::~MainWindow()
 {
+    m_thread->requestInterruption();
+    m_thread->quit();
+    m_thread->wait();
+    delete m_thread;
+    delete m_worker;
     delete ui;
 }
 
@@ -303,7 +316,7 @@ void MainWindow::on_actionCreate_new_triggered()
 {
 
     if (m_CRDdlg->exec() == QDialog::Accepted) {
-        steganoFsAdapter.createNewFilesystem(m_CRDdlg->getValue());
+        steganoFsAdapter->createNewFilesystem(m_CRDdlg->getValue());
         ui->statusbar->showMessage(QString("New Ramdisk created! Size: ") + QString::number(m_CRDdlg->getValue()), 10000);
     } else {
         std::cout << "No Ramdisk created. ";
@@ -316,8 +329,9 @@ void MainWindow::on_actionCreate_new_triggered()
 
 void MainWindow::on_actionLoad_triggered()
 {
-    std::string s = steganoFsAdapter.steganoImageFolder();
-    steganoFsAdapter.loadFilesytemFromSteganoProvider();
+
+    std::string s = steganoFsAdapter->steganoImageFolder() + "/filesystem.steganofs";
+    steganoFsAdapter->loadFilesytemFromSteganoProvider();
     ui->statusbar->showMessage(QString("Filesystem loaded: ") + QString::fromStdString(s), 10000);
 }
 
@@ -327,7 +341,7 @@ void MainWindow::on_actionLoad_triggered()
 void MainWindow::on_actionDefragment_triggered()
 {
     //float fragmentation = steganoFsAdapter.getFragmentationInPercent();
-    m_DefragDlg->setFragmentation(steganoFsAdapter.getFragmentationInPercent());
+    m_DefragDlg->setFragmentation(steganoFsAdapter->getFragmentationInPercent());
     m_DefragDlg->exec();
 }
 
@@ -345,22 +359,30 @@ void MainWindow::on_actionShow_Filesystem_information_triggered()
 
 
 void MainWindow::on_actionMount_triggered()
-{/*
-    std::string s = steganoFsAdapter.steganoImageFolder() + "anything";
+{
+    std::string s = steganoFsAdapter->steganoImageFolder() + "anything";
 
-//    std::thread t1([steganoFsAdapter](){
-//        steganoFsAdapter.mount(s);
+    auto path = m_filemodel->rootPath();
+    m_filemodel->setRootPath("");
+
+//    std::thread t1([this, s](){
+//        steganoFsAdapter->mount(s);
 //    });
 
-    std::thread t1(steganoFsAdapter.mount(s));
 
-    t1.join();*/
+//    t1.join();
+    m_thread->start();
+    QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(SteganoFsAdapter, *steganoFsAdapter), Q_ARG(std::string, s));
+    //m_worker->mountFolder(steganoFsAdapter, s);
+
+    m_filemodel->setRootPath(path);
+
 
 }
 
 
 void MainWindow::on_actionUnmount_triggered()
 {
-    steganoFsAdapter.umount();
+    steganoFsAdapter->umount();
 }
 

@@ -19,6 +19,8 @@ set(PROJECT_SOURCES
         mainwindow.ui
         example.cpp
         example.h
+        worker.h
+        worker.cpp
         ../cpp-wrapper/SteganoFsAdapter.cpp
         ../cpp-wrapper/SteganoFsAdapter.h
         res.qrc
@@ -49,6 +51,9 @@ else()
                 ${PROJECT_SOURCES}
                 createramdiskdialog.h createramdiskdialog.cpp createramdiskdialog.ui
                 defragmentdialog.h defragmentdialog.cpp defragmentdialog.ui
+                worker.h worker.cpp
+
+
 
         )
     endif()

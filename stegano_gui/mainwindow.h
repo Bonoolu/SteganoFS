@@ -12,6 +12,9 @@
 #include <QDebug>
 #include "createramdiskdialog.h"
 #include "defragmentdialog.h"
+#include "worker.h"
+#include <QThread>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -62,11 +65,15 @@ private slots:
 
     void on_actionUnmount_triggered();
 
+
+
 private:
     Ui::MainWindow *ui;
     CreateRamdiskDialog *m_CRDdlg;
     DefragmentDialog *m_DefragDlg;
-
+    SteganoFsAdapter *steganoFsAdapter = new SteganoFsAdapter("/home/minaboo/Bilder/example/");
+    Worker *m_worker;
+    QThread *m_thread;
 
 
     QString m_darkstyle;
