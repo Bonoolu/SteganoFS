@@ -74,10 +74,6 @@ bool SteganoFsAdapter::mount(const std::string &mntPoint) {
 }
 
 bool SteganoFsAdapter::writeFilesystemToSteganoProvider() {
-    if (m_isMounted) {
-        std::cout << "[SteganoFS] Error: Can't write a mounted filesystem! unmount first!" << std::endl;
-        return false;
-    }
     if (m_steganoImageFolder.empty()) {
         std::cout << "[SteganoFS] Error: String passed to constructor is empty!" << std::endl;
         return false;
