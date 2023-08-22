@@ -18,7 +18,7 @@ struct SerializedFilesystem stegano_provider_read(const char *path) {
         struct stat file_info;
         struct dirent **namelist;
         const int n = scandir(path, &namelist, NULL, alphasort);
-        for(int fileIndex = 0; fileIndex < n; fileIndex++) {
+        for(int fileIndex = 0; fileIndex < n ; fileIndex++) {
             memset(&file_info, 0, sizeof(struct stat));
             char path_buffer[256];
             memset(path_buffer, 0, sizeof(char));
@@ -61,6 +61,7 @@ struct SerializedFilesystem stegano_provider_read(const char *path) {
                     serializedFilesystem.buf = tmp;
                     serializedFilesystem.size = new_length;
                     memcpy(serializedFilesystem.buf + writeOffset, steganoFile.payload, steganoFile.payload_length);
+                    writeOffset = new_length;
                 }
             }
         }

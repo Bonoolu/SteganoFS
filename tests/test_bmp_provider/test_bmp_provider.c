@@ -53,7 +53,7 @@ bool test_single_bmp_file () {
 }
 
 bool test_bmp_folder () {
-    HiddenFat *hiddenFat = createHiddenFat(STEGANOFS_BLOCK_SIZE * 10000, BLOCK_SIZE);
+    HiddenFat *hiddenFat = createHiddenFat(STEGANOFS_BLOCK_SIZE * 100, BLOCK_SIZE);
     const char *hiddenFilename = "test.txt";
     long timestamp = time(NULL);
     HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
@@ -109,8 +109,8 @@ bool test_bmp_folder () {
 
 int main() {
     int tests[] = {
-            //test_generic_buffer(),
-            //test_single_bmp_file(),
+            test_generic_buffer(),
+            test_single_bmp_file(),
             test_bmp_folder(),
             -1};
     size_t passed = 0;
