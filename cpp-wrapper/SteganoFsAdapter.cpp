@@ -1,5 +1,25 @@
 #include "SteganoFsAdapter.h"
 
+std::string SteganoFsAdapter::steganoImageFolder() const
+{
+    return m_steganoImageFolder;
+}
+
+bool SteganoFsAdapter::isMounted() const
+{
+    return m_isMounted;
+}
+
+SteganoFS::HiddenFat *SteganoFsAdapter::hiddenFat() const
+{
+    return m_hiddenFat;
+}
+
+std::string SteganoFsAdapter::mountPath() const
+{
+    return m_mountPath;
+}
+
 SteganoFsAdapter::SteganoFsAdapter(std::string steganoImageFolder) :
 m_steganoImageFolder(std::move(steganoImageFolder)){
 
@@ -58,9 +78,9 @@ bool SteganoFsAdapter::mount(const std::string &mntPoint) {
         std::cout << "[SteganoFS] Error: Need to load filesystem before mounting is possible!" << std::endl;
         return false;
     }
+    m_mountPath = mntPoint;
     m_isMounted = SteganoFS::steganofs_mount(m_hiddenFat, mntPoint.c_str());
     if (m_isMounted) {
-        m_mountPath = mntPoint;
         std::cout << "[SteganoFS] Successfully mounted at : " << m_mountPath << std::endl;
     } else {
         std::cout << "[SteganoFS] Error: Failed to mount at : " << m_mountPath << std::endl;
@@ -91,10 +111,6 @@ bool SteganoFsAdapter::writeFilesystemToSteganoProvider() {
 }
 
 bool SteganoFsAdapter::umount() {
-    if (!m_isMounted) {
-        std::cout << "[SteganoFS] Error: Filesystem is not mounted yet!" << std::endl;
-        return false;
-    }
     bool ret = SteganoFS::steganofs_umount(m_mountPath.c_str());
     if (ret) {
         std::cout << "[SteganoFS] Successfully unmounted at : " << m_mountPath << std::endl;

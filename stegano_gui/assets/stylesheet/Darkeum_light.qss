@@ -289,7 +289,7 @@ QComboBox::drop-down
 
 QComboBox::down-arrow
 {
-    image: url(:/assets/img/light/assets/img/light/arrow-down.png);
+    image: url(:/assets/img/light/arrow-down.png);
     width: 8px;
     height: 8px;
 }
@@ -396,7 +396,7 @@ QSpinBox::down-arrow,
 QDoubleSpinBox::down-arrow,
 QDateTimeEdit::down-arrow
 {
-    image: url(://arrow-down.png);
+    image: url(:/assets/img/light/arrow-down.png);
     width: 7px;
 
 }
@@ -406,7 +406,7 @@ QSpinBox::up-arrow,
 QDoubleSpinBox::up-arrow,
 QDateTimeEdit::up-arrow
 {
-    image: url(://arrow-up.png);
+    image: url(:/assets/img/light/arrow-up.png);
     width: 7px;
 
 }
@@ -418,7 +418,7 @@ QLineEdit
         background-color: #fcfcfc;
         color: #000000;
         border: 1px solid #cccccc;
-        border-radius: 13px;
+        border-radius: 6px;
 	padding: 2px;
 
 }
@@ -1043,24 +1043,26 @@ QDial::disabled
 QScrollBar:horizontal
 {
     border: 1px solid #222222;
-    background-color: #3d3d3d;
+    background-color: #efefef;
     height: 13px;
     margin: 0px 16px 0 16px;
+    border-radius: 5px;
 
 }
 
 
 QScrollBar::handle:horizontal
 {
-    background: #1073b4;
+    background: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891);
     min-height: 20px;
+    border-radius: 3px;
 
 }
 
 
 QScrollBar::add-line:horizontal
 {
-    border: 1px solid #1b1b19;
+    border: 1px solid transparent;
     background-color: #1073b4;
     width: 14px;
     subcontrol-position: right;
@@ -1071,7 +1073,7 @@ QScrollBar::add-line:horizontal
 
 QScrollBar::sub-line:horizontal
 {
-    border: 1px solid #1b1b19;
+    border: 1px solid transparent;
     background-color: #1073b4;
     width: 14px;
     subcontrol-position: left;
@@ -1082,18 +1084,20 @@ QScrollBar::sub-line:horizontal
 
 QScrollBar::right-arrow:horizontal
 {
-    image: url(://arrow-right.png);
+    image: url(:/assets/img/light/arrow-right.png);
     width: 6px;
     height: 6px;
+    border-radius:2px;
 
 }
 
 
 QScrollBar::left-arrow:horizontal
 {
-    image: url(://arrow-left.png);
+    image: url(:/assets/img/light/arrow-left.png);
     width: 6px;
     height: 6px;
+    border-radius:2px;
 
 }
 
@@ -1107,10 +1111,11 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
 
 QScrollBar:vertical
 {
-    background-color: #3d3d3d;
+    background-color: #efefef;
     width: 13px;
     margin: 16px 0 16px 0;
-    border: 1px solid #222222;
+    border: 1px solid transparent;
+    border-radius:5px;
 
 }
 
@@ -1119,6 +1124,7 @@ QScrollBar::handle:vertical
 {
     background-color: #1073b4;
     min-height: 20px;
+    border-radius:3px;
 
 }
 
@@ -1136,7 +1142,7 @@ QScrollBar::add-line:vertical
 
 QScrollBar::sub-line:vertical
 {
-    border: 1px solid #1b1b19;
+    border: 1px solid transparent;
     background-color: #1073b4;
     height: 14px;
     subcontrol-position: top;
@@ -1147,18 +1153,20 @@ QScrollBar::sub-line:vertical
 
 QScrollBar::up-arrow:vertical
 {
-    image: url(://arrow-up.png);
+    image: url(:/assets/img/light/arrow-up.png);
     width: 6px;
     height: 6px;
+    border-radius:2px;
 
 }
 
 
 QScrollBar::down-arrow:vertical
 {
-    image: url(://arrow-down.png);
+    image: url(:/assets/img/light/arrow-down.png);
     width: 6px;
     height: 6px;
+    border-radius:2px;
 
 }
 
@@ -1205,4 +1213,23 @@ QStatusBar
 
 }
 
+/*-----QInputDialog-----*/
+
+QInputDialog
+{
+        background-color: #fafafa;
+        color: #333333;
+}
+
+QDialog, QMessageBox
+{
+        background-color: #fafafa;
+        color: #333333;
+}
+
+QDialogButtonBox
+{
+    background-color: #fafafa;
+    color: #333333;
+}
 

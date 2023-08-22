@@ -19,6 +19,8 @@ set(PROJECT_SOURCES
         mainwindow.ui
         example.cpp
         example.h
+        worker.h
+        worker.cpp
         ../cpp-wrapper/SteganoFsAdapter.cpp
         ../cpp-wrapper/SteganoFsAdapter.h
         res.qrc
@@ -28,8 +30,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(steganoExplorer
             MANUAL_FINALIZATION
             ${PROJECT_SOURCES}
-            mainwindow.ui
             createramdiskdialog.ui
+            defragmentdialog.ui
+            mainwindow.ui
             res.qrc
     )
     # Define target properties for Android with Qt 6 as:
@@ -47,10 +50,21 @@ else()
         add_executable(steganoExplorer
                 ${PROJECT_SOURCES}
                 createramdiskdialog.h createramdiskdialog.cpp createramdiskdialog.ui
+                defragmentdialog.h defragmentdialog.cpp defragmentdialog.ui
+                worker.h worker.cpp
+                mountfrompathdialog.h mountfrompathdialog.cpp mountfrompathdialog.ui
+                previewgraphicsview.h previewgraphicsview.cpp
+
+
 
         )
     endif()
 endif()
+
+add_custom_target(copy_fs
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/filesystem.steganofs ${CMAKE_CURRENT_BINARY_DIR}
+)
+add_dependencies(steganoExplorer copy_fs)
 
 target_link_libraries(steganoExplorer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(steganoExplorer PRIVATE steganofs)

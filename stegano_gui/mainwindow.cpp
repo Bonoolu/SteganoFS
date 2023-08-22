@@ -9,8 +9,15 @@
 #include <QDialog>
 #include <iostream>
 #include "createramdiskdialog.h"
+#include <string>
+#include <thread>
+#include <QThread>
+#include <QMetaObject>
+#include "../cpp-wrapper/SteganoFsAdapter.h"
+#include <filesystem>
+#include <QGraphicsScene>
+Q_DECLARE_METATYPE(SteganoFsAdapter*)
 
-SteganoFsAdapter steganoFsAdapter("/home/minaboo/Bilder/example/");
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent)
@@ -19,16 +26,37 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("Stegano File Explorer");
 
-    m_CRDdlg = new CreateRamdiskDialog;
+    //qRegisterMetaType(SteganoFsAdapter*);
 
+    m_CRDdlg = new CreateRamdiskDialog;
+    m_CRDdlg->setLightmodeOn(false);
+
+    m_DefragDlg = new DefragmentDialog;
+    m_DefragDlg->setLightmode_on(false);
+    m_DefragDlg->setAdapter(steganoFsAdapter);
+
+    m_MFPDlg = new MountFromPathDialog;
+    m_MFPDlg->setLightmodeon(false);
+
+    m_fileDlg = new QFileDialog;
+
+
+    m_currentFile = nullptr;
+    m_worker = new Worker();
+    m_thread = new QThread();
+
+    m_worker->moveToThread(m_thread);
 
     m_preview_on = 0;
 
     m_lightmode_on = 0;
 
+    m_pgv = new PreviewGraphicsView;
+    m_previewPicture = new QGraphicsScene;
+
     ui->statusbar->show();
 
-    // DARK STYLE
+    // DARK/LIGHT STYLE
     QFile file(":/assets/stylesheet/Darkeum.qss");
     file.open(QFile::ReadOnly);
 
@@ -39,11 +67,21 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_lightstyle = QLatin1String(file2.readAll());
 
+
+    // BACK AND FORTH BUTTONS
+    m_bafButtonsStyle_dark = "QPushButton {background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); height: 20px; width: 20px; border-radius: 15px;} QPushButton::disabled { background-color: #3f476b;} QPushButton::hover {background-color: #7990fc;} QPushButton::pressed {background-color: #899dfa;} )";
+    m_bafButtonsStyle_light = "QPushButton {background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); height: 20px; width: 20px; border-radius: 15px;} QPushButton::disabled { background-color: #2e5e7d;} QPushButton::hover {background-color: #1e86c9;} QPushButton::pressed {background-color: #54a8de;} )";
+    ui->backButton->setStyleSheet(m_bafButtonsStyle_dark);
+    ui->forwardButton->setStyleSheet(m_bafButtonsStyle_dark);
+
+
+
     // LEFT SIDE - DISPLAYING FOLDERS
-    QString sPath = "D:\\Mina\\Bilder\\SFS_example\\";
+    QString sPath = "/home/minaboo/Bilder/example";
     m_dirmodel = new QFileSystemModel(this);
     m_dirmodel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
     m_dirmodel->setRootPath(sPath);
+    m_currentDir = m_dirmodel->rootPath();
 
     ui->treeView->setModel(m_dirmodel);
     ui->treeView->setSortingEnabled(true);
@@ -54,20 +92,24 @@ MainWindow::MainWindow(QWidget *parent)
     // RIGHT SIDE - DISPLAYING FILES
 
     m_filemodel = new QFileSystemModel(this);
-    m_filemodel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
+    //m_filemodel->setFilter(/*QDir::NoDotAndDotDot |*/ QDir::Files);
     m_filemodel->setRootPath(sPath);
 
+    ui->tableView->hide();
     ui->tableView->setSortingEnabled(true);
     ui->tableView->setModel(m_filemodel);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->searchLineEdit->setPlaceholderText("Search...");
+    ui->DisplayComboBox->setDisabled(true);
 
 
-
-    ui->listWidget->hide();
+    //ui->listWidget->hide();
     ui->listWidget->setSortingEnabled(true);
 
-    ui->previewLabel->hide();
+    ui->horizontalLayout_2->addWidget(m_pgv);
+    //ui->horizontalLayout_2->removeWidget(ui->graphicsView);
+    m_pgv->setAlignment(Qt::AlignCenter | Qt::AlignCenter);
+    m_pgv->hide();
 
 
 
@@ -80,14 +122,25 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->searchLineEdit, &QLineEdit::textChanged, this, &MainWindow::handleSearchTextChanged);
 
-    connect(ui->refreshButton, &QPushButton::clicked, this, &MainWindow::refreshView);
+    connect(m_worker, &Worker::mountFinished, this, &MainWindow::mountFinished);
 
-    // connect(m_CRDdlg, &CreateRamdiskDialog::accepted, this, &MainWindow::createNewRamdisk);
+    connect(m_pgv, &PreviewGraphicsView::refreshScene, this, &MainWindow::refreshPreviewOnResize);
 
 }
 
 MainWindow::~MainWindow()
 {
+    m_thread->requestInterruption();
+    m_thread->quit();
+    m_thread->wait();
+
+    delete m_CRDdlg;
+    delete m_MFPDlg;
+    delete m_DefragDlg;
+    delete m_thread;
+    delete m_worker;
+    delete m_pgv;
+    delete m_previewPicture;
     delete ui;
 }
 
@@ -104,7 +157,7 @@ void MainWindow::updateListWidget(QString sPath){
     QList<QString> path_list;
     QModelIndex parentIndex = m_filemodel->index(sPath);
     int numRows = m_filemodel->rowCount(parentIndex);
-    qDebug() << "Dateien in " + sPath << ": " << numRows << Qt::endl;
+
 
 
     for (int row = 0; row < numRows; ++row) {
@@ -113,26 +166,70 @@ void MainWindow::updateListWidget(QString sPath){
         path_list.append(path);
     }
 
-    qDebug() << path_list << Qt::endl;
 
     for (QString file : path_list) {
         QString fullPath = sPath + "/" + file;
-        QImage img = QImage(fullPath);
-        //qiimg = img.scaled(200,150,Qt::KeepAspectRatio);
-        QPixmap pixmap = QPixmap::fromImage(img, Qt::AutoColor);
+        QPixmap pixmap;
+
+
+        if ( file.contains(QRegExp(".jpg")) |  file.contains(QRegExp(".bmp")) | file.contains(QRegExp(".png")) | file.contains(QRegExp(".gif")) | file.contains(QRegExp(".jpeg")) | file.contains(QRegExp(".tif"))) {
+            QImage img = QImage(fullPath);
+            pixmap = QPixmap::fromImage(img, Qt::AutoColor);
+        } else if (file.contains(QRegExp(".mp4")) |  file.contains(QRegExp(".avi")) | file.contains(QRegExp(".mov")) | file.contains(QRegExp(".flv"))) {
+            //icon for video file
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/play-button.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/play-button.png");
+            }
+        } else if (file.contains(QRegExp(".m4a")) |  file.contains(QRegExp(".mp3")) | file.contains(QRegExp(".wav")) | file.contains(QRegExp(".flac"))) {
+            //icon for music file
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/music-note.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/music-note.png");
+            }
+
+        } else if (file.contains(QRegExp(".c$")) |  file.contains(QRegExp(".cpp$")) | file.contains(QRegExp(".ui$")) |  file.contains(QRegExp(".h$")) | file.contains(QRegExp(".html$")) | file.contains(QRegExp(".css$")) | file.contains(QRegExp(".qss$")) | file.contains(QRegExp(".java$")) | file.contains(QRegExp(".steganofs$"))) {
+            //icon for coding file
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/coding.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/coding.png");
+            }
+
+        } else if (!file.contains(QRegExp("*[.]*"))) {
+            //icon for folders
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/folder_c.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/folder_c.png");
+            }
+
+        }  else {
+            // docs and other files
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/file.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/file.png");
+            }
+
+        }
+
+
         QListWidgetItem *item = new QListWidgetItem(QIcon(pixmap), QString(file));
         item->setSizeHint(QSize(210, 170));
         qDebug() << fullPath << Qt::endl;
         ui->listWidget->addItem(item);
     }
 
-    qDebug() << path_list << Qt::endl;
-
     path_list.clear();
 }
 
 void MainWindow::on_treeView_clicked(const QModelIndex &index)
 {
+    m_currentFile = nullptr;
+    ui->listWidget->setCurrentItem(nullptr);
     m_currentDir = m_dirmodel->fileInfo(index).absoluteFilePath();
     QString sPath = m_currentDir;
     qDebug() << "sPath: " + sPath << Qt::endl;
@@ -193,38 +290,103 @@ void MainWindow::on_pathLineEdit_editingFinished()
 void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
 
-    //ui->previewLabel->setPixmap(current->icon());
-    QString fullPath = m_currentDir + "/" + current->text();
-    qDebug() << "Test currentItemChanged : " << fullPath;
-    QImage img = QImage(fullPath);
-    //img = img.scaled(500,250,Qt::KeepAspectRatio);
-    QPixmap pixmap = QPixmap::fromImage(img, Qt::AutoColor);
-    ui->previewLabel->setMaximumWidth(500);
-    ui->previewLabel->setPixmap(pixmap);
-    ui->previewLabel->setScaledContents(true);
-    //ui->previewLabel->setText("PREVIEW");
-    /*QListWidgetItem *currentpreview = new QListWidgetItem(QIcon(current->icon()));
-    currentpreview->setSizeHint(QSize(400, 400));
-    qDebug() << fullPath << Qt::endl;
-    ui->previewWidget->addItem(currentpreview);*/
+    m_previewPicture->clear();
 
-}
+    if (ui->listWidget->currentItem() != nullptr){
+        m_currentFile = current;
+        QString fullPath = m_currentDir + "/" + current->text();
+
+        QImage img = QImage(fullPath);
+
+        QPixmap pixmap; // = QPixmap::fromImage(img, Qt::AutoColor);
+
+        if ( fullPath.contains(QRegExp(".jpg")) |  fullPath.contains(QRegExp(".bmp")) | fullPath.contains(QRegExp(".png")) | fullPath.contains(QRegExp(".gif")) | fullPath.contains(QRegExp(".jpeg")) | fullPath.contains(QRegExp(".tif"))) {
+            pixmap = QPixmap::fromImage(img, Qt::AutoColor);
+
+        } else if (fullPath.contains(QRegExp(".mp4")) |  fullPath.contains(QRegExp(".avi")) | fullPath.contains(QRegExp(".mov")) | fullPath.contains(QRegExp(".flv"))) {
+            //icon for video fullPath
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/play-button.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/play-button.png");
+            }
+
+        } else if (fullPath.contains(QRegExp(".m4a")) |  fullPath.contains(QRegExp(".mp3")) | fullPath.contains(QRegExp(".wav")) | fullPath.contains(QRegExp(".flac"))) {
+            //icon for music fullPath
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/music-note.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/music-note.png");
+            }
+
+        } else if (!fullPath.contains(QRegExp("*[.]*")) ) {
+            //icon for folders
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/folder_c.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/folder_c.png");
+            }
+
+        } else if (fullPath.contains(QRegExp(".c")) |  fullPath.contains(QRegExp(".cpp")) | fullPath.contains(QRegExp(".ui")) |  fullPath.contains(QRegExp(".h")) | fullPath.contains(QRegExp(".html")) | fullPath.contains(QRegExp(".css")) | fullPath.contains(QRegExp(".qss")) | fullPath.contains(QRegExp(".java")) | fullPath.contains(QRegExp(".steganofs"))) {
+            //icon for coding fullPath
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/coding.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/coding.png");
+            }
+
+        }  else {
+            // docs and other files
+            if (m_lightmode_on == 0){
+                pixmap = QPixmap(":/assets/img/file.png");
+            } else {
+                pixmap = QPixmap(":/assets/img/light/file.png");
+            }
+
+        }
+
+//        ui->previewLabel->setScaledContents(true);
+//        //ui->previewLabel->setMaximumWidth(this->width() / 4);
+//        ui->previewLabel->setPixmap(pixmap.scaledToWidth(w));
+
+
+        //m_previewPicture->setSceneRect(0,0,300,450);
+
+//        PreviewGraphicsView *pgv = new PreviewGraphicsView;
+//        int w = ui->graphicsView->width();
+//        int h = ui->graphicsView->height();
+//        m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
+//        ui->horizontalLayout_2->addWidget(pgv);
+//        ui->horizontalLayout_2->removeWidget(ui->graphicsView);
+//        pgv->setScene(m_previewPicture);
+
+
+
+        int w = m_pgv->width();
+        int h = m_pgv->height();
+        m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
+
+        m_pgv->setScene(m_previewPicture);
+
+    }
+
+
+    }
 
 
 void MainWindow::on_previewToolButton_clicked()
 {
+
+
     if (m_preview_on == 0){
 
-        ui->centralwidget->setBaseSize(QSize(ui->centralwidget->width() + 500, ui->centralwidget->height()));
+        m_pgv->show();
 
-        ui->previewLabel->show();
         m_preview_on = 1;
 
     } else {
 
-        ui->centralwidget->setBaseSize(QSize(ui->centralwidget->width() - 500, ui->centralwidget->height()));
-
-        ui->previewLabel->hide();
+        m_pgv->hide();
         m_preview_on = 0;
     }
 }
@@ -232,6 +394,9 @@ void MainWindow::on_previewToolButton_clicked()
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
+
+
+    m_currentFileString = item->text();
 
 }
 
@@ -242,7 +407,9 @@ void MainWindow::on_darkModePushButton_clicked()
     if (m_lightmode_on == 0){
         qApp->setStyleSheet(m_lightstyle);
         m_lightmode_on = 1;
-        m_CRDdlg->setLightmodeOn(1);
+        m_CRDdlg->setLightmodeOn(true);
+        m_DefragDlg->setLightmode_on(true);
+        m_MFPDlg->setLightmodeon(true);
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/light/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/light/document.png"));
@@ -252,12 +419,21 @@ void MainWindow::on_darkModePushButton_clicked()
         ui->pastePushButton->setIcon(QIcon(":/assets/img/light/paste.png"));
         ui->previewToolButton->setIcon(QIcon(":/assets/img/light/preview.png"));
         ui->darkModePushButton->setIcon(QIcon(":/assets/img/light/night-mode.png"));
+        ui->backButton->setStyleSheet(m_bafButtonsStyle_light);
+
+        ui->forwardButton->setStyleSheet(m_bafButtonsStyle_light);
+
+        ui->forwardButton->setIcon(QIcon(":/assets/img/light/arrow-forth.png"));
+        ui->backButton->setIcon(QIcon(":/assets/img/light/arrow-back.png"));
 
 
     } else {
 
         qApp->setStyleSheet(m_darkstyle);
         m_lightmode_on = 0;
+        m_CRDdlg->setLightmodeOn(false);
+        m_DefragDlg->setLightmode_on(false);
+        m_MFPDlg->setLightmodeon(false);
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/document.png"));
@@ -267,8 +443,169 @@ void MainWindow::on_darkModePushButton_clicked()
         ui->pastePushButton->setIcon(QIcon(":/assets/img/paste.png"));
         ui->previewToolButton->setIcon(QIcon(":/assets/img/preview (2).png"));
         ui->darkModePushButton->setIcon(QIcon(":/assets/img/light-bulb.png"));
+        ui->backButton->setStyleSheet(m_bafButtonsStyle_dark);
+        ui->forwardButton->setStyleSheet(m_bafButtonsStyle_dark);
+
+        ui->forwardButton->setIcon(QIcon(":/assets/img/arrow-forth.png"));
+        ui->backButton->setIcon(QIcon(":/assets/img/arrow-back.png"));
+
+
     }
 
+   updateListWidget(m_currentDir);
+
+}
+
+
+
+
+
+void MainWindow::on_actionCreate_new_triggered()
+{
+
+    if (m_CRDdlg->exec() == QDialog::Accepted) {
+        steganoFsAdapter->createNewFilesystem(m_CRDdlg->getValue());
+        ui->statusbar->showMessage(QString("New Ramdisk created! Size: ") + QString::number(m_CRDdlg->getValue()), 10000);
+    } else {
+        ui->statusbar->showMessage(QString("No Ramdisk created!"));
+    }
+
+
+}
+
+
+void MainWindow::on_actionDefragment_triggered()
+{
+
+    m_DefragDlg->setFragmentation(steganoFsAdapter->getFragmentationInPercent());
+    m_DefragDlg->exec();
+}
+
+
+void MainWindow::on_actionNeuer_Ordner_triggered()
+{
+
+}
+
+
+void MainWindow::on_actionShow_Filesystem_information_triggered()
+{
+
+}
+
+
+
+void MainWindow::on_actionUnmount_triggered()
+{
+    steganoFsAdapter->umount();
+}
+
+
+void MainWindow::on_actionCurrent_directory_triggered()
+{
+    std::string s = m_currentDir.toStdString();
+
+    auto path = m_filemodel->rootPath();
+    m_filemodel->setRootPath("");
+
+
+        m_thread->start();
+        QVariant qSteganoFSAdapter = QVariant::fromValue(steganoFsAdapter);
+        QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, QString(s.c_str())));
+/*
+        if (mountSucceeded && steganoFsAdapter->mountPath()==s){
+                ui->statusbar->showMessage(QString("Mount successfull. Path: " ) + QString::fromStdString(s));
+        } else if (mountSucceeded ) {
+
+        }*/
+        /*
+        if (m_thread->isFinished() && steganoFsAdapter->isMounted()){
+        ui->statusbar->showMessage(QString("Path successfully mounted: ") + QString::fromStdString(s));
+        } else {
+            ui->statusbar->showMessage(QString("Path successfully mounted: ") + QString::fromStdString(s));
+        }
+*/
+
+
+    m_filemodel->setRootPath(path);
+
+}
+
+
+void MainWindow::on_actionFrom_Path_triggered()
+{
+
+    auto path = m_filemodel->rootPath();
+    m_filemodel->setRootPath("");
+
+
+
+    if (m_MFPDlg->exec() == QDialog::Accepted) {
+        m_thread->start();
+        QVariant qSteganoFSAdapter = QVariant::fromValue(steganoFsAdapter);
+        QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, m_MFPDlg->mountingPath()));
+
+    } else {
+        ui->statusbar->showMessage(QString("Mount aborted."));
+    }
+
+    m_filemodel->setRootPath(path);
+}
+
+void MainWindow::mountFinished()
+{
+    if (steganoFsAdapter->isMounted() && steganoFsAdapter->mountPath() == m_currentDir.toStdString()){
+        ui->statusbar->showMessage("Mount finished. Path: " + QString::fromStdString(steganoFsAdapter->mountPath()));
+    } else {
+        ui->statusbar->showMessage("Mount failed. " + m_currentDir);
+    }
+
+}
+
+// TODO: In welcher Variable soll der Pfad der ausgewählten Datei gespeichert werden?
+void MainWindow::on_actionChoose_from_explorer_triggered()
+{
+    if (m_fileDlg->exec() == QDialog::Accepted) {
+        m_fileDlg->setDirectory(m_currentDir);
+        m_fileDlg->setFileMode(QFileDialog::ExistingFile);
+
+        ui->statusbar->showMessage(QString("Loaded file:" + m_fileDlg->selectedFiles().at(0)) );
+
+    } else {
+        ui->statusbar->showMessage(QString("No file selected."));
+    }
+}
+
+//TODO: string s ist filesystem.steganofs/filesystem.steganofs...
+void MainWindow::on_actionLoad_selected_file_triggered()
+{
+    std::string s = steganoFsAdapter->steganoImageFolder() + "/filesystem.steganofs";
+    steganoFsAdapter->loadFilesytemFromSteganoProvider();
+    ui->statusbar->showMessage(QString("Filesystem loaded: ") + QString::fromStdString(s), 10000);
+}
+
+
+void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    QString path = m_currentDir + "/" + ui->listWidget->currentItem()->text();
+    if (!path.contains(QRegExp("*.*"))){
+        m_currentDir = path;
+        updateListWidget(path);
+
+        if (ui->listWidget->count() != 0){
+                ui->listWidget->setCurrentRow(1);
+                m_currentFile = ui->listWidget->currentItem();
+        }
+    }
+
+
+
+}
+
+void MainWindow::refreshPreviewOnResize()
+{
+
+    m_pgv->setScene(m_previewPicture);
 }
 
 
@@ -286,20 +623,12 @@ void MainWindow::on_darkModePushButton_clicked()
 
 */
 
-
-void MainWindow::on_actionCreate_new_triggered()
-{
-
-    /*m_CRDdlg->exec();
-
-    delete m_CRDdlg;*/
-
-    if (m_CRDdlg->exec() == QDialog::Accepted) {
-        std::cout << "New Ramdisk created: " <<  steganoFsAdapter.createNewFilesystem(m_CRDdlg->getValue()) << "/n";
-        ui->statusbar->showMessage(QString("New Ramdisk created!"), 10000);
-    }
-
-
-}
-
-
+/*   FÜR SYSTEMINFO
+ *
+ *     stbuf->f_bsize = hiddenFat->blockSize;    // Filesystem block size
+    stbuf->f_frsize = hiddenFat->blockSize;   // Fundamental filesystem block size
+    stbuf->f_blocks = hiddenFat->amountBlocks; // Total data blocks in filesystem
+    stbuf->f_bfree = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;   // Free blocks
+    stbuf->f_bavail = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;  // Free blocks available to non-superuser
+    stbuf->f_namemax = STEGANOFS_MAX_FILENAME_LENGTH;
+*/
