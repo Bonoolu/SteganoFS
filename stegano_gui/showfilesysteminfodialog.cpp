@@ -1,0 +1,56 @@
+#include "showfilesysteminfodialog.h"
+#include "ui_showfilesysteminfodialog.h"
+
+ShowFileSystemInfoDialog::ShowFileSystemInfoDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::ShowFileSystemInfoDialog)
+{
+    ui->setupUi(this);
+    this->setWindowTitle("Filesystem info");
+
+    /*   FÜR SYSTEMINFO
+ *
+ *     stbuf->f_bsize = hiddenFat->blockSize;    // Filesystem block size
+    stbuf->f_frsize = hiddenFat->blockSize;   // Fundamental filesystem block size
+    stbuf->f_blocks = hiddenFat->amountBlocks; // Total data blocks in filesystem
+    stbuf->f_bfree = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;   // Free blocks
+    stbuf->f_bavail = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;  // Free blocks available to non-superuser
+    stbuf->f_namemax = STEGANOFS_MAX_FILENAME_LENGTH;
+*/
+
+
+
+}
+
+ShowFileSystemInfoDialog::~ShowFileSystemInfoDialog()
+{
+    delete ui;
+}
+
+void ShowFileSystemInfoDialog::on_closeButton_clicked()
+{
+    this->close();
+}
+
+void ShowFileSystemInfoDialog::setLightmodeon(bool newLightsmodeon)
+{
+    m_lightmodeon = newLightsmodeon;
+
+
+    if (this->m_lightmodeon == true){
+        this->setStyleSheet("background-color: #fafafa; color: #111111;");
+        ui->closeButton->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); border-radius: 5px; padding: 5px; color: white; border: 1px solid #1073b4; padding: 2px 5px;");
+        ui->filesystemInfoLabel->setStyleSheet("background-color: #efefef; color: black;");
+
+    }
+
+    if (this->m_lightmodeon == false) {
+
+        this->setStyleSheet("background-color: #111111; color: #fafafa;");
+        ui->closeButton->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; border: 1px solid #607cff; padding: 2px 5px;");
+        ui->filesystemInfoLabel->setStyleSheet("background-color: #1e1e1e; color: white; padding: 2px 7px ; ");
+
+
+    }
+}
+

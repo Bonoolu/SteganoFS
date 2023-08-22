@@ -43,8 +43,8 @@ void MountFromPathDialog::setLightmodeon(bool newLightmodeon)
 
     if (this->m_lightmodeon == true){
         this->setStyleSheet("background-color: #fafafa; color: #111111;");
-        ui->mountPathLineEdit->setStyleSheet("background-color: transparent; color: #111111; border: 1px solid #1073b4; border-radius: 15px; padding: 2px 5px;");
-        ui->buttonBox->setStyleSheet("background-color: #1073b4; color: white; padding: 2px 7px ; ");
+        ui->mountPathLineEdit->setStyleSheet("background-color: #fafafa; color: #111111; border: 1px solid #1073b4; border-radius: 15px; padding: 2px 5px;");
+        ui->buttonBox->setStyleSheet("qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); padding: 5px; color: white; padding: 2px 7px ; ");
         ui->pleaseTypeInLabel ->setStyleSheet("background-color: transparent; color: #111111; ");
 
 
@@ -55,8 +55,8 @@ void MountFromPathDialog::setLightmodeon(bool newLightmodeon)
     if (this->m_lightmodeon == false) {
 
         this->setStyleSheet("background-color: #111111; color: #fafafa;");
-        ui->mountPathLineEdit->setStyleSheet("background-color: transparent; color: black; border: 1px solid #607cff; border-radius: 15px; padding: 2px 5px;");
-        ui->buttonBox->setStyleSheet("background-color: #607cff; color: white; padding: 2px 7px ; ");
+        ui->mountPathLineEdit->setStyleSheet("background-color: #111111; color: black; border: 1px solid #607cff; border-radius: 15px; padding: 2px 5px;");
+        ui->buttonBox->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; padding: 2px 7px ; ");
         ui->pleaseTypeInLabel ->setStyleSheet("background-color: transparent; color: black; ");
 
     }

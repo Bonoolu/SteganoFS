@@ -38,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_MFPDlg = new MountFromPathDialog;
     m_MFPDlg->setLightmodeon(false);
 
+    m_SFIdlg = new ShowFileSystemInfoDialog;
+    m_SFIdlg->setLightmodeon(false);
+
     m_fileDlg = new QFileDialog;
 
 
@@ -137,6 +140,7 @@ MainWindow::~MainWindow()
     delete m_CRDdlg;
     delete m_MFPDlg;
     delete m_DefragDlg;
+    delete m_SFIdlg;
     delete m_thread;
     delete m_worker;
     delete m_pgv;
@@ -410,6 +414,7 @@ void MainWindow::on_darkModePushButton_clicked()
         m_CRDdlg->setLightmodeOn(true);
         m_DefragDlg->setLightmode_on(true);
         m_MFPDlg->setLightmodeon(true);
+        m_SFIdlg->setLightmodeon(true);
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/light/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/light/document.png"));
@@ -434,6 +439,7 @@ void MainWindow::on_darkModePushButton_clicked()
         m_CRDdlg->setLightmodeOn(false);
         m_DefragDlg->setLightmode_on(false);
         m_MFPDlg->setLightmodeon(false);
+        m_SFIdlg->setLightmodeon(false);
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/document.png"));
@@ -490,6 +496,7 @@ void MainWindow::on_actionNeuer_Ordner_triggered()
 
 void MainWindow::on_actionShow_Filesystem_information_triggered()
 {
+        m_SFIdlg->exec();
 
 }
 
@@ -637,15 +644,6 @@ void MainWindow::refreshPreviewOnResize()
 
 */
 
-/*   FÜR SYSTEMINFO
- *
- *     stbuf->f_bsize = hiddenFat->blockSize;    // Filesystem block size
-    stbuf->f_frsize = hiddenFat->blockSize;   // Fundamental filesystem block size
-    stbuf->f_blocks = hiddenFat->amountBlocks; // Total data blocks in filesystem
-    stbuf->f_bfree = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;   // Free blocks
-    stbuf->f_bavail = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;  // Free blocks available to non-superuser
-    stbuf->f_namemax = STEGANOFS_MAX_FILENAME_LENGTH;
-*/
 
 void MainWindow::on_backButton_clicked()
 {

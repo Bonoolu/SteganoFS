@@ -18,6 +18,7 @@
 #include <QFileDialog>
 #include <QGraphicsScene>
 #include "previewgraphicsview.h"
+#include "showfilesysteminfodialog.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -95,6 +96,8 @@ private:
     DefragmentDialog *m_DefragDlg;
     MountFromPathDialog *m_MFPDlg;
     QFileDialog *m_fileDlg;
+    ShowFileSystemInfoDialog *m_SFIdlg;
+
 
     QGraphicsScene *m_previewPicture;
     PreviewGraphicsView *m_pgv;

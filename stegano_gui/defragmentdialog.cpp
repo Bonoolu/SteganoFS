@@ -21,7 +21,7 @@ void DefragmentDialog::setLightmode_on(bool newLightmode_on)
 
     if (this->m_lightmode_on == true){
         this->setStyleSheet("background-color: #fafafa; color: #111111;");
-        ui->buttonBox->setStyleSheet("background-color: #1073b4; color: white; padding: 2px 7px ; ");
+        ui->buttonBox->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); border-radius: 5px;  padding: 5px; color: white; padding: 2px 7px ; ");
 
 
 
@@ -30,7 +30,7 @@ void DefragmentDialog::setLightmode_on(bool newLightmode_on)
 
     if (this->m_lightmode_on == false) {
 
-        ui->buttonBox->setStyleSheet("background-color: #607cff; color: white; padding: 2px 7px ; ");
+        ui->buttonBox->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; padding: 2px 7px ; ");
         this->setStyleSheet("background-color: #111111; color: #fafafa;");
 
     }

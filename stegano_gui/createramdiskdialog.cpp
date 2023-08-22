@@ -11,13 +11,6 @@ CreateRamdiskDialog::CreateRamdiskDialog(QWidget *parent) :
     this->setWindowTitle("Create a new File System");
     m_value = 0;
 
-
-    ui->buttonBox->setStyleSheet("background-color: #607cff; color: white; padding: 2px 7px ; ");
-    ui->newRamdiskLabel->setStyleSheet("background-color: transparent; color: #fafafa;");
-    ui->ramdiskSizeSpinBox->setStyleSheet("background-color: transparent; color: #fafafa;");
-    this->setStyleSheet("background-color: #111111; color: #fafafa;");
-
-
 }
 
 CreateRamdiskDialog::~CreateRamdiskDialog()
@@ -48,7 +41,7 @@ void CreateRamdiskDialog::setLightmodeOn(bool b)
     if (this->m_lightmodeon == true){
         this->setStyleSheet("background-color: #fafafa; color: #111111;");
         ui->newRamdiskLabel->setStyleSheet("background-color: transparent; color: #111111;");
-        ui->buttonBox->setStyleSheet("background-color: #1073b4; color: white; padding: 2px 7px ; ");
+        ui->buttonBox->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); padding: 5px; color: white; padding: 2px 7px ; ");
         ui->ramdiskSizeSpinBox->setStyleSheet("background-color: transparent; color: #111111;");
 
 
@@ -58,7 +51,7 @@ void CreateRamdiskDialog::setLightmodeOn(bool b)
 
     if (this->m_lightmodeon == false) {
 
-        ui->buttonBox->setStyleSheet("background-color: #607cff; color: white; padding: 2px 7px ; ");
+        ui->buttonBox->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; padding: 2px 7px ; ");
         ui->newRamdiskLabel->setStyleSheet("background-color: transparent; color: black;");
         ui->ramdiskSizeSpinBox->setStyleSheet("background-color: transparent; color: black;");
         this->setStyleSheet("background-color: #111111; color: black;");
