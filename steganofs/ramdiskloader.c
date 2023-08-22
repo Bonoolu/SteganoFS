@@ -13,7 +13,7 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat) {
 
     size_t sizeFilesystem = offsetBlocks + sizeBlocks;
 
-    unsigned char *bufferFilesystem = malloc(sizeFilesystem);
+    unsigned char *bufferFilesystem = malloc(sizeFilesystem); // TODO! free me after serializedFilesystem is no longer needed
     memset(bufferFilesystem, 0, sizeFilesystem);
 
     PackedFat *packedFat = (PackedFat*) (bufferFilesystem + offsetPackedFat);
@@ -76,7 +76,7 @@ HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem) {
     PackedFile *packedFiles = (PackedFile*) (serializedFilesystem.buf + packedFat->filesOffset);
     unsigned char *disk = serializedFilesystem.buf + packedFat->diskOffset;
 
-    HiddenFat *hiddenFat = createHiddenFat(packedFat->blockSize * packedFat->amountBlocks, packedFat->blockSize);
+    HiddenFat *hiddenFat = createHiddenFat(packedFat->blockSize * packedFat->amountBlocks, packedFat->blockSize); // TODO: Call freeHiddenFat() in hiddenfat.c when this Filesystem is no longer needed
 
     HiddenFile **hiddenFileIterator = hiddenFat->files;
     struct PackedFile emptyFile;
@@ -86,7 +86,7 @@ HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem) {
             hiddenFileIterator++;
             continue;
         }
-        *hiddenFileIterator = malloc(sizeof(HiddenFile));
+        *hiddenFileIterator = malloc(sizeof(HiddenFile)); // gets freed in freeHiddenFat in hiddenfat.c
         memset(*hiddenFileIterator, 0, sizeof(HiddenFile));
         (*hiddenFileIterator)->filesize = (packedFile)->filesize;
         if (packedFile->hiddenClusterBIndex == -1) {
@@ -122,6 +122,5 @@ HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem) {
         hiddenFileIterator++;
     }
     memcpy(hiddenFat->disk, disk, hiddenFat->amountBlocks * hiddenFat->blockSize);
-
     return hiddenFat;
 }

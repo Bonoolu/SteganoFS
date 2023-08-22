@@ -1,4 +1,3 @@
-#ifndef __cplusplus
 #ifndef STEGANOFS_RAMDISKLOADER_H
 #define STEGANOFS_RAMDISKLOADER_H
 
@@ -50,4 +49,3 @@ struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat);
 HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem);
 
 #endif //STEGANOFS_RAMDISKLOADER_H
-#endif // __cplusplus

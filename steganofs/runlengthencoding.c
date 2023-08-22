@@ -41,7 +41,7 @@ void run_length_encoding(struct SerializedFilesystem *serialFilesystem) {
                 dataBlockBegin = readIndex;
                 rangesCount++;
                 zeroRanges->offsetTo = readIndex;
-                zeroRanges->next = malloc(sizeof(struct LinkedList)); // TODO!
+                zeroRanges->next = malloc(sizeof(struct LinkedList)); // gets freed in the while loop below
                 memset(zeroRanges->next, 0, sizeof(struct LinkedList));
                 zeroRanges = zeroRanges->next;
             }
@@ -61,7 +61,7 @@ void run_length_encoding(struct SerializedFilesystem *serialFilesystem) {
     size_t buffer_length = writeIndex;
     size_t header_length =  (rangesCount * 2 * 8) + 8;
     printf("Allocated %zu + %zu = %zu bytes!\n", buffer_length, header_length, buffer_length + header_length);
-    unsigned char * new_buffer = malloc(buffer_length + header_length);
+    unsigned char *new_buffer = malloc(buffer_length + header_length); // See free below
     struct LinkedList *zero_ranges_end = zeroRanges;
     zeroRanges = zeroRangesBegin;
     size_t writeIndexNewBuffer = 0;
@@ -70,7 +70,11 @@ void run_length_encoding(struct SerializedFilesystem *serialFilesystem) {
         *((uint64_t*) &(new_buffer[writeIndexNewBuffer + 8])) = zeroRanges->offsetTo;
         printf("From: %zu, To: %zu\n", zeroRanges->offsetFrom,zeroRanges->offsetTo);
         writeIndexNewBuffer += 16;
+        struct LinkedList *tmp = zeroRanges;
         zeroRanges = zeroRanges->next;
+        if (tmp != zeroRangesBegin) {
+            free(tmp);
+        }
     }
     new_buffer[writeIndexNewBuffer] = 0;
     writeIndexNewBuffer += 8;
@@ -104,7 +108,7 @@ void run_length_decoding(struct SerializedFilesystem *serializedFilesystem) {
     printf("Length of DataBuffer: %zu\n", encodedBufferLength);
     printf("Length of decoded Filesystem: %zu\n", encodedBufferLength + amountZerosToPlace);
     size_t decodedFilesystemLength = encodedBufferLength + amountZerosToPlace;
-    unsigned char *decodedFilesystem = malloc(decodedFilesystemLength);
+    unsigned char *decodedFilesystem = malloc(decodedFilesystemLength); // See free below
     memset(decodedFilesystem, 0, decodedFilesystemLength);
     lengthPointer = (uint64_t*) zeroRanges;
     unsigned char *readPointer = (unsigned char*) encodedBuffer;

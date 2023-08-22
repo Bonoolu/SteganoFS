@@ -10,9 +10,9 @@ bool SteganoFsAdapter::isMounted() const
     return m_isMounted;
 }
 
-SteganoFS::HiddenFat *SteganoFsAdapter::hiddenFat() const
+bool SteganoFsAdapter::isLoaded() const
 {
-    return m_hiddenFat;
+    return m_hiddenFat != nullptr;
 }
 
 std::string SteganoFsAdapter::mountPath() const

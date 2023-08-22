@@ -1,4 +1,3 @@
-#ifndef __cplusplus
 #ifndef STEGANOFS_HIDDENFAT_H
 #define STEGANOFS_HIDDENFAT_H
 
@@ -45,4 +44,3 @@ int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t of
 size_t getFragmentationArray(HiddenFat *hiddenFat, size_t **array);
 
 #endif //STEGANOFS_HIDDENFAT_H
-#endif // __cplusplus
