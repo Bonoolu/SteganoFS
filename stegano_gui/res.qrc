@@ -1,12 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>assets/stylesheet/Webmas.qss</file>
-        <file>assets/stylesheet/Toolery.qss</file>
         <file>assets/stylesheet/Darkeum.qss</file>
-        <file>assets/stylesheet/WordOffice.qss</file>
         <file>assets/stylesheet/Darkeum_light.qss</file>
-    </qresource>
-    <qresource prefix="/">
         <file>assets/img/delete(1).png</file>
         <file>assets/img/document.png</file>
         <file>assets/img/folder.png</file>
@@ -18,8 +13,6 @@
         <file>assets/img/night-mode.png</file>
         <file>assets/img/arrow-down.png</file>
         <file>assets/img/arrow-up.png</file>
-    </qresource>
-    <qresource prefix="/">
         <file>assets/img/light/copy.png</file>
         <file>assets/img/light/delete.png</file>
         <file>assets/img/light/document.png</file>
@@ -31,5 +24,15 @@
         <file>assets/img/light/scissors.png</file>
         <file>assets/img/light/arrow-down.png</file>
         <file>assets/img/light/arrow-up.png</file>
+        <file>assets/img/coding.png</file>
+        <file>assets/img/file.png</file>
+        <file>assets/img/music-note.png</file>
+        <file>assets/img/play-button.png</file>
+        <file>assets/img/light/coding.png</file>
+        <file>assets/img/light/file.png</file>
+        <file>assets/img/light/music-note.png</file>
+        <file>assets/img/light/play-button.png</file>
+        <file>assets/img/folder_c.png</file>
+        <file>assets/img/light/folder_c.png</file>
     </qresource>
 </RCC>

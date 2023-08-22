@@ -49,7 +49,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="res.qrc">
                <normaloff>:/assets/img/folder.png</normaloff>:/assets/img/folder.png</iconset>
              </property>
             </widget>
@@ -72,7 +72,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="res.qrc">
                <normaloff>:/assets/img/document.png</normaloff>:/assets/img/document.png</iconset>
              </property>
             </widget>
@@ -108,7 +108,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="res.qrc">
                <normaloff>:/assets/img/delete(1).png</normaloff>:/assets/img/delete(1).png</iconset>
              </property>
             </widget>
@@ -137,7 +137,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="res.qrc">
                <normaloff>:/assets/img/scissors(1).png</normaloff>:/assets/img/scissors(1).png</iconset>
              </property>
             </widget>
@@ -166,7 +166,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="res.qrc">
                <normaloff>:/assets/img/copy.png</normaloff>:/assets/img/copy.png</iconset>
              </property>
             </widget>
@@ -195,7 +195,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="res.qrc">
                <normaloff>:/assets/img/paste.png</normaloff>:/assets/img/paste.png</iconset>
              </property>
             </widget>
@@ -237,7 +237,7 @@
               <string>Neuer Ordner</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="res.qrc">
                <normaloff>:/assets/img/preview (2).png</normaloff>:/assets/img/preview (2).png</iconset>
              </property>
             </widget>
@@ -251,7 +251,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="res.qrc">
                <normaloff>:/assets/img/light-bulb.png</normaloff>:/assets/img/light-bulb.png</iconset>
              </property>
             </widget>
@@ -394,8 +394,22 @@
      <property name="title">
       <string>Filesystem...</string>
      </property>
+     <widget class="QMenu" name="menuLoad">
+      <property name="title">
+       <string>Load</string>
+      </property>
+      <addaction name="actionLoad_selected_file"/>
+      <addaction name="actionChoose_from_explorer"/>
+     </widget>
      <addaction name="actionCreate_new"/>
-     <addaction name="actionLoad"/>
+     <addaction name="menuLoad"/>
+    </widget>
+    <widget class="QMenu" name="menuMount">
+     <property name="title">
+      <string>Mount...</string>
+     </property>
+     <addaction name="actionCurrent_directory"/>
+     <addaction name="actionFrom_Path"/>
     </widget>
     <addaction name="actionNeue_Datei"/>
     <addaction name="actionNeuer_Ordner"/>
@@ -404,7 +418,7 @@
     <addaction name="actionDefragment"/>
     <addaction name="actionShow_Filesystem_information"/>
     <addaction name="separator"/>
-    <addaction name="actionMount"/>
+    <addaction name="menuMount"/>
     <addaction name="actionUnmount"/>
    </widget>
    <widget class="QMenu" name="menuAnsicht">
@@ -447,11 +461,6 @@
     <string>Create new</string>
    </property>
   </action>
-  <action name="actionLoad">
-   <property name="text">
-    <string>Load</string>
-   </property>
-  </action>
   <action name="actionUnload">
    <property name="text">
     <string>Unload</string>
@@ -462,17 +471,34 @@
     <string>Show Filesystem information</string>
    </property>
   </action>
-  <action name="actionMount">
-   <property name="text">
-    <string>Mount...</string>
-   </property>
-  </action>
   <action name="actionUnmount">
    <property name="text">
     <string>Unmount...</string>
    </property>
   </action>
+  <action name="actionCurrent_directory">
+   <property name="text">
+    <string>Current directory</string>
+   </property>
+  </action>
+  <action name="actionFrom_Path">
+   <property name="text">
+    <string>From Path...</string>
+   </property>
+  </action>
+  <action name="actionLoad_selected_file">
+   <property name="text">
+    <string>Load selected file</string>
+   </property>
+  </action>
+  <action name="actionChoose_from_explorer">
+   <property name="text">
+    <string>Choose from explorer</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

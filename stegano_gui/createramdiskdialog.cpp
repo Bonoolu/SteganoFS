@@ -61,7 +61,7 @@ void CreateRamdiskDialog::setLightmodeOn(bool b)
         ui->buttonBox->setStyleSheet("background-color: #607cff; color: white; padding: 2px 7px ; ");
         ui->newRamdiskLabel->setStyleSheet("background-color: transparent; color: black;");
         ui->ramdiskSizeSpinBox->setStyleSheet("background-color: transparent; color: black;");
-        this->setStyleSheet("background-color: #111111; color: #fafafa;");
+        this->setStyleSheet("background-color: #111111; color: black;");
 
     }
 
