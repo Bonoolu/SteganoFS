@@ -7,6 +7,6 @@
 #include <stdlib.h>
 
 struct SteganoFile read_raw(const char *path);
-bool write_raw(struct SteganoFile);
+size_t write_raw(struct SteganoFile);
 
 #endif //STEGANOFS_MAIN_RAW_PROVIDER_H

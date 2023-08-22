@@ -34,8 +34,12 @@ void embedd_payload_in_generic_buffer(unsigned char *payload_buffer, size_t payl
     }
 }
 
-void embedd_payload(struct SteganoFile *steganoFile, unsigned char *pixeldata, size_t pixel_data_length) {
-    embedd_payload_in_generic_buffer(steganoFile->payload, steganoFile->payload_length, pixeldata, pixel_data_length);
+size_t embedd_payload(struct SteganoFile steganoFile, unsigned char *pixeldata, size_t pixel_data_length) {
+    if (pixel_data_length / 8 < steganoFile.payload_length) {
+        steganoFile.payload_length = pixel_data_length / 8;
+    }
+    embedd_payload_in_generic_buffer(steganoFile.payload, steganoFile.payload_length, pixeldata, pixel_data_length);
+    return steganoFile.payload_length;
 }
 
 struct SteganoFile read_bmp(const char *path) {
@@ -58,7 +62,7 @@ struct SteganoFile read_bmp(const char *path) {
     return steganoFile;
 }
 
-bool write_bmp(struct SteganoFile steganoFile) {
+size_t write_bmp(struct SteganoFile steganoFile) {
     FILE *file = fopen(steganoFile.path, "rb");
     if (file) {
         fseek(file, 0L, SEEK_END);
@@ -67,20 +71,20 @@ bool write_bmp(struct SteganoFile steganoFile) {
         fseek(file, 36, 0);
         unsigned char *pixeldata = malloc(pixel_data_length);
         if (pixeldata == NULL) {
-            return false;
+            return 0;
         }
         fread(pixeldata, pixel_data_length, 1, file);
         fflush(file);
         fclose(file);
-        embedd_payload(&steganoFile, pixeldata, pixel_data_length);
+        size_t payload_written = embedd_payload(steganoFile, pixeldata, pixel_data_length);
         fopen(steganoFile.path, "wb");
         fseek(file, 36, 0);
         size_t bytes_written = fwrite(pixeldata, pixel_data_length, 1, file);
         fflush(file);
         fclose(file);
-        return bytes_written == 1;
+        return payload_written;
     }
-    return false;
+    return 0;
 }
 
 

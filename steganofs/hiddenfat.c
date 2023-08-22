@@ -3,23 +3,23 @@
 HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) {
     if (diskSize == 0 || blockSize == 0) {
         fprintf(stderr, "Disk size and blockSize each can not be zero!\n");
-        exit(1);
+        return NULL;
     }
     if (diskSize % blockSize != 0) {
         fprintf(stderr, "Disk size is not dividable by block size!\n");
-        exit(1);
+        return NULL;
     }
     unsigned char *disk = (unsigned char *) malloc(diskSize * sizeof(unsigned char));
     if (!disk) {
         fprintf(stderr, "Could not allocate memory!\n");
-        exit(1);
+        return NULL;
     }
     memset(disk, 0, diskSize);
     size_t amountBlocks = diskSize / blockSize;
     HiddenCluster *clusters = (HiddenCluster *) malloc(amountBlocks * sizeof(HiddenCluster));
     if (!clusters) {
         fprintf(stderr, "Could not allocate memory!\n");
-        exit(1);
+        return NULL;
     }
     memset(clusters, 0, amountBlocks * sizeof(HiddenCluster));
     for (size_t bIndex = 0; bIndex < amountBlocks; bIndex++) {
@@ -28,7 +28,7 @@ HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) {
     HiddenFat *hiddenFat = (HiddenFat *) malloc(sizeof(HiddenFat));
     if (!hiddenFat) {
         fprintf(stderr, "Could not allocate memory!\n");
-        exit(1);
+        return NULL;
     }
     memset(hiddenFat->files, 0, STEGANOFS_AMOUNT_ROOT_FILES * sizeof(HiddenFile *));
     hiddenFat->blockSize = blockSize;
