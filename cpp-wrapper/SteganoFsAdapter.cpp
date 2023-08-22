@@ -5,6 +5,21 @@ std::string SteganoFsAdapter::steganoImageFolder() const
     return m_steganoImageFolder;
 }
 
+bool SteganoFsAdapter::isMounted() const
+{
+    return m_isMounted;
+}
+
+SteganoFS::HiddenFat *SteganoFsAdapter::hiddenFat() const
+{
+    return m_hiddenFat;
+}
+
+std::string SteganoFsAdapter::mountPath() const
+{
+    return m_mountPath;
+}
+
 SteganoFsAdapter::SteganoFsAdapter(std::string steganoImageFolder) :
 m_steganoImageFolder(std::move(steganoImageFolder)){
 

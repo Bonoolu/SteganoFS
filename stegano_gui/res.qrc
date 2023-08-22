@@ -34,5 +34,13 @@
         <file>assets/img/light/play-button.png</file>
         <file>assets/img/folder_c.png</file>
         <file>assets/img/light/folder_c.png</file>
+        <file>assets/img/arrow-back.png</file>
+        <file>assets/img/arrow-forth.png</file>
+        <file>assets/img/light/arrow-back.png</file>
+        <file>assets/img/light/arrow-forth.png</file>
+        <file>assets/img/arrow-left.png</file>
+        <file>assets/img/arrow-right.png</file>
+        <file>assets/img/light/arrow-left.png</file>
+        <file>assets/img/light/arrow-right.png</file>
     </qresource>
 </RCC>

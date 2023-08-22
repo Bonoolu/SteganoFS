@@ -16,6 +16,8 @@
 #include <QThread>
 #include "mountfrompathdialog.h"
 #include <QFileDialog>
+#include <QGraphicsScene>
+#include "previewgraphicsview.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -81,12 +83,17 @@ private slots:
 
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
+    void refreshPreviewOnResize();
+
 private:
     Ui::MainWindow *ui;
     CreateRamdiskDialog *m_CRDdlg;
     DefragmentDialog *m_DefragDlg;
     MountFromPathDialog *m_MFPDlg;
     QFileDialog *m_fileDlg;
+
+    QGraphicsScene *m_previewPicture;
+    PreviewGraphicsView *m_pgv;
 
 
     SteganoFsAdapter *steganoFsAdapter = new SteganoFsAdapter("filesystem.steganofs");
@@ -96,6 +103,8 @@ private:
 
     QString m_darkstyle;
     QString m_lightstyle;
+    QString m_bafButtonsStyle_dark;
+    QString m_bafButtonsStyle_light;
 
     QFileSystemModel *m_dirmodel;
     QFileSystemModel *m_filemodel;
@@ -103,6 +112,9 @@ private:
     QString m_currentDir;
     QListWidgetItem *m_currentFile;
     QString m_currentFileString;
+
+    QString m_lastDirectory;
+    QString m_nextDirectory;
 
     QListWidget *listWidget;
     QTreeView *treeView;

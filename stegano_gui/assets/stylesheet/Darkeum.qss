@@ -403,7 +403,7 @@ QLineEdit
 	background-color: #525251;
 	color: #ffffff;
 	border-width: 1px;
-        border-radius:13px;
+        border-radius:6px;
         border-color: #1a0539;
 	padding: 2px;
 
@@ -1024,14 +1024,16 @@ QScrollBar:horizontal
     background-color: #3d3d3d;
     height: 13px;
     margin: 0px 16px 0 16px;
+    border-radius:5px;
 
 }
 
 
 QScrollBar::handle:horizontal
 {
-    background: #607cff;
+    background: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9);
     min-height: 20px;
+    border-radius:3px;
 
 }
 
@@ -1060,18 +1062,21 @@ QScrollBar::sub-line:horizontal
 
 QScrollBar::right-arrow:horizontal
 {
-    image: url(://arrow-right.png);
+    image: url(:/assets/img/arrow-right.png);
+
     width: 6px;
     height: 6px;
+    border-radius:2px;
 
 }
 
 
 QScrollBar::left-arrow:horizontal
 {
-    image: url(://arrow-left.png);
+    image: url(:/assets/img/arrow-left.png);
     width: 6px;
     height: 6px;
+    border-radius:2px;
 
 }
 
@@ -1089,6 +1094,7 @@ QScrollBar:vertical
     width: 13px;
     margin: 16px 0 16px 0;
     border: 1px solid #222222;
+    border-radius:5px;
 
 }
 
@@ -1097,6 +1103,7 @@ QScrollBar::handle:vertical
 {
     background-color: #607cff;
     min-height: 20px;
+    border-radius:3px;
 
 }
 
@@ -1125,18 +1132,20 @@ QScrollBar::sub-line:vertical
 
 QScrollBar::up-arrow:vertical
 {
-    image: url(://arrow-up.png);
+    image: url(:/assets/img/arrow-up.png);
     width: 6px;
     height: 6px;
+    border-radius:2px;
 
 }
 
 
 QScrollBar::down-arrow:vertical
 {
-    image: url(://arrow-down.png);
+    image: url(:/assets/img/arrow-down.png);
     width: 6px;
     height: 6px;
+    border-radius:2px;
 
 }
 

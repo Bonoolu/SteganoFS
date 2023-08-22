@@ -53,6 +53,7 @@ else()
                 defragmentdialog.h defragmentdialog.cpp defragmentdialog.ui
                 worker.h worker.cpp
                 mountfrompathdialog.h mountfrompathdialog.cpp mountfrompathdialog.ui
+                previewgraphicsview.h previewgraphicsview.cpp
 
 
 
