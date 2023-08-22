@@ -418,7 +418,7 @@ QLineEdit
         background-color: #fcfcfc;
         color: #000000;
         border: 1px solid #cccccc;
-        border-radius: 6px;
+        border-radius: 12px;
 	padding: 2px;
 
 }
@@ -1208,7 +1208,7 @@ QProgressBar::chunk:disabled {
 QStatusBar
 {
         background-color: #fafafa;
-        color: #999999;
+        color: #1073b4;
         border-color: #b5d0eb;
 
 }

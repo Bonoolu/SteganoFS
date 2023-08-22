@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_dirmodel = new QFileSystemModel(this);
     m_dirmodel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
     m_dirmodel->setRootPath(sPath);
-    m_currentDir = m_dirmodel->rootPath();
+    m_currentDir = "";
 
     ui->treeView->setModel(m_dirmodel);
     ui->treeView->setSortingEnabled(true);
@@ -238,6 +238,7 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
     ui->pathLineEdit->setText(sPath);
 
     updateListWidget(sPath);
+    ui->forwardButton->setDisabled(true);
 
 }
 
@@ -363,7 +364,6 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
 
 
         int w = m_pgv->width();
-        int h = m_pgv->height();
         m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
 
         m_pgv->setScene(m_previewPicture);
@@ -587,6 +587,10 @@ void MainWindow::on_actionLoad_selected_file_triggered()
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
+    ui->pathLineEdit->clear();
+    QString tmp = m_currentDir;
+
+
     QString path = m_currentDir + "/" + ui->listWidget->currentItem()->text();
     if (!path.contains(QRegExp("*.*"))){
         m_currentDir = path;
@@ -596,7 +600,17 @@ void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
                 ui->listWidget->setCurrentRow(1);
                 m_currentFile = ui->listWidget->currentItem();
         }
+
+        ui->pathLineEdit->setText(m_currentDir);
+
+        m_lastDirectory = m_currentDir;
+        m_currentDir = path;
+
     }
+
+
+    m_lastDirectory = tmp;
+    ui->forwardButton->setDisabled(true);
 
 
 
@@ -632,3 +646,38 @@ void MainWindow::refreshPreviewOnResize()
     stbuf->f_bavail = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;  // Free blocks available to non-superuser
     stbuf->f_namemax = STEGANOFS_MAX_FILENAME_LENGTH;
 */
+
+void MainWindow::on_backButton_clicked()
+{
+    QString tmp = m_currentDir;
+
+    m_currentDir = m_lastDirectory;
+    m_nextDirectory = tmp;
+
+    updateListWidget(m_currentDir);
+    ui->pathLineEdit->setText(m_currentDir);
+
+    ui->forwardButton->setDisabled(false);
+
+    /*
+     * CAN ONLY BE EXECUTED ONCE
+     * */
+}
+
+
+void MainWindow::on_forwardButton_clicked()
+{
+    QString tmp = m_currentDir;
+    m_currentDir = m_nextDirectory;
+    m_lastDirectory = tmp;
+
+    updateListWidget(m_currentDir);
+    ui->pathLineEdit->setText(m_currentDir);
+
+    ui->forwardButton->setDisabled(true);
+
+    /*
+     * CAN ONLY BE EXECUTED ONCE
+     * */
+}
+

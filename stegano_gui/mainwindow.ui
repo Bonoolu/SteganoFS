@@ -288,10 +288,7 @@
         <item>
          <widget class="QLineEdit" name="pathLineEdit">
           <property name="styleSheet">
-           <string notr="true">QLineEdit {
-	border-radius: 20px;
-
-}</string>
+           <string notr="true"/>
           </property>
          </widget>
         </item>

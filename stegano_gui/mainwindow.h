@@ -85,6 +85,10 @@ private slots:
 
     void refreshPreviewOnResize();
 
+    void on_backButton_clicked();
+
+    void on_forwardButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     CreateRamdiskDialog *m_CRDdlg;
@@ -112,6 +116,7 @@ private:
     QString m_currentDir;
     QListWidgetItem *m_currentFile;
     QString m_currentFileString;
+    QList<QListWidgetItem> selectedFiles;
 
     QString m_lastDirectory;
     QString m_nextDirectory;
