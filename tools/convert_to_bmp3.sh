@@ -1,5 +1,5 @@
 #!/bin/bash
-# you need to install ffmpeg for this to work
+# you need to install imagemagick for this to work
 
 convert "$1" -define bmp:format=bmp3 \
 -define bmp:colormap=0 \
@@ -10,6 +10,3 @@ convert "$1" -define bmp:format=bmp3 \
 -endian LSB \
 -units PixelsPerCentimeter \
 "$2"
-
-# actually, most of these flags are redundant, it's already plenty to convert like this:
-# convert "$1" -define bmp:format=bmp3 -type truecolor "$2"

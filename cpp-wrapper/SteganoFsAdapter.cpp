@@ -172,10 +172,10 @@ struct statfs SteganoFsAdapter::getFilesystemInfo() {
   return stfs;
 }
 
-SteganoFsAdapter::~SteganoFsAdapter() { //TODO!
-//    if (m_hiddenFat != nullptr && m_isMounted) {
-//        SteganoFsAdapter::umount();
-//    } else if (m_hiddenFat != nullptr) {
-//        SteganoFsAdapter::writeFilesystemToSteganoProvider();
-//    }
+SteganoFsAdapter::~SteganoFsAdapter() {
+    if (m_hiddenFat != nullptr && m_isMounted) {
+        SteganoFsAdapter::umount();
+    } else if (m_hiddenFat != nullptr) {
+        SteganoFsAdapter::writeFilesystemToSteganoProvider();
+    }
 }

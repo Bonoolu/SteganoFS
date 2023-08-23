@@ -64,7 +64,7 @@ struct __attribute__((__packed__)) PackedCluster {
     u_int16_t cluster_index; /**< Index of the cluster within the file. */
     u_int8_t state; /**< State of the cluster (FREE, ALLOCATED, RESERVED, etc.). */
     int64_t prev_cluster_b_index; /**< Block index of the previous cluster in the linked list. */
-    int64_t next_cluster_b_index /**< Block index of the next cluster in the linked list. */
+    int64_t next_cluster_b_index; /**< Block index of the next cluster in the linked list. */
 };
 
 /**
