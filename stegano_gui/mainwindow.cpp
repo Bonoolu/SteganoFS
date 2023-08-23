@@ -496,7 +496,9 @@ void MainWindow::on_actionNeuer_Ordner_triggered()
 
 void MainWindow::on_actionShow_Filesystem_information_triggered()
 {
+        m_SFIdlg->showFilesystemInfo(*steganoFsAdapter);
         m_SFIdlg->exec();
+
 
 }
 

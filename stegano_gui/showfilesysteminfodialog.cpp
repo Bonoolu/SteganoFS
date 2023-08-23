@@ -32,6 +32,20 @@ void ShowFileSystemInfoDialog::on_closeButton_clicked()
     this->close();
 }
 
+void ShowFileSystemInfoDialog::showFilesystemInfo(SteganoFsAdapter &sfa)
+{
+    struct statfs info = sfa.getFilesystemInfo();
+    QString text = "";
+
+    text = "Filesystem block size:\t\t\t" + QString::number(info.f_bsize) +
+        "\n\nFundamental filesystem block size:\t" + QString::number(info.f_frsize) +
+        "\n\nTotal data blocks in filesystem:\t\t" + QString::number(info.f_blocks) +
+        "\n\nFree blocks: \t\t\t\t" + QString::number(info.f_bfree) +
+        "\n\nFree blocks available to non-superuser:\t" + QString::number(info.f_bavail);
+
+    ui->filesystemInfoLabel->setText(text);
+}
+
 void ShowFileSystemInfoDialog::setLightmodeon(bool newLightsmodeon)
 {
     m_lightmodeon = newLightsmodeon;
