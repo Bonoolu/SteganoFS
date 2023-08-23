@@ -1,127 +1,145 @@
 #include "../../steganofs/steganofs.h"
-#include "../../steganofs/stegano_providers/bmp/bmp_provider.h"
-#include "../../steganofs/stegano_providers/stegano_file.h"
 
-bool test_generic_buffer(){
-    unsigned char bufferFF[17] = "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF"
-                                 "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF";
-    unsigned char buffer00[17] = "\x00\x00\x00\x00\x00\x00\x00"
-                                 "\x00\x00\x00\x00\x00\x00\x00";
-    const size_t length = 16;
-    unsigned char *extractedBuffer = NULL;
-    size_t extractedLength = 0;
+bool test_generic_buffer ()
+{
+  unsigned char buffer_ff[17] = "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF"
+                                "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF";
+  unsigned char buffer_00[17] = "\x00\x00\x00\x00\x00\x00\x00"
+                                "\x00\x00\x00\x00\x00\x00\x00";
+  const size_t length = 16;
+  unsigned char *extracted_buffer = NULL;
+  size_t extracted_length = 0;
 
-    exract_payload_from_generic_buffer(&extractedBuffer, &extractedLength, bufferFF, length);
-    printf("The exracted bytes are %d and %d\n", extractedBuffer[0], extractedBuffer[1]);
+  exract_payload_from_generic_buffer (&extracted_buffer, &extracted_length, buffer_ff, length);
+  printf ("The exracted bytes are %d and %d\n", extracted_buffer[0], extracted_buffer[1]);
 
-    unsigned char payload[2] = {54, 27};
-    size_t payloadLength = 2;
+  unsigned char payload[2] = {54, 27};
+  size_t payload_length = 2;
 
-    embedd_payload_in_generic_buffer(payload, payloadLength, buffer00, length);
+  embedd_payload_in_generic_buffer (payload, payload_length, buffer_00);
 
-    printf("Buffer with payload:\n");
-    for (size_t i = 0; i < length; i ++) {
-        printf("%d", buffer00[i]);
-        if (i == 7 || i == 15) {
-            printf("\n");
-        }else {
-            printf(", ");
+  printf ("Buffer with payload:\n");
+  for (size_t i = 0; i < length; i++)
+    {
+      printf ("%d", buffer_00[i]);
+      if (i == 7 || i == 15)
+        {
+          printf ("\n");
+        }
+      else
+        {
+          printf (", ");
         }
     }
-    return true;
+  return true;
 }
 
-bool test_single_bmp_file () {
-    HiddenFat *hiddenFat = createHiddenFat(10,2);
-    createHiddenFile(hiddenFat, "test.txt", time(NULL));
-    unsigned char testbuffer[4] = "abc";
-    stgfs_write("/test.txt", (char*) testbuffer, 4, 0, (struct fuse_file_info *) hiddenFat);
-    steganofs_unload_ramdisk(hiddenFat, "example.bmp");
-    freeHiddenFat(hiddenFat);
-    hiddenFat = steganofs_load_ramdisk("example.bmp");
-    if (!hiddenFat){
-        printf("Could not load anything from example.bmp\n");
-        return false;
+bool test_single_bmp_file ()
+{
+  HiddenFat *hidden_fat = create_hidden_fat (10, 2);
+  create_hidden_file (hidden_fat, "test.txt", time (NULL));
+  unsigned char testbuffer[4] = "abc";
+  stgfs_write ("/test.txt", (char *) testbuffer, 4, 0, (struct fuse_file_info *) hidden_fat);
+  steganofs_unload_ramdisk (hidden_fat, "example.bmp");
+  free_hidden_fat (hidden_fat);
+  hidden_fat = steganofs_load_ramdisk ("example.bmp");
+  if (!hidden_fat)
+    {
+      printf ("Could not load anything from example.bmp\n");
+      return false;
     }
-    if (!checkIntegrity(hiddenFat)) {
-        printf("Failed to check integrity of filesystem which was embedded in BMP File!\n");
-        return false;
+  if (!check_integrity (hidden_fat))
+    {
+      printf ("Failed to check integrity of filesystem which was embedded in BMP File!\n");
+      return false;
     }
-    showHiddenFat(hiddenFat, NULL);
-    printf("Passed test successfully!\n");
-    return true;
+  show_hidden_fat (hidden_fat, NULL);
+  printf ("Passed test successfully!\n");
+  return true;
 }
 
-bool test_bmp_folder () {
-    HiddenFat *hiddenFat = createHiddenFat(STEGANOFS_BLOCK_SIZE * 100, BLOCK_SIZE);
-    const char *hiddenFilename = "test.txt";
-    long timestamp = time(NULL);
-    HiddenFile **hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
-    if (hiddenFile == NULL) {
-        printf("test_bmp_folder test failed: createHiddenFile failed and returned NULL.\n");
-        return false;
+bool test_bmp_folder ()
+{
+  HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 100, BLOCK_SIZE);
+  const char *hidden_filename = "test.txt";
+  long timestamp = time (NULL);
+  HiddenFile **hidden_file = create_hidden_file (hidden_fat, hidden_filename, timestamp);
+  if (hidden_file == NULL)
+    {
+      printf ("test_bmp_folder test failed: create_hidden_file failed and returned NULL.\n");
+      return false;
     }
-    const char *testBuffer = "My testbuffer!";
-    int bytesWritten = stgfs_write("/test.txt", testBuffer, 15, 0, (struct fuse_file_info *) hiddenFat);
-    if (bytesWritten < 0) {
-        printf("test_bmp_folder test failed: createHiddenFile failed. Errorcode: %d\n", bytesWritten);
-        return false;
+  const char *test_buffer = "My testbuffer!";
+  int bytes_written = stgfs_write ("/test.txt", test_buffer, 15, 0, (struct fuse_file_info *) hidden_fat);
+  if (bytes_written < 0)
+    {
+      printf ("test_bmp_folder test failed: create_hidden_file failed. Errorcode: %d\n", bytes_written);
+      return false;
     }
 
-    hiddenFilename = "test2.txt";
-    hiddenFile = createHiddenFile(hiddenFat, hiddenFilename, timestamp);
-    if (hiddenFile == NULL) {
-        printf("test_bmp_folder test failed: createHiddenFile failed and returned NULL.\n");
-        return false;
+  hidden_filename = "test2.txt";
+  hidden_file = create_hidden_file (hidden_fat, hidden_filename, timestamp);
+  if (hidden_file == NULL)
+    {
+      printf ("test_bmp_folder test failed: create_hidden_file failed and returned NULL.\n");
+      return false;
     }
-    testBuffer = "My testbuffer2!";
-    bytesWritten = stgfs_write("/test2.txt", testBuffer, 16, 0, (struct fuse_file_info *) hiddenFat);
-    if (bytesWritten < 0) {
-        printf("test_bmp_folder test failed: createHiddenFile failed. Errorcode: %d\n", bytesWritten);
-        return false;
+  test_buffer = "My testbuffer2!";
+  bytes_written = stgfs_write ("/test2.txt", test_buffer, 16, 0, (struct fuse_file_info *) hidden_fat);
+  if (bytes_written < 0)
+    {
+      printf ("test_bmp_folder test failed: create_hidden_file failed. Errorcode: %d\n", bytes_written);
+      return false;
     }
-    showHiddenFat(hiddenFat, NULL);
-    bool ret = steganofs_unload_ramdisk(hiddenFat, "example_pictures");
-    if (!ret) {
-        printf("test_bmp_folder test failed: Unloading ramdisk failed!\n");
-        return false;
+  show_hidden_fat (hidden_fat, NULL);
+  bool ret = steganofs_unload_ramdisk (hidden_fat, "example_pictures");
+  if (!ret)
+    {
+      printf ("test_bmp_folder test failed: Unloading ramdisk failed!\n");
+      return false;
     }
-    freeHiddenFat(hiddenFat);
-    hiddenFat = steganofs_load_ramdisk("example_pictures");
-    if (hiddenFat == NULL) {
-        printf("test_bmp_folder test failed: Loading ramdisk failed!\n");
-        return false;
+  free_hidden_fat (hidden_fat);
+  hidden_fat = steganofs_load_ramdisk ("example_pictures");
+  if (hidden_fat == NULL)
+    {
+      printf ("test_bmp_folder test failed: Loading ramdisk failed!\n");
+      return false;
     }
-    ret = steganofs_unload_ramdisk(hiddenFat, "example_pictures");
-    if (!ret) {
-        printf("test_bmp_folder test failed: Unloading ramdisk failed!\n");
-        return false;
+  ret = steganofs_unload_ramdisk (hidden_fat, "example_pictures");
+  if (!ret)
+    {
+      printf ("test_bmp_folder test failed: Unloading ramdisk failed!\n");
+      return false;
     }
-    showHiddenFat(hiddenFat, NULL);
-    ret = checkIntegrity(hiddenFat);
-    if (!ret) {
-        printf("test_bmp_folder test failed: Integrity check failed!\n");
-        return false;
+  show_hidden_fat (hidden_fat, NULL);
+  ret = check_integrity (hidden_fat);
+  if (!ret)
+    {
+      printf ("test_bmp_folder test failed: Integrity check failed!\n");
+      return false;
     }
-    freeHiddenFat(hiddenFat);
-    return ret;
+  free_hidden_fat (hidden_fat);
+  return ret;
 }
 
-int main() {
-    int tests[] = {
-            test_generic_buffer(),
-            test_single_bmp_file(),
-            test_bmp_folder(),
-            -1};
-    size_t passed = 0;
-    size_t sum = 0;
-    int *pTests = tests;
-    while (*pTests != -1) {
-        sum++;
-        if (*pTests == 1) {
-            passed++;
+int main ()
+{
+  int tests[] = {
+      test_generic_buffer (),
+      test_single_bmp_file (),
+      test_bmp_folder (),
+      -1};
+  size_t passed = 0;
+  size_t sum = 0;
+  int *p_tests = tests;
+  while (*p_tests != -1)
+    {
+      sum++;
+      if (*p_tests == 1)
+        {
+          passed++;
         }
-        pTests++;
+      p_tests++;
     }
-    printf("%zu/%zu tests passed!\n", passed, sum);
+  printf ("%zu/%zu tests passed!\n", passed, sum);
 }

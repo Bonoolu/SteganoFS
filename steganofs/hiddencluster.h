@@ -1,5 +1,5 @@
-#ifndef STEGANOFS_HIDDENCLUSTER_H
-#define STEGANOFS_HIDDENCLUSTER_H
+#ifndef _HIDDENCLUSTER_H_
+#define _HIDDENCLUSTER_H_
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -12,20 +12,20 @@ typedef struct HiddenCluster HiddenCluster;
 typedef struct HiddenFile HiddenFile;
 
 enum State {
-    free_ = 0, reserved = 1, defect = 2, allocated = 3
+    FREE = 0, RESERVED = 1, DEFECT = 2, ALLOCATED = 3
 };
 
 struct HiddenCluster {
-    size_t bIndex;
-    size_t clusterIndex;
+    size_t b_index;
+    size_t cluster_index;
     unsigned int state;
     HiddenCluster *prev;
     HiddenCluster *next;
     HiddenFile *file;
 };
 
-bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB);
+bool swap_hidden_clusters (HiddenFat *hidden_fat, size_t b_index_a, size_t b_index_b);
 
-bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *hiddenFile);
+bool extend_hidden_cluster (HiddenFat *hidden_fat, HiddenFile *p_file);
 
-#endif //STEGANOFS_HIDDENCLUSTER_H
+#endif //_HIDDENCLUSTER_H_

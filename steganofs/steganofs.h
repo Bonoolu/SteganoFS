@@ -1,5 +1,5 @@
-#ifndef STEGANOFS_H
-#define STEGANOFS_H
+#ifndef _STEGANOFS_H_
+#define _STEGANOFS_H_
 
 #ifndef __cplusplus
 
@@ -19,23 +19,22 @@
 #include "runlengthencoding.h"
 #include "stegano_providers/stegano_provider.h"
 
+int stgfs_getattr (const char *path, struct stat *stbuf, __attribute__((unused)) struct fuse_file_info *fi);
 
-int stgfs_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi);
+int stgfs_readdir (const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
+                   enum fuse_readdir_flags flags);
 
-int stgfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi,
-                  enum fuse_readdir_flags flags);
+int stgfs_create (const char *path, mode_t mode, struct fuse_file_info *fi);
 
-int stgfs_create(const char *path, mode_t mode, struct fuse_file_info *fi);
+int stgfs_write (const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 
-int stgfs_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+int stgfs_read (const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 
-int stgfs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
+int stgfs_unlink (const char *path);
 
-int stgfs_unlink(const char *path);
+int stgfs_statfs (__attribute__((unused)) const char *path, struct statvfs *stbuf);
 
-int stgfs_statfs(const char *path, struct statvfs *stbuf);
-
-extern struct fuse_operations fuseOperations;
+extern struct fuse_operations fuse_operations;
 
 #endif
 
@@ -46,25 +45,25 @@ extern "C" {
     typedef struct HiddenFat HiddenFat;
 #endif
 
-struct HiddenFat *steganofs_create_new_ramdisk(size_t diskSize);
+struct HiddenFat *steganofs_create_new_ramdisk (size_t disk_size);
 
-struct HiddenFat *steganofs_load_ramdisk(const char *steganoImageFolder);
+struct HiddenFat *steganofs_load_ramdisk (const char *stegano_image_folder);
 
-bool steganofs_unload_ramdisk(HiddenFat *hiddenFat, const char *steganoFolder);
+bool steganofs_unload_ramdisk (HiddenFat *hidden_fat, const char *stegano_folder);
 
-bool steganofs_mount(struct HiddenFat *hiddenFat, const char *mnt_point);
+bool steganofs_mount (struct HiddenFat *hidden_fat, const char *mnt_point);
 
-bool steganofs_umount(const char *mnt_point);
+bool steganofs_umount (const char *mnt_point);
 
-void steganofs_show_fragmentation(HiddenFat *hiddenFat, char *outputMessage);
+void steganofs_show_fragmentation (HiddenFat *hidden_fat, char *output_message);
 
-size_t steganofs_fragmentation_array(HiddenFat *hiddenFat, size_t **array);
+size_t steganofs_fragmentation_array (HiddenFat *hidden_fat, size_t **array);
 
-bool steganofs_check_integrity(HiddenFat *hiddenFat);
+bool steganofs_check_integrity (HiddenFat *hidden_fat);
 
-float steganofs_defragmentation_percent(HiddenFat *hiddenFat);
+float steganofs_defragmentation_percent (HiddenFat *hidden_fat);
 
-void steganofs_defragmentate_filesystem(HiddenFat *hiddenFat);
+void steganofs_defragmentate_filesystem (HiddenFat *hidden_fat);
 
 #ifdef __cplusplus
 }
@@ -159,4 +158,4 @@ void steganofs_defragmentate_filesystem(HiddenFat *hiddenFat);
 // */
 //static int stegFS_readlink(const char *path, char *buf, size_t size);
 
-#endif // STEGANOFS_H
+#endif // _STEGANOFS_H_

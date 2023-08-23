@@ -1,31 +1,36 @@
 #include "raw_provider.h"
 
-struct SteganoFile read_raw(const char *path) {
-    FILE *file = fopen(path, "rb");
-    struct SteganoFile steganoFile = {.payload = NULL, .payload_length = 0};
-    if (file) {
-        fseek(file, 0L, SEEK_END);
-        steganoFile.payload_length = ftell(file);
-        rewind(file);
-        steganoFile.payload = malloc(steganoFile.payload_length);
-        if (steganoFile.payload == NULL) {
-            steganoFile.payload_length = 0;
-            return steganoFile;
+struct SteganoFile read_raw (const char *path)
+{
+  FILE *file = fopen (path, "rb");
+  struct SteganoFile stegano_file = {.payload = NULL, .payload_length = 0};
+  if (file)
+    {
+      fseek (file, 0L, SEEK_END);
+      stegano_file.payload_length = ftell (file);
+      rewind (file);
+      stegano_file.payload = malloc (stegano_file.payload_length);
+      if (stegano_file.payload == NULL)
+        {
+          stegano_file.payload_length = 0;
+          return stegano_file;
         }
-        fread(steganoFile.payload, steganoFile.payload_length, 1, file);
-        fflush(file);
-        fclose(file);
+      fread (stegano_file.payload, stegano_file.payload_length, 1, file);
+      fflush (file);
+      fclose (file);
     }
-    return steganoFile;
+  return stegano_file;
 }
 
-size_t write_raw(struct SteganoFile steganoFile) {
-    FILE *file = fopen((char*) steganoFile.path, "wb");
-    if (file) {
-        size_t written = fwrite(steganoFile.payload, steganoFile.payload_length, 1, file);
-        fflush(file);
-        fclose(file);
-        return steganoFile.payload_length;
+size_t write_raw (struct SteganoFile stegano_file)
+{
+  FILE *file = fopen ((char *) stegano_file.path, "wb");
+  if (file)
+    {
+      fwrite (stegano_file.payload, stegano_file.payload_length, 1, file);
+      fflush (file);
+      fclose (file);
+      return stegano_file.payload_length;
     }
-    return 0;
+  return 0;
 }

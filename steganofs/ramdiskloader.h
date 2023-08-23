@@ -1,5 +1,5 @@
-#ifndef STEGANOFS_RAMDISKLOADER_H
-#define STEGANOFS_RAMDISKLOADER_H
+#ifndef _RAMDISKLOADER_H_
+#define _RAMDISKLOADER_H_
 
 #include "hiddencluster.h"
 #include "hiddenfat.h"
@@ -14,27 +14,27 @@ typedef struct PackedFile PackedFile;
 typedef struct PackedFat PackedFat;
 
 struct __attribute__((__packed__)) PackedFat {
-    u_int16_t blockSize;
-    u_int64_t amountBlocks;
-    u_int32_t clustersOffset;
-    u_int32_t filesOffset;
+    u_int16_t block_size;
+    u_int64_t amount_blocks;
+    u_int32_t clusters_offset;
+    u_int32_t files_offset;
     u_int8_t amount_root_files;
-    u_int32_t diskOffset;
+    u_int32_t disk_offset;
 };
 
-struct __attribute__((__packed__)) PackedCluster{
-    u_int64_t bIndex;
-    u_int16_t clusterIndex;
+struct __attribute__((__packed__)) PackedCluster {
+    u_int64_t b_index;
+    u_int16_t cluster_index;
     u_int8_t state;
-    int64_t prevClusterBIndex;
-    int64_t nextClusterBIndex;
+    int64_t prev_cluster_b_index;
+    int64_t next_cluster_b_index;
 };
 
 struct __attribute__((__packed__)) PackedFile {
     u_int64_t filesize;
     u_int64_t real_filesize;
     u_int32_t timestamp;
-    int64_t hiddenClusterBIndex;
+    int64_t hidden_cluster_b_index;
     char filename[12];
 };
 
@@ -44,8 +44,8 @@ struct SerializedFilesystem {
     unsigned char *buf;
 };
 
-struct SerializedFilesystem serializeFilesystem(HiddenFat *hiddenFat);
+struct SerializedFilesystem serialize_filesystem (HiddenFat *hidden_fat);
 
-HiddenFat *loadRamdisk(struct SerializedFilesystem serializedFilesystem);
+HiddenFat *load_ramdisk (struct SerializedFilesystem serialized_filesystem);
 
-#endif //STEGANOFS_RAMDISKLOADER_H
+#endif //_RAMDISKLOADER_H_

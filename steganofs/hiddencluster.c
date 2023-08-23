@@ -1,122 +1,146 @@
 #include "hiddencluster.h"
 
-
-bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *pFile) {
-    size_t bIndex;
-    for (bIndex = 0; bIndex < hiddenFat->amountBlocks; bIndex++) {
-        if (hiddenFat->clusters[bIndex].state == free_) {
-            break;
+bool extend_hidden_cluster (HiddenFat *hidden_fat, HiddenFile *p_file)
+{
+  size_t b_index;
+  for (b_index = 0; b_index < hidden_fat->amount_blocks; b_index++)
+    {
+      if (hidden_fat->clusters[b_index].state == FREE)
+        {
+          break;
         }
-        if (bIndex == hiddenFat->amountBlocks - 1) {
-            fprintf(stderr, "Partition is full!\n");
-            return false;
+      if (b_index == hidden_fat->amount_blocks - 1)
+        {
+          fprintf (stderr, "Partition is full!\n");
+          return false;
         }
     }
-    // Allocate the block for the file
-    hiddenFat->clusters[bIndex].state = allocated;
-    hiddenFat->clusters[bIndex].bIndex = bIndex;
-    int clusterIndex = 0;
-    HiddenCluster *lastCluster = pFile->hiddenCluster;
-    while (lastCluster) {
-        clusterIndex++;
-        if (lastCluster->next == NULL) {
-            break;
+  // Allocate the block for the file
+  hidden_fat->clusters[b_index].state = ALLOCATED;
+  hidden_fat->clusters[b_index].b_index = b_index;
+  int cluster_index = 0;
+  HiddenCluster *last_cluster = p_file->hiddenCluster;
+  while (last_cluster)
+    {
+      cluster_index++;
+      if (last_cluster->next == NULL)
+        {
+          break;
         }
-        lastCluster = lastCluster->next;
+      last_cluster = last_cluster->next;
     }
-    if (lastCluster != NULL) {
-        hiddenFat->clusters[bIndex].prev = lastCluster;
-        lastCluster->next = &(hiddenFat->clusters[bIndex]);
-    } else {
-        pFile->hiddenCluster = &(hiddenFat->clusters[bIndex]);
+  if (last_cluster != NULL)
+    {
+      hidden_fat->clusters[b_index].prev = last_cluster;
+      last_cluster->next = &(hidden_fat->clusters[b_index]);
     }
-    hiddenFat->clusters[bIndex].clusterIndex = clusterIndex;
-    hiddenFat->clusters[bIndex].file = pFile;
-    pFile->filesize += hiddenFat->blockSize;
-    return true;
+  else
+    {
+      p_file->hiddenCluster = &(hidden_fat->clusters[b_index]);
+    }
+  hidden_fat->clusters[b_index].cluster_index = cluster_index;
+  hidden_fat->clusters[b_index].file = p_file;
+  p_file->filesize += hidden_fat->block_size;
+  return true;
 }
 
-
-bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB) {
-    if (bIndexA == bIndexB) {
-        // fprintf(stderr, "Swapping the same block is not possible!\n");
-        return false;
+bool swap_hidden_clusters (HiddenFat *hidden_fat, size_t b_index_a, size_t b_index_b)
+{
+  if (b_index_a == b_index_b)
+    {
+      // fprintf(stderr, "Swapping the same block is not possible!\n");
+      return false;
     }
-    if (bIndexA >= hiddenFat->amountBlocks || bIndexB >= hiddenFat->amountBlocks) {
-        fprintf(stderr, "Invalid block indices for swapHiddenClusters.\n");
-        return false;
+  if (b_index_a >= hidden_fat->amount_blocks || b_index_b >= hidden_fat->amount_blocks)
+    {
+      fprintf (stderr, "Invalid block indices for swap_hidden_clusters.\n");
+      return false;
     }
-    if (hiddenFat->clusters[bIndexA].state == free_ && hiddenFat->clusters[bIndexB].state == free_) {
-        // fprintf(stderr, "No need to swap two free Blocks!\n");
-        return false;
+  if (hidden_fat->clusters[b_index_a].state == FREE && hidden_fat->clusters[b_index_b].state == FREE)
+    {
+      // fprintf(stderr, "No need to swap two free Blocks!\n");
+      return false;
     }
-    if (hiddenFat->clusters[bIndexA].state == reserved || hiddenFat->clusters[bIndexB].state == reserved) {
-        fprintf(stderr, "\"Invalid block for swapHiddenClusters! Can't swap with a reserved block!\n");
-        return false;
+  if (hidden_fat->clusters[b_index_a].state == RESERVED || hidden_fat->clusters[b_index_b].state == RESERVED)
+    {
+      fprintf (stderr, "\"Invalid block for swap_hidden_clusters! Can't swap with a reserved block!\n");
+      return false;
     }
-    if (hiddenFat->clusters[bIndexA].state == defect || hiddenFat->clusters[bIndexB].state == defect) {
-        fprintf(stderr, "\"Invalid block for swapHiddenClusters! Can't swap with a defect block!\n");
-        return false;
-    }
-
-    size_t clusterIndexClusterA = hiddenFat->clusters[bIndexA].clusterIndex;
-    unsigned int stateClusterA = hiddenFat->clusters[bIndexA].state;
-    HiddenCluster *prevClusterA = hiddenFat->clusters[bIndexA].prev;
-    HiddenCluster *nextClusterA = hiddenFat->clusters[bIndexA].next;
-    HiddenFile *fileClusterA = hiddenFat->clusters[bIndexA].file;
-
-    hiddenFat->clusters[bIndexA].clusterIndex = hiddenFat->clusters[bIndexB].clusterIndex;
-    hiddenFat->clusters[bIndexA].state = hiddenFat->clusters[bIndexB].state;
-    hiddenFat->clusters[bIndexA].prev = hiddenFat->clusters[bIndexB].prev;
-    hiddenFat->clusters[bIndexA].next = hiddenFat->clusters[bIndexB].next;
-    hiddenFat->clusters[bIndexA].file = hiddenFat->clusters[bIndexB].file;
-
-    hiddenFat->clusters[bIndexB].clusterIndex = clusterIndexClusterA;
-    hiddenFat->clusters[bIndexB].state = stateClusterA;
-    hiddenFat->clusters[bIndexB].prev = prevClusterA;
-    hiddenFat->clusters[bIndexB].next = nextClusterA;
-    hiddenFat->clusters[bIndexB].file = fileClusterA;
-
-    if (hiddenFat->clusters[bIndexA].next == &(hiddenFat->clusters[bIndexA])) {
-        hiddenFat->clusters[bIndexA].next = &(hiddenFat->clusters[bIndexB]);
-    }
-    if (hiddenFat->clusters[bIndexA].prev == &(hiddenFat->clusters[bIndexA])) {
-        hiddenFat->clusters[bIndexA].prev = &(hiddenFat->clusters[bIndexB]);
-    }
-    if (hiddenFat->clusters[bIndexB].next == &(hiddenFat->clusters[bIndexB])) {
-        hiddenFat->clusters[bIndexB].next = &(hiddenFat->clusters[bIndexA]);
-    }
-    if (hiddenFat->clusters[bIndexB].prev == &(hiddenFat->clusters[bIndexB])) {
-        hiddenFat->clusters[bIndexB].prev = &(hiddenFat->clusters[bIndexA]);
+  if (hidden_fat->clusters[b_index_a].state == DEFECT || hidden_fat->clusters[b_index_b].state == DEFECT)
+    {
+      fprintf (stderr, "\"Invalid block for swap_hidden_clusters! Can't swap with a defect block!\n");
+      return false;
     }
 
-    if (hiddenFat->clusters[bIndexA].prev != NULL) {
-        hiddenFat->clusters[bIndexA].prev->next = &(hiddenFat->clusters[bIndexA]);
-    } else if (hiddenFat->clusters[bIndexA].file != NULL) {
-        hiddenFat->clusters[bIndexA].file->hiddenCluster = &(hiddenFat->clusters[bIndexA]);
+  size_t cluster_index_cluster_a = hidden_fat->clusters[b_index_a].cluster_index;
+  unsigned int state_cluster_a = hidden_fat->clusters[b_index_a].state;
+  HiddenCluster *prev_cluster_a = hidden_fat->clusters[b_index_a].prev;
+  HiddenCluster *next_cluster_a = hidden_fat->clusters[b_index_a].next;
+  HiddenFile *file_cluster_a = hidden_fat->clusters[b_index_a].file;
+
+  hidden_fat->clusters[b_index_a].cluster_index = hidden_fat->clusters[b_index_b].cluster_index;
+  hidden_fat->clusters[b_index_a].state = hidden_fat->clusters[b_index_b].state;
+  hidden_fat->clusters[b_index_a].prev = hidden_fat->clusters[b_index_b].prev;
+  hidden_fat->clusters[b_index_a].next = hidden_fat->clusters[b_index_b].next;
+  hidden_fat->clusters[b_index_a].file = hidden_fat->clusters[b_index_b].file;
+
+  hidden_fat->clusters[b_index_b].cluster_index = cluster_index_cluster_a;
+  hidden_fat->clusters[b_index_b].state = state_cluster_a;
+  hidden_fat->clusters[b_index_b].prev = prev_cluster_a;
+  hidden_fat->clusters[b_index_b].next = next_cluster_a;
+  hidden_fat->clusters[b_index_b].file = file_cluster_a;
+
+  if (hidden_fat->clusters[b_index_a].next == &(hidden_fat->clusters[b_index_a]))
+    {
+      hidden_fat->clusters[b_index_a].next = &(hidden_fat->clusters[b_index_b]);
+    }
+  if (hidden_fat->clusters[b_index_a].prev == &(hidden_fat->clusters[b_index_a]))
+    {
+      hidden_fat->clusters[b_index_a].prev = &(hidden_fat->clusters[b_index_b]);
+    }
+  if (hidden_fat->clusters[b_index_b].next == &(hidden_fat->clusters[b_index_b]))
+    {
+      hidden_fat->clusters[b_index_b].next = &(hidden_fat->clusters[b_index_a]);
+    }
+  if (hidden_fat->clusters[b_index_b].prev == &(hidden_fat->clusters[b_index_b]))
+    {
+      hidden_fat->clusters[b_index_b].prev = &(hidden_fat->clusters[b_index_a]);
     }
 
-    if (hiddenFat->clusters[bIndexA].next != NULL) {
-        hiddenFat->clusters[bIndexA].next->prev = &(hiddenFat->clusters[bIndexA]);
+  if (hidden_fat->clusters[b_index_a].prev != NULL)
+    {
+      hidden_fat->clusters[b_index_a].prev->next = &(hidden_fat->clusters[b_index_a]);
+    }
+  else if (hidden_fat->clusters[b_index_a].file != NULL)
+    {
+      hidden_fat->clusters[b_index_a].file->hiddenCluster = &(hidden_fat->clusters[b_index_a]);
     }
 
-    if (hiddenFat->clusters[bIndexB].prev != NULL) {
-        hiddenFat->clusters[bIndexB].prev->next = &(hiddenFat->clusters[bIndexB]);
-    } else if (hiddenFat->clusters[bIndexB].file != NULL) {
-        hiddenFat->clusters[bIndexB].file->hiddenCluster = &(hiddenFat->clusters[bIndexB]);
+  if (hidden_fat->clusters[b_index_a].next != NULL)
+    {
+      hidden_fat->clusters[b_index_a].next->prev = &(hidden_fat->clusters[b_index_a]);
     }
 
-    if (hiddenFat->clusters[bIndexB].next != NULL) {
-        hiddenFat->clusters[bIndexB].next->prev = &(hiddenFat->clusters[bIndexB]);
+  if (hidden_fat->clusters[b_index_b].prev != NULL)
+    {
+      hidden_fat->clusters[b_index_b].prev->next = &(hidden_fat->clusters[b_index_b]);
+    }
+  else if (hidden_fat->clusters[b_index_b].file != NULL)
+    {
+      hidden_fat->clusters[b_index_b].file->hiddenCluster = &(hidden_fat->clusters[b_index_b]);
     }
 
+  if (hidden_fat->clusters[b_index_b].next != NULL)
+    {
+      hidden_fat->clusters[b_index_b].next->prev = &(hidden_fat->clusters[b_index_b]);
+    }
 
-    size_t blockSize = hiddenFat->blockSize;
-    // Swap blocks on disk
-    unsigned char bufferA[blockSize];
-    memcpy(bufferA, hiddenFat->disk + (blockSize * bIndexA), blockSize);
-    memcpy(hiddenFat->disk + (blockSize * bIndexA), hiddenFat->disk + (blockSize * bIndexB), blockSize);
-    memcpy(hiddenFat->disk + (blockSize * bIndexB), bufferA, blockSize);
+  size_t block_size = hidden_fat->block_size;
+  // Swap blocks on disk
+  unsigned char buffer_a[block_size];
+  memcpy (buffer_a, hidden_fat->disk + (block_size * b_index_a), block_size);
+  memcpy (hidden_fat->disk + (block_size * b_index_a), hidden_fat->disk + (block_size * b_index_b), block_size);
+  memcpy (hidden_fat->disk + (block_size * b_index_b), buffer_a, block_size);
 
-    return true;
+  return true;
 }

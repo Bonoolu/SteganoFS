@@ -1,5 +1,5 @@
-#ifndef STEGANOFS_HIDDENFILE_H
-#define STEGANOFS_HIDDENFILE_H
+#ifndef _HIDDENFILE_H_
+#define _HIDDENFILE_H_
 
 #include "hiddenfat.h"
 #include <errno.h>
@@ -16,12 +16,12 @@ struct HiddenFile {
     char filename[12];
 };
 
-int deleteHiddenFile(HiddenFat *hiddenFat, const char *filename);
+int delete_hidden_file (HiddenFat *hidden_fat, const char *filename);
 
-int countPathComponents(const char *path);
+int count_path_components (const char *path);
 
-HiddenFile *findFileByPath(HiddenFat *hiddenFat, const char *path);
+HiddenFile *find_file_by_path (HiddenFat *hidden_fat, const char *path);
 
-HiddenFile **createHiddenFile(HiddenFat *hiddenFat, const char *filename, long timestamp);
+HiddenFile **create_hidden_file (HiddenFat *hidden_fat, const char *filename, long timestamp);
 
-#endif //STEGANOFS_HIDDENFILE_H
+#endif //_HIDDENFILE_H_

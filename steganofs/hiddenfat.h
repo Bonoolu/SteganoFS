@@ -1,5 +1,5 @@
-#ifndef STEGANOFS_HIDDENFAT_H
-#define STEGANOFS_HIDDENFAT_H
+#ifndef _HIDDENFAT_H_
+#define _HIDDENFAT_H_
 
 #include "hiddencluster.h"
 #include "steganofs.h"
@@ -13,34 +13,34 @@ typedef struct HiddenFile HiddenFile;
 typedef struct HiddenFat HiddenFat;
 
 struct HiddenFat {
-    size_t blockSize;
-    size_t amountBlocks;
+    size_t block_size;
+    size_t amount_blocks;
     unsigned char *disk;
     HiddenCluster *clusters;
     HiddenFile *files[STEGANOFS_AMOUNT_ROOT_FILES];
 };
 
 // HiddenFat
-HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize);
+HiddenFat *create_hidden_fat (size_t disk_size, size_t block_size);
 
-void freeHiddenFat(HiddenFat *hiddenFat);
+void free_hidden_fat (HiddenFat *hidden_fat);
 
-size_t getAmountEntries(HiddenFat *hiddenFat, const char *path);
+size_t get_amount_entries (HiddenFat *hidden_fat, const char *path);
 
-size_t getFreeDiskSpace(HiddenFat *hiddenFat);
+size_t get_free_disk_space (HiddenFat *hidden_fat);
 
-void showHiddenFat(HiddenFat *hiddenFat, char *outputMessage);
+void show_hidden_fat (HiddenFat *hidden_fat, char *output_message);
 
-bool checkIntegrity(HiddenFat *hiddenFat);
+bool check_integrity (HiddenFat *hidden_fat);
 
-float checkForFragmentation(HiddenFat *hiddenFat);
+float check_for_fragmentation (HiddenFat *hidden_fat);
 
-void defragmentate(HiddenFat *hiddenFat);
+void defragmentate (HiddenFat *hidden_fat);
 
-int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length);
+int write_block (HiddenFat *hidden_fat, size_t b_index, const char *buffer, size_t offset, size_t length);
 
-int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length);
+int read_block (HiddenFat *hidden_fat, size_t b_index, const char *buffer, size_t offset, size_t length);
 
-size_t getFragmentationArray(HiddenFat *hiddenFat, size_t **array);
+size_t get_fragmentation_array (HiddenFat *hidden_fat, size_t **array);
 
-#endif //STEGANOFS_HIDDENFAT_H
+#endif //_HIDDENFAT_H_

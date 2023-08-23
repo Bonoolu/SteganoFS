@@ -1,12 +1,11 @@
-#ifndef STEGANOFS_MAIN_RUNLENGTHENCODING_H
-#define STEGANOFS_MAIN_RUNLENGTHENCODING_H
+#ifndef _RUNLENGTHENCODING_H_
+#define _RUNLENGTHENCODING_H_
 
 #include "ramdiskloader.h"
 
 typedef struct SerializedFilesystem SerializedFilesystem;
 
-void run_length_encoding(struct SerializedFilesystem *serializedFilesystem);
-void run_length_decoding(struct SerializedFilesystem *serializedFilesystem);
+void run_length_encoding (struct SerializedFilesystem *serialized_filesystem);
+void run_length_decoding (struct SerializedFilesystem *serialized_filesystem);
 
-
-#endif //STEGANOFS_MAIN_RUNLENGTHENCODING_H
+#endif //_RUNLENGTHENCODING_H_
