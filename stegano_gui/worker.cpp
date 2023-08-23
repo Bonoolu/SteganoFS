@@ -19,7 +19,7 @@ void Worker::mountFolder(QVariant qAdapt, QString s)
     adapt->mount(s.toStdString());
 
     qDebug() << "Thread finished: " << QThread::currentThreadId();
-    emit mountFinished();
+
 }
 
 

@@ -377,49 +377,21 @@
     <property name="title">
      <string>Datei</string>
     </property>
-    <widget class="QMenu" name="menuRamdisk">
-     <property name="title">
-      <string>Filesystem...</string>
-     </property>
-     <widget class="QMenu" name="menuLoad">
-      <property name="title">
-       <string>Load</string>
-      </property>
-      <addaction name="actionLoad_selected_file"/>
-      <addaction name="actionChoose_from_explorer"/>
-     </widget>
-     <addaction name="actionCreate_new"/>
-     <addaction name="menuLoad"/>
-     <addaction name="actionUnload"/>
-    </widget>
     <addaction name="actionNeue_Datei"/>
     <addaction name="actionNeuer_Ordner"/>
     <addaction name="separator"/>
-    <addaction name="menuRamdisk"/>
-    <addaction name="actionDefragment"/>
-    <addaction name="actionShow_Filesystem_information"/>
-    <addaction name="separator"/>
     <addaction name="actionMount"/>
     <addaction name="actionUnmount"/>
-   </widget>
-   <widget class="QMenu" name="menuAnsicht">
-    <property name="title">
-     <string>Ansicht</string>
-    </property>
-    <addaction name="actionVorschau_anzeigen"/>
+    <addaction name="separator"/>
+    <addaction name="actionDefragment"/>
+    <addaction name="actionShow_Filesystem_information"/>
    </widget>
    <addaction name="menuDatei"/>
-   <addaction name="menuAnsicht"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionVorschau_anzeigen">
    <property name="text">
     <string>Vorschau anzeigen</string>
-   </property>
-  </action>
-  <action name="actionSortierung_ndern">
-   <property name="text">
-    <string>Sortierung ändern</string>
    </property>
   </action>
   <action name="actionNeue_Datei">
@@ -447,16 +419,6 @@
     <string>Show Filesystem information</string>
    </property>
   </action>
-  <action name="actionCurrent_directory">
-   <property name="text">
-    <string>Current directory</string>
-   </property>
-  </action>
-  <action name="actionFrom_Path">
-   <property name="text">
-    <string>From Path...</string>
-   </property>
-  </action>
   <action name="actionLoad_selected_file">
    <property name="text">
     <string>Load selected file</string>
@@ -465,11 +427,6 @@
   <action name="actionChoose_from_explorer">
    <property name="text">
     <string>Choose from explorer</string>
-   </property>
-  </action>
-  <action name="action_Demo_Load_filesystem">
-   <property name="text">
-    <string>[Demo] Load filesystem</string>
    </property>
   </action>
   <action name="actionUnload">

@@ -40,7 +40,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_DefragDlg = new DefragmentDialog;
     m_DefragDlg->setLightmode_on(false);
-    m_DefragDlg->setAdapter(steganoFsAdapter);
 
     m_MFPDlg = new MountFromPathDialog;
     m_MFPDlg->setLightmodeon(false);
@@ -92,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->forwardButton->setDisabled(true);
 
     ui->actionUnmount->setDisabled(true);
+    ui->actionDefragment->setDisabled(true);
 
 
 
@@ -111,7 +111,7 @@ MainWindow::MainWindow(QWidget *parent)
     // RIGHT SIDE - DISPLAYING FILES
 
     m_filemodel = new QFileSystemModel(this);
-    //m_filemodel->setFilter(/* |*/ QDir::Files);
+
     m_filemodel->setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
     m_filemodel->setRootPath(sPath);
 
@@ -127,7 +127,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->listWidget->setSortingEnabled(true);
 
     ui->horizontalLayout_2->addWidget(m_pgv);
-    //ui->horizontalLayout_2->removeWidget(ui->graphicsView);
+
     m_pgv->setAlignment(Qt::AlignCenter | Qt::AlignCenter);
     m_pgv->hide();
 
@@ -141,8 +141,6 @@ MainWindow::MainWindow(QWidget *parent)
     // CONNECT SLOTS & SIGNALS
 
     connect(ui->searchLineEdit, &QLineEdit::textChanged, this, &MainWindow::handleSearchTextChanged);
-
-    connect(m_worker, &Worker::mountFinished, this, &MainWindow::mountFinished);
 
     connect(m_pgv, &PreviewGraphicsView::refreshScene, this, &MainWindow::refreshPreviewOnResize);
 
@@ -492,24 +490,9 @@ void MainWindow::on_darkModePushButton_clicked()
 
 
 
-
-void MainWindow::on_actionCreate_new_triggered()
-{
-
-    if (m_CRDdlg->exec() == QDialog::Accepted) {
-        steganoFsAdapter->createNewFilesystem(m_CRDdlg->getValue());
-        ui->statusbar->showMessage(QString("New Ramdisk created! Size: ") + QString::number(m_CRDdlg->getValue()), 10000);
-    } else {
-        ui->statusbar->showMessage(QString("No Ramdisk created!"));
-    }
-
-
-}
-
-
 void MainWindow::on_actionDefragment_triggered()
 {
-
+    m_DefragDlg->setAdapter(steganoFsAdapter);
     m_DefragDlg->setFragmentation(steganoFsAdapter->getFragmentationInPercent());
     m_DefragDlg->exec();
 }
@@ -552,6 +535,7 @@ void MainWindow::on_actionMount_triggered()
             if (QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, m_MFPDlg->mountingPath()))){
                 ui->actionMount->setDisabled(true);
                 ui->actionUnmount->setDisabled(false);
+                ui->actionDefragment->setDisabled(false);
                 steganoFsAdapter = sfa;
 
             } else {
@@ -581,15 +565,6 @@ void MainWindow::on_actionMount_triggered()
 //        m_filemodel->setRootPath(path);
 }
 
-void MainWindow::mountFinished()
-{
-        if (steganoFsAdapter->isMounted() && steganoFsAdapter->mountPath() == m_currentDir.toStdString()){
-        ui->statusbar->showMessage("Mount finished. Path: " + QString::fromStdString(steganoFsAdapter->mountPath()));
-        } else {
-        ui->statusbar->showMessage("Mount failed. " + m_currentDir);
-        }
-
-}
 
 
 
@@ -599,6 +574,7 @@ void MainWindow::on_actionUnmount_triggered()
         if (steganoFsAdapter->writeFilesystemToSteganoProvider()){
             ui->actionUnmount->setDisabled(true);
             ui->actionMount->setDisabled(false);
+            ui->actionDefragment->setDisabled(true);
             delete steganoFsAdapter;
             steganoFsAdapter = nullptr;
             ui->statusbar->showMessage("Successfully unmounted!",18000);
@@ -616,81 +592,7 @@ void MainWindow::on_actionUnmount_triggered()
 }
 
 
-void MainWindow::on_actionCurrent_directory_triggered()
-{
-    std::string s = m_currentDir.toStdString();
 
-    auto path = m_filemodel->rootPath();
-    m_filemodel->setRootPath("");
-    steganoFsAdapter = new SteganoFsAdapter(s);
-
-        m_thread->start();
-        QVariant qSteganoFSAdapter = QVariant::fromValue(steganoFsAdapter);
-        QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, QString(s.c_str())));
-/*
-        if (mountSucceeded && steganoFsAdapter->mountPath()==s){
-                ui->statusbar->showMessage(QString("Mount successfull. Path: " ) + QString::fromStdString(s));
-        } else if (mountSucceeded ) {
-
-        }*/
-        /*
-        if (m_thread->isFinished() && steganoFsAdapter->isMounted()){
-        ui->statusbar->showMessage(QString("Path successfully mounted: ") + QString::fromStdString(s));
-        } else {
-            ui->statusbar->showMessage(QString("Path successfully mounted: ") + QString::fromStdString(s));
-        }
-*/
-
-
-    m_filemodel->setRootPath(path);
-
-}
-
-
-
-
-// TODO: In welcher Variable soll der Pfad der ausgewählten Datei gespeichert werden?
-void MainWindow::on_actionChoose_from_explorer_triggered()
-{
-    // HARDCODED
-    m_LFdlg->setLoadingPath("/home/minaboo/test_mnt/");
-    m_LFdlg->setAdapter(steganoFsAdapter);
-
-    // überprüfe mit bool
-
-    if (m_LFdlg->exec() == QDialog::Accepted) {
-
-        SteganoFsAdapter *sfa = new SteganoFsAdapter(m_LFdlg->loadingPath().toStdString());
-
-        if (sfa->loadFilesytemFromSteganoProvider()){
-
-            ui->statusbar->showMessage(QString("Loaded file: " + m_LFdlg->loadingPath()), 10000);
-            steganoFsAdapter = sfa;
-            ui->actionLoad_selected_file->setDisabled(true);
-            ui->actionChoose_from_explorer->setDisabled(true);
-
-
-        } else {
-            ui->statusbar->showMessage(QString("ERROR: did not work with " + m_LFdlg->loadingPath()), 10000);
-            delete sfa;
-        }
-
-    // OPTION FOR LOAD DISABLED
-
-
-    } else {
-        ui->statusbar->showMessage(QString("No file selected."));
-    }
-
-}
-
-
-void MainWindow::on_action_Demo_Load_filesystem_triggered()
-{
-    steganoFsAdapter->loadFilesytemFromSteganoProvider();
-    std::string s = steganoFsAdapter->steganoImageFolder();
-    ui->statusbar->showMessage(QString("Filesystem loaded: ") + QString::fromStdString(s), 10000);
-}
 
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)

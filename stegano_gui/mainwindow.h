@@ -42,10 +42,6 @@ private slots:
     void on_treeView_clicked(const QModelIndex &index);
     void handleSearchTextChanged(const QString &searchText);
     void refreshView();
-//    void handlePathTextEditFinished(const QString &newPath);
-
-//    void on_DisplayComboBox_activated(int index);
-
 
     void on_pathLineEdit_editingFinished();
 
@@ -59,28 +55,15 @@ private slots:
 
     void on_darkModePushButton_clicked();
 
-    void on_actionCreate_new_triggered();
-
-    //void createNewRamdisk();
-    //void on_actionLoad_triggered();
-
     void on_actionDefragment_triggered();
 
     void on_actionNeuer_Ordner_triggered();
 
     void on_actionShow_Filesystem_information_triggered();
 
-    //void on_actionMount_triggered();
+    void on_actionMount_triggered();
 
     void on_actionUnmount_triggered();
-
-
-
-    void on_actionCurrent_directory_triggered();
-
-    void mountFinished();
-
-    void on_actionChoose_from_explorer_triggered();
 
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
@@ -92,9 +75,6 @@ private slots:
 
     void updateHistory();
 
-    void on_action_Demo_Load_filesystem_triggered();
-
-    void on_actionMount_triggered();
 
 private:
     Ui::MainWindow *ui;
