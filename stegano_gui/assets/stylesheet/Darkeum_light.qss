@@ -25,6 +25,7 @@ SOFTWARE.
 QWidget
 {
         background-color: #ffffff;
+        font-size: 14px;
         color: #1c1c1c;;
         border-color: #b5d0eb;
 

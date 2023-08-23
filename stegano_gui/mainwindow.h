@@ -33,6 +33,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void pathChanged();
+
 
 private slots:
     void on_treeView_clicked(const QModelIndex &index);
@@ -90,6 +93,8 @@ private slots:
 
     void on_forwardButton_clicked();
 
+    void updateHistory();
+
 private:
     Ui::MainWindow *ui;
     CreateRamdiskDialog *m_CRDdlg;
@@ -119,6 +124,8 @@ private:
     QString m_currentDir;
     QListWidgetItem *m_currentFile;
     QString m_currentFileString;
+    QList<QString> *m_movingHistory;
+    int m_stepsToGoBack;
     QList<QListWidgetItem> selectedFiles;
 
     QString m_lastDirectory;

@@ -16,12 +16,13 @@ void PreviewGraphicsView::resizeEvent(QResizeEvent *event)
 //        update();
 //    }
 
-    //QGraphicsScene *scene = this->scene();
+   //QGraphicsItem *scene = this->scene()->activePanel() ;
     int w = this->parentWidget()->width();
     //this->setFixedWidth(w/3);
-    this->setMaximumWidth(w/5);
-    //this.scene
-    //this->scene()->addPixmap(this->scene().)
+    this->setMaximumWidth(w/4);
+//    this->scene()->clear();
+//    this->scene()->items().clear();
+//    this->scene()->addPixmap(this->scene().)
     update();
     emit refreshScene();
     QGraphicsView::resizeEvent(event);
