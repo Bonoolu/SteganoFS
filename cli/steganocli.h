@@ -1,13 +1,18 @@
-//
-// Created by Group 80 on 8/23/23.
-//
+#ifndef _STEGANOCLI_H_
+#define _STEGANOCLI_H_
 
-#ifndef STEGANOFS_MAIN_STEGANOCLI_H
-#define STEGANOFS_MAIN_STEGANOCLI_H
+#include <iostream>
+#include "../cpp-wrapper/SteganoFsAdapter.h"
 
-
-class SteganoCLI {
-
+class SteganoCli {
+public:
+    static int printUsage();
+    static int loadAndMount(const std::string& steganoPath, const std::string& mntPath);
+    static int unmountAndUnload(const std::string& mntPath);
+    static int format(const std::string& steganoPath);
+    static int info();
+    static int defragment(const std::string& steganoPath);
+    static int parse(int argc, char** argv);
 };
 
-#endif //STEGANOFS_MAIN_STEGANOCLI_H
+#endif //_STEGANOCLI_H_
