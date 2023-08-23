@@ -1,5 +1,15 @@
 #include "../../steganofs/steganofs.h"
 
+/**
+ * @file test_bmp_provider.c
+ * @brief This file contains a test suite for the BMP Provider implementation.
+ */
+
+/**
+ * @brief Test the functions for generic buffer manipulation.
+ *
+ * @return True if the test passes, false otherwise.
+ */
 bool test_generic_buffer ()
 {
   unsigned char buffer_ff[17] = "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF"
@@ -34,6 +44,11 @@ bool test_generic_buffer ()
   return true;
 }
 
+/**
+ * @brief Test embedding and extracting a single file within a BMP image.
+ *
+ * @return True if the test passes, false otherwise.
+ */
 bool test_single_bmp_file ()
 {
   HiddenFat *hidden_fat = create_hidden_fat (10, 2);
@@ -58,6 +73,11 @@ bool test_single_bmp_file ()
   return true;
 }
 
+/**
+ * @brief Test creating a folder with files and integrity check in a BMP image.
+ *
+ * @return True if the test passes, false otherwise.
+ */
 bool test_bmp_folder ()
 {
   HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 100, BLOCK_SIZE);
@@ -122,7 +142,15 @@ bool test_bmp_folder ()
   return ret;
 }
 
-int main ()
+/**
+ * @brief The main entry point for the test suite.
+ *
+ * @param argc The number of command-line arguments.
+ * @param argv An array of pointers to command-line arguments.
+ * @return 0 on successful execution.
+ */
+
+int main (int argc, char **argv)
 {
   int tests[] = {
       test_generic_buffer (),

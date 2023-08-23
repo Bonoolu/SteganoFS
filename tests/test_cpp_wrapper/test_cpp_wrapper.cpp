@@ -1,5 +1,18 @@
+/**
+ * @file test_cpp_wrapper.cpp
+ * @brief This file contains a test suite for the SteganoFsAdapter class.
+ */
+
 #include <iostream>
 #include "../../cpp-wrapper/SteganoFsAdapter.h"
+
+/**
+ * @brief The main entry point for the test suite.
+ *
+ * @param argc The number of command-line arguments.
+ * @param argv An array of pointers to command-line arguments.
+ * @return 0 on successful execution.
+ */
 
 int main (int argc, char **argv)
 {

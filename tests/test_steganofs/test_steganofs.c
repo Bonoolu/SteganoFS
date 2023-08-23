@@ -1,5 +1,14 @@
+/**
+ * @file test_steganofs.c
+ * @brief Unit tests for the SteganOFS filesystem.
+ */
+
 #include "../../steganofs/steganofs.h"
 
+/**
+ * @brief Test function for creating a hidden FAT structure.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_create_hidden_fat ()
 {
   size_t disk_size = STEGANOFS_BLOCK_SIZE * 4;  // Example disk size
@@ -76,6 +85,10 @@ bool test_create_hidden_fat ()
   return passed;
 }
 
+/**
+ * @brief Test function for getting free disk space on an empty hidden FAT.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_get_free_disk_space_empty_fat ()
 {
   HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 4, STEGANOFS_BLOCK_SIZE);
@@ -97,6 +110,10 @@ bool test_get_free_disk_space_empty_fat ()
   return passed;
 }
 
+/**
+ * @brief Test function for getting free disk space with allocated blocks/files.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_get_free_disk_space_with_allocated_blocks ()
 {
   HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 4, STEGANOFS_BLOCK_SIZE);
@@ -128,6 +145,10 @@ bool test_get_free_disk_space_with_allocated_blocks ()
   return passed;
 }
 
+/**
+ * @brief Test function for getting free disk space on a completely filled disk.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_get_free_disk_space_full_disk ()
 {
   HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE, STEGANOFS_BLOCK_SIZE);
@@ -152,6 +173,10 @@ bool test_get_free_disk_space_full_disk ()
   return passed;
 }
 
+/**
+ * @brief Test function for creating a hidden file with valid parameters.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_create_file_valid ()
 {
   HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 4, STEGANOFS_BLOCK_SIZE);
@@ -178,6 +203,10 @@ bool test_create_file_valid ()
   return passed;
 }
 
+/**
+ * @brief Test function for creating a hidden file with insufficient memory.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_create_file_insufficient_memory ()
 {
   fflush (stdout);
@@ -215,6 +244,10 @@ bool test_create_file_insufficient_memory ()
   return passed;
 }
 
+/**
+ * @brief Test function for creating a hidden file when no available file slots remain.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_create_file_no_available_file_slot ()
 {
   fflush (stdout);
@@ -254,6 +287,10 @@ bool test_create_file_no_available_file_slot ()
   return passed;
 }
 
+/**
+ * @brief Test function for creating a hidden file with linked cluster blocks.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_create_file_linked_list ()
 {
   // Create a file with multiple clusters
@@ -315,6 +352,10 @@ bool test_create_file_linked_list ()
   return passed;
 }
 
+/**
+ * @brief Test function for deleting a valid hidden file.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_delete_file_valid ()
 {
   // Create a valid file
@@ -360,6 +401,10 @@ bool test_delete_file_valid ()
   return passed;
 }
 
+/**
+ * @brief Test function for deleting a non-existent hidden file.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_delete_file_non_existent ()
 {
   // Create a valid file
@@ -402,6 +447,10 @@ bool test_delete_file_non_existent ()
   return passed;
 }
 
+/**
+ * @brief Test function for deleting a non-existent hidden file.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_delete_file_with_clusters ()
 {
   // Check if the associated clusters were freed
@@ -449,6 +498,13 @@ bool test_delete_file_with_clusters ()
   return passed;
 }
 
+/**
+ * @brief Test function for displaying the FAT structure for a specified number of blocks.
+ * @param n The number of blocks in the FAT.
+ * @param output_len The expected length of the output.
+ * @return `true` if the test passes, otherwise `false`.
+ */
+
 bool test_show_n_block_fat (size_t n, size_t output_len)
 {
   // Create an empty Fat
@@ -478,6 +534,14 @@ bool test_show_n_block_fat (size_t n, size_t output_len)
   return passed;
 }
 
+/**
+ * @brief Tests the integrity of hidden clusters swapping.
+ *
+ * This function tests whether swapping of hidden clusters maintains the integrity
+ * of the data structure.
+ *
+ * @return `true` if hidden cluster swapping passes integrity check, otherwise `false`.
+ */
 bool test_swap_hidden_clusters_integrity ()
 {
   HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 20, STEGANOFS_BLOCK_SIZE);
@@ -608,6 +672,10 @@ bool test_swap_hidden_clusters_integrity ()
   return passed;
 }
 
+/**
+ * @brief Test function for defragmenting the filesystem.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_defragmentation ()
 {
   // Create a valid file
@@ -698,6 +766,12 @@ bool test_defragmentation ()
   return integrity;
 }
 
+/**
+ * @brief Test function for writing and reading data from the filesystem.
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line argument strings.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_write_read (int argc, char **argv)
 {
   HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 4, STEGANOFS_BLOCK_SIZE);
@@ -731,6 +805,10 @@ bool test_write_read (int argc, char **argv)
   return check_integrity (hidden_fat);
 }
 
+/**
+ * @brief Test function for loading and unloading a RAM disk image.
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_ramdiskloader ()
 {
   HiddenFat *hidden_fat = create_hidden_fat (10 * 4, 4);
@@ -795,6 +873,10 @@ bool test_ramdiskloader ()
   return ret;
 }
 
+/**
+ * @brief Test function for testing Run Length Encoding (RLE).
+ * @return `true` if the test passes, otherwise `false`.
+ */
 bool test_rle ()
 {
   HiddenFat *hidden_fat = create_hidden_fat (10, 2);
@@ -825,6 +907,15 @@ bool test_rle ()
   return false;
 }
 
+/**
+ * @brief Runs the test suite.
+ *
+ * This function initializes the test framework and runs the test suite
+ * based on the provided command line arguments.
+ *
+ * @param argc The number of command line arguments.
+ * @param argv An array of C-style strings containing the command line arguments.
+ */
 void run_tests (int argc, char **argv)
 {
   int tests[] = {
@@ -865,6 +956,16 @@ void run_tests (int argc, char **argv)
   printf ("%zu/%zu tests passed!\n", passed, sum);
 }
 
+/**
+ * @brief Tests the fusion of two or more argc clusters into one cluster.
+ *
+ * This function performs testing of argc cluster fusion operation. It takes
+ * argc and argv as input, performs the testing, and returns the result.
+ *
+ * @param argc The number of command line arguments.
+ * @param argv An array of C-style strings containing the command line arguments.
+ * @return The result code of the test_fuse operation.
+ */
 int test_fuse (int argc, char **argv)
 {
   HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 100000, STEGANOFS_BLOCK_SIZE);
@@ -888,6 +989,14 @@ int test_fuse (int argc, char **argv)
     }
   return fuse_main(argc, argv, &fuse_operations, hidden_fat);
 }
+
+/**
+ * @brief The main entry point for the test suite.
+ *
+ * @param argc The number of command-line arguments.
+ * @param argv An array of pointers to command-line arguments.
+ * @return 0 on successful execution.
+ */
 
 int main (int argc, char **argv)
 {
