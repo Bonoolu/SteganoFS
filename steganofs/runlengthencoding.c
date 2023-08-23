@@ -75,7 +75,7 @@ void run_length_encoding (struct SerializedFilesystem *serialized_filesystem)
   size_t buffer_length = write_index;
   size_t header_length = (ranges_count * 2 * 8) + 8;
   printf ("Allocated %zu + %zu = %zu bytes!\n", buffer_length, header_length, buffer_length + header_length);
-  unsigned char *new_buffer = malloc (buffer_length + header_length); // See free below
+  unsigned char *new_buffer = malloc (buffer_length + header_length); // See free() below
   struct LinkedList *zero_ranges_end = zero_ranges;
   zero_ranges = zero_ranges_begin;
   size_t write_index_new_buffer = 0;
@@ -128,7 +128,7 @@ void run_length_decoding (struct SerializedFilesystem *serialized_filesystem)
   printf ("Length of DataBuffer: %zu\n", encoded_buffer_length);
   printf ("Length of decoded Filesystem: %zu\n", encoded_buffer_length + amount_zeros_to_place);
   size_t decoded_filesystem_length = encoded_buffer_length + amount_zeros_to_place;
-  unsigned char *decoded_filesystem = malloc (decoded_filesystem_length); // See free below
+  unsigned char *decoded_filesystem = malloc (decoded_filesystem_length); // See free() below
   memset (decoded_filesystem, 0, decoded_filesystem_length);
   length_pointer = (uint64_t *) zero_ranges;
   unsigned char *read_pointer = (unsigned char *) encoded_buffer;

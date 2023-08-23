@@ -104,7 +104,7 @@ HiddenFile **create_hidden_file (HiddenFat *hidden_fat, const char *filename, lo
     }
 
   // Create the file structure and update the file table
-  HiddenFile *p_file = (HiddenFile *) malloc (sizeof (HiddenFile));
+  HiddenFile *p_file = (HiddenFile *) malloc (sizeof (HiddenFile));  // gets by freed in free_hidden_fat()
   if (!p_file)
     {
       fprintf (stderr, "Could not allocate memory!\n");

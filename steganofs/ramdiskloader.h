@@ -60,22 +60,22 @@ struct __attribute__((__packed__)) PackedFat {
  * @brief Represents a packed cluster for serialization.
  */
 struct __attribute__((__packed__)) PackedCluster {
-    u_int64_t b_index;
-    u_int16_t cluster_index;
-    u_int8_t state;
-    int64_t prev_cluster_b_index;
-    int64_t next_cluster_b_index;
+    u_int64_t b_index; /**< Block index of the cluster in the RAM disk. */
+    u_int16_t cluster_index; /**< Index of the cluster within the file. */
+    u_int8_t state; /**< State of the cluster (FREE, ALLOCATED, RESERVED, etc.). */
+    int64_t prev_cluster_b_index; /**< Block index of the previous cluster in the linked list. */
+    int64_t next_cluster_b_index /**< Block index of the next cluster in the linked list. */
 };
 
 /**
  * @brief Represents a packed file for serialization.
  */
 struct __attribute__((__packed__)) PackedFile {
-    u_int64_t filesize;
-    u_int64_t real_filesize;
-    u_int32_t timestamp;
-    int64_t hidden_cluster_b_index;
-    char filename[12];
+    u_int64_t filesize; /**< Size of the file in bytes. */
+    u_int64_t real_filesize; /**< Real size of the file on disk including padding. */
+    u_int32_t timestamp; /**< Timestamp of the file's creation or modification. */
+    int64_t hidden_cluster_b_index; /**< Block index of the first cluster of the file. */
+    char filename[12]; /**< Name of the file. */
 };
 
 /**
@@ -93,6 +93,8 @@ struct SerializedFilesystem {
  *
  * This function takes a HiddenFat structure and converts it into a serialized representation
  * suitable for storage or transmission.
+ * This function allocates buf inside SerializedFilesystem, which can be freed with free() by
+ * the caller of this function.
  *
  * @param hidden_fat A pointer to the HiddenFat structure.
  * @return A SerializedFilesystem structure containing the serialized data.
@@ -106,7 +108,8 @@ struct SerializedFilesystem serialize_filesystem (HiddenFat *hidden_fat);
  * a HiddenFat structure representing the RAM disk filesystem.
  *
  * @param serialized_filesystem The SerializedFilesystem structure containing the serialized data.
- * @return A pointer to the loaded HiddenFat structure, or NULL if loading fails.
+ * @return A pointer to the loaded HiddenFat structure, or NULL if loading fails. This structure is
+ * allocated on the heap and can be freed with freeHiddenFat in hiddenfat.h
  */
 HiddenFat *load_ramdisk (struct SerializedFilesystem serialized_filesystem);
 

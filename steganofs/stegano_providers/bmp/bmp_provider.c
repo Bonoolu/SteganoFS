@@ -4,7 +4,7 @@ void exract_payload_from_generic_buffer (unsigned char **payload_buffer, size_t 
                                          const unsigned char *data, size_t data_length)
 {
   *payload_length = data_length / 8;
-  *payload_buffer = malloc (*payload_length);
+  *payload_buffer = malloc (*payload_length); // gets freed in stegano_provider_read()
   memset (*payload_buffer, 0, *payload_length);
   for (size_t i = 0; i < *payload_length; i++)
     {
@@ -61,13 +61,14 @@ struct SteganoFile read_bmp (const char *path)
       size_t pixel_data_length = ftell (file) - 36;
       rewind (file);
       fseek (file, 36, 0);
-      unsigned char *pixeldata = malloc (pixel_data_length);
+      unsigned char *pixeldata = malloc (pixel_data_length); // see free() below
       if (pixeldata == NULL)
         {
           return stegano_file;
         }
       fread (pixeldata, pixel_data_length, 1, file);
       extract_payload (&stegano_file, pixeldata, pixel_data_length);
+      free (pixeldata);
       fflush (file);
       fclose (file);
     }
@@ -83,7 +84,7 @@ size_t write_bmp (struct SteganoFile stegano_file)
       size_t pixel_data_length = ftell (file) - 36;
       rewind (file);
       fseek (file, 36, 0);
-      unsigned char *pixeldata = malloc (pixel_data_length);
+      unsigned char *pixeldata = malloc (pixel_data_length); // see free() below
       if (pixeldata == NULL)
         {
           return 0;
@@ -96,6 +97,7 @@ size_t write_bmp (struct SteganoFile stegano_file)
       fseek (file, 36, 0);
       fwrite (pixeldata, pixel_data_length, 1, file);
       fflush (file);
+      free (pixeldata);
       fclose (file);
       return payload_written;
     }

@@ -339,7 +339,9 @@ struct HiddenFat *steganofs_load_ramdisk (const char *stegano_image_folder)
   struct SerializedFilesystem serialized_filesystem = stegano_provider_read (stegano_image_folder);
   if (serialized_filesystem.size == 0)
     return NULL;
-  return load_ramdisk (serialized_filesystem);
+  HiddenFat *p_hidden_fat = load_ramdisk (serialized_filesystem);
+  free(serialized_filesystem.buf);
+  return p_hidden_fat;
 }
 
 bool steganofs_unload_ramdisk (struct HiddenFat *hidden_fat, const char *stegano_folder)
@@ -347,7 +349,9 @@ bool steganofs_unload_ramdisk (struct HiddenFat *hidden_fat, const char *stegano
   struct SerializedFilesystem serialized_filesystem = serialize_filesystem (hidden_fat);
   if (serialized_filesystem.size == 0)
     return false;
-  return stegano_provider_write (serialized_filesystem, stegano_folder);
+  bool ret = stegano_provider_write (serialized_filesystem, stegano_folder);
+  free(serialized_filesystem.buf);
+  return ret;
 }
 
 bool steganofs_mount (struct HiddenFat *hidden_fat, const char *mnt_point)

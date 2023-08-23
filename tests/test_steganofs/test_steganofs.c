@@ -200,6 +200,7 @@ bool test_create_file_valid ()
 
   if (passed)
     printf ("test_create_file_valid test passed.\n");
+  free_hidden_fat (hidden_fat);
   return passed;
 }
 
@@ -241,6 +242,7 @@ bool test_create_file_insufficient_memory ()
   if (passed)
     printf ("test_create_file_insufficient_memory test passed.\n");
   fflush (stderr);
+  free_hidden_fat (hidden_fat);
   return passed;
 }
 
@@ -284,6 +286,7 @@ bool test_create_file_no_available_file_slot ()
   if (passed)
     printf ("test_create_file_no_available_file_slot test passed.\n");
   fflush (stderr);
+  free_hidden_fat (hidden_fat);
   return passed;
 }
 
@@ -349,6 +352,7 @@ bool test_create_file_linked_list ()
 
   if (passed)
     printf ("test_create_file_linked_list test passed.\n");
+  free_hidden_fat (hidden_fat);
   return passed;
 }
 
@@ -444,6 +448,7 @@ bool test_delete_file_non_existent ()
 
   if (passed)
     printf ("test_delete_file_non_existent test passed.\n");
+  free_hidden_fat (hidden_fat);
   return passed;
 }
 
@@ -495,6 +500,7 @@ bool test_delete_file_with_clusters ()
 
   if (passed)
     printf ("test_delete_file_with_clusters test passed.\n");
+  free_hidden_fat (hidden_fat);
   return passed;
 }
 
@@ -802,7 +808,9 @@ bool test_write_read (int argc, char **argv)
   memset (output, 0, 20);
   stgfs_read ("/test.txt", output, 15, 0, (struct fuse_file_info *) hidden_fat);
   printf ("Printing result of stgfs_read: %s\n", output);
-  return check_integrity (hidden_fat);
+  bool ret = check_integrity (hidden_fat);
+  free_hidden_fat (hidden_fat);
+  return ret;
 }
 
 /**
@@ -884,7 +892,7 @@ bool test_rle ()
   unsigned char testbuffer[4] = "abc";
   stgfs_write ("/test.txt", (char *) testbuffer, 4, 0, (struct fuse_file_info *) hidden_fat);
   struct SerializedFilesystem serialized_filesystem = serialize_filesystem (hidden_fat);
-  unsigned char *buffer_before = malloc (serialized_filesystem.size);
+  unsigned char *buffer_before = malloc (serialized_filesystem.size); // see free() below
   memcpy (buffer_before, serialized_filesystem.buf, serialized_filesystem.size);
   run_length_encoding (&serialized_filesystem);
   run_length_decoding (&serialized_filesystem);
@@ -892,6 +900,7 @@ bool test_rle ()
   printf ("Memory comparison value is %d\n", ret);
   if (ret == 0)
     {
+      free(buffer_before);
       return true;
     }
   for (size_t i = 0; i < serialized_filesystem.size; i++)
@@ -904,6 +913,8 @@ bool test_rle ()
           break;
         }
     }
+  free(buffer_before);
+  free_hidden_fat (hidden_fat);
   return false;
 }
 

@@ -12,7 +12,7 @@ HiddenFat *create_hidden_fat (size_t disk_size, size_t block_size)
       fprintf (stderr, "Disk size is not dividable by block size!\n");
       return NULL;
     }
-  unsigned char *disk = (unsigned char *) malloc (disk_size * sizeof (unsigned char)); // gets freed in freeHiddenFat
+  unsigned char *disk = (unsigned char *) malloc (disk_size * sizeof (unsigned char)); // gets freed in free_hidden_fat
   if (!disk)
     {
       fprintf (stderr, "Could not allocate memory!\n");
@@ -21,7 +21,7 @@ HiddenFat *create_hidden_fat (size_t disk_size, size_t block_size)
   memset (disk, 0, disk_size);
   size_t amount_blocks = disk_size / block_size;
   HiddenCluster
-      *clusters = (HiddenCluster *) malloc (amount_blocks * sizeof (HiddenCluster)); // gets freed in freeHiddenFat
+      *clusters = (HiddenCluster *) malloc (amount_blocks * sizeof (HiddenCluster)); // gets freed in free_hidden_fat
   if (!clusters)
     {
       fprintf (stderr, "Could not allocate memory!\n");
@@ -304,8 +304,7 @@ void defragmentate (HiddenFat *hidden_fat)
 
 size_t get_fragmentation_array (HiddenFat *hidden_fat, size_t **array)
 {
-  *array = malloc (hidden_fat->amount_blocks
-                   * sizeof (size_t));  // TODO! Write doxygen to make sure this is freed by caller. make sure cpp wrapper calls free
+  *array = malloc (hidden_fat->amount_blocks * sizeof (size_t)); // gets in SteganoFsAdapter::getFilesystemVector()
   memset (*array, 0, hidden_fat->amount_blocks * sizeof (size_t));
   if (*array == NULL)
     {
@@ -368,7 +367,7 @@ int write_block (HiddenFat *hidden_fat, size_t b_index, const char *buffer, size
   size_t disk_offset = (b_index * hidden_fat->block_size) + offset;
   if (hidden_fat->disk + disk_offset + length > hidden_fat->disk + (hidden_fat->amount_blocks * hidden_fat->block_size))
     {
-      fprintf (stderr, "Can't write outside the disk!!\n"); // TODO BREAKPOINT
+      fprintf (stderr, "Can't write outside the disk!!\n");
       return -1;
     }
   memcpy (hidden_fat->disk + disk_offset, (void *) buffer + offset, length);

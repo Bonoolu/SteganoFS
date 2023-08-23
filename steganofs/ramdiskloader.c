@@ -14,8 +14,7 @@ struct SerializedFilesystem serialize_filesystem (HiddenFat *hidden_fat)
 
   size_t size_filesystem = offset_blocks + size_blocks;
 
-  unsigned char
-      *buffer_filesystem = malloc (size_filesystem); // TODO! free me after serializedFilesystem is no longer needed
+  unsigned char *buffer_filesystem = malloc (size_filesystem); // gets freed by steganofs_unload_ramdisk()
   memset (buffer_filesystem, 0, size_filesystem);
 
   PackedFat *packed_fat = (PackedFat *) (buffer_filesystem + offset_packed_fat);
@@ -92,8 +91,7 @@ HiddenFat *load_ramdisk (struct SerializedFilesystem serialized_filesystem)
   unsigned char *disk = serialized_filesystem.buf + packed_fat->disk_offset;
 
   HiddenFat *hidden_fat = create_hidden_fat (packed_fat->block_size * packed_fat->amount_blocks,
-                                             packed_fat
-                                                 ->block_size); // TODO: Call freeHiddenFat() in hiddenfat.c when this Filesystem is no longer needed
+                                             packed_fat->block_size); // gets freed by free_hidden_fat()
 
   HiddenFile **hidden_file_iterator = hidden_fat->files;
   struct PackedFile empty_file;
@@ -106,7 +104,7 @@ HiddenFat *load_ramdisk (struct SerializedFilesystem serialized_filesystem)
           hidden_file_iterator++;
           continue;
         }
-      *hidden_file_iterator = malloc (sizeof (HiddenFile)); // gets freed in freeHiddenFat in hiddenfat.c
+      *hidden_file_iterator = malloc (sizeof (HiddenFile)); // gets freed by free_hidden_fat()
       memset (*hidden_file_iterator, 0, sizeof (HiddenFile));
       (*hidden_file_iterator)->filesize = (packed_file)->filesize;
       if (packed_file->hidden_cluster_b_index == -1)

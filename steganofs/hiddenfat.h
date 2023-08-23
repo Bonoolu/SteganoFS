@@ -131,7 +131,8 @@ int read_block (HiddenFat *hidden_fat, size_t b_index, const char *buffer, size_
  * @brief Gets an array indicating the fragmentation status of blocks in the hidden FAT filesystem.
  *
  * @param hidden_fat A pointer to the HiddenFat structure.
- * @param array A pointer to an array that will be allocated to hold the fragmentation data.
+ * @param array A pointer to an array that will be allocated to hold the fragmentation data. This array is allocated on
+ * the heap an can freed with free() by the caller of this function
  * @return The total number of blocks in the filesystem.
  */
 size_t get_fragmentation_array (HiddenFat *hidden_fat, size_t **array);

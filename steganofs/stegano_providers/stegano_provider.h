@@ -44,7 +44,8 @@ struct SteganoProvider {
  * This function reads a serialized filesystem from a path, utilizing appropriate steganography providers.
  *
  * @param path Path to the serialized filesystem data.
- * @return SerializedFilesystem structure containing the read data.
+ * @return SerializedFilesystem structure containing the read data. * This function allocates heap for buf inside SerializedFilesystem, which can be freed with free() by
+ * the caller of this function. This buffer needs to be freed with free() by the caller of this function
  */
 struct SerializedFilesystem stegano_provider_read (const char *path);
 

@@ -9,7 +9,7 @@ struct SteganoFile read_raw (const char *path)
       fseek (file, 0L, SEEK_END);
       stegano_file.payload_length = ftell (file);
       rewind (file);
-      stegano_file.payload = malloc (stegano_file.payload_length);
+      stegano_file.payload = malloc (stegano_file.payload_length); // gets freed in stegano_provider_read()
       if (stegano_file.payload == NULL)
         {
           stegano_file.payload_length = 0;

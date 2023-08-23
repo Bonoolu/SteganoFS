@@ -16,8 +16,11 @@
  *
  * This function reads raw data from a file and encapsulates it in a SteganoFile structure.
  *
- * @param path Path to the file containing raw data to be read.
- * @return SteganoFile structure containing the read payload data.
+ * @param path Path to the file containing payload data to be read.
+ * @return SteganoFile structure containing the read payload data. The payload buffer
+ * inside SteganoFile is allocated on the heap and needs to get freed with free() by the caller of this
+ * function
+ * and needs to get freed with free() by the caller of this function
  */
 struct SteganoFile read_raw (const char *path);
 

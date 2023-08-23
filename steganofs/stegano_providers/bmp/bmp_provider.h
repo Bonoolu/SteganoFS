@@ -17,7 +17,8 @@
  *
  * This function extracts payload data from a generic buffer containing steganographic data.
  *
- * @param payload_buffer Pointer to the pointer that will hold the extracted payload data.
+ * @param payload_buffer Pointer to the pointer that will hold the extracted payload data. This buffer is on the heap
+ * and needs to get freed with free() by the caller of this function
  * @param payload_length Pointer to the variable that will hold the length of the extracted payload.
  * @param data Pointer to the buffer containing steganographic data.
  * @param data_length Length of the steganographic data buffer.
@@ -41,7 +42,10 @@ void embedd_payload_in_generic_buffer (const unsigned char *payload_buffer, size
  *
  * This function extracts payload data from steganographic pixel data.
  *
- * @param stegano_file Pointer to the SteganoFile structure holding payload information.
+ * @param stegano_file Pointer to the SteganoFile structure holding payload information. The payload buffer
+ * inside SteganoFile is allocated on the heap and needs to get freed with free() by the caller of this
+ * function
+ * and needs to get freed with free() by the caller of this function
  * @param pixeldata Pointer to the steganographic pixel data.
  * @param pixel_data_length Length of the steganographic pixel data.
  */
@@ -65,7 +69,10 @@ size_t embedd_payload (struct SteganoFile stegano_file, unsigned char *pixeldata
  * This function reads a BMP file, extracts pixel data, and extracts payload data from it.
  *
  * @param path Path to the BMP file to be read.
- * @return SteganoFile structure containing extracted payload data.
+ * @return SteganoFile structure containing extracted payload data. The payload buffer
+ * inside SteganoFile is allocated on the heap and needs to get freed with free() by the caller of this
+ * function
+ * and needs to get freed with free() by the caller of this function
  */
 struct SteganoFile read_bmp (const char *path);
 
