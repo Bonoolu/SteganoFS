@@ -17,8 +17,6 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        example.cpp
-        example.h
         worker.h
         worker.cpp
         ../cpp-wrapper/SteganoFsAdapter.cpp
