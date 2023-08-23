@@ -16,7 +16,7 @@
 
 int main (int argc, char **argv)
 {
-  SteganoFsAdapter steganoFsAdapter ("filesystem.steganofs");
+  SteganoFsAdapter steganoFsAdapter ("test_cpp_wrapper.steganofs");
   bool status = steganoFsAdapter.loadFilesytemFromSteganoProvider ();
   if (!status)
     {
@@ -49,13 +49,13 @@ int main (int argc, char **argv)
   std::cout << std::endl;
 
 
-//    status = steganoFsAdapter.mount("/home/admin/test_mnt");
+//    status = steganoFsAdapter.mount("test_mnt");
 //    if (!status) {
-//        std::cout << "Mounting to /home/admin/test_mnt failed!" << std::endl;
+//        std::cout << "Mounting to test_mnt failed!" << std::endl;
 //    }
 //    status = steganoFsAdapter.umount();
 //    if (!status) {
-//        std::cout << "Unmounting to /home/admin/test_mnt failed!" << std::endl;
+//        std::cout << "Unmounting to test_mnt failed!" << std::endl;
 //    }
 //    status = steganoFsAdapter.writeFilesystemToSteganoProvider();
 //    if (!status) {
