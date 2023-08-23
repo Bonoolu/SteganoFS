@@ -9,14 +9,14 @@ HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) {
         fprintf(stderr, "Disk size is not dividable by block size!\n");
         return NULL;
     }
-    unsigned char *disk = (unsigned char *) malloc(diskSize * sizeof(unsigned char));
+    unsigned char *disk = (unsigned char *) malloc(diskSize * sizeof(unsigned char)); // gets freed in freeHiddenFat
     if (!disk) {
         fprintf(stderr, "Could not allocate memory!\n");
         return NULL;
     }
     memset(disk, 0, diskSize);
     size_t amountBlocks = diskSize / blockSize;
-    HiddenCluster *clusters = (HiddenCluster *) malloc(amountBlocks * sizeof(HiddenCluster));
+    HiddenCluster *clusters = (HiddenCluster *) malloc(amountBlocks * sizeof(HiddenCluster)); // gets freed in freeHiddenFat
     if (!clusters) {
         fprintf(stderr, "Could not allocate memory!\n");
         return NULL;
@@ -25,7 +25,7 @@ HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) {
     for (size_t bIndex = 0; bIndex < amountBlocks; bIndex++) {
         clusters[bIndex].bIndex = bIndex;
     }
-    HiddenFat *hiddenFat = (HiddenFat *) malloc(sizeof(HiddenFat));
+    HiddenFat *hiddenFat = (HiddenFat *) malloc(sizeof(HiddenFat)); // gets freed in freeHiddenFat
     if (!hiddenFat) {
         fprintf(stderr, "Could not allocate memory!\n");
         return NULL;
@@ -245,7 +245,7 @@ void defragmentate(HiddenFat *hiddenFat) {
 }
 
 size_t getFragmentationArray(HiddenFat *hiddenFat, size_t **array) {
-    *array = malloc(hiddenFat->amountBlocks * sizeof(size_t));
+    *array = malloc(hiddenFat->amountBlocks * sizeof(size_t));  // TODO! Write doxygen to make sure this is freed by caller. make sure cpp wrapper calls free
     memset(*array, 0, hiddenFat->amountBlocks * sizeof(size_t));
     if (*array == NULL) {
         return 0;

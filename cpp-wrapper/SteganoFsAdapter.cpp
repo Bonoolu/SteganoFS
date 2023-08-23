@@ -10,9 +10,9 @@ bool SteganoFsAdapter::isMounted() const
     return m_isMounted;
 }
 
-SteganoFS::HiddenFat *SteganoFsAdapter::hiddenFat() const
+bool SteganoFsAdapter::isLoaded() const
 {
-    return m_hiddenFat;
+    return m_hiddenFat != nullptr;
 }
 
 std::string SteganoFsAdapter::mountPath() const
@@ -93,8 +93,12 @@ bool SteganoFsAdapter::writeFilesystemToSteganoProvider() {
         std::cout << "[SteganoFS] Error: String passed to constructor is empty!" << std::endl;
         return false;
     }
-    if (!exists(std::filesystem::path{m_steganoImageFolder})) {
-        std::cout << "[SteganoFS] Error: Could not find path: " << m_steganoImageFolder << std::endl;
+    try {
+        if (!exists(std::filesystem::path{m_steganoImageFolder})) {
+            std::cout << "[SteganoFS] Error: Could not find path: " << m_steganoImageFolder << std::endl;
+            return false;
+        }
+    } catch () {
         return false;
     }
     if (m_hiddenFat == nullptr) {

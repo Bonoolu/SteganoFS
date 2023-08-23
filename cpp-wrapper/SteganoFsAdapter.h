@@ -35,7 +35,7 @@ public:
     struct statfs getFilesystemInfo();
     std::string steganoImageFolder() const;
     bool isMounted() const;
-    SteganoFS::HiddenFat *hiddenFat() const;
+    bool isLoaded() const;
     std::string mountPath() const;
 };
 

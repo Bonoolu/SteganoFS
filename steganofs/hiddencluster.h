@@ -1,4 +1,3 @@
-#ifndef __cplusplus
 #ifndef STEGANOFS_HIDDENCLUSTER_H
 #define STEGANOFS_HIDDENCLUSTER_H
 
@@ -30,4 +29,3 @@ bool swapHiddenClusters(HiddenFat *hiddenFat, size_t bIndexA, size_t bIndexB);
 bool extendHiddenCluster(HiddenFat *hiddenFat, HiddenFile *hiddenFile);
 
 #endif //STEGANOFS_HIDDENCLUSTER_H
-#endif // __cplusplus
