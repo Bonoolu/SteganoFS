@@ -42,6 +42,7 @@ void ShowFileSystemInfoDialog::showFilesystemInfo(SteganoFsAdapter &sfa)
         "\n\nTotal data blocks in filesystem:\t\t" + QString::number(info.f_blocks) +
         "\n\nFree blocks: \t\t\t\t" + QString::number(info.f_bfree) +
         "\n\nFree blocks available to non-superuser:\t" + QString::number(info.f_bavail);
+    "\n\nFree blocks available to non-superuser:\t" + QString::number(info.f_bavail);
 
     ui->filesystemInfoLabel->setText(text);
 }

@@ -16,6 +16,7 @@
 #include "../cpp-wrapper/SteganoFsAdapter.h"
 #include <filesystem>
 #include <QGraphicsScene>
+#include <QFont>
 Q_DECLARE_METATYPE(SteganoFsAdapter*)
 
 
@@ -27,6 +28,10 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle("Stegano File Explorer");
 
     //qRegisterMetaType(SteganoFsAdapter*);
+
+//    QFont roboto(":/assets/fonts/Roboto-Medium.ttf");
+//    QFont garet(":/assets/fonts/Garet-Book.ttf");
+//    this->setFont(garet);
 
     m_CRDdlg = new CreateRamdiskDialog;
     m_CRDdlg->setLightmodeOn(false);
@@ -40,6 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_SFIdlg = new ShowFileSystemInfoDialog;
     m_SFIdlg->setLightmodeon(false);
+
+    m_movingHistory = new QList<QString>;
+    m_stepsToGoBack = 0;
 
     m_fileDlg = new QFileDialog;
 
@@ -76,6 +84,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_bafButtonsStyle_light = "QPushButton {background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); height: 20px; width: 20px; border-radius: 15px;} QPushButton::disabled { background-color: #2e5e7d;} QPushButton::hover {background-color: #1e86c9;} QPushButton::pressed {background-color: #54a8de;} )";
     ui->backButton->setStyleSheet(m_bafButtonsStyle_dark);
     ui->forwardButton->setStyleSheet(m_bafButtonsStyle_dark);
+
+    ui->backButton->setDisabled(true);
+    ui->forwardButton->setDisabled(true);
 
 
 
@@ -129,6 +140,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(m_pgv, &PreviewGraphicsView::refreshScene, this, &MainWindow::refreshPreviewOnResize);
 
+    m_movingHistory->append(m_currentDir);
+
 }
 
 MainWindow::~MainWindow()
@@ -141,6 +154,8 @@ MainWindow::~MainWindow()
     delete m_MFPDlg;
     delete m_DefragDlg;
     delete m_SFIdlg;
+
+    delete m_movingHistory;
     delete m_thread;
     delete m_worker;
     delete m_pgv;
@@ -243,6 +258,10 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
 
     updateListWidget(sPath);
     ui->forwardButton->setDisabled(true);
+    ui->backButton->setDisabled(false);
+
+
+    m_movingHistory->append(m_currentDir);
 
 }
 
@@ -596,14 +615,27 @@ void MainWindow::on_actionLoad_selected_file_triggered()
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
-    ui->pathLineEdit->clear();
-    QString tmp = m_currentDir;
+
+    //
 
 
     QString path = m_currentDir + "/" + ui->listWidget->currentItem()->text();
-    if (!path.contains(QRegExp("*.*"))){
+    if (!path.contains(QRegExp("*[.]*"))){
+        //QString tmp = m_currentDir;
+        ui->pathLineEdit->clear();
         m_currentDir = path;
+
+        if (m_currentDir != m_movingHistory->last()){
+            m_movingHistory->removeLast();
+            m_stepsToGoBack -= 1;
+        }
+
+        //m_lastDirectory = tmp;
+        ui->forwardButton->setDisabled(true);
+        ui->backButton->setDisabled(false);
+
         updateListWidget(path);
+        m_movingHistory->append(m_currentDir);
 
         if (ui->listWidget->count() != 0){
                 ui->listWidget->setCurrentRow(1);
@@ -618,8 +650,7 @@ void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     }
 
 
-    m_lastDirectory = tmp;
-    ui->forwardButton->setDisabled(true);
+
 
 
 
@@ -627,7 +658,7 @@ void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::refreshPreviewOnResize()
 {
-
+    //m_pgv->scene()->clear();
     m_pgv->setScene(m_previewPicture);
 }
 
@@ -649,12 +680,16 @@ void MainWindow::refreshPreviewOnResize()
 
 void MainWindow::on_backButton_clicked()
 {
-    QString tmp = m_currentDir;
+//    QString tmp = m_currentDir;
 
-    m_currentDir = m_lastDirectory;
-    m_nextDirectory = tmp;
+//    m_currentDir = m_lastDirectory;
+//    m_nextDirectory = tmp;
+
+    m_currentDir = m_movingHistory->at(m_movingHistory->size() - 1);
+    m_nextDirectory = m_movingHistory->last();
 
     updateListWidget(m_currentDir);
+    ui->pathLineEdit->clear();
     ui->pathLineEdit->setText(m_currentDir);
 
     ui->forwardButton->setDisabled(false);
@@ -679,5 +714,10 @@ void MainWindow::on_forwardButton_clicked()
     /*
      * CAN ONLY BE EXECUTED ONCE
      * */
+}
+
+void MainWindow::updateHistory()
+{
+
 }
 
