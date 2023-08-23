@@ -12,7 +12,7 @@
 #include <unistd.h>
 
 typedef struct SteganoFile (*ProviderRead) (const char*);
-typedef bool (*ProviderWrite) (struct SteganoFile);
+typedef size_t (*ProviderWrite) (struct SteganoFile);
 
 struct SteganoProvider {
     const char *extension;

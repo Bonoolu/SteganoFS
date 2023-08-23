@@ -3,23 +3,23 @@
 HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) {
     if (diskSize == 0 || blockSize == 0) {
         fprintf(stderr, "Disk size and blockSize each can not be zero!\n");
-        exit(1);
+        return NULL;
     }
     if (diskSize % blockSize != 0) {
         fprintf(stderr, "Disk size is not dividable by block size!\n");
-        exit(1);
+        return NULL;
     }
     unsigned char *disk = (unsigned char *) malloc(diskSize * sizeof(unsigned char));
     if (!disk) {
         fprintf(stderr, "Could not allocate memory!\n");
-        exit(1);
+        return NULL;
     }
     memset(disk, 0, diskSize);
     size_t amountBlocks = diskSize / blockSize;
     HiddenCluster *clusters = (HiddenCluster *) malloc(amountBlocks * sizeof(HiddenCluster));
     if (!clusters) {
         fprintf(stderr, "Could not allocate memory!\n");
-        exit(1);
+        return NULL;
     }
     memset(clusters, 0, amountBlocks * sizeof(HiddenCluster));
     for (size_t bIndex = 0; bIndex < amountBlocks; bIndex++) {
@@ -28,7 +28,7 @@ HiddenFat *createHiddenFat(size_t diskSize, size_t blockSize) {
     HiddenFat *hiddenFat = (HiddenFat *) malloc(sizeof(HiddenFat));
     if (!hiddenFat) {
         fprintf(stderr, "Could not allocate memory!\n");
-        exit(1);
+        return NULL;
     }
     memset(hiddenFat->files, 0, STEGANOFS_AMOUNT_ROOT_FILES * sizeof(HiddenFile *));
     hiddenFat->blockSize = blockSize;
@@ -141,6 +141,12 @@ void showHiddenFat(HiddenFat *hiddenFat, char *outputMessage) {
 }
 
 bool checkIntegrity(HiddenFat *hiddenFat) {
+    if (hiddenFat == NULL) {
+        fprintf(stderr,
+                "HiddenFat is NULL! No filesystem to check!\n");
+
+        return false;
+    }
     bool hasIntegrity = true;
 
     // Check if all clusters are associated with a file
@@ -230,7 +236,7 @@ void defragmentate(HiddenFat *hiddenFat) {
             size_t blockIndexToSwap = hiddenCluster->bIndex;
             if (swapHiddenClusters(hiddenFat, bIndex, blockIndexToSwap)) {
                 hiddenCluster = hiddenFat->clusters[bIndex].next;
-            }else {
+            } else {
                 hiddenCluster = hiddenCluster->next;;
             }
             bIndex++;
@@ -297,7 +303,8 @@ int writeBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t o
 
 int readBlock(HiddenFat *hiddenFat, size_t bIndex, const char *buffer, size_t offset, size_t length) {
     if (offset + length > hiddenFat->blockSize) {
-        fprintf(stderr, "Trying to read from the wrong Block! offset+length is higher than %zu\n", hiddenFat->blockSize);
+        fprintf(stderr, "Trying to read from the wrong Block! offset+length is higher than %zu\n",
+                hiddenFat->blockSize);
         return -1;
     }
     if (bIndex > hiddenFat->amountBlocks) {

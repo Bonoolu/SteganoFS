@@ -693,6 +693,32 @@ bool testRamdiskloader() {
     return ret;
 }
 
+bool test_rle() {
+    HiddenFat *hiddenFat = createHiddenFat(10,2);
+    createHiddenFile(hiddenFat, "test.txt", time(NULL));
+    unsigned char testbuffer[4] = "abc";
+    stgfs_write("/test.txt", (char*) testbuffer, 4, 0, (struct fuse_file_info *) hiddenFat);
+    struct SerializedFilesystem serializedFilesystem = serializeFilesystem(hiddenFat);
+    unsigned char *buffer_before = malloc(serializedFilesystem.size);
+    memcpy(buffer_before, serializedFilesystem.buf, serializedFilesystem.size);
+    run_length_encoding(&serializedFilesystem);
+    run_length_decoding(&serializedFilesystem);
+    int ret = memcmp(buffer_before, serializedFilesystem.buf, serializedFilesystem.size);
+    printf("Memory comparison value is %d\n", ret);
+    if (ret == 0) {
+        return true;
+    }
+    for(size_t i = 0; i < serializedFilesystem.size; i++){
+        if (buffer_before[i] != serializedFilesystem.buf[i]) {
+            unsigned char *beforePointer = buffer_before + i;
+            unsigned char *afterPointer = serializedFilesystem.buf + i;
+            printf("First difference is at offset %d!\n", i);
+            break;
+        }
+    }
+    return false;
+}
+
 void runTests(int argc, char **argv) {
     int tests[] = {
             testCreateHiddenFat(),
@@ -715,6 +741,7 @@ void runTests(int argc, char **argv) {
             testSwapHiddenClustersIntegrity(),
             testDefragmentation(),
             testRamdiskloader(),
+            test_rle(),
             -1};
     size_t passed = 0;
     size_t sum = 0;

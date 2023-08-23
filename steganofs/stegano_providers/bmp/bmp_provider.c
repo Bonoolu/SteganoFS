@@ -1,28 +1,45 @@
 #include "bmp_provider.h"
 
-void extract_payload(struct SteganoFile *steganoFile, const unsigned char *pixeldata, size_t pixel_data_length) {
-    steganoFile->payload_length = pixel_data_length / 8;
-    steganoFile->payload = malloc(steganoFile->payload_length);
-    memset(steganoFile->payload, 0, steganoFile->payload_length);
-    for(size_t i = 0; i < steganoFile->payload_length; i++) {
-        steganoFile->payload[i] = 0xFF;
+void exract_payload_from_generic_buffer(unsigned char **payload_buffer, size_t *payloadLength,
+                                               const unsigned char *data, size_t dataLength) {
+    *payloadLength = dataLength / 8;
+    *payload_buffer = malloc(*payloadLength);
+    memset(*payload_buffer, 0, *payloadLength);
+    for (size_t i = 0; i < *payloadLength; i++) {
+        unsigned char *currentByteToWriteTo = (*payload_buffer) + i;
+        *currentByteToWriteTo = 0x00;
         for (size_t bit = 0; bit < 8; bit++) {
-            steganoFile->payload[i] &= ((pixeldata[(i * 8) + bit] & 0x01) << bit);
+            unsigned char currentBitToWrite = ((data[(i * 8) + bit] & 0x01));
+            *currentByteToWriteTo ^= currentBitToWrite << bit;
         }
     }
 }
 
-void embedd_payload(struct SteganoFile *steganoFile, unsigned char *pixeldata, size_t pixel_data_length) {
-    for(size_t i = 0; i < steganoFile->payload_length; i++) {
-        unsigned char byteToWrite = steganoFile->payload[i];
+void extract_payload(struct SteganoFile *steganoFile, const unsigned char *pixeldata, size_t pixel_data_length) {
+    exract_payload_from_generic_buffer(&(steganoFile->payload), &steganoFile->payload_length, pixeldata,
+                                       pixel_data_length);
+}
+
+void embedd_payload_in_generic_buffer(unsigned char *payload_buffer, size_t payloadLength,
+                                      unsigned char *data, size_t dataLength) {
+    for (size_t i = 0; i < payloadLength; i++) {
+        unsigned char byteToWrite = payload_buffer[i];
         for (size_t bitIndex = 0; bitIndex < 8; bitIndex++) {
-            unsigned char currentBit = pixeldata[(i * 8) + bitIndex] & 0x01;
+            unsigned char currentBit = data[(i * 8) + bitIndex] & 0x01;
             unsigned char bitToWrite = (byteToWrite >> bitIndex) & 0x01;
             if (bitToWrite != currentBit) {
-                pixeldata[(i * 8) + bitIndex] ^= 1;
+                data[(i * 8) + bitIndex] ^= 1;
             }
         }
     }
+}
+
+size_t embedd_payload(struct SteganoFile steganoFile, unsigned char *pixeldata, size_t pixel_data_length) {
+    if (pixel_data_length / 8 < steganoFile.payload_length) {
+        steganoFile.payload_length = pixel_data_length / 8;
+    }
+    embedd_payload_in_generic_buffer(steganoFile.payload, steganoFile.payload_length, pixeldata, pixel_data_length);
+    return steganoFile.payload_length;
 }
 
 struct SteganoFile read_bmp(const char *path) {
@@ -45,7 +62,7 @@ struct SteganoFile read_bmp(const char *path) {
     return steganoFile;
 }
 
-bool write_bmp(struct SteganoFile steganoFile) {
+size_t write_bmp(struct SteganoFile steganoFile) {
     FILE *file = fopen(steganoFile.path, "rb");
     if (file) {
         fseek(file, 0L, SEEK_END);
@@ -54,18 +71,20 @@ bool write_bmp(struct SteganoFile steganoFile) {
         fseek(file, 36, 0);
         unsigned char *pixeldata = malloc(pixel_data_length);
         if (pixeldata == NULL) {
-            return false;
+            return 0;
         }
         fread(pixeldata, pixel_data_length, 1, file);
-        embedd_payload(&steganoFile, pixeldata, pixel_data_length);
-        rewind(file);
+        fflush(file);
+        fclose(file);
+        size_t payload_written = embedd_payload(steganoFile, pixeldata, pixel_data_length);
+        fopen(steganoFile.path, "wb");
         fseek(file, 36, 0);
         size_t bytes_written = fwrite(pixeldata, pixel_data_length, 1, file);
         fflush(file);
         fclose(file);
-        return bytes_written == 1;
+        return payload_written;
     }
-    return false;
+    return 0;
 }
 
 

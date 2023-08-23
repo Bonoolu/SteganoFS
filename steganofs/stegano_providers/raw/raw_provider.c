@@ -19,13 +19,13 @@ struct SteganoFile read_raw(const char *path) {
     return steganoFile;
 }
 
-bool write_raw(struct SteganoFile steganoFile) {
+size_t write_raw(struct SteganoFile steganoFile) {
     FILE *file = fopen((char*) steganoFile.path, "wb");
     if (file) {
         size_t written = fwrite(steganoFile.payload, steganoFile.payload_length, 1, file);
         fflush(file);
         fclose(file);
-        return written == 1;
+        return steganoFile.payload_length;
     }
-    return false;
+    return 0;
 }

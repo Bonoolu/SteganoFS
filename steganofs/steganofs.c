@@ -287,7 +287,6 @@ struct HiddenFat *steganofs_load_ramdisk(const char *steganoImageFolder) {
 bool steganofs_unload_ramdisk(struct HiddenFat *hiddenFat, const char *steganoImageFolder) {
     struct SerializedFilesystem serializedFilesystem = serializeFilesystem(hiddenFat);
     if (serializedFilesystem.size == 0) return false;
-    run_length_encoding(serializedFilesystem);
     return stegano_provider_write(serializedFilesystem, steganoImageFolder);
 }
 
