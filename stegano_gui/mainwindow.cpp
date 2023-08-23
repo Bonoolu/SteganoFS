@@ -17,6 +17,8 @@
 #include <filesystem>
 #include <QGraphicsScene>
 #include <QFont>
+#include <QRegularExpression>
+#include <QFileInfo>
 Q_DECLARE_METATYPE(SteganoFsAdapter*)
 
 
@@ -46,10 +48,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_SFIdlg = new ShowFileSystemInfoDialog;
     m_SFIdlg->setLightmodeon(false);
 
+    m_LFdlg = new LoadFileSystemDialog;
+    m_LFdlg->setLightmodeon(false);
+
     m_movingHistory = new QList<QString>;
     m_stepsToGoBack = 0;
-
-    m_fileDlg = new QFileDialog;
 
 
     m_currentFile = nullptr;
@@ -88,6 +91,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->backButton->setDisabled(true);
     ui->forwardButton->setDisabled(true);
 
+    ui->actionUnmount->setDisabled(true);
+
 
 
     // LEFT SIDE - DISPLAYING FOLDERS
@@ -106,7 +111,8 @@ MainWindow::MainWindow(QWidget *parent)
     // RIGHT SIDE - DISPLAYING FILES
 
     m_filemodel = new QFileSystemModel(this);
-    //m_filemodel->setFilter(/*QDir::NoDotAndDotDot |*/ QDir::Files);
+    //m_filemodel->setFilter(/* |*/ QDir::Files);
+    m_filemodel->setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
     m_filemodel->setRootPath(sPath);
 
     ui->tableView->hide();
@@ -174,7 +180,7 @@ void MainWindow::updateListWidget(QString sPath){
     ui->listWidget->setSpacing(20);
 
     QList<QString> path_list;
-    QModelIndex parentIndex = m_filemodel->index(sPath);
+    QModelIndex parentIndex = m_filemodel->index(m_currentDir);
     int numRows = m_filemodel->rowCount(parentIndex);
 
 
@@ -251,12 +257,12 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
     ui->listWidget->setCurrentItem(nullptr);
     m_currentDir = m_dirmodel->fileInfo(index).absoluteFilePath();
     QString sPath = m_currentDir;
-    qDebug() << "sPath: " + sPath << Qt::endl;
-    ui->tableView->setRootIndex(m_filemodel->setRootPath(sPath));
-    //ui->listWidget->setRootIndex(m_filemodel->setRootPath(sPath));
+
+    //ui->tableView->setRootIndex(m_filemodel->setRootPath(sPath));
+    ui->listWidget->setRootIndex(m_filemodel->setRootPath(sPath));
     ui->pathLineEdit->setText(sPath);
 
-    updateListWidget(sPath);
+    updateListWidget(m_currentDir);
     ui->forwardButton->setDisabled(true);
     ui->backButton->setDisabled(false);
 
@@ -434,6 +440,7 @@ void MainWindow::on_darkModePushButton_clicked()
         m_DefragDlg->setLightmode_on(true);
         m_MFPDlg->setLightmodeon(true);
         m_SFIdlg->setLightmodeon(true);
+        m_LFdlg->setLightmodeon(true);
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/light/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/light/document.png"));
@@ -459,6 +466,7 @@ void MainWindow::on_darkModePushButton_clicked()
         m_DefragDlg->setLightmode_on(false);
         m_MFPDlg->setLightmodeon(false);
         m_SFIdlg->setLightmodeon(false);
+        m_LFdlg->setLightmodeon(false);
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/document.png"));
@@ -521,11 +529,90 @@ void MainWindow::on_actionShow_Filesystem_information_triggered()
 
 }
 
+void MainWindow::on_actionMount_triggered()
+{
+
+        //steganoFsAdapter->umount();
+
+//        auto path = m_filemodel->rootPath();
+//        m_filemodel->setRootPath("");
+
+
+        if (m_MFPDlg->exec() == QDialog::Accepted) {
+
+        SteganoFsAdapter *sfa = new SteganoFsAdapter(m_MFPDlg->filesystemPath().toStdString());
+
+        if (sfa->loadFilesytemFromSteganoProvider()){
+            ui->statusbar->showMessage(QString("Loaded file: " + m_MFPDlg->filesystemPath()), 10000);
+
+            m_thread->start();
+            // QVariant qSteganoFSAdapter = QVariant::fromValue(steganoFsAdapter);
+             QVariant qSteganoFSAdapter = QVariant::fromValue(sfa);
+
+            if (QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, m_MFPDlg->mountingPath()))){
+                ui->actionMount->setDisabled(true);
+                ui->actionUnmount->setDisabled(false);
+                steganoFsAdapter = sfa;
+
+            } else {
+                ui->actionMount->setDisabled(false);
+                ui->actionUnmount->setDisabled(true);
+                steganoFsAdapter = nullptr;
+                delete sfa;
+
+                //TODO fehlermeldung dialog
+            }
+
+        } else {
+            ui->actionMount->setDisabled(false);
+            ui->actionUnmount->setDisabled(true);
+            steganoFsAdapter = nullptr;
+            delete sfa;
+
+            //TODO fehlermeldung dialog
+
+        }
+
+
+        } else {
+        ui->statusbar->showMessage(QString("Mount aborted."));
+        }
+
+//        m_filemodel->setRootPath(path);
+}
+
+void MainWindow::mountFinished()
+{
+        if (steganoFsAdapter->isMounted() && steganoFsAdapter->mountPath() == m_currentDir.toStdString()){
+        ui->statusbar->showMessage("Mount finished. Path: " + QString::fromStdString(steganoFsAdapter->mountPath()));
+        } else {
+        ui->statusbar->showMessage("Mount failed. " + m_currentDir);
+        }
+
+}
+
 
 
 void MainWindow::on_actionUnmount_triggered()
 {
-    steganoFsAdapter->umount();
+    if (steganoFsAdapter->umount()){
+        if (steganoFsAdapter->writeFilesystemToSteganoProvider()){
+            ui->actionUnmount->setDisabled(true);
+            ui->actionMount->setDisabled(false);
+            delete steganoFsAdapter;
+            steganoFsAdapter = nullptr;
+            ui->statusbar->showMessage("Successfully unmounted!",18000);
+
+        } else {
+            ui->statusbar->showMessage("writeFilesystemTo... = false!", 18000);
+        }
+    } else {
+        ui->actionUnmount->setDisabled(false);
+        ui->actionMount->setDisabled(true);
+        ui->statusbar->showMessage("umount was not successfull", 18000);
+    }
+
+
 }
 
 
@@ -535,7 +622,7 @@ void MainWindow::on_actionCurrent_directory_triggered()
 
     auto path = m_filemodel->rootPath();
     m_filemodel->setRootPath("");
-
+    steganoFsAdapter = new SteganoFsAdapter(s);
 
         m_thread->start();
         QVariant qSteganoFSAdapter = QVariant::fromValue(steganoFsAdapter);
@@ -560,55 +647,48 @@ void MainWindow::on_actionCurrent_directory_triggered()
 }
 
 
-void MainWindow::on_actionFrom_Path_triggered()
-{
 
-    auto path = m_filemodel->rootPath();
-    m_filemodel->setRootPath("");
-
-
-
-    if (m_MFPDlg->exec() == QDialog::Accepted) {
-        m_thread->start();
-        QVariant qSteganoFSAdapter = QVariant::fromValue(steganoFsAdapter);
-        QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, m_MFPDlg->mountingPath()));
-
-    } else {
-        ui->statusbar->showMessage(QString("Mount aborted."));
-    }
-
-    m_filemodel->setRootPath(path);
-}
-
-void MainWindow::mountFinished()
-{
-    if (steganoFsAdapter->isMounted() && steganoFsAdapter->mountPath() == m_currentDir.toStdString()){
-        ui->statusbar->showMessage("Mount finished. Path: " + QString::fromStdString(steganoFsAdapter->mountPath()));
-    } else {
-        ui->statusbar->showMessage("Mount failed. " + m_currentDir);
-    }
-
-}
 
 // TODO: In welcher Variable soll der Pfad der ausgewählten Datei gespeichert werden?
 void MainWindow::on_actionChoose_from_explorer_triggered()
 {
-    if (m_fileDlg->exec() == QDialog::Accepted) {
-        m_fileDlg->setDirectory(m_currentDir);
-        m_fileDlg->setFileMode(QFileDialog::ExistingFile);
+    // HARDCODED
+    m_LFdlg->setLoadingPath("/home/minaboo/test_mnt/");
+    m_LFdlg->setAdapter(steganoFsAdapter);
 
-        ui->statusbar->showMessage(QString("Loaded file:" + m_fileDlg->selectedFiles().at(0)) );
+    // überprüfe mit bool
+
+    if (m_LFdlg->exec() == QDialog::Accepted) {
+
+        SteganoFsAdapter *sfa = new SteganoFsAdapter(m_LFdlg->loadingPath().toStdString());
+
+        if (sfa->loadFilesytemFromSteganoProvider()){
+
+            ui->statusbar->showMessage(QString("Loaded file: " + m_LFdlg->loadingPath()), 10000);
+            steganoFsAdapter = sfa;
+            ui->actionLoad_selected_file->setDisabled(true);
+            ui->actionChoose_from_explorer->setDisabled(true);
+
+
+        } else {
+            ui->statusbar->showMessage(QString("ERROR: did not work with " + m_LFdlg->loadingPath()), 10000);
+            delete sfa;
+        }
+
+    // OPTION FOR LOAD DISABLED
+
 
     } else {
         ui->statusbar->showMessage(QString("No file selected."));
     }
+
 }
 
-//TODO: string s ist filesystem.steganofs/filesystem.steganofs...
-void MainWindow::on_actionLoad_selected_file_triggered()
+
+void MainWindow::on_action_Demo_Load_filesystem_triggered()
 {
-    std::string s = steganoFsAdapter->steganoImageFolder() + "/filesystem.steganofs";
     steganoFsAdapter->loadFilesytemFromSteganoProvider();
+    std::string s = steganoFsAdapter->steganoImageFolder();
     ui->statusbar->showMessage(QString("Filesystem loaded: ") + QString::fromStdString(s), 10000);
 }
 
@@ -616,36 +696,41 @@ void MainWindow::on_actionLoad_selected_file_triggered()
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
 
-    //
-
-
-    QString path = m_currentDir + "/" + ui->listWidget->currentItem()->text();
-    if (!path.contains(QRegExp("*[.]*"))){
-        //QString tmp = m_currentDir;
+    if (ui->pathLineEdit->text() == "/"){
         ui->pathLineEdit->clear();
-        m_currentDir = path;
+        m_currentDir = "";
+        m_lastDirectory = "/";
+    } else {
 
-        if (m_currentDir != m_movingHistory->last()){
-            m_movingHistory->removeLast();
-            m_stepsToGoBack -= 1;
-        }
+        QString path = m_currentDir + "/" + ui->listWidget->currentItem()->text();
 
-        //m_lastDirectory = tmp;
-        ui->forwardButton->setDisabled(true);
-        ui->backButton->setDisabled(false);
 
-        updateListWidget(path);
-        m_movingHistory->append(m_currentDir);
+        if ( QFileInfo(path).isDir()  /*!path.contains(QRegExp("*[.]*"))*/){
+            ui->pathLineEdit->clear();
+            m_currentDir = path;
 
-        if (ui->listWidget->count() != 0){
+            if (m_currentDir != m_movingHistory->last()){
+                m_movingHistory->removeLast();
+                m_stepsToGoBack -= 1;
+            }
+
+            //m_lastDirectory = tmp;
+            ui->forwardButton->setDisabled(true);
+            ui->backButton->setDisabled(false);
+
+
+            //std::future<QString> fut = std::async(m_filemodel->directoryLoaded(path));
+            updateListWidget(path);
+
+            m_movingHistory->append(m_currentDir);
+
+            if (ui->listWidget->count() != 0){
                 ui->listWidget->setCurrentRow(1);
                 m_currentFile = ui->listWidget->currentItem();
-        }
+            }
 
-        ui->pathLineEdit->setText(m_currentDir);
-
-        m_lastDirectory = m_currentDir;
-        m_currentDir = path;
+            ui->pathLineEdit->setText(m_currentDir);
+    }
 
     }
 
@@ -663,20 +748,6 @@ void MainWindow::refreshPreviewOnResize()
 }
 
 
-/*
-    bool formatNewRamdisk(size_t diskSize);
-    bool loadRamdisk();
-    bool mount(const std::string& mntPoint);
-    bool unloadRamdisk();
-    bool umount();
-    float getFragmentationInPercent();
-    std::vector<size_t> getFilesystemVector();
-    bool checkFilesystemIntegrity();
-    bool defragmentateFilesystem();
-    struct statfs getFilesystemInfo();
-
-*/
-
 
 void MainWindow::on_backButton_clicked()
 {
@@ -685,7 +756,8 @@ void MainWindow::on_backButton_clicked()
 //    m_currentDir = m_lastDirectory;
 //    m_nextDirectory = tmp;
 
-    m_currentDir = m_movingHistory->at(m_movingHistory->size() - 1);
+    m_currentDir = m_movingHistory->at(m_movingHistory->size() - 2);
+    ui->statusbar->showMessage(m_currentDir);
     m_nextDirectory = m_movingHistory->last();
 
     updateListWidget(m_currentDir);
@@ -720,4 +792,9 @@ void MainWindow::updateHistory()
 {
 
 }
+
+
+
+
+
 

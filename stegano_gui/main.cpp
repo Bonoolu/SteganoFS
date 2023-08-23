@@ -2,7 +2,6 @@
 
 #include <QApplication>
 #include <QFile>
-#include "example.h"
 
 int main(int argc, char *argv[])
 {

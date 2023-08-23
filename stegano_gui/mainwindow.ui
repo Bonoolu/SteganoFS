@@ -390,13 +390,7 @@
      </widget>
      <addaction name="actionCreate_new"/>
      <addaction name="menuLoad"/>
-    </widget>
-    <widget class="QMenu" name="menuMount">
-     <property name="title">
-      <string>Mount...</string>
-     </property>
-     <addaction name="actionCurrent_directory"/>
-     <addaction name="actionFrom_Path"/>
+     <addaction name="actionUnload"/>
     </widget>
     <addaction name="actionNeue_Datei"/>
     <addaction name="actionNeuer_Ordner"/>
@@ -405,7 +399,7 @@
     <addaction name="actionDefragment"/>
     <addaction name="actionShow_Filesystem_information"/>
     <addaction name="separator"/>
-    <addaction name="menuMount"/>
+    <addaction name="actionMount"/>
     <addaction name="actionUnmount"/>
    </widget>
    <widget class="QMenu" name="menuAnsicht">
@@ -445,22 +439,12 @@
   </action>
   <action name="actionCreate_new">
    <property name="text">
-    <string>Create new</string>
-   </property>
-  </action>
-  <action name="actionUnload">
-   <property name="text">
-    <string>Unload</string>
+    <string>Create New</string>
    </property>
   </action>
   <action name="actionShow_Filesystem_information">
    <property name="text">
     <string>Show Filesystem information</string>
-   </property>
-  </action>
-  <action name="actionUnmount">
-   <property name="text">
-    <string>Unmount...</string>
    </property>
   </action>
   <action name="actionCurrent_directory">
@@ -481,6 +465,26 @@
   <action name="actionChoose_from_explorer">
    <property name="text">
     <string>Choose from explorer</string>
+   </property>
+  </action>
+  <action name="action_Demo_Load_filesystem">
+   <property name="text">
+    <string>[Demo] Load filesystem</string>
+   </property>
+  </action>
+  <action name="actionUnload">
+   <property name="text">
+    <string>Unload</string>
+   </property>
+  </action>
+  <action name="actionMount">
+   <property name="text">
+    <string>Mount</string>
+   </property>
+  </action>
+  <action name="actionUnmount">
+   <property name="text">
+    <string>Unmount</string>
    </property>
   </action>
  </widget>

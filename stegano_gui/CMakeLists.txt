@@ -17,8 +17,6 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        example.cpp
-        example.h
         worker.h
         worker.cpp
         ../cpp-wrapper/SteganoFsAdapter.cpp
@@ -55,6 +53,7 @@ else()
                 mountfrompathdialog.h mountfrompathdialog.cpp mountfrompathdialog.ui
                 previewgraphicsview.h previewgraphicsview.cpp
                 showfilesysteminfodialog.h showfilesysteminfodialog.cpp showfilesysteminfodialog.ui
+                loadfilesystemdialog.h loadfilesystemdialog.cpp loadfilesystemdialog.ui
 
 
 

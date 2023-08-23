@@ -19,6 +19,7 @@
 #include <QGraphicsScene>
 #include "previewgraphicsview.h"
 #include "showfilesysteminfodialog.h"
+#include "loadfilesystemdialog.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -77,13 +78,9 @@ private slots:
 
     void on_actionCurrent_directory_triggered();
 
-    void on_actionFrom_Path_triggered();
-
     void mountFinished();
 
     void on_actionChoose_from_explorer_triggered();
-
-    void on_actionLoad_selected_file_triggered();
 
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
@@ -95,20 +92,26 @@ private slots:
 
     void updateHistory();
 
+    void on_action_Demo_Load_filesystem_triggered();
+
+    void on_actionMount_triggered();
+
 private:
     Ui::MainWindow *ui;
     CreateRamdiskDialog *m_CRDdlg;
     DefragmentDialog *m_DefragDlg;
     MountFromPathDialog *m_MFPDlg;
-    QFileDialog *m_fileDlg;
+
     ShowFileSystemInfoDialog *m_SFIdlg;
+    LoadFileSystemDialog *m_LFdlg;
+
 
 
     QGraphicsScene *m_previewPicture;
     PreviewGraphicsView *m_pgv;
 
 
-    SteganoFsAdapter *steganoFsAdapter = new SteganoFsAdapter("filesystem.steganofs");
+    SteganoFsAdapter *steganoFsAdapter = nullptr;
     Worker *m_worker;
     QThread *m_thread;
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MountFromPathDialog</class>
- <widget class="QDialog" name="MountFromPathDialog">
+ <class>LoadFileSystemDialog</class>
+ <widget class="QDialog" name="LoadFileSystemDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>229</height>
+    <height>167</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,25 +15,32 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="pleaseTypeInLabel">
+    <widget class="QLabel" name="typeInOrSelectLabel">
      <property name="text">
-      <string>Please type in or paste the path you would like to mount:</string>
+      <string>Type in or select the filesystem you would like to load:</string>
      </property>
     </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLineEdit" name="mountPathLineEdit"/>
+      <widget class="QLineEdit" name="loadPathLineEdit"/>
      </item>
      <item>
-      <widget class="QPushButton" name="browseDirButton">
+      <widget class="QPushButton" name="fileBrowserButton">
        <property name="text">
-        <string>Browse...</string>
+        <string>Browse</string>
        </property>
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="pleaseMakeSureLabel">
+     <property name="text">
+      <string>Please make sure your file is a .steganofs-file</string>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">
@@ -47,27 +54,6 @@
       </size>
      </property>
     </spacer>
-   </item>
-   <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Select a filesystem you would like to load</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLineEdit" name="filesystemPathLineEdit"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="browseFsButton">
-       <property name="text">
-        <string>Browse...</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -86,7 +72,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>MountFromPathDialog</receiver>
+   <receiver>LoadFileSystemDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -102,7 +88,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>MountFromPathDialog</receiver>
+   <receiver>LoadFileSystemDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
