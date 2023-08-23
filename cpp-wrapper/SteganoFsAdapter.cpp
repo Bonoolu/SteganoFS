@@ -93,8 +93,12 @@ bool SteganoFsAdapter::writeFilesystemToSteganoProvider() {
         std::cout << "[SteganoFS] Error: String passed to constructor is empty!" << std::endl;
         return false;
     }
-    if (!exists(std::filesystem::path{m_steganoImageFolder})) {
-        std::cout << "[SteganoFS] Error: Could not find path: " << m_steganoImageFolder << std::endl;
+    try {
+        if (!exists(std::filesystem::path{m_steganoImageFolder})) {
+            std::cout << "[SteganoFS] Error: Could not find path: " << m_steganoImageFolder << std::endl;
+            return false;
+        }
+    } catch () {
         return false;
     }
     if (m_hiddenFat == nullptr) {
