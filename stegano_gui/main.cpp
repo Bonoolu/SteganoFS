@@ -8,7 +8,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    Example::example();
 
     //open qss file
     QFile file(":/assets/stylesheet/Darkeum.qss");
