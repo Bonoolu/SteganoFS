@@ -334,13 +334,40 @@ struct HiddenFat *steganofs_create_new_ramdisk (size_t disk_size)
   return create_hidden_fat (amount_blocks * STEGANOFS_BLOCK_SIZE, STEGANOFS_BLOCK_SIZE);
 }
 
+size_t steganofs_format (const char *stegano_image_folder)
+{
+  struct SerializedFilesystem serialized_filesystem = stegano_provider_read (stegano_image_folder);
+  if (serialized_filesystem.size == 0)
+    return 0;
+  size_t amount_blocks = calculate_amount_blocks (serialized_filesystem);
+  free (serialized_filesystem.buf);
+  HiddenFat *hidden_fat = steganofs_create_new_ramdisk (amount_blocks * STEGANOFS_BLOCK_SIZE);
+  if (hidden_fat == NULL)
+    {
+      return 0;
+    }
+  serialized_filesystem = serialize_filesystem (hidden_fat);
+  if (serialized_filesystem.size == 0)
+    return 0;
+  bool ret = stegano_provider_write (serialized_filesystem, stegano_image_folder);
+  free (serialized_filesystem.buf);
+  if (ret)
+    {
+      return amount_blocks * STEGANOFS_BLOCK_SIZE;
+    }
+  else
+    {
+      return 0;
+    }
+}
+
 struct HiddenFat *steganofs_load_ramdisk (const char *stegano_image_folder)
 {
   struct SerializedFilesystem serialized_filesystem = stegano_provider_read (stegano_image_folder);
   if (serialized_filesystem.size == 0)
     return NULL;
   HiddenFat *p_hidden_fat = load_ramdisk (serialized_filesystem);
-  free(serialized_filesystem.buf);
+  free (serialized_filesystem.buf);
   return p_hidden_fat;
 }
 
@@ -350,7 +377,7 @@ bool steganofs_unload_ramdisk (struct HiddenFat *hidden_fat, const char *stegano
   if (serialized_filesystem.size == 0)
     return false;
   bool ret = stegano_provider_write (serialized_filesystem, stegano_folder);
-  free(serialized_filesystem.buf);
+  free (serialized_filesystem.buf);
   return ret;
 }
 
@@ -376,7 +403,11 @@ bool steganofs_mount (struct HiddenFat *hidden_fat, const char *mnt_point)
 
 bool steganofs_umount (const char *mnt_point)
 {
-  return umount2 (mnt_point, MNT_FORCE) == 0;
+  char command[256];
+  snprintf (command, sizeof (command), "umount %s", mnt_point);
+  int res = system (command);
+  return res == 0;
+
 }
 
 void steganofs_show_fragmentation (HiddenFat *hidden_fat, char *output_message)
@@ -403,24 +434,3 @@ void steganofs_defragmentate_filesystem (HiddenFat *hidden_fat)
 {
   defragmentate (hidden_fat);
 }
-
-///**
-// * @brief Open a file.
-// *
-// * @param path The path to the file.
-// * @param fi A pointer to the fuse_file_info structure containing information about the file.
-// * @return 0 on success, or a negative value on failure.
-// */
-//static int stegFS_open(const char *path, struct fuse_file_info *fi);
-//
-///**
-// * @brief Create a new directory.
-// *
-// * @param path The path to the new directory.
-// * @param mode The directory mode/permissions.
-// * @return 0 on success, or a negative value on failure.
-// */
-//static int stegFS_mkdir(const char *path, mode_t mode);
-//
-
-

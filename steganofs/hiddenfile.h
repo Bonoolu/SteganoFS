@@ -33,11 +33,11 @@ typedef struct HiddenFile HiddenFile;
  * @brief Represents a hidden file in the hidden FAT filesystem.
  */
 struct HiddenFile {
-    size_t filesize;
-    size_t real_filesize;
-    long timestamp;
-    HiddenCluster *hiddenCluster;
-    char filename[12];
+  size_t filesize;
+  size_t real_filesize;
+  long timestamp;
+  HiddenCluster *hiddenCluster;
+  char filename[12];
 };
 
 /**

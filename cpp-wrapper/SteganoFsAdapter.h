@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <sys/statfs.h>
+#include <sys/statvfs.h>
 #include <iostream>
 #include <filesystem>
 #include <utility>
@@ -39,6 +39,12 @@ class SteganoFsAdapter {
   ~SteganoFsAdapter ();
 
   /**
+   * @brief Creates a new filesystem the specified path of steganographic files.
+   * @return The size of the new filesystem. 0 if fails.
+   */
+  size_t formatNewFilesystem ();
+
+  /**
    * @brief Creates a new filesystem with the given disk size.
    * @param diskSize Size of the disk in bytes.
    * @return True if successful, false otherwise.
@@ -66,9 +72,10 @@ class SteganoFsAdapter {
 
   /**
    * @brief Unmount the hidden filesystem.
+   * @param mntPoint Mount point for the filesystem. Can be omitted if set as member
    * @return True if the filesystem was unmounted successfully, false otherwise.
    */
-  bool umount ();
+  bool umount (std::string mntPoint = "");
 
   /**
    * @brief Get the fragmentation of the hidden filesystem in percentage.
@@ -98,7 +105,7 @@ class SteganoFsAdapter {
    * @brief Get information about the hidden filesystem.
    * @return Structure containing filesystem information.
    */
-  struct statfs getFilesystemInfo ();
+  struct statvfs getFilesystemInfo ();
 
   /**
    * @brief Get the steganographic image folder path.

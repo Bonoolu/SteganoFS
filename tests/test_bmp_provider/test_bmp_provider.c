@@ -143,6 +143,43 @@ bool test_bmp_folder ()
 }
 
 /**
+ * @brief Test formatting a filesystem.
+ *
+ * @return True if the test passes, false otherwise.
+ */
+bool test_format_bmp_folder ()
+{
+  size_t filesystem_size = steganofs_format ("example_pictures");
+  if (filesystem_size == 0)
+    {
+      printf ("test_format_bmp_folder test failed: formatted filesystem is of size 0.\n");
+      return false;
+    }
+  printf ("Formatted filesystem is of size: %zu\n", filesystem_size);
+  HiddenFat *hidden_fat = steganofs_load_ramdisk ("example_pictures");
+  if (hidden_fat == NULL)
+    {
+      printf ("test_format_bmp_folder test failed: Loading ramdisk failed!\n");
+      return false;
+    }
+  bool ret = steganofs_unload_ramdisk (hidden_fat, "example_pictures");
+  if (!ret)
+    {
+      printf ("test_format_bmp_folder test failed: Unloading ramdisk failed!\n");
+      return false;
+    }
+  show_hidden_fat (hidden_fat, NULL);
+  ret = check_integrity (hidden_fat);
+  if (!ret)
+    {
+      printf ("test_format_bmp_folder test failed: Integrity check failed!\n");
+      return false;
+    }
+  free_hidden_fat (hidden_fat);
+  return ret;
+}
+
+/**
  * @brief The main entry point for the test suite.
  *
  * @param argc The number of command-line arguments.
@@ -156,6 +193,7 @@ int main (int argc, char **argv)
       test_generic_buffer (),
       test_single_bmp_file (),
       test_bmp_folder (),
+      test_format_bmp_folder (),
       -1};
   size_t passed = 0;
   size_t sum = 0;

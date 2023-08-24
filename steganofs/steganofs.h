@@ -16,7 +16,6 @@
 
 #include <fuse3/fuse.h>
 #include <errno.h>
-#include <sys/mount.h>
 #include "hiddenfat.h"
 #include "hiddenfile.h"
 #include "hiddencluster.h"
@@ -83,6 +82,14 @@ typedef struct HiddenFile HiddenFile;
  * @return A pointer to the created HiddenFat structure, or NULL on failure.
  */
 struct HiddenFat *steganofs_create_new_ramdisk (size_t disk_size);
+
+/**
+ * @brief Formats a new SteganoFS Filesystem into an imagefolder.
+ *
+ * @param stegano_image_folder The path to the folder containing the image.
+ * @return The size of the new filesystem. zero if fails.
+ */
+size_t steganofs_format (const char *stegano_image_folder);
 
 /**
  * @brief Load a SteganoFS RAM disk from an image folder.

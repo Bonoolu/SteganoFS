@@ -152,3 +152,19 @@ HiddenFat *load_ramdisk (struct SerializedFilesystem serialized_filesystem)
   memcpy (hidden_fat->disk, disk, hidden_fat->amount_blocks * hidden_fat->block_size);
   return hidden_fat;
 }
+
+size_t calculate_amount_blocks (struct SerializedFilesystem serialized_filesystem)
+{
+  if (serialized_filesystem.size == 0)
+    {
+      return 0;
+    }
+  size_t header = sizeof (PackedFat) + sizeof (PackedFile) * STEGANOFS_AMOUNT_ROOT_FILES;
+  if (header > serialized_filesystem.size)
+    {
+      return 0;
+    }
+  size_t effective_size = serialized_filesystem.size - header;
+  size_t amount_blocks = effective_size / (sizeof (PackedCluster) + STEGANOFS_BLOCK_SIZE);
+  return amount_blocks;
+}
