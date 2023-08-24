@@ -10,12 +10,13 @@ int SteganoCli::printUsage()
               "                            mounts the filesystem to the specified path\n\n"
               "  --umount <mount path>     unmounts the filesystem at the specified path\n\n"
               "  --info <mount path> or <path to steganograhpic file/folder>\n"
-              "                            if a filesystem is mounted, shows info about the filesystem\n\n"
+              "                            shows info about the filesystem\n\n"
               "  --format <path to steganograhpic file/folder>\n"
               "                            formats a new filesystem at the specified path\n\n"
               "  --defragment <path to steganograhpic file/folder>\n"
               "                            defragments the *unmounted* filesystem at the specified path\n"
-              "                            defragmenting a mounted filesystem is possible from the gui" << std::endl;
+              "                            defragmenting a mounted filesystem is possible from the gui\n\n"
+              "  --help                    shows this message"<< std::endl;
     return 0;
 }
 
