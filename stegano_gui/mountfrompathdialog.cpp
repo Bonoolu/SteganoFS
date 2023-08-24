@@ -9,7 +9,6 @@ MountFromPathDialog::MountFromPathDialog(QWidget *parent) :
     this->setWindowTitle("Mount from path");
 
     m_mountingPath = "";
-    m_status = "";
     m_fsDlg = new QFileDialog;
     m_fsDlg->setFileMode(QFileDialog::ExistingFile);
 
@@ -65,16 +64,16 @@ void MountFromPathDialog::on_mountPathLineEdit_textChanged(const QString &arg1)
 }
 
 
-bool MountFromPathDialog::lightmodeon() const
+bool MountFromPathDialog::lightmodeOn() const
 {
-    return m_lightmodeon;
+    return m_lightmodeOn;
 }
 
-void MountFromPathDialog::setLightmodeon(bool newLightmodeon)
+void MountFromPathDialog::setLightmodeOn(bool newLightmodeOn)
 {
-    m_lightmodeon = newLightmodeon;
+    m_lightmodeOn = newLightmodeOn;
 
-    if (this->m_lightmodeon == true){
+    if (this->m_lightmodeOn == true){
         this->setStyleSheet("background-color: #fafafa; color: #111111;");
         ui->mountPathLineEdit->setStyleSheet("background-color: #fafafa; color: #111111; border: 1px solid #1073b4; border-radius: 5px; padding: 2px 5px;");
         ui->filesystemPathLineEdit->setStyleSheet("background-color: #fafafa; color: #111111; border: 1px solid #1073b4; border-radius: 5px; padding: 2px 5px;");
@@ -87,7 +86,7 @@ void MountFromPathDialog::setLightmodeon(bool newLightmodeon)
 
     }
 
-    if (this->m_lightmodeon == false) {
+    if (this->m_lightmodeOn == false) {
 
         this->setStyleSheet("background-color: #111111; color: #fafafa;");
         ui->mountPathLineEdit->setStyleSheet("background-color: #444444; color: white; border: 1px solid #607cff; border-radius: 5px; padding: 2px 5px;");

@@ -47,19 +47,19 @@ void ShowFileSystemInfoDialog::showFilesystemInfo(SteganoFsAdapter &sfa)
     ui->filesystemInfoLabel->setText(text);
 }
 
-void ShowFileSystemInfoDialog::setLightmodeon(bool newLightsmodeon)
+void ShowFileSystemInfoDialog::setLightmodeOn(bool newLightsmodeOn)
 {
-    m_lightmodeon = newLightsmodeon;
+    m_lightmodeOn = newLightsmodeOn;
 
 
-    if (this->m_lightmodeon == true){
+    if (this->m_lightmodeOn == true){
         this->setStyleSheet("background-color: #fafafa; color: #111111;");
         ui->closeButton->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); border-radius: 5px; padding: 5px; color: white; border: 1px solid #1073b4; padding: 2px 5px;");
         ui->filesystemInfoLabel->setStyleSheet("background-color: #efefef; color: black;");
 
     }
 
-    if (this->m_lightmodeon == false) {
+    if (this->m_lightmodeOn == false) {
 
         this->setStyleSheet("background-color: #111111; color: #fafafa;");
         ui->closeButton->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; border: 1px solid #607cff; padding: 2px 5px;");

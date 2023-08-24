@@ -7,7 +7,7 @@ DefragmentDialog::DefragmentDialog(QWidget *parent) :
     ui(new Ui::DefragmentDialog)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Defragment");
+    setWindowTitle("Defragment");
 }
 
 DefragmentDialog::~DefragmentDialog()
@@ -15,30 +15,22 @@ DefragmentDialog::~DefragmentDialog()
     delete ui;
 }
 
-void DefragmentDialog::setLightmode_on(bool newLightmode_on)
+void DefragmentDialog::setLightmodeOn(bool newLightmodeOn)
 {
-    m_lightmode_on = newLightmode_on;
+    m_lightmodeOn = newLightmodeOn;
 
-    if (this->m_lightmode_on == true){
-        this->setStyleSheet("background-color: #fafafa; color: #111111;");
-        ui->buttonBox->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); border-radius: 5px;  padding: 5px; color: white; padding: 2px 7px ; ");
-
-
-
-
-    }
-
-    if (this->m_lightmode_on == false) {
-
-        ui->buttonBox->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; padding: 2px 7px ; ");
-        this->setStyleSheet("background-color: #111111; color: #fafafa;");
-
+    if (m_lightmodeOn) {
+        setStyleSheet("background-color: #fafafa; color: #111111;");
+        ui->buttonBox->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, stop: 0 #1073b4, stop: 1 #015891); border-radius: 5px; padding: 5px; color: white; padding: 2px 7px ; ");
+    } else {
+        ui->buttonBox->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; padding: 2px 7px ; ");
+        setStyleSheet("background-color: #111111; color: #fafafa;");
     }
 }
 
-bool DefragmentDialog::lightmode_on() const
+bool DefragmentDialog::lightmodeOn() const
 {
-    return m_lightmode_on;
+    return m_lightmodeOn;
 }
 
 void DefragmentDialog::setFragmentation(float f)
@@ -48,22 +40,20 @@ void DefragmentDialog::setFragmentation(float f)
 }
 
 void DefragmentDialog::on_pushButton_clicked()
-{   bool b = false;
-    //qDebug() << "Disk defragmented: " << QString::number(m_adapter->defragmentateFilesystem());
-    qDebug() << "Disk defragmented: " << QString::number(b);
+{
+    bool defragmentResult = m_adapter->defragmentateFilesystem();
+    qDebug() << "Disk defragmented: " << QString::number(defragmentResult);
 
-    if (m_adapter->defragmentateFilesystem() == true){
+    if (defragmentResult) {
         ui->actualStatusLabel->setStyleSheet("color: green;");
         ui->actualStatusLabel->setText("DONE");
     } else {
         ui->actualStatusLabel->setStyleSheet("color: red;");
         ui->actualStatusLabel->setText("ERROR");
     }
-
 }
 
 void DefragmentDialog::setAdapter(SteganoFsAdapter *newAdapter)
 {
     m_adapter = newAdapter;
 }
-

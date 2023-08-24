@@ -8,7 +8,6 @@
 #include <QPixmap>
 #include <QDialog>
 #include <iostream>
-#include "createramdiskdialog.h"
 #include <string>
 #include <thread>
 #include <QThread>
@@ -23,32 +22,26 @@ Q_DECLARE_METATYPE(SteganoFsAdapter*)
 
 
 MainWindow::MainWindow(QWidget *parent)
-        : QMainWindow(parent)
-        , ui(new Ui::MainWindow)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     this->setWindowTitle("Stegano File Explorer");
 
     //qRegisterMetaType(SteganoFsAdapter*);
 
-//    QFont roboto(":/assets/fonts/Roboto-Medium.ttf");
-//    QFont garet(":/assets/fonts/Garet-Book.ttf");
-//    this->setFont(garet);
-
-    m_CRDdlg = new CreateRamdiskDialog;
-    m_CRDdlg->setLightmodeOn(false);
+    //    QFont roboto(":/assets/fonts/Roboto-Medium.ttf");
+    //    QFont garet(":/assets/fonts/Garet-Book.ttf");
+    //    this->setFont(garet);
 
     m_DefragDlg = new DefragmentDialog;
-    m_DefragDlg->setLightmode_on(false);
+    m_DefragDlg->setLightmodeOn(false);
 
     m_MFPDlg = new MountFromPathDialog;
-    m_MFPDlg->setLightmodeon(false);
+    m_MFPDlg->setLightmodeOn(false);
 
     m_SFIdlg = new ShowFileSystemInfoDialog;
-    m_SFIdlg->setLightmodeon(false);
-
-    m_LFdlg = new LoadFileSystemDialog;
-    m_LFdlg->setLightmodeon(false);
+    m_SFIdlg->setLightmodeOn(false);
 
     m_movingHistory = new QList<QString>;
     m_stepsToGoBack = 0;
@@ -62,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_preview_on = 0;
 
-    m_lightmode_on = 0;
+    m_lightmodeOn = 0;
 
     m_pgv = new PreviewGraphicsView;
     m_previewPicture = new QGraphicsScene;
@@ -114,6 +107,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_filemodel->setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
     m_filemodel->setRootPath(sPath);
+    m_filemodel->sort(QDir::DirsFirst || Qt::SortOrder::AscendingOrder);
 
     ui->tableView->hide();
     ui->tableView->setSortingEnabled(true);
@@ -154,7 +148,6 @@ MainWindow::~MainWindow()
     m_thread->quit();
     m_thread->wait();
 
-    delete m_CRDdlg;
     delete m_MFPDlg;
     delete m_DefragDlg;
     delete m_SFIdlg;
@@ -169,6 +162,12 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::updateListWidget(QString sPath){
+
+    if (m_stepsToGoBack == 0){
+        ui->backButton->setDisabled(true);
+    } else if (m_stepsToGoBack == m_movingHistory->size()){
+        ui->forwardButton->setDisabled(true);
+    }
 
     ui->listWidget->clear();
 
@@ -200,14 +199,14 @@ void MainWindow::updateListWidget(QString sPath){
             pixmap = QPixmap::fromImage(img, Qt::AutoColor);
         } else if (file.contains(QRegExp(".mp4")) |  file.contains(QRegExp(".avi")) | file.contains(QRegExp(".mov")) | file.contains(QRegExp(".flv"))) {
             //icon for video file
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/play-button.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/play-button.png");
             }
         } else if (file.contains(QRegExp(".m4a")) |  file.contains(QRegExp(".mp3")) | file.contains(QRegExp(".wav")) | file.contains(QRegExp(".flac"))) {
             //icon for music file
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/music-note.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/music-note.png");
@@ -215,7 +214,7 @@ void MainWindow::updateListWidget(QString sPath){
 
         } else if (file.contains(QRegExp(".c$")) |  file.contains(QRegExp(".cpp$")) | file.contains(QRegExp(".ui$")) |  file.contains(QRegExp(".h$")) | file.contains(QRegExp(".html$")) | file.contains(QRegExp(".css$")) | file.contains(QRegExp(".qss$")) | file.contains(QRegExp(".java$")) | file.contains(QRegExp(".steganofs$"))) {
             //icon for coding file
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/coding.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/coding.png");
@@ -223,7 +222,7 @@ void MainWindow::updateListWidget(QString sPath){
 
         } else if (!file.contains(QRegExp("*[.]*"))) {
             //icon for folders
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/folder_c.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/folder_c.png");
@@ -231,7 +230,7 @@ void MainWindow::updateListWidget(QString sPath){
 
         }  else {
             // docs and other files
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/file.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/file.png");
@@ -251,21 +250,28 @@ void MainWindow::updateListWidget(QString sPath){
 
 void MainWindow::on_treeView_clicked(const QModelIndex &index)
 {
-    m_currentFile = nullptr;
-    ui->listWidget->setCurrentItem(nullptr);
-    m_currentDir = m_dirmodel->fileInfo(index).absoluteFilePath();
-    QString sPath = m_currentDir;
+    QString newdir = m_dirmodel->fileInfo(index).absoluteFilePath();;
+    if (m_currentDir != newdir) {
+        m_currentFile = nullptr;
+        m_stepsToGoBack++;
+        ui->listWidget->setCurrentItem(nullptr);
+        m_currentDir = newdir;
 
-    //ui->tableView->setRootIndex(m_filemodel->setRootPath(sPath));
-    ui->listWidget->setRootIndex(m_filemodel->setRootPath(sPath));
-    ui->pathLineEdit->setText(sPath);
+        //ui->tableView->setRootIndex(m_filemodel->setRootPath(sPath));
+        //ui->listWidget->setRootIndex(m_filemodel->setRootPath(sPath));
+        ui->listWidget->setRootIndex(m_filemodel->setRootPath(m_currentDir));
+        ui->pathLineEdit->setText(m_currentDir);
 
-    updateListWidget(m_currentDir);
-    ui->forwardButton->setDisabled(true);
-    ui->backButton->setDisabled(false);
+        updateListWidget(m_currentDir);
+        ui->forwardButton->setDisabled(true);
+        ui->backButton->setDisabled(false);
+
+        if ( m_currentDir != m_movingHistory->last()){
+            m_movingHistory->append(m_currentDir);
+        }
+    }
 
 
-    m_movingHistory->append(m_currentDir);
 
 }
 
@@ -333,7 +339,7 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
 
         } else if (fullPath.contains(QRegExp(".mp4")) |  fullPath.contains(QRegExp(".avi")) | fullPath.contains(QRegExp(".mov")) | fullPath.contains(QRegExp(".flv"))) {
             //icon for video fullPath
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/play-button.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/play-button.png");
@@ -341,7 +347,7 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
 
         } else if (fullPath.contains(QRegExp(".m4a")) |  fullPath.contains(QRegExp(".mp3")) | fullPath.contains(QRegExp(".wav")) | fullPath.contains(QRegExp(".flac"))) {
             //icon for music fullPath
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/music-note.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/music-note.png");
@@ -349,7 +355,7 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
 
         } else if (!fullPath.contains(QRegExp("*[.]*")) ) {
             //icon for folders
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/folder_c.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/folder_c.png");
@@ -357,7 +363,7 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
 
         } else if (fullPath.contains(QRegExp(".c")) |  fullPath.contains(QRegExp(".cpp")) | fullPath.contains(QRegExp(".ui")) |  fullPath.contains(QRegExp(".h")) | fullPath.contains(QRegExp(".html")) | fullPath.contains(QRegExp(".css")) | fullPath.contains(QRegExp(".qss")) | fullPath.contains(QRegExp(".java")) | fullPath.contains(QRegExp(".steganofs"))) {
             //icon for coding fullPath
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/coding.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/coding.png");
@@ -365,7 +371,7 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
 
         }  else {
             // docs and other files
-            if (m_lightmode_on == 0){
+            if (m_lightmodeOn == 0){
                 pixmap = QPixmap(":/assets/img/file.png");
             } else {
                 pixmap = QPixmap(":/assets/img/light/file.png");
@@ -373,20 +379,20 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
 
         }
 
-//        ui->previewLabel->setScaledContents(true);
-//        //ui->previewLabel->setMaximumWidth(this->width() / 4);
-//        ui->previewLabel->setPixmap(pixmap.scaledToWidth(w));
+        //        ui->previewLabel->setScaledContents(true);
+        //        //ui->previewLabel->setMaximumWidth(this->width() / 4);
+        //        ui->previewLabel->setPixmap(pixmap.scaledToWidth(w));
 
 
         //m_previewPicture->setSceneRect(0,0,300,450);
 
-//        PreviewGraphicsView *pgv = new PreviewGraphicsView;
-//        int w = ui->graphicsView->width();
-//        int h = ui->graphicsView->height();
-//        m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
-//        ui->horizontalLayout_2->addWidget(pgv);
-//        ui->horizontalLayout_2->removeWidget(ui->graphicsView);
-//        pgv->setScene(m_previewPicture);
+        //        PreviewGraphicsView *pgv = new PreviewGraphicsView;
+        //        int w = ui->graphicsView->width();
+        //        int h = ui->graphicsView->height();
+        //        m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
+        //        ui->horizontalLayout_2->addWidget(pgv);
+        //        ui->horizontalLayout_2->removeWidget(ui->graphicsView);
+        //        pgv->setScene(m_previewPicture);
 
 
 
@@ -398,7 +404,7 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
     }
 
 
-    }
+}
 
 
 void MainWindow::on_previewToolButton_clicked()
@@ -431,14 +437,13 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 void MainWindow::on_darkModePushButton_clicked()
 {
 
-    if (m_lightmode_on == 0){
+    if (m_lightmodeOn == 0){
         qApp->setStyleSheet(m_lightstyle);
-        m_lightmode_on = 1;
-        m_CRDdlg->setLightmodeOn(true);
-        m_DefragDlg->setLightmode_on(true);
-        m_MFPDlg->setLightmodeon(true);
-        m_SFIdlg->setLightmodeon(true);
-        m_LFdlg->setLightmodeon(true);
+        m_lightmodeOn = 1;
+        m_DefragDlg->setLightmodeOn(true);
+        m_MFPDlg->setLightmodeOn(true);
+        m_SFIdlg->setLightmodeOn(true);
+
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/light/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/light/document.png"));
@@ -459,12 +464,11 @@ void MainWindow::on_darkModePushButton_clicked()
     } else {
 
         qApp->setStyleSheet(m_darkstyle);
-        m_lightmode_on = 0;
-        m_CRDdlg->setLightmodeOn(false);
-        m_DefragDlg->setLightmode_on(false);
-        m_MFPDlg->setLightmodeon(false);
-        m_SFIdlg->setLightmodeon(false);
-        m_LFdlg->setLightmodeon(false);
+        m_lightmodeOn = 0;
+        m_DefragDlg->setLightmodeOn(false);
+        m_MFPDlg->setLightmodeOn(false);
+        m_SFIdlg->setLightmodeOn(false);
+
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/folder.png"));
         ui->newFilePushButton->setIcon(QIcon(":/assets/img/document.png"));
@@ -483,7 +487,7 @@ void MainWindow::on_darkModePushButton_clicked()
 
     }
 
-   updateListWidget(m_currentDir);
+    updateListWidget(m_currentDir);
 
 }
 
@@ -506,8 +510,8 @@ void MainWindow::on_actionNeuer_Ordner_triggered()
 
 void MainWindow::on_actionShow_Filesystem_information_triggered()
 {
-        m_SFIdlg->showFilesystemInfo(*steganoFsAdapter);
-        m_SFIdlg->exec();
+    m_SFIdlg->showFilesystemInfo(*steganoFsAdapter);
+    m_SFIdlg->exec();
 
 
 }
@@ -515,13 +519,13 @@ void MainWindow::on_actionShow_Filesystem_information_triggered()
 void MainWindow::on_actionMount_triggered()
 {
 
-        //steganoFsAdapter->umount();
+    //steganoFsAdapter->umount();
 
-//        auto path = m_filemodel->rootPath();
-//        m_filemodel->setRootPath("");
+    //        auto path = m_filemodel->rootPath();
+    //        m_filemodel->setRootPath("");
 
 
-        if (m_MFPDlg->exec() == QDialog::Accepted) {
+    if (m_MFPDlg->exec() == QDialog::Accepted) {
 
         SteganoFsAdapter *sfa = new SteganoFsAdapter(m_MFPDlg->filesystemPath().toStdString());
 
@@ -530,7 +534,7 @@ void MainWindow::on_actionMount_triggered()
 
             m_thread->start();
             // QVariant qSteganoFSAdapter = QVariant::fromValue(steganoFsAdapter);
-             QVariant qSteganoFSAdapter = QVariant::fromValue(sfa);
+            QVariant qSteganoFSAdapter = QVariant::fromValue(sfa);
 
             if (QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, m_MFPDlg->mountingPath()))){
                 ui->actionMount->setDisabled(true);
@@ -558,11 +562,11 @@ void MainWindow::on_actionMount_triggered()
         }
 
 
-        } else {
+    } else {
         ui->statusbar->showMessage(QString("Mount aborted."));
-        }
+    }
 
-//        m_filemodel->setRootPath(path);
+    //        m_filemodel->setRootPath(path);
 }
 
 
@@ -598,48 +602,59 @@ void MainWindow::on_actionUnmount_triggered()
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
 
+    QString newdir = m_currentDir + "/" + ui->listWidget->currentItem()->text();
+
+
     if (ui->pathLineEdit->text() == "/"){
+
+        m_movingHistory->append(newdir);
+        m_stepsToGoBack++;
         ui->pathLineEdit->clear();
         m_currentDir = "";
         m_lastDirectory = "/";
     } else {
 
-        QString path = m_currentDir + "/" + ui->listWidget->currentItem()->text();
 
+        if ( QFileInfo(newdir).isDir()){
 
-        if ( QFileInfo(path).isDir()  /*!path.contains(QRegExp("*[.]*"))*/){
-            ui->pathLineEdit->clear();
-            m_currentDir = path;
+            if (m_currentDir != newdir) {
+                ui->pathLineEdit->clear();
+                m_currentDir = newdir;
+                m_movingHistory->insert(m_stepsToGoBack, m_currentDir);
+                m_stepsToGoBack++;
 
-            if (m_currentDir != m_movingHistory->last()){
-                m_movingHistory->removeLast();
-                m_stepsToGoBack -= 1;
+                if (m_movingHistory->size() != 0){
+                    while (m_currentDir != m_movingHistory->last()){
+                        m_movingHistory->removeLast();
+                        m_stepsToGoBack--;
+                        ui->forwardButton->setDisabled(true);
+
+                    }
+
+                }
+                ui->backButton->setDisabled(false);
             }
 
-            //m_lastDirectory = tmp;
-            ui->forwardButton->setDisabled(true);
-            ui->backButton->setDisabled(false);
+
+
+
 
 
             //std::future<QString> fut = std::async(m_filemodel->directoryLoaded(path));
-            updateListWidget(path);
+            updateListWidget(m_currentDir);
 
-            m_movingHistory->append(m_currentDir);
 
+            /*
             if (ui->listWidget->count() != 0){
                 ui->listWidget->setCurrentRow(1);
                 m_currentFile = ui->listWidget->currentItem();
-            }
+            }*/
 
             ui->pathLineEdit->setText(m_currentDir);
-    }
+            m_movingHistory->append(m_currentDir);
+        }
 
     }
-
-
-
-
-
 
 }
 
@@ -653,37 +668,41 @@ void MainWindow::refreshPreviewOnResize()
 
 void MainWindow::on_backButton_clicked()
 {
-//    QString tmp = m_currentDir;
+    //    QString tmp = m_currentDir;
 
-//    m_currentDir = m_lastDirectory;
-//    m_nextDirectory = tmp;
+    //    m_currentDir = m_lastDirectory;
+    //    m_nextDirectory = tmp;
 
-    m_currentDir = m_movingHistory->at(m_movingHistory->size() - 2);
-    ui->statusbar->showMessage(m_currentDir);
-    m_nextDirectory = m_movingHistory->last();
+    if (m_stepsToGoBack != 0){
 
-    updateListWidget(m_currentDir);
-    ui->pathLineEdit->clear();
-    ui->pathLineEdit->setText(m_currentDir);
+        m_currentDir = m_movingHistory->at(m_stepsToGoBack);
+        m_stepsToGoBack--;
 
-    ui->forwardButton->setDisabled(false);
 
-    /*
-     * CAN ONLY BE EXECUTED ONCE
-     * */
+        ui->statusbar->showMessage(m_currentDir);
+
+        updateListWidget(m_currentDir);
+        ui->pathLineEdit->clear();
+        ui->pathLineEdit->setText(m_currentDir);
+
+        ui->forwardButton->setDisabled(false);
+
+    }
 }
 
 
 void MainWindow::on_forwardButton_clicked()
 {
-    QString tmp = m_currentDir;
-    m_currentDir = m_nextDirectory;
-    m_lastDirectory = tmp;
 
-    updateListWidget(m_currentDir);
-    ui->pathLineEdit->setText(m_currentDir);
+    if (m_stepsToGoBack != m_movingHistory->size()){
+        m_stepsToGoBack++;
+        m_currentDir = m_movingHistory->at(m_stepsToGoBack);
 
-    ui->forwardButton->setDisabled(true);
+        updateListWidget(m_currentDir);
+        ui->pathLineEdit->setText(m_currentDir);
+
+    }
+
 
     /*
      * CAN ONLY BE EXECUTED ONCE
@@ -700,3 +719,18 @@ void MainWindow::updateHistory()
 
 
 
+
+void MainWindow::on_sortComboBox_currentIndexChanged(int index)
+{
+    //    switch (index){
+
+    //    case 1:
+
+    //    break;
+
+    //    }
+
+
+
+
+}
