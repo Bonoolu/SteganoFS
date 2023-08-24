@@ -1,6 +1,6 @@
 #include "previewgraphicsview.h"
 
-PreviewGraphicsView::PreviewGraphicsView()
+PreviewGraphicsView::PreviewGraphicsView(QWidget *parent)
 {
 
 }

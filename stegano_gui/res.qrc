@@ -42,7 +42,5 @@
         <file>assets/img/arrow-right.png</file>
         <file>assets/img/light/arrow-left.png</file>
         <file>assets/img/light/arrow-right.png</file>
-        <file>assets/fonts/Garet-Book.ttf</file>
-        <file>assets/fonts/Roboto-Medium.ttf</file>
     </qresource>
 </RCC>

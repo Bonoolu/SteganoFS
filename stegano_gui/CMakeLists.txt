@@ -47,12 +47,13 @@ else()
     else()
         add_executable(steganoExplorer
                 ${PROJECT_SOURCES}
-                createramdiskdialog.h createramdiskdialog.cpp createramdiskdialog.ui
+
                 defragmentdialog.h defragmentdialog.cpp defragmentdialog.ui
                 worker.h worker.cpp
                 mountfrompathdialog.h mountfrompathdialog.cpp mountfrompathdialog.ui
                 previewgraphicsview.h previewgraphicsview.cpp
                 showfilesysteminfodialog.h showfilesysteminfodialog.cpp showfilesysteminfodialog.ui
+
 
 
 

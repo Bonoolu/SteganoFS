@@ -1234,3 +1234,7 @@ QDialogButtonBox
     color: #333333;
 }
 
+QErrorMessage
+{
+    color: black;
+}
