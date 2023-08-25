@@ -18,6 +18,7 @@
 #include <QGraphicsScene>
 #include "previewgraphicsview.h"
 #include "showfilesysteminfodialog.h"
+#include "formatfilesystemdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -61,7 +62,6 @@ private slots:
     void on_listWidget_itemClicked(QListWidgetItem *item);
     void on_darkModePushButton_clicked();
     void on_actionDefragment_triggered();
-    void on_actionNeuer_Ordner_triggered();
     void on_actionShow_Filesystem_information_triggered();
     void on_actionMount_triggered();
     void on_actionUnmount_triggered();
@@ -72,11 +72,14 @@ private slots:
     void updateHistory();
     void on_sortComboBox_currentIndexChanged(int index);
 
+    void on_actionFormat_Filesystem_triggered();
+
 private:
     Ui::MainWindow *ui;
     DefragmentDialog *m_DefragDlg;
     MountFromPathDialog *m_MFPDlg;
     ShowFileSystemInfoDialog *m_SFIdlg;
+    FormatFileSystemDialog *m_FFSDlg;
     QGraphicsScene *m_previewPicture;
     PreviewGraphicsView *m_pgv;
     SteganoFsAdapter *steganoFsAdapter = nullptr;

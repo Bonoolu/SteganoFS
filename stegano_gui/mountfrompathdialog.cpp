@@ -121,7 +121,7 @@ void MountFromPathDialog::on_browseDirButton_clicked()
         ui->mountPathLineEdit->setText(m_mountingPath);
 
     } else {
-        //ui->pleaseMakeSureLabel->setText(ui->pleaseMakeSureLabel->text() + "\n\n WARNING: no legit file selected!");
+        //ui->pleaseMakeSureLabel->setText("NO FI");
     }
 }
 

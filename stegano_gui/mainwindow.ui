@@ -26,7 +26,7 @@
       <item>
        <widget class="QGroupBox" name="groupBox">
         <property name="title">
-         <string>Tools</string>
+         <string>TOOLS</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
@@ -377,14 +377,15 @@
     <property name="title">
      <string>Datei</string>
     </property>
-    <addaction name="actionNeue_Datei"/>
-    <addaction name="actionNeuer_Ordner"/>
+    <addaction name="actionNewFile"/>
+    <addaction name="actionNewFolder"/>
     <addaction name="separator"/>
     <addaction name="actionMount"/>
     <addaction name="actionUnmount"/>
     <addaction name="separator"/>
-    <addaction name="actionDefragment"/>
     <addaction name="actionShow_Filesystem_information"/>
+    <addaction name="actionDefragment"/>
+    <addaction name="actionFormat_Filesystem"/>
    </widget>
    <addaction name="menuDatei"/>
   </widget>
@@ -394,12 +395,12 @@
     <string>Vorschau anzeigen</string>
    </property>
   </action>
-  <action name="actionNeue_Datei">
+  <action name="actionNewFile">
    <property name="text">
-    <string>Neue Datei...</string>
+    <string>New File...</string>
    </property>
   </action>
-  <action name="actionNeuer_Ordner">
+  <action name="actionNewFolder">
    <property name="text">
     <string>New Folder...</string>
    </property>
@@ -442,6 +443,11 @@
   <action name="actionUnmount">
    <property name="text">
     <string>Unmount</string>
+   </property>
+  </action>
+  <action name="actionFormat_Filesystem">
+   <property name="text">
+    <string>Format Filesystem</string>
    </property>
   </action>
  </widget>

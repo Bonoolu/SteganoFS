@@ -18,6 +18,7 @@
 #include <QFont>
 #include <QRegularExpression>
 #include <QFileInfo>
+#include <QErrorMessage>
 Q_DECLARE_METATYPE(SteganoFsAdapter*)
 
 
@@ -42,6 +43,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_SFIdlg = new ShowFileSystemInfoDialog;
     m_SFIdlg->setLightmodeOn(false);
+
+    m_FFSDlg = new FormatFileSystemDialog;
+    m_FFSDlg->setLightmodeOn(false);
 
     m_movingHistory = new QList<QString>;
     m_stepsToGoBack = 0;
@@ -152,6 +156,7 @@ MainWindow::~MainWindow()
     delete m_MFPDlg;
     delete m_DefragDlg;
     delete m_SFIdlg;
+    delete m_FFSDlg;
 
     delete m_movingHistory;
     delete m_thread;
@@ -398,7 +403,9 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
 
 
         int w = m_pgv->width();
-        m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
+        QGraphicsPixmapItem *pixitem = m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
+        //m_pgv->fitInView(*pixitem);
+
 
         m_pgv->setScene(m_previewPicture);
 
@@ -444,6 +451,7 @@ void MainWindow::on_darkModePushButton_clicked()
         m_DefragDlg->setLightmodeOn(true);
         m_MFPDlg->setLightmodeOn(true);
         m_SFIdlg->setLightmodeOn(true);
+        m_FFSDlg->setLightmodeOn(true);
 
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/light/folder.png"));
@@ -469,6 +477,7 @@ void MainWindow::on_darkModePushButton_clicked()
         m_DefragDlg->setLightmodeOn(false);
         m_MFPDlg->setLightmodeOn(false);
         m_SFIdlg->setLightmodeOn(false);
+        m_FFSDlg->setLightmodeOn(false);
 
 
         ui->newFolderPushButton->setIcon(QIcon(":/assets/img/folder.png"));
@@ -495,36 +504,14 @@ void MainWindow::on_darkModePushButton_clicked()
 
 
 
-void MainWindow::on_actionDefragment_triggered()
-{
-    m_DefragDlg->setAdapter(steganoFsAdapter);
-    m_DefragDlg->setFragmentation(steganoFsAdapter->getFragmentationInPercent());
-    m_DefragDlg->exec();
-}
-
-
-void MainWindow::on_actionNeuer_Ordner_triggered()
-{
-
-}
-
-
-void MainWindow::on_actionShow_Filesystem_information_triggered()
-{
-    m_SFIdlg->showFilesystemInfo(*steganoFsAdapter);
-    m_SFIdlg->exec();
-
-
-}
 
 void MainWindow::on_actionMount_triggered()
 {
-
+    // ZU BEGINN IMMER MOUNTEN: gibt segmentation fault
     //steganoFsAdapter->umount();
 
-    //        auto path = m_filemodel->rootPath();
-    //        m_filemodel->setRootPath("");
 
+    QErrorMessage *err = new QErrorMessage;
 
     if (m_MFPDlg->exec() == QDialog::Accepted) {
 
@@ -534,7 +521,6 @@ void MainWindow::on_actionMount_triggered()
             ui->statusbar->showMessage(QString("Loaded file: " + m_MFPDlg->filesystemPath()), 10000);
 
             m_thread->start();
-            // QVariant qSteganoFSAdapter = QVariant::fromValue(steganoFsAdapter);
             QVariant qSteganoFSAdapter = QVariant::fromValue(sfa);
 
             if (QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, m_MFPDlg->mountingPath()))){
@@ -542,6 +528,7 @@ void MainWindow::on_actionMount_triggered()
                 ui->actionUnmount->setDisabled(false);
                 ui->actionDefragment->setDisabled(false);
                 steganoFsAdapter = sfa;
+                ui->statusbar->showMessage(QString("Mount of" + m_MFPDlg->mountingPath() + " successfull"), 18000);
 
             } else {
                 ui->actionMount->setDisabled(false);
@@ -549,7 +536,7 @@ void MainWindow::on_actionMount_triggered()
                 steganoFsAdapter = nullptr;
                 delete sfa;
 
-                //TODO fehlermeldung dialog
+                err->showMessage("Unable to mount path!");
             }
 
         } else {
@@ -557,17 +544,17 @@ void MainWindow::on_actionMount_triggered()
             ui->actionUnmount->setDisabled(true);
             steganoFsAdapter = nullptr;
             delete sfa;
-
-            //TODO fehlermeldung dialog
+            err->showMessage("Unable to load file system!");
 
         }
-
 
     } else {
         ui->statusbar->showMessage(QString("Mount aborted."));
     }
 
-    //        m_filemodel->setRootPath(path);
+    delete err;
+
+
 }
 
 
@@ -595,6 +582,71 @@ void MainWindow::on_actionUnmount_triggered()
 
 
 }
+
+
+void MainWindow::on_actionShow_Filesystem_information_triggered()
+{
+    m_SFIdlg->showFilesystemInfo(*steganoFsAdapter);
+    m_SFIdlg->exec();
+
+
+}
+
+void MainWindow::on_actionDefragment_triggered()
+{
+    m_DefragDlg->setAdapter(steganoFsAdapter);
+    m_DefragDlg->setFragmentation(steganoFsAdapter->getFragmentationInPercent());
+    m_DefragDlg->exec();
+}
+
+
+void MainWindow::on_actionFormat_Filesystem_triggered()
+{
+    /* TODO: Implement as soon as formatFileSystem() exists
+     * This is only copied from MFSDlg and roughly adjusted!
+     */
+    QErrorMessage *err = new QErrorMessage;
+
+    if (m_FFSDlg->exec() == QDialog::Accepted) {
+
+        SteganoFsAdapter *sfa = new SteganoFsAdapter(m_FFSDlg->filesystemPath().toStdString());
+/*
+        if (sfa->loadFilesytemFromSteganoProvider()){
+            ui->statusbar->showMessage(QString("Loaded file: " + m_FFSDlg->filesystemPath()), 10000);
+
+            m_thread->start();
+            QVariant qSteganoFSAdapter = QVariant::fromValue(sfa);
+
+            if (QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, m_FFSDlg->filesystemPath()))){
+                ui->actionMount->setDisabled(true);
+                ui->actionUnmount->setDisabled(false);
+                ui->actionDefragment->setDisabled(false);
+                steganoFsAdapter = sfa;
+                ui->statusbar->showMessage(QString("Mount of" + m_FFSDlg->filesystemPath() + " successfull"), 18000);
+
+            } else {
+                ui->actionMount->setDisabled(false);
+                ui->actionUnmount->setDisabled(true);
+                steganoFsAdapter = nullptr;
+                delete sfa;
+
+                err->showMessage("Unable to mount path!");
+            }
+*/
+    } else {
+//            ui->actionMount->setDisabled(false);
+//            ui->actionUnmount->setDisabled(true);
+//            steganoFsAdapter = nullptr;
+//            delete sfa;
+//            err->showMessage("Unable to load file system!");
+
+    }
+    delete err;
+}
+
+
+
+
 
 
 

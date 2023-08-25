@@ -53,6 +53,7 @@ else()
                 mountfrompathdialog.h mountfrompathdialog.cpp mountfrompathdialog.ui
                 previewgraphicsview.h previewgraphicsview.cpp
                 showfilesysteminfodialog.h showfilesysteminfodialog.cpp showfilesysteminfodialog.ui
+                formatfilesystemdialog.h formatfilesystemdialog.cpp formatfilesystemdialog.ui
 
 
 
