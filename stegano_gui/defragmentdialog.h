@@ -5,7 +5,8 @@
 #include "../cpp-wrapper/SteganoFsAdapter.h"
 
 
-namespace Ui {
+namespace Ui
+{
 class DefragmentDialog;
 }
 
@@ -14,9 +15,9 @@ class DefragmentDialog;
  *
  * This class provides a dialog window to configure defragmentation settings for the application.
  */
-class DefragmentDialog : public QDialog
+class DefragmentDialog: public QDialog
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     /**
@@ -32,9 +33,9 @@ public:
 
     /**
      * @brief Sets the light mode on/off.
-     * @param newLightmode_on Whether light mode should be turned on.
+     * @param newLightmodeOn Whether light mode should be turned on.
      */
-    void setLightmodeOn(bool newLightmode_on);
+    void setLightmodeOn(bool newLightmodeOn);
 
     /**
      * @brief Checks if light mode is on.
@@ -64,8 +65,8 @@ private slots:
 
 private:
     Ui::DefragmentDialog *ui; ///< The UI components of the dialog.
-    bool m_lightmodeOn;      ///< Stores the current light mode status.
-    SteganoFsAdapter *m_adapter; ///< Pointer to the adapter used by the dialog.
+    bool m_lightmodeOn{};      ///< Stores the current light mode status.
+    SteganoFsAdapter *m_adapter{}; ///< Pointer to the adapter used by the dialog.
 };
 
 #endif // DEFRAGMENTDIALOG_H

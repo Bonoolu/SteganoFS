@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     QFile file(":/assets/stylesheet/Darkeum.qss");
     file.open(QFile::ReadOnly);
 
-    QString styleSheet { QLatin1String(file.readAll()) };
+    QString styleSheet{QLatin1String(file.readAll())};
 
     //setup stylesheet
     a.setStyleSheet(styleSheet);

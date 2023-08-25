@@ -5,13 +5,14 @@
 #include "../cpp-wrapper/SteganoFsAdapter.h"
 #include <sys/statfs.h>
 
-namespace Ui {
+namespace Ui
+{
 class ShowFileSystemInfoDialog;
 }
 
-class ShowFileSystemInfoDialog : public QDialog
+class ShowFileSystemInfoDialog: public QDialog
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     /**
@@ -23,7 +24,7 @@ public:
     /**
      * @brief Destructor for ShowFileSystemInfoDialog.
      */
-    ~ShowFileSystemInfoDialog();
+    ~ShowFileSystemInfoDialog() override;
 
     /**
      * @brief Sets the light mode state.

@@ -1,7 +1,8 @@
 #include "showfilesysteminfodialog.h"
 #include "ui_showfilesysteminfodialog.h"
 
-ShowFileSystemInfoDialog::ShowFileSystemInfoDialog(QWidget *parent) :
+ShowFileSystemInfoDialog::ShowFileSystemInfoDialog(QWidget *parent)
+    :
     QDialog(parent),
     ui(new Ui::ShowFileSystemInfoDialog)
 {
@@ -35,7 +36,7 @@ void ShowFileSystemInfoDialog::on_closeButton_clicked()
 void ShowFileSystemInfoDialog::showFilesystemInfo(SteganoFsAdapter &sfa)
 {
     struct statvfs info = sfa.getFilesystemInfo();
-    QString text = "";
+    QString text;
 
     text = "Filesystem block size:\t\t\t" + QString::number(info.f_bsize) +
         "\n\nFundamental filesystem block size:\t" + QString::number(info.f_frsize) +
@@ -52,19 +53,20 @@ void ShowFileSystemInfoDialog::setLightmodeOn(bool newLightsmodeOn)
     m_lightmodeOn = newLightsmodeOn;
 
 
-    if (this->m_lightmodeOn == true){
+    if (this->m_lightmodeOn) {
         this->setStyleSheet("background-color: #fafafa; color: #111111;");
-        ui->closeButton->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); border-radius: 5px; padding: 5px; color: white; border: 1px solid #1073b4; padding: 2px 5px;");
+        ui->closeButton->setStyleSheet(
+            "background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891); border-radius: 5px; padding: 5px; color: white; border: 1px solid #1073b4; padding: 2px 5px;");
         ui->filesystemInfoLabel->setStyleSheet("background-color: #efefef; color: black;");
 
     }
 
-    if (this->m_lightmodeOn == false) {
+    if (!this->m_lightmodeOn) {
 
         this->setStyleSheet("background-color: #111111; color: #fafafa;");
-        ui->closeButton->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; border: 1px solid #607cff; padding: 2px 5px;");
+        ui->closeButton->setStyleSheet(
+            "background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; border: 1px solid #607cff; padding: 2px 5px;");
         ui->filesystemInfoLabel->setStyleSheet("background-color: #1e1e1e; color: white; padding: 2px 7px ; ");
-
 
     }
 }

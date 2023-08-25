@@ -21,7 +21,10 @@
 #include "formatfilesystemdialog.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui
+{
+class MainWindow;
+}
 QT_END_NAMESPACE
 
 /**
@@ -29,21 +32,21 @@ QT_END_NAMESPACE
  *
  * This class handles various UI interactions, signals, and slots.
  */
-class MainWindow : public QMainWindow
+class MainWindow: public QMainWindow
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     /**
      * @brief Constructor for the MainWindow class.
      * @param parent The parent widget.
      */
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
 
     /**
      * @brief Destructor for the MainWindow class.
      */
-    ~MainWindow();
+    ~MainWindow() override;
 
 signals:
     /**
@@ -57,7 +60,7 @@ private slots:
     void refreshView();
     void on_pathLineEdit_editingFinished();
     void on_DisplayComboBox_currentIndexChanged(int index);
-    void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void on_listWidget_currentItemChanged(QListWidgetItem *current, [[maybe_unused]] QListWidgetItem *previous);
     void on_previewToolButton_clicked();
     void on_listWidget_itemClicked(QListWidgetItem *item);
     void on_darkModePushButton_clicked();
@@ -66,7 +69,7 @@ private slots:
     void on_actionMount_triggered();
     void on_actionUnmount_triggered();
     void on_actionShow_Fragmentation_triggered();
-    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+    void on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetItem *item);
     void refreshPreviewOnResize();
     void on_backButton_clicked();
     void on_forwardButton_clicked();
@@ -100,10 +103,10 @@ private:
     QList<QListWidgetItem> selectedFiles;
     QString m_lastDirectory;
     QString m_nextDirectory;
-    QListWidget *listWidget;
-    QTreeView *treeView;
-    QLineEdit *searchLineEdit;
-    QPushButton *refreshButton;
+    QListWidget *listWidget{};
+    QTreeView *treeView{};
+    QLineEdit *searchLineEdit{};
+    QPushButton *refreshButton{}; // TODO: Are these 4 pointers actually used?
     bool m_preview_on;
     bool m_lightmodeOn;
 
@@ -111,7 +114,7 @@ private:
      * @brief Updates the QListWidget with items from the given path.
      * @param sPath The path to update the QListWidget with.
      */
-    void updateListWidget(QString sPath);
+    void updateListWidget(const QString &sPath);
 };
 
 #endif // MAINWINDOW_H

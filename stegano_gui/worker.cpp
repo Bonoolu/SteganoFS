@@ -10,11 +10,11 @@ Worker::Worker(QObject *parent)
 
 }
 
-void Worker::mountFolder(QVariant qAdapt, QString s)
+void Worker::mountFolder(const QVariant& qAdapt, const QString& s)
 {
     qDebug() << "RUnning thread: " << QThread::currentThreadId();
 
-    SteganoFsAdapter *adapt = qvariant_cast<SteganoFsAdapter*>(qAdapt);
+    auto *adapt = qvariant_cast<SteganoFsAdapter *>(qAdapt);
 
     adapt->mount(s.toStdString());
 

@@ -10,9 +10,9 @@
  * This class extends QGraphicsView and adds functionality for handling resize events and emitting a signal
  * to request a scene refresh.
  */
-class PreviewGraphicsView : public QGraphicsView
+class PreviewGraphicsView: public QGraphicsView
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     /**
@@ -34,5 +34,4 @@ signals:
     void refreshScene();
 
 };
-
 #endif // PREVIEWGRAPHICSVIEW_H

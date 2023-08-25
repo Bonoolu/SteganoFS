@@ -1,7 +1,8 @@
 #include "previewgraphicsview.h"
 
 PreviewGraphicsView::PreviewGraphicsView(QWidget *parent)
-{
+    :
+    QGraphicsView(parent){
 
 }
 
@@ -16,10 +17,10 @@ void PreviewGraphicsView::resizeEvent(QResizeEvent *event)
 //        update();
 //    }
 
-   //QGraphicsItem *scene = this->scene()->activePanel() ;
+    //QGraphicsItem *scene = this->scene()->activePanel() ;
     int w = this->parentWidget()->width();
     //this->setFixedWidth(w/3);
-    this->setMaximumWidth(w/4);
+    this->setMaximumWidth(w / 4);
 //    this->scene()->clear();
 //    this->scene()->items().clear();
 //    this->scene()->addPixmap(this->scene().)

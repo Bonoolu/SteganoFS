@@ -3,18 +3,19 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class FragmentTile;
 }
 
-class FragmentTile : public QWidget
+class FragmentTile: public QWidget
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
-    explicit FragmentTile(QWidget *parent = nullptr, QColor color = QColor("white"));
-    void setColor(QColor color);
-    ~FragmentTile();
+    explicit FragmentTile(QWidget *parent = nullptr, const QColor &color = QColor("white"));
+    void setColor(const QColor &color);
+    ~FragmentTile() override;
 
 private:
     Ui::FragmentTile *ui;

@@ -10,9 +10,9 @@
  *
  * This class inherits from QObject and provides slots for performing various tasks.
  */
-class Worker : public QObject
+class Worker: public QObject
 {
-    Q_OBJECT
+Q_OBJECT
 public:
     /*!
      * \brief Constructor for the Worker class.
@@ -26,7 +26,7 @@ public slots:
      * \param qAdapt The QVariant containing a pointer to the SteganoFsAdapter.
      * \param s The path to the folder to be mounted.
      */
-    void mountFolder(QVariant qAdapt, QString s);
+    void mountFolder(const QVariant& qAdapt, const QString& s);
 
 };
 

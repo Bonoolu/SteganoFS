@@ -6,7 +6,10 @@
 #include "../cpp-wrapper/SteganoFsAdapter.h"
 
 
-namespace Ui { class MountFromPathDialog; }
+namespace Ui
+{
+class MountFromPathDialog;
+}
 /**
  * \class MountFromPathDialog
  * \brief Dialog for mounting a filesystem from a specific path.
@@ -15,9 +18,9 @@ namespace Ui { class MountFromPathDialog; }
  * along with additional settings like light mode. It also allows connecting a
  * SteganoFsAdapter to handle the mounting process.
  */
-class MountFromPathDialog : public QDialog
+class MountFromPathDialog: public QDialog
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     /**
@@ -29,7 +32,7 @@ public:
     /**
      * \brief Destructs the MountFromPathDialog.
      */
-    ~MountFromPathDialog();
+    ~MountFromPathDialog() override;
 
     /**
      * \brief Sets the mounting path.
@@ -41,13 +44,13 @@ public:
      * \brief Returns the selected mounting path.
      * \return The selected mounting path.
      */
-    QString mountingPath() const;
+    [[nodiscard]] QString mountingPath() const;
 
     /**
      * \brief Checks if light mode is enabled.
      * \return True if light mode is enabled, false otherwise.
      */
-    bool lightmodeOn() const;
+    [[nodiscard]] bool lightmodeOn() const;
 
     /**
      * \brief Sets the light mode.
@@ -59,7 +62,7 @@ public:
      * \brief Returns the selected filesystem path.
      * \return The selected filesystem path.
      */
-    QString filesystemPath() const;
+    [[nodiscard]] QString filesystemPath() const;
 
     /**
      * \brief Sets the filesystem path.
@@ -71,7 +74,7 @@ public:
      * \brief Returns the associated SteganoFsAdapter.
      * \return The associated SteganoFsAdapter.
      */
-    SteganoFsAdapter *adapter() const;
+    [[nodiscard]] SteganoFsAdapter *adapter() const;
 
     /**
      * \brief Sets the SteganoFsAdapter.
@@ -112,7 +115,7 @@ private:
     Ui::MountFromPathDialog *ui; ///< The UI components.
     QString m_mountingPath;      ///< The selected mounting path.
     QString m_filesystemPath;    ///< The selected filesystem path.
-    bool m_lightmodeOn;          ///< Flag indicating light mode status.
+    bool m_lightmodeOn{};          ///< Flag indicating light mode status.
     QFileDialog *m_mountDlg = nullptr; ///< Dialog for selecting mounting path.
     QFileDialog *m_fsDlg = nullptr;    ///< Dialog for selecting filesystem path.
     SteganoFsAdapter *m_adapter = nullptr; ///< Associated SteganoFsAdapter.

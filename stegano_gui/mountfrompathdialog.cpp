@@ -73,7 +73,7 @@ void MountFromPathDialog::setLightmodeOn(bool newLightmodeOn)
 {
     m_lightmodeOn = newLightmodeOn;
 
-    if (this->m_lightmodeOn == true){
+    if (this->m_lightmodeOn){
         this->setStyleSheet("background-color: #fafafa; color: #111111;");
         ui->mountPathLineEdit->setStyleSheet("background-color: #fafafa; color: #111111; border: 1px solid #1073b4; border-radius: 5px; padding: 2px 5px;");
         ui->filesystemPathLineEdit->setStyleSheet("background-color: #fafafa; color: #111111; border: 1px solid #1073b4; border-radius: 5px; padding: 2px 5px;");
@@ -86,7 +86,7 @@ void MountFromPathDialog::setLightmodeOn(bool newLightmodeOn)
 
     }
 
-    if (this->m_lightmodeOn == false) {
+    if (!this->m_lightmodeOn) {
 
         this->setStyleSheet("background-color: #111111; color: #fafafa;");
         ui->mountPathLineEdit->setStyleSheet("background-color: #444444; color: white; border: 1px solid #607cff; border-radius: 5px; padding: 2px 5px;");

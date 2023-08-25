@@ -3,17 +3,18 @@
 
 #include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
 class FragmentationDialog;
 }
 
-class FragmentationDialog : public QDialog
+class FragmentationDialog: public QDialog
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     explicit FragmentationDialog(QWidget *parent = nullptr);
-    ~FragmentationDialog();
+    ~FragmentationDialog() override;
 
 private:
     Ui::FragmentationDialog *ui;

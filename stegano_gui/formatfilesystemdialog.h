@@ -5,37 +5,37 @@
 #include <QFileDialog>
 #include "../cpp-wrapper/SteganoFsAdapter.h"
 
-namespace Ui {
+namespace Ui
+{
 class FormatFileSystemDialog;
 }
 
-class FormatFileSystemDialog : public QDialog
+class FormatFileSystemDialog: public QDialog
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
 
-     /**
-     * \class FormatFileSystemDialog
-     * \brief Dialog for mounting a filesystem from a specific path.
-     *
-     * This class provides a dialog for selecting a mounting path and filesystem path,
-     * along with additional settings like light mode. It also allows connecting a
-     * SteganoFsAdapter to handle the mounting process.
-     */
+    /**
+    * \class FormatFileSystemDialog
+    * \brief Dialog for mounting a filesystem from a specific path.
+    *
+    * This class provides a dialog for selecting a mounting path and filesystem path,
+    * along with additional settings like light mode. It also allows connecting a
+    * SteganoFsAdapter to handle the mounting process.
+    */
     explicit FormatFileSystemDialog(QWidget *parent = nullptr);
 
     /**
      * \brief Destructs the FormatFileSystemDialog.
      */
-    ~FormatFileSystemDialog();
-
+    ~FormatFileSystemDialog() override;
 
     /**
      * \brief Checks if light mode is enabled.
      * \return True if light mode is enabled, false otherwise.
      */
-    bool lightmodeOn() const;
+    [[maybe_unused]] bool lightmodeOn() const;
 
     /**
      * \brief Sets the light mode.
@@ -47,19 +47,19 @@ public:
      * \brief Returns the selected filesystem path.
      * \return The selected filesystem path.
      */
-    QString filesystemPath() const;
+    [[nodiscard]] QString filesystemPath() const;
 
     /**
      * \brief Sets the filesystem path.
      * \param newFilesystemPath The new filesystem path.
      */
-    void setFilesystemPath(const QString &newFilesystemPath);
+    [[maybe_unused]] void setFilesystemPath(const QString &newFilesystemPath);
 
     /**
      * \brief Returns the associated SteganoFsAdapter.
      * \return The associated SteganoFsAdapter.
      */
-    SteganoFsAdapter *adapter() const;
+    [[nodiscard]] SteganoFsAdapter *adapter() const;
 
     /**
      * \brief Sets the SteganoFsAdapter.

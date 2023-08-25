@@ -4,21 +4,22 @@
 #include <QWidget>
 #include "fragmenttile.h"
 
-namespace Ui {
+namespace Ui
+{
 class FragmentationDiagram;
 }
 
-class FragmentationDiagram : public QWidget
+class FragmentationDiagram: public QWidget
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     explicit FragmentationDiagram(QWidget *parent = nullptr);
-    ~FragmentationDiagram();
+    ~FragmentationDiagram() override;
 
 private:
     Ui::FragmentationDiagram *ui;
-    QList<FragmentTile*> *tiles;
+    QList<FragmentTile *> *tiles;
 };
 
 #endif // FRAGMENTATIONDIAGRAM_H

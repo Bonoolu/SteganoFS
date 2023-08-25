@@ -61,10 +61,7 @@ else()
     endif()
 endif()
 
-add_custom_target(copy_fs
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/filesystem.steganofs ${CMAKE_CURRENT_BINARY_DIR}
-)
-add_dependencies(steganoExplorer copy_fs)
+add_dependencies(steganoExplorer copy_example_folder)
 
 target_link_libraries(steganoExplorer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(steganoExplorer PRIVATE steganofs)

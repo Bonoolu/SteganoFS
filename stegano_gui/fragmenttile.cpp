@@ -1,7 +1,8 @@
 #include "fragmenttile.h"
 #include "ui_fragmenttile.h"
 
-FragmentTile::FragmentTile(QWidget *parent, QColor color) :
+FragmentTile::FragmentTile(QWidget *parent, const QColor& color)
+    :
     QWidget(parent),
     ui(new Ui::FragmentTile)
 {
@@ -9,7 +10,7 @@ FragmentTile::FragmentTile(QWidget *parent, QColor color) :
     this->setStyleSheet("background: " + color.toRgb().name() + "; border 1px solid black;");
 }
 
-void FragmentTile::setColor(QColor color)
+void FragmentTile::setColor(const QColor& color)
 {
     this->setStyleSheet("background: " + color.toRgb().name() + "; border 1px solid black;");
 }
