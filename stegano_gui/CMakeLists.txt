@@ -54,10 +54,9 @@ else()
                 previewgraphicsview.h previewgraphicsview.cpp
                 showfilesysteminfodialog.h showfilesysteminfodialog.cpp showfilesysteminfodialog.ui
                 formatfilesystemdialog.h formatfilesystemdialog.cpp formatfilesystemdialog.ui
-
-
-
-
+                fragmentationdiagram.h fragmentationdiagram.cpp fragmentationdiagram.ui
+                fragmenttile.h fragmenttile.cpp fragmenttile.ui
+                fragmentationdialog.h fragmentationdialog.cpp fragmentationdialog.ui
         )
     endif()
 endif()

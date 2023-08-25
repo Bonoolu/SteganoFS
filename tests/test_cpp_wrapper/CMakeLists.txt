@@ -7,7 +7,7 @@ add_executable(test_cpp_wrapper test_cpp_wrapper.cpp
         ../../cpp-wrapper/SteganoFsAdapter.h)
 
 add_custom_target(copy_fs1
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/filesystem.steganofs ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/test_cpp_wrapper.steganofs ${CMAKE_CURRENT_BINARY_DIR}
 )
 add_dependencies(test_cpp_wrapper copy_fs1)
 

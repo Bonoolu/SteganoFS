@@ -370,7 +370,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
@@ -386,6 +386,7 @@
     <addaction name="actionShow_Filesystem_information"/>
     <addaction name="actionDefragment"/>
     <addaction name="actionFormat_Filesystem"/>
+    <addaction name="actionShow_Fragmentation"/>
    </widget>
    <addaction name="menuDatei"/>
   </widget>
@@ -448,6 +449,11 @@
   <action name="actionFormat_Filesystem">
    <property name="text">
     <string>Format Filesystem</string>
+   </property>
+  </action>
+  <action name="actionShow_Fragmentation">
+   <property name="text">
+    <string>Show Fragmentation</string>
    </property>
   </action>
  </widget>

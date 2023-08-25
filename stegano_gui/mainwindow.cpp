@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "fragmentationdialog.h"
 
 #include <QMainWindow>
 #include <QFileSystemModel>
@@ -583,7 +584,6 @@ void MainWindow::on_actionUnmount_triggered()
 
 }
 
-
 void MainWindow::on_actionShow_Filesystem_information_triggered()
 {
     m_SFIdlg->showFilesystemInfo(*steganoFsAdapter);
@@ -644,13 +644,11 @@ void MainWindow::on_actionFormat_Filesystem_triggered()
     delete err;
 }
 
-
-
-
-
-
-
-
+void MainWindow::on_actionShow_Fragmentation_triggered()
+{
+    FragmentationDialog *dialog = new FragmentationDialog(this);
+    dialog->exec();
+}
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {

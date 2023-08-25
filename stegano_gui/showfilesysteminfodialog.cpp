@@ -34,7 +34,7 @@ void ShowFileSystemInfoDialog::on_closeButton_clicked()
 
 void ShowFileSystemInfoDialog::showFilesystemInfo(SteganoFsAdapter &sfa)
 {
-    struct statfs info = sfa.getFilesystemInfo();
+    struct statvfs info = sfa.getFilesystemInfo();
     QString text = "";
 
     text = "Filesystem block size:\t\t\t" + QString::number(info.f_bsize) +
