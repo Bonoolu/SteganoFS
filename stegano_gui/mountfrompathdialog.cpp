@@ -11,9 +11,13 @@ MountFromPathDialog::MountFromPathDialog(QWidget *parent) :
     m_mountingPath = "";
     m_fsDlg = new QFileDialog;
     m_fsDlg->setFileMode(QFileDialog::ExistingFile);
+    m_fsDlg->setDirectory(QDir("../examples/pictures").absolutePath());
 
     m_mountDlg = new QFileDialog;
     m_mountDlg->setFileMode(QFileDialog::Directory);
+    m_fsDlg->setDirectory(QDir("../examples/mnt").absolutePath());
+    ui->filesystemPathLineEdit->setText(QDir("../examples/pictures").absolutePath());
+    ui->mountPathLineEdit->setText(QDir("../examples/mnt").absolutePath());
 
     // ZWEITES EINGABEFELD MIT PFAD ZU DEM ORDNER IN DEM DAS FILESYSTEM VERSTECKT
    // also der Code von loadFilesystem

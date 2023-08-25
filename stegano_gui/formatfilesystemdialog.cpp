@@ -10,7 +10,9 @@ FormatFileSystemDialog::FormatFileSystemDialog(QWidget *parent)
 
     m_filesystemPath = "";
     m_fsDlg = new QFileDialog;
-    m_fsDlg->setFileMode(QFileDialog::ExistingFile);
+    m_fsDlg->setDirectory(QDir("../examples/pictures").absolutePath());
+    ui->fileSystemLineEdit->setText(QDir("../examples/pictures").absolutePath());
+    m_fsDlg->setFileMode(QFileDialog::Directory);
 
 }
 

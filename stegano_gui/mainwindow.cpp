@@ -139,6 +139,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_pgv, &PreviewGraphicsView::refreshScene, this, &MainWindow::refreshPreviewOnResize);
 
     m_movingHistory->append(m_currentDir);
+    ui->actionShow_Filesystem_information->setDisabled(true);
 
 }
 
@@ -163,7 +164,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateListWidget(const QString &sPath)
 {
-
+    qDebug() << "Updating List Widget with: " << sPath << Qt::endl;
     if (m_stepsToGoBack == 0) {
         ui->backButton->setDisabled(true);
     }
@@ -181,7 +182,10 @@ void MainWindow::updateListWidget(const QString &sPath)
     QList<QString> pathList;
     QModelIndex parentIndex = m_filemodel->index(m_currentDir);
     int numRows = m_filemodel->rowCount(parentIndex);
-
+    qDebug() << "Filemodel root path" << m_filemodel->rootPath() << Qt::endl;
+    qDebug() << "Requesting path:" << m_currentDir << Qt::endl;
+    qDebug() << "Is path valid?:" << (parentIndex.isValid() ? "yes" : "no") << Qt::endl;
+    qDebug() << "Number of entries inside path:" << numRows << Qt::endl;
 
     for (int row = 0; row < numRows; ++row) {
         QModelIndex childIndex = m_filemodel->index(row, 0, parentIndex);
@@ -268,6 +272,7 @@ void MainWindow::updateListWidget(const QString &sPath)
 void MainWindow::on_treeView_clicked(const QModelIndex &index)
 {
     QString newdir = m_dirmodel->fileInfo(index).absoluteFilePath();
+    qDebug() << "Tree view clicked on: " << newdir << Qt::endl;
     if (m_currentDir != newdir) {
         m_currentFile = nullptr;
         m_stepsToGoBack++;
@@ -323,6 +328,7 @@ void MainWindow::on_DisplayComboBox_currentIndexChanged(int index)
 void MainWindow::on_pathLineEdit_editingFinished()
 {
     QString newPath = ui->pathLineEdit->text();
+    qDebug() << "PathLineEdit finished! Updating dirmodel and filemodel to path:" <<  newPath << Qt::endl;
     ui->treeView->setRootIndex(m_dirmodel->setRootPath(newPath));
     ui->tableView->setRootIndex(m_filemodel->setRootPath(newPath));
     updateListWidget(newPath);
@@ -539,6 +545,7 @@ void MainWindow::on_actionMount_triggered()
                                           Q_ARG(QVariant, qSteganoFsAdapter),
                                           Q_ARG(QString, m_MFPDlg->mountingPath()))) {
                 ui->actionMount->setDisabled(true);
+                ui->actionShow_Filesystem_information->setDisabled(false);
                 ui->actionUnmount->setDisabled(false);
                 ui->actionDefragment->setDisabled(false);
                 steganoFsAdapter = sfa;
@@ -548,6 +555,7 @@ void MainWindow::on_actionMount_triggered()
             else {
                 ui->actionMount->setDisabled(false);
                 ui->actionUnmount->setDisabled(true);
+                ui->actionShow_Filesystem_information->setDisabled(true);
                 steganoFsAdapter = nullptr;
                 delete sfa;
 
@@ -558,6 +566,7 @@ void MainWindow::on_actionMount_triggered()
         else {
             ui->actionMount->setDisabled(false);
             ui->actionUnmount->setDisabled(true);
+            ui->actionShow_Filesystem_information->setDisabled(true);
             steganoFsAdapter = nullptr;
             delete sfa;
             err->showMessage("Unable to load file system!");
@@ -580,19 +589,19 @@ void MainWindow::on_actionUnmount_triggered()
             ui->actionUnmount->setDisabled(true);
             ui->actionMount->setDisabled(false);
             ui->actionDefragment->setDisabled(true);
+            ui->actionShow_Filesystem_information->setDisabled(true);
             delete steganoFsAdapter;
             steganoFsAdapter = nullptr;
             ui->statusbar->showMessage("Successfully unmounted!", 18000);
-
         }
         else {
-            ui->statusbar->showMessage("writeFilesystemTo... = false!", 18000);
+            ui->statusbar->showMessage("Writing to filesystem failed!", 18000);
         }
     }
     else {
         ui->actionUnmount->setDisabled(false);
         ui->actionMount->setDisabled(true);
-        ui->statusbar->showMessage("umount was not successfull", 18000);
+        ui->statusbar->showMessage("Umount was not successfull", 18000);
     }
 
 }
@@ -621,8 +630,13 @@ void MainWindow::on_actionFormat_Filesystem_triggered()
     if (m_FFSDlg->exec() == QDialog::Accepted) {
 
         auto *sfa = new SteganoFsAdapter(m_FFSDlg->filesystemPath().toStdString());
-        // TODO! Unused variable sfa
-
+        size_t filesystem_size = sfa->formatNewFilesystem();
+        if (filesystem_size) {
+            ui->statusbar->showMessage(QString("Formatted new filesystem with size: ") + QString::number(filesystem_size), 10000);
+        }
+        else {
+            ui->statusbar->showMessage(QString("Failed to format new filesystem!"), 10000);
+        }
 /*
         if (sfa->loadFilesytemFromSteganoProvider()){
             ui->statusbar->showMessage(QString("Loaded file: " + m_FFSDlg->filesystemPath()), 10000);
@@ -653,7 +667,7 @@ void MainWindow::on_actionFormat_Filesystem_triggered()
 //            steganoFsAdapter = nullptr;
 //            delete sfa;
 //            err->showMessage("Unable to load file system!");
-
+        ui->statusbar->showMessage(QString("Filesystem formatting aborted by user"), 10000);
     }
     delete err;
 }
