@@ -16,7 +16,7 @@
 
 int main (int argc, char **argv)
 {
-  SteganoFsAdapter steganoFsAdapter ("test_cpp_wrapper.steganofs");
+  SteganoFsAdapter steganoFsAdapter ("../../examples/example.steganofs");
   bool status = steganoFsAdapter.loadFilesytemFromSteganoProvider ();
   if (!status)
     {

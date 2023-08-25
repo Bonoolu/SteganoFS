@@ -5,10 +5,7 @@ set(CMAKE_C_STANDARD 99)
 
 add_executable(test_bmp_provider test_bmp_provider.c)
 
-add_custom_target(copy_example_bmp_folder
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/example_pictures ${CMAKE_CURRENT_BINARY_DIR}/example_pictures
-)
-add_dependencies(test_bmp_provider copy_example_bmp_folder)
+add_dependencies(test_bmp_provider copy_example_folder)
 
 add_custom_target(copy_example_bmp
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/example.bmp ${CMAKE_CURRENT_BINARY_DIR}
