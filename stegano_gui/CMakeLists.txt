@@ -53,9 +53,9 @@ else()
                 mountfrompathdialog.h mountfrompathdialog.cpp mountfrompathdialog.ui
                 previewgraphicsview.h previewgraphicsview.cpp
                 showfilesysteminfodialog.h showfilesysteminfodialog.cpp showfilesysteminfodialog.ui
-
-
-
+                fragmentationdiagram.h fragmentationdiagram.cpp fragmentationdiagram.ui
+                fragmenttile.h fragmenttile.cpp fragmenttile.ui
+                fragmentationdialog.h fragmentationdialog.cpp fragmentationdialog.ui
 
         )
     endif()

@@ -65,6 +65,7 @@ private slots:
     void on_actionShow_Filesystem_information_triggered();
     void on_actionMount_triggered();
     void on_actionUnmount_triggered();
+    void on_actionShow_Fragmentation_triggered();
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
     void refreshPreviewOnResize();
     void on_backButton_clicked();

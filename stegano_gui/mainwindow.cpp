@@ -18,6 +18,7 @@
 #include <QFont>
 #include <QRegularExpression>
 #include <QFileInfo>
+#include "fragmentationdialog.h"
 Q_DECLARE_METATYPE(SteganoFsAdapter*)
 
 
@@ -595,7 +596,11 @@ void MainWindow::on_actionUnmount_triggered()
 
 }
 
-
+void MainWindow::on_actionShow_Fragmentation_triggered()
+{
+    FragmentationDialog *dialog = new FragmentationDialog(this);
+    dialog->exec();
+}
 
 
 

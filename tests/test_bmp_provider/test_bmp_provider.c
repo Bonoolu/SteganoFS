@@ -80,7 +80,7 @@ bool test_single_bmp_file ()
  */
 bool test_bmp_folder ()
 {
-  HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 100, BLOCK_SIZE);
+  HiddenFat *hidden_fat = create_hidden_fat (STEGANOFS_BLOCK_SIZE * 100, STEGANOFS_BLOCK_SIZE);
   const char *hidden_filename = "test.txt";
   long timestamp = time (NULL);
   HiddenFile **hidden_file = create_hidden_file (hidden_fat, hidden_filename, timestamp);

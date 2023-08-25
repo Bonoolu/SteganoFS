@@ -370,7 +370,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
@@ -385,6 +385,7 @@
     <addaction name="separator"/>
     <addaction name="actionDefragment"/>
     <addaction name="actionShow_Filesystem_information"/>
+    <addaction name="actionShow_Fragmentation"/>
    </widget>
    <addaction name="menuDatei"/>
   </widget>
@@ -442,6 +443,11 @@
   <action name="actionUnmount">
    <property name="text">
     <string>Unmount</string>
+   </property>
+  </action>
+  <action name="actionShow_Fragmentation">
+   <property name="text">
+    <string>Show Fragmentation</string>
    </property>
   </action>
  </widget>
