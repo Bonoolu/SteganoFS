@@ -89,10 +89,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     // LEFT SIDE - DISPLAYING FOLDERS
-    QString sPath = "/home/minaboo/Bilder/example";
+    //QString sPath = "/home/minaboo/Bilder/example";
+    QString sPath = "/";
     m_dirmodel = new QFileSystemModel(this);
     m_dirmodel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
-    m_dirmodel->setRootPath(sPath);
+    m_dirmodel->setRootPath(QDir::rootPath());
     m_currentDir = "";
 
     ui->treeView->setModel(m_dirmodel);
