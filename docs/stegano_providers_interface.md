@@ -18,7 +18,7 @@ size_t write_pdf(struct SteganoFile);
 
 ### Subprocess Provider Guide
 
-The Subprocess Provider feature allows you to integrate steganographic techniques from various languages. You can spawn subprocesses from provider code. Here's a basic example:
+The Subprocess Provider pattern allows you to integrate steganographic techniques from various languages. You can spawn subprocesses from provider code. Here's a basic example:
 
 ```c
 #include <stdio.h>
