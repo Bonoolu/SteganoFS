@@ -17,7 +17,6 @@ SteganoFS is a developing project designed to explore the concept of concealing 
 - [File Compatibility](#file-compatibility)
 - [Documentation](#documentation)
 - [Known Issues and Limitations](#known-issues-and-limitations)
-- [Future Development](#future-development)
 - [License](#license)
 - [Contact and Support](#contact-and-support)
 
@@ -27,7 +26,7 @@ SteganoFS offers a unique solution for securely hiding files in a hostile enviro
 
 ## Features
 
-- Conceal an entire mountable filesystem within steganographic image files.
+- Conceal an entire mountable filesystem within steganographic files.
 - Extend functionality through the Developer API to support additional file types.
 - Compatible with Linux operating systems, utilizing fuse3 technology.
 - Includes both a Command Line Interface (CLI) and a Graphical User Interface (GUI).
