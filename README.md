@@ -23,18 +23,18 @@ SteganoFS is a developing project designed to explore the concept of concealing 
 
 ## Introduction
 
-SteganoFS offers a unique solution for securely hiding files in a hostile environment, utilizing steganographic image files, primarily BMP files. It addresses the need for discreet storage of sensitive data while providing extensibility through a flexible Developer API.
+SteganoFS offers a unique solution for securely hiding files in a hostile environment, utilizing steganographic image files, primarily BMP files. A Developer Interface allows to add support for additional file types.
 
 ## Features
 
 - Conceal an entire mountable filesystem within steganographic files.
-- Extend functionality through the Developer API to support additional file types.
+- Extend functionality through the Developer Interface to support additional file types.
 - Compatible with Linux operating systems, utilizing fuse3 technology.
 - Includes both a Command Line Interface (CLI) and a Graphical User Interface (GUI).
 
 ## Installation and Dependencies
 
-To use SteganoFS, you need a Linux operating system and the fuse3 library. The CLI requires the SteganoFS library, while the GUI necessitates Qt6 and the SteganoFS library. Detailed installation instructions can be found in the [Installation Guide](./docs/install.md).
+To use SteganoFS, you need a Linux operating system and the fuse3 library. The CLI requires the SteganoFS library, while the GUI necessitates Qt5 and the SteganoFS library. Detailed installation instructions can be found in the [Installation Guide](./docs/install.md).
 
 ## Usage
 
@@ -76,13 +76,9 @@ The Subprocess Provider feature allows you to spawn subprocesses from provider c
 
 ## Library Interfaces ##
 
-If you're a developer interested in integrating SteganoFS functionality into your projects, we've got you covered!
-
-- **C Interface Documentation:** For C enthusiasts, we've documented the [steganofs.h Documentation](doxygen/c/doxygen.md) that defines the C interface of SteganoFS. This interface grants you direct access to SteganoFS functionality within your C projects.
+- **C Interface Documentation:** For C enthusiasts, we've documented the [steganofs.h Documentation](doxygen/c/steganofs.md) that defines the C interface of SteganoFS. This interface grants you direct access to SteganoFS functionality within your C projects.
 
 - **C++ Interface Documentation:** Check out the [SteganoFsAdapter.h Documentation](doxygen/cpp/doxygen.md#class-SteganoFsAdapter) to see how you can seamlessly incorporate SteganoFS into your C++ projects. The C++ interface provides a user-friendly wrapper around the core functionality of SteganoFS.
-
-By using these interfaces, you can experiment, innovate, and build upon the foundation of SteganoFS to create new and exciting applications. Feel free to contribute, extend, or modify these interfaces to suit your specific needs. We can't wait to see what you come up with!
 
 ## File Compatibility
 
