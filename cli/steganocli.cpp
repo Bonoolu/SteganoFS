@@ -70,17 +70,19 @@ int SteganoCli::info(const std::string &path)
 
     char *originalCwd;
     size_t cwdSize = pathconf(".", _PC_PATH_MAX);
-    if ((originalCwd = (char *) malloc((size_t) cwdSize)) != nullptr) {
+    if ((originalCwd = (char *) malloc((size_t) cwdSize)) != nullptr) { // see free() below
         if (getcwd(originalCwd, cwdSize) == nullptr) {
             free(originalCwd);
             return -1;
         }
     }
     else {
+        free(originalCwd);
         return -1;
     }
 
     if (chdir(path.c_str()) != 0) {
+        free(originalCwd);
         return -1;
     }
 
@@ -95,6 +97,7 @@ int SteganoCli::info(const std::string &path)
                   "Free blocks:                              " << childFsStat.f_bfree << "\n" <<
                   "Free blocks available to non-superuser:   " << childFsStat.f_bavail << "\n" <<
                   "Maximum filename length:                  " << childFsStat.f_namemax << std::endl;
+        free(originalCwd);
         return 0;
     }
     else {
