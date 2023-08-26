@@ -601,7 +601,7 @@ void MainWindow::on_actionMount_triggered()
     if (m_MFPDlg->exec() == QDialog::Accepted) {
 
         auto *sfa = new SteganoFsAdapter(m_MFPDlg->filesystemPath().toStdString());
-        bool u = sfa->umount(m_MFPDlg->mountingPath().toStdString());
+        sfa->umount(m_MFPDlg->mountingPath().toStdString());
 
         if (sfa->loadFilesytemFromSteganoProvider()) {
             ui->statusbar->showMessage(QString("Loaded file: " + m_MFPDlg->filesystemPath()), 10000);
