@@ -23,7 +23,7 @@ SteganoFS is a developing project designed to explore the concept of concealing 
 
 ## Introduction
 
-SteganoFS offers a unique solution for securely hiding files in a hostile environment, utilizing steganographic image files, primarily BMP files. A Developer Interface allows to add support for additional file types.
+SteganoFS offers a solution for securely hiding files in a hostile environment, utilizing steganographic image files, primarily BMP files. A Developer Interface allows to add support for additional file types.
 
 ## Features
 
@@ -72,7 +72,7 @@ Stegano Providers are fundamental to SteganoFS's versatility. To implement a new
 
 ## Subprocess Provider
 
-The Subprocess Provider feature allows you to spawn subprocesses from provider code, enabling integration of steganographic techniques in various languages. For an example and instructions, refer to the [Subprocess Provider Guide](../docs/stegano_providers_interface.md#subprocess-provider).
+The Subprocess Provider pattern allows you to spawn subprocesses from provider code, enabling integration of steganographic techniques in various languages. For an example and instructions, refer to the [Subprocess Provider Guide](../docs/stegano_providers_interface.md#subprocess-provider).
 
 ## Library Interfaces ##
 
