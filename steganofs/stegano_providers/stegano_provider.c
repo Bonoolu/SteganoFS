@@ -44,7 +44,7 @@ struct SerializedFilesystem stegano_provider_read (const char *path)
             {
               return serialized_filesystem;
             }
-          char *extension = strdup (dot + 1);
+          char *extension = strdup (dot + 1); // see free() below
           for (char *i = extension; *i != 0; i++)
             {
               *i = (char) toupper (*i);
@@ -69,6 +69,7 @@ struct SerializedFilesystem stegano_provider_read (const char *path)
                   if (tmp == NULL)
                     {
                       fprintf (stderr, "Out of memory!\n");
+                      free(extension);
                       return serialized_filesystem;
                     }
                   serialized_filesystem.buf = tmp;
@@ -78,6 +79,7 @@ struct SerializedFilesystem stegano_provider_read (const char *path)
                   write_offset = new_length;
                 }
             }
+          free(extension);
         }
       return serialized_filesystem;
     }
@@ -87,7 +89,7 @@ struct SerializedFilesystem stegano_provider_read (const char *path)
     {
       return serialized_filesystem;
     }
-  char *extension = strdup (dot + 1);
+  char *extension = strdup (dot + 1); // see free() below
   for (char *i = extension; *i != 0; i++)
     {
       *i = (char) toupper (*i);
@@ -101,19 +103,23 @@ struct SerializedFilesystem stegano_provider_read (const char *path)
           struct SteganoFile stegano_file = provider.provider_read (path);
           if (stegano_file.payload_length == 0 || stegano_file.payload == NULL)
             {
+              free(extension);
               return serialized_filesystem;
             }
           serialized_filesystem.buf = malloc (stegano_file.payload_length);  // gets freed by steganofs_load_ramdisk()
           if (serialized_filesystem.buf == NULL)
             {
+              free(extension);
               return serialized_filesystem;
             }
           serialized_filesystem.size = stegano_file.payload_length;
           memcpy (serialized_filesystem.buf, stegano_file.payload, serialized_filesystem.size);
           free(stegano_file.payload);
+          free(extension);
           return serialized_filesystem;
         }
     }
+  free(extension);
   return serialized_filesystem;
 }
 
@@ -154,7 +160,7 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
             {
               continue;
             }
-          char *extension = strdup (dot + 1);
+          char *extension = strdup (dot + 1); // see free() below
           for (char *i = extension; *i != 0; i++)
             {
               *i = (char) toupper (*i);
@@ -165,10 +171,11 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
               if (strcmp (provider.extension, extension) == 0)
                 {
                   struct SteganoFile stegano_file = {};
-                  stegano_file.path = strdup (full_path);
+                  stegano_file.path = strdup (full_path); // see free() below
                   stegano_file.payload = serialized_filesystem.buf + bytes_written;
                   stegano_file.payload_length = serialized_filesystem.size - bytes_written;
                   size_t written = provider.provider_write (stegano_file);
+                  free(stegano_file.path);
                   bytes_written += written;
                   printf ("Wrote %zu bytes of payload to %s\n", written, full_path);
                   if (serialized_filesystem.size == bytes_written)
@@ -178,6 +185,7 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
                 }
 
             }
+          free(extension);
         }
       return serialized_filesystem.size == bytes_written;
     }
@@ -187,7 +195,7 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
     {
       return false;
     }
-  char *extension = strdup (dot + 1);
+  char *extension = strdup (dot + 1); // see free() below
   for (char *i = extension; *i != 0; i++)
     {
       *i = (char) toupper (*i);
@@ -199,14 +207,17 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
       if (strcmp (provider.extension, extension) == 0)
         {
           struct SteganoFile stegano_file = {};
-          stegano_file.path = strdup (path);
+          stegano_file.path = strdup (path); // see free() below
           stegano_file.payload = malloc (serialized_filesystem.size); // see free() below
           memcpy (stegano_file.payload, serialized_filesystem.buf, serialized_filesystem.size);
           stegano_file.payload_length = serialized_filesystem.size;
           bool ret = provider.provider_write (stegano_file);
           free(stegano_file.payload);
+          free(stegano_file.path);
+          free(extension);
           return ret;
         }
     }
+  free(extension);
   return false;
 }
