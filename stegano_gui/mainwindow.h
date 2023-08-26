@@ -53,6 +53,8 @@ signals:
      * @brief Signal emitted when the path is changed.
      */
     void pathChanged();
+    void backButtonHit();
+    void forthButtonHit();
 
 private slots:
     void on_treeView_clicked(const QModelIndex &index);
@@ -73,7 +75,8 @@ private slots:
     void refreshPreviewOnResize();
     void on_backButton_clicked();
     void on_forwardButton_clicked();
-    void updateHistory();
+    void updateHistoryBack();
+    void updateHistoryForth();
     void on_sortComboBox_currentIndexChanged(int index);
 
     void on_actionFormat_Filesystem_triggered();

@@ -138,6 +138,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(m_pgv, &PreviewGraphicsView::refreshScene, this, &MainWindow::refreshPreviewOnResize);
 
+    connect(this, &MainWindow::backButtonHit, this, &MainWindow::updateHistoryBack);
+    connect(this, &MainWindow::forthButtonHit, this, &MainWindow::updateHistoryForth);
+
     m_movingHistory->append(m_currentDir);
     ui->actionShow_Filesystem_information->setDisabled(true);
     QDir dir = QDir(QDir::currentPath());
@@ -364,6 +367,8 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
             m_movingHistory->append(m_currentDir);
         }
     }
+
+    emit pathChanged();
 
 }
 
@@ -759,9 +764,9 @@ void MainWindow::on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetIte
     if (ui->pathLineEdit->text() == "/") {
 
         m_movingHistory->append(newdir);
-        m_stepsToGoBack++;
         ui->pathLineEdit->clear();
         m_currentDir = "";
+        m_stepsToGoBack++;
         m_lastDirectory = "/";
     }
     else {
@@ -770,10 +775,6 @@ void MainWindow::on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetIte
         if (QFileInfo(newdir).isDir()) {
 
             if (m_currentDir != newdir) {
-                ui->pathLineEdit->clear();
-                m_currentDir = newdir;
-                m_movingHistory->insert(m_stepsToGoBack, m_currentDir);
-                m_stepsToGoBack++;
 
                 if (!m_movingHistory->empty()) {
                     while (m_currentDir != m_movingHistory->last()) {
@@ -784,6 +785,13 @@ void MainWindow::on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetIte
                     }
 
                 }
+                ui->pathLineEdit->clear();
+                m_currentDir = newdir;
+                m_movingHistory->append(m_currentDir);
+                m_stepsToGoBack++;
+
+
+                emit pathChanged();
                 ui->backButton->setDisabled(false);
             }
 
@@ -825,7 +833,7 @@ void MainWindow::on_backButton_clicked()
 
     if (m_stepsToGoBack != 0) {
 
-        m_currentDir = m_movingHistory->at(m_stepsToGoBack);
+        m_currentDir = m_movingHistory->at(m_stepsToGoBack-1);
         m_stepsToGoBack--;
 
 
@@ -837,7 +845,9 @@ void MainWindow::on_backButton_clicked()
 
         ui->forwardButton->setDisabled(false);
 
+        emit backButtonHit();
     }
+
 }
 
 void MainWindow::on_forwardButton_clicked()
@@ -851,16 +861,35 @@ void MainWindow::on_forwardButton_clicked()
         ui->pathLineEdit->setText(m_currentDir);
 
     }
-
-
-    /*
-     * CAN ONLY BE EXECUTED ONCE
-     * */
 }
 
-void MainWindow::updateHistory()
+void MainWindow::updateHistoryBack()
 {
-    // TODO! implement or delete me
+    if (m_movingHistory->isEmpty()){
+        ui->backButton->setDisabled(true);
+        ui->forwardButton->setDisabled(true);
+
+    }
+
+    if (m_stepsToGoBack == 0) {
+        ui->backButton->setDisabled(true);
+    }
+
+}
+
+void MainWindow::updateHistoryForth()
+{
+    if (!m_movingHistory->isEmpty()){
+        if (m_movingHistory->last() == m_currentDir) {
+            ui->backButton->setDisabled(false);
+            ui->forwardButton->setDisabled(true);
+        }
+
+    }
+
+    if (m_stepsToGoBack >= m_movingHistory->size()-1){
+        ui->forwardButton->setDisabled(true);
+    }
 }
 
 void MainWindow::on_sortComboBox_currentIndexChanged(int index)
