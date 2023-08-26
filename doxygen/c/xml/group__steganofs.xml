@@ -1,0 +1,650 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="group__steganofs" kind="group">
+    <compoundname>steganofs</compoundname>
+    <title>.h</title>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="group__steganofs_1ga236d8400f44438f0d230645a37e20c9d" prot="public" static="no" mutable="no">
+        <type>struct fuse_operations</type>
+        <definition>struct fuse_operations fuse_operations</definition>
+        <argsstring></argsstring>
+        <name>fuse_operations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="45" column="29" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="45" declcolumn="29"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__steganofs_1ga4df3c6bd301e91ab34cf3f4e4a144d93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int stgfs_getattr</definition>
+        <argsstring>(const char *path, struct stat *stbuf, __attribute__((unused)) struct fuse_file_info *fi)</argsstring>
+        <name>stgfs_getattr</name>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>struct stat *</type>
+          <declname>stbuf</declname>
+        </param>
+        <param>
+          <type><ref refid="group__ramdiskloader_1ga43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((unused)) struct fuse_file_info *</type>
+          <declname>fi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="30" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="30" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1gab2dbcbcc171e6a1f10b99ea011889176" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int stgfs_readdir</definition>
+        <argsstring>(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags)</argsstring>
+        <name>stgfs_readdir</name>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>fuse_fill_dir_t</type>
+          <declname>filler</declname>
+        </param>
+        <param>
+          <type>off_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>struct fuse_file_info *</type>
+          <declname>fi</declname>
+        </param>
+        <param>
+          <type>enum fuse_readdir_flags</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="32" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="32" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1gadedceaf3ad9001890fbcc9a94c98f924" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int stgfs_create</definition>
+        <argsstring>(const char *path, mode_t mode, struct fuse_file_info *fi)</argsstring>
+        <name>stgfs_create</name>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>mode_t</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>struct fuse_file_info *</type>
+          <declname>fi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="35" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="35" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1gacb33aea88c4f73aa0bad5573746388cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int stgfs_write</definition>
+        <argsstring>(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi)</argsstring>
+        <name>stgfs_write</name>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>off_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>struct fuse_file_info *</type>
+          <declname>fi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="37" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="37" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1ga6b7c2a0044567c0db507ed39bd6bc5f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int stgfs_read</definition>
+        <argsstring>(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi)</argsstring>
+        <name>stgfs_read</name>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>off_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>struct fuse_file_info *</type>
+          <declname>fi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="39" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="39" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1ga0643a2df6935c5f72d555234b0764043" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int stgfs_unlink</definition>
+        <argsstring>(const char *path)</argsstring>
+        <name>stgfs_unlink</name>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="41" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="41" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1ga9f96362e4deea6e70e4b0d6411581a7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int stgfs_statfs</definition>
+        <argsstring>(__attribute__((unused)) const char *path, struct statvfs *stbuf)</argsstring>
+        <name>stgfs_statfs</name>
+        <param>
+          <type><ref refid="group__ramdiskloader_1ga43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((unused)) const char *</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>struct statvfs *</type>
+          <declname>stbuf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="43" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="43" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1gaa81009db58c5f4fca772082eaa247e6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+        <definition>struct HiddenFat * steganofs_create_new_ramdisk</definition>
+        <argsstring>(size_t disk_size)</argsstring>
+        <name>steganofs_create_new_ramdisk</name>
+        <param>
+          <type>size_t</type>
+          <declname>disk_size</declname>
+        </param>
+        <briefdescription>
+<para>Create a new RAM disk for SteganoFS. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>disk_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the RAM disk in bytes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to the created <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure, or NULL on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="77" column="16" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="77" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1ga2d260be3e7055645cfd50fe72e45d1c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t steganofs_format</definition>
+        <argsstring>(const char *stegano_image_folder)</argsstring>
+        <name>steganofs_format</name>
+        <param>
+          <type>const char *</type>
+          <declname>stegano_image_folder</declname>
+        </param>
+        <briefdescription>
+<para>Formats a new SteganoFS Filesystem into an imagefolder. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stegano_image_folder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the folder containing the image. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The size of the new filesystem. zero if fails. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="85" column="8" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="85" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1ga7022eec647ed52c0002408d4e62aca39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+        <definition>struct HiddenFat * steganofs_load_ramdisk</definition>
+        <argsstring>(const char *stegano_image_folder)</argsstring>
+        <name>steganofs_load_ramdisk</name>
+        <param>
+          <type>const char *</type>
+          <declname>stegano_image_folder</declname>
+        </param>
+        <briefdescription>
+<para>Load a SteganoFS RAM disk from an image folder. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stegano_image_folder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the folder containing the image. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to the loaded <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure, or NULL on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="93" column="16" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="93" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1ga232a931e6eec402c4a7128a156ea2e63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool steganofs_unload_ramdisk</definition>
+        <argsstring>(HiddenFat *hidden_fat, const char *stegano_folder)</argsstring>
+        <name>steganofs_unload_ramdisk</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>stegano_folder</declname>
+        </param>
+        <briefdescription>
+<para>Unload a SteganoFS RAM disk to an image folder. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure to unload. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stegano_folder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the folder where the image will be saved. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="102" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="102" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1ga7caab2f11f17e63ca323bca9566d1779" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool steganofs_mount</definition>
+        <argsstring>(struct HiddenFat *hidden_fat, const char *mnt_point)</argsstring>
+        <name>steganofs_mount</name>
+        <param>
+          <type>struct <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>mnt_point</declname>
+        </param>
+        <briefdescription>
+<para>Mount a SteganoFS RAM disk to a mount point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure to mount. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mnt_point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the mount point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="111" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="111" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1ga3dd49e298c2132b283578ea0c27f0cfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool steganofs_umount</definition>
+        <argsstring>(const char *mnt_point)</argsstring>
+        <name>steganofs_umount</name>
+        <param>
+          <type>const char *</type>
+          <declname>mnt_point</declname>
+        </param>
+        <briefdescription>
+<para>Unmount a SteganoFS RAM disk from a mount point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mnt_point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the mount point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="119" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="119" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1gaae5148742d37fc5acc1aabd3dda5df1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void steganofs_show_fragmentation</definition>
+        <argsstring>(HiddenFat *hidden_fat, char *output_message)</argsstring>
+        <name>steganofs_show_fragmentation</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>output_message</declname>
+        </param>
+        <briefdescription>
+<para>Display fragmentation information of a SteganoFS RAM disk. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>output_message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the message buffer to store the output. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="127" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="127" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1ga6955400d2773e0cfb6e06101648debd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t steganofs_fragmentation_array</definition>
+        <argsstring>(HiddenFat *hidden_fat, size_t **array)</argsstring>
+        <name>steganofs_fragmentation_array</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>size_t **</type>
+          <declname>array</declname>
+        </param>
+        <briefdescription>
+<para>Get an array of fragmentation information for a SteganoFS RAM disk. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>array</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the variable where the fragmentation array will be stored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of entries in the fragmentation array. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="136" column="8" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="136" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1gaf6a900eaf9bef00c45c6b0461438eb3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool steganofs_check_integrity</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>steganofs_check_integrity</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Check the integrity of a SteganoFS RAM disk. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the RAM disk is intact, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="144" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="144" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1gae49425d025ea3dbb8c12075419eb7e53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float steganofs_defragmentation_percent</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>steganofs_defragmentation_percent</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the defragmentation percentage for a SteganoFS RAM disk. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The percentage of fragmentation that can be defragmented. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="152" column="7" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="152" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="group__steganofs_1gad42e3a83dd715bf8dce2264852cb563e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void steganofs_defragmentate_filesystem</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>steganofs_defragmentate_filesystem</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Defragment a SteganoFS RAM disk. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="159" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="159" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__steganofs_1ga0919197af2e154da2c05727b6d87cbda" prot="public" static="no">
+        <name>FUSE_USE_VERSION</name>
+        <initializer>31</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="15" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__steganofs_1ga64489b1f57cc01f9f3c21efeca50a378" prot="public" static="no">
+        <name>STEGANOFS_AMOUNT_ROOT_FILES</name>
+        <initializer>16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="16" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__steganofs_1ga5d1366b576fa580404ac8d71a08b1edf" prot="public" static="no">
+        <name>STEGANOFS_BLOCK_SIZE</name>
+        <initializer>512</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="17" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__steganofs_1ga68f6206a38c0ef043621c9b9bad4aa87" prot="public" static="no">
+        <name>STEGANOFS_MAX_FILENAME_LENGTH</name>
+        <initializer>12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="18" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__steganofs_1ga1d29d564950eefc26873cb8565fd5263" prot="public" static="no">
+        <name>STEGANOFS_DEBUG</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="19" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This file contains function declarations and structures related to the SteganoFS FUSE filesystem. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

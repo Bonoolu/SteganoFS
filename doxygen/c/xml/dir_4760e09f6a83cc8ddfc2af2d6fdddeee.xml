@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
   <compounddef id="dir_4760e09f6a83cc8ddfc2af2d6fdddeee" kind="dir">
     <compoundname>/home/admin/CLionProjects/SteganoFS/steganofs</compoundname>
+    <innerdir refid="dir_8717b148848d745312d0736022ef0e06">/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers</innerdir>
     <innerfile refid="hiddencluster_8h">hiddencluster.h</innerfile>
     <innerfile refid="hiddenfat_8h">hiddenfat.h</innerfile>
     <innerfile refid="hiddenfile_8h">hiddenfile.h</innerfile>

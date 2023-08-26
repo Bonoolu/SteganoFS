@@ -9,7 +9,7 @@
     <includes refid="hiddencluster_8h" local="yes">hiddencluster.h</includes>
     <includes refid="ramdiskloader_8h" local="yes">ramdiskloader.h</includes>
     <includes refid="runlengthencoding_8h" local="yes">runlengthencoding.h</includes>
-    <includes local="yes">stegano_providers/stegano_provider.h</includes>
+    <includes refid="stegano__provider_8h" local="yes">stegano_providers/stegano_provider.h</includes>
     <includedby refid="hiddenfat_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</includedby>
     <incdepgraph>
       <node id="5">
@@ -26,7 +26,7 @@
       </node>
       <node id="4">
         <label>hiddenfat.h</label>
-        <link refid="hiddenfat_8h_source"/>
+        <link refid="hiddenfat_8h"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="1" relation="include">
@@ -64,6 +64,34 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
+      <node id="17">
+        <label>stegano_file.h</label>
+        <link refid="stegano__file_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>stegano_providers/stegano_provider.h</label>
+        <link refid="stegano__provider_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</label>
         <link refid="steganofs_8h"/>
@@ -84,11 +112,23 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
+      <node id="16">
+        <label>bmp/bmp_provider.h</label>
+      </node>
+      <node id="21">
+        <label>ctype.h</label>
+      </node>
+      <node id="20">
+        <label>dirent.h</label>
+      </node>
       <node id="3">
         <label>errno.h</label>
       </node>
       <node id="2">
         <label>fuse3/fuse.h</label>
+      </node>
+      <node id="15">
+        <label>raw/raw_provider.h</label>
       </node>
       <node id="6">
         <label>stdbool.h</label>
@@ -102,11 +142,17 @@
       <node id="9">
         <label>stdlib.h</label>
       </node>
-      <node id="14">
-        <label>stegano_providers/stegano_provider.h</label>
-      </node>
       <node id="11">
         <label>string.h</label>
+      </node>
+      <node id="19">
+        <label>sys/stat.h</label>
+      </node>
+      <node id="18">
+        <label>sys/types.h</label>
+      </node>
+      <node id="22">
+        <label>unistd.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -122,17 +168,17 @@
       </node>
       <node id="2">
         <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</label>
-        <link refid="hiddenfat_8h_source"/>
+        <link refid="hiddenfat_8h"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="1" relation="include">
         </childnode>
       </node>
-      <node id="6">
+      <node id="7">
         <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h</label>
         <link refid="hiddenfile_8h"/>
         <childnode refid="3" relation="include">
@@ -147,12 +193,20 @@
         <link refid="ramdiskloader_8h"/>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
         <childnode refid="1" relation="include">
         </childnode>
       </node>
       <node id="5">
         <label>/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</label>
         <link refid="runlengthencoding_8h"/>
+        <childnode refid="1" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h</label>
+        <link refid="stegano__provider_8h"/>
         <childnode refid="1" relation="include">
         </childnode>
       </node>
@@ -164,279 +218,34 @@
       </node>
     </invincdepgraph>
       <sectiondef kind="define">
-      <memberdef kind="define" id="steganofs_8h_1a0919197af2e154da2c05727b6d87cbda" prot="public" static="no">
-        <name>FUSE_USE_VERSION</name>
-        <initializer>31</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="11" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="11" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="define" id="steganofs_8h_1a64489b1f57cc01f9f3c21efeca50a378" prot="public" static="no">
-        <name>STEGANOFS_AMOUNT_ROOT_FILES</name>
-        <initializer>16</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="12" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="12" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="define" id="steganofs_8h_1a5d1366b576fa580404ac8d71a08b1edf" prot="public" static="no">
-        <name>STEGANOFS_BLOCK_SIZE</name>
-        <initializer>512</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="13" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="13" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="define" id="steganofs_8h_1a68f6206a38c0ef043621c9b9bad4aa87" prot="public" static="no">
-        <name>STEGANOFS_MAX_FILENAME_LENGTH</name>
-        <initializer>12</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="14" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="14" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="define" id="steganofs_8h_1a1d29d564950eefc26873cb8565fd5263" prot="public" static="no">
-        <name>STEGANOFS_DEBUG</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="15" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" bodystart="15" bodyend="-1"/>
-      </memberdef>
+      <member refid="group__steganofs_1ga0919197af2e154da2c05727b6d87cbda" kind="define"><name>FUSE_USE_VERSION</name></member>
+      <member refid="group__steganofs_1ga64489b1f57cc01f9f3c21efeca50a378" kind="define"><name>STEGANOFS_AMOUNT_ROOT_FILES</name></member>
+      <member refid="group__steganofs_1ga5d1366b576fa580404ac8d71a08b1edf" kind="define"><name>STEGANOFS_BLOCK_SIZE</name></member>
+      <member refid="group__steganofs_1ga68f6206a38c0ef043621c9b9bad4aa87" kind="define"><name>STEGANOFS_MAX_FILENAME_LENGTH</name></member>
+      <member refid="group__steganofs_1ga1d29d564950eefc26873cb8565fd5263" kind="define"><name>STEGANOFS_DEBUG</name></member>
       </sectiondef>
       <sectiondef kind="var">
-      <memberdef kind="variable" id="steganofs_8h_1a236d8400f44438f0d230645a37e20c9d" prot="public" static="no" mutable="no">
-        <type>struct fuse_operations</type>
-        <definition>struct fuse_operations fuse_operations</definition>
-        <argsstring></argsstring>
-        <name>fuse_operations</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="41" column="29" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="41" declcolumn="29"/>
-      </memberdef>
+      <member refid="group__steganofs_1ga236d8400f44438f0d230645a37e20c9d" kind="variable"><name>fuse_operations</name></member>
       </sectiondef>
       <sectiondef kind="func">
-      <memberdef kind="function" id="steganofs_8h_1a4df3c6bd301e91ab34cf3f4e4a144d93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int</type>
-        <definition>int stgfs_getattr</definition>
-        <argsstring>(const char *path, struct stat *stbuf, __attribute__((unused)) struct fuse_file_info *fi)</argsstring>
-        <name>stgfs_getattr</name>
-        <param>
-          <type>const char *</type>
-          <declname>path</declname>
-        </param>
-        <param>
-          <type>struct stat *</type>
-          <declname>stbuf</declname>
-        </param>
-        <param>
-          <type><ref refid="ramdiskloader_8h_1a43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((unused)) struct fuse_file_info *</type>
-          <declname>fi</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="26" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="26" declcolumn="5"/>
-      </memberdef>
-      <memberdef kind="function" id="steganofs_8h_1ab2dbcbcc171e6a1f10b99ea011889176" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int</type>
-        <definition>int stgfs_readdir</definition>
-        <argsstring>(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi, enum fuse_readdir_flags flags)</argsstring>
-        <name>stgfs_readdir</name>
-        <param>
-          <type>const char *</type>
-          <declname>path</declname>
-        </param>
-        <param>
-          <type>void *</type>
-          <declname>buf</declname>
-        </param>
-        <param>
-          <type>fuse_fill_dir_t</type>
-          <declname>filler</declname>
-        </param>
-        <param>
-          <type>off_t</type>
-          <declname>offset</declname>
-        </param>
-        <param>
-          <type>struct fuse_file_info *</type>
-          <declname>fi</declname>
-        </param>
-        <param>
-          <type>enum fuse_readdir_flags</type>
-          <declname>flags</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="28" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="28" declcolumn="5"/>
-      </memberdef>
-      <memberdef kind="function" id="steganofs_8h_1adedceaf3ad9001890fbcc9a94c98f924" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int</type>
-        <definition>int stgfs_create</definition>
-        <argsstring>(const char *path, mode_t mode, struct fuse_file_info *fi)</argsstring>
-        <name>stgfs_create</name>
-        <param>
-          <type>const char *</type>
-          <declname>path</declname>
-        </param>
-        <param>
-          <type>mode_t</type>
-          <declname>mode</declname>
-        </param>
-        <param>
-          <type>struct fuse_file_info *</type>
-          <declname>fi</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="31" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="31" declcolumn="5"/>
-      </memberdef>
-      <memberdef kind="function" id="steganofs_8h_1acb33aea88c4f73aa0bad5573746388cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int</type>
-        <definition>int stgfs_write</definition>
-        <argsstring>(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi)</argsstring>
-        <name>stgfs_write</name>
-        <param>
-          <type>const char *</type>
-          <declname>path</declname>
-        </param>
-        <param>
-          <type>const char *</type>
-          <declname>buf</declname>
-        </param>
-        <param>
-          <type>size_t</type>
-          <declname>size</declname>
-        </param>
-        <param>
-          <type>off_t</type>
-          <declname>offset</declname>
-        </param>
-        <param>
-          <type>struct fuse_file_info *</type>
-          <declname>fi</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="33" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="33" declcolumn="5"/>
-      </memberdef>
-      <memberdef kind="function" id="steganofs_8h_1a6b7c2a0044567c0db507ed39bd6bc5f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int</type>
-        <definition>int stgfs_read</definition>
-        <argsstring>(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi)</argsstring>
-        <name>stgfs_read</name>
-        <param>
-          <type>const char *</type>
-          <declname>path</declname>
-        </param>
-        <param>
-          <type>char *</type>
-          <declname>buf</declname>
-        </param>
-        <param>
-          <type>size_t</type>
-          <declname>size</declname>
-        </param>
-        <param>
-          <type>off_t</type>
-          <declname>offset</declname>
-        </param>
-        <param>
-          <type>struct fuse_file_info *</type>
-          <declname>fi</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="35" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="35" declcolumn="5"/>
-      </memberdef>
-      <memberdef kind="function" id="steganofs_8h_1a0643a2df6935c5f72d555234b0764043" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int</type>
-        <definition>int stgfs_unlink</definition>
-        <argsstring>(const char *path)</argsstring>
-        <name>stgfs_unlink</name>
-        <param>
-          <type>const char *</type>
-          <declname>path</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="37" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="37" declcolumn="5"/>
-      </memberdef>
-      <memberdef kind="function" id="steganofs_8h_1a9f96362e4deea6e70e4b0d6411581a7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int</type>
-        <definition>int stgfs_statfs</definition>
-        <argsstring>(__attribute__((unused)) const char *path, struct statvfs *stbuf)</argsstring>
-        <name>stgfs_statfs</name>
-        <param>
-          <type><ref refid="ramdiskloader_8h_1a43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((unused)) const char *</type>
-          <declname>path</declname>
-        </param>
-        <param>
-          <type>struct statvfs *</type>
-          <declname>stbuf</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" line="39" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h" declline="39" declcolumn="5"/>
-      </memberdef>
-      <member refid="group__steg__functions_1gaa81009db58c5f4fca772082eaa247e6a" kind="function"><name>steganofs_create_new_ramdisk</name></member>
-      <member refid="group__steg__functions_1ga2d260be3e7055645cfd50fe72e45d1c2" kind="function"><name>steganofs_format</name></member>
-      <member refid="group__steg__functions_1ga7022eec647ed52c0002408d4e62aca39" kind="function"><name>steganofs_load_ramdisk</name></member>
-      <member refid="group__steg__functions_1ga232a931e6eec402c4a7128a156ea2e63" kind="function"><name>steganofs_unload_ramdisk</name></member>
-      <member refid="group__steg__functions_1ga7caab2f11f17e63ca323bca9566d1779" kind="function"><name>steganofs_mount</name></member>
-      <member refid="group__steg__functions_1ga3dd49e298c2132b283578ea0c27f0cfc" kind="function"><name>steganofs_umount</name></member>
-      <member refid="group__steg__functions_1gaae5148742d37fc5acc1aabd3dda5df1b" kind="function"><name>steganofs_show_fragmentation</name></member>
-      <member refid="group__steg__functions_1ga6955400d2773e0cfb6e06101648debd6" kind="function"><name>steganofs_fragmentation_array</name></member>
-      <member refid="group__steg__functions_1gaf6a900eaf9bef00c45c6b0461438eb3e" kind="function"><name>steganofs_check_integrity</name></member>
-      <member refid="group__steg__functions_1gae49425d025ea3dbb8c12075419eb7e53" kind="function"><name>steganofs_defragmentation_percent</name></member>
-      <member refid="group__steg__functions_1gad42e3a83dd715bf8dce2264852cb563e" kind="function"><name>steganofs_defragmentate_filesystem</name></member>
+      <member refid="group__steganofs_1ga4df3c6bd301e91ab34cf3f4e4a144d93" kind="function"><name>stgfs_getattr</name></member>
+      <member refid="group__steganofs_1gab2dbcbcc171e6a1f10b99ea011889176" kind="function"><name>stgfs_readdir</name></member>
+      <member refid="group__steganofs_1gadedceaf3ad9001890fbcc9a94c98f924" kind="function"><name>stgfs_create</name></member>
+      <member refid="group__steganofs_1gacb33aea88c4f73aa0bad5573746388cd" kind="function"><name>stgfs_write</name></member>
+      <member refid="group__steganofs_1ga6b7c2a0044567c0db507ed39bd6bc5f8" kind="function"><name>stgfs_read</name></member>
+      <member refid="group__steganofs_1ga0643a2df6935c5f72d555234b0764043" kind="function"><name>stgfs_unlink</name></member>
+      <member refid="group__steganofs_1ga9f96362e4deea6e70e4b0d6411581a7b" kind="function"><name>stgfs_statfs</name></member>
+      <member refid="group__steganofs_1gaa81009db58c5f4fca772082eaa247e6a" kind="function"><name>steganofs_create_new_ramdisk</name></member>
+      <member refid="group__steganofs_1ga2d260be3e7055645cfd50fe72e45d1c2" kind="function"><name>steganofs_format</name></member>
+      <member refid="group__steganofs_1ga7022eec647ed52c0002408d4e62aca39" kind="function"><name>steganofs_load_ramdisk</name></member>
+      <member refid="group__steganofs_1ga232a931e6eec402c4a7128a156ea2e63" kind="function"><name>steganofs_unload_ramdisk</name></member>
+      <member refid="group__steganofs_1ga7caab2f11f17e63ca323bca9566d1779" kind="function"><name>steganofs_mount</name></member>
+      <member refid="group__steganofs_1ga3dd49e298c2132b283578ea0c27f0cfc" kind="function"><name>steganofs_umount</name></member>
+      <member refid="group__steganofs_1gaae5148742d37fc5acc1aabd3dda5df1b" kind="function"><name>steganofs_show_fragmentation</name></member>
+      <member refid="group__steganofs_1ga6955400d2773e0cfb6e06101648debd6" kind="function"><name>steganofs_fragmentation_array</name></member>
+      <member refid="group__steganofs_1gaf6a900eaf9bef00c45c6b0461438eb3e" kind="function"><name>steganofs_check_integrity</name></member>
+      <member refid="group__steganofs_1gae49425d025ea3dbb8c12075419eb7e53" kind="function"><name>steganofs_defragmentation_percent</name></member>
+      <member refid="group__steganofs_1gad42e3a83dd715bf8dce2264852cb563e" kind="function"><name>steganofs_defragmentate_filesystem</name></member>
       </sectiondef>
     <briefdescription>
 <para>This file contains function declarations and structures related to the SteganoFS FUSE filesystem. </para>
@@ -447,44 +256,44 @@
 <codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>_STEGANOFS_H_</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_STEGANOFS_H_</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FUSE_USE_VERSION<sp/>31</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANOFS_AMOUNT_ROOT_FILES<sp/>16</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANOFS_BLOCK_SIZE<sp/>512</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANOFS_MAX_FILENAME_LENGTH<sp/>12</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANOFS_DEBUG</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fuse3/fuse.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;errno.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;hiddenfat.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddenfile_8h" kindref="compound">hiddenfile.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddencluster_8h" kindref="compound">hiddencluster.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ramdiskloader_8h" kindref="compound">ramdiskloader.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="runlengthencoding_8h" kindref="compound">runlengthencoding.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;stegano_providers/stegano_provider.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_getattr<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>stat<sp/>*stbuf,<sp/><ref refid="ramdiskloader_8h_1a43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((unused))<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi);</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_readdir<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*buf,<sp/>fuse_fill_dir_t<sp/>filler,<sp/>off_t<sp/>offset,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi,</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>fuse_readdir_flags<sp/>flags);</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_create<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/>mode_t<sp/>mode,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi);</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_write<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size,<sp/>off_t<sp/>offset,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FUSE_USE_VERSION<sp/>31</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANOFS_AMOUNT_ROOT_FILES<sp/>16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANOFS_BLOCK_SIZE<sp/>512</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANOFS_MAX_FILENAME_LENGTH<sp/>12</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANOFS_DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fuse3/fuse.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;errno.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddenfat_8h" kindref="compound">hiddenfat.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddenfile_8h" kindref="compound">hiddenfile.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddencluster_8h" kindref="compound">hiddencluster.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ramdiskloader_8h" kindref="compound">ramdiskloader.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="runlengthencoding_8h" kindref="compound">runlengthencoding.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="stegano__provider_8h" kindref="compound">stegano_providers/stegano_provider.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_getattr<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>stat<sp/>*stbuf,<sp/><ref refid="group__ramdiskloader_1ga43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((unused))<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_readdir<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*buf,<sp/>fuse_fill_dir_t<sp/>filler,<sp/>off_t<sp/>offset,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>fuse_readdir_flags<sp/>flags);</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_read<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size,<sp/>off_t<sp/>offset,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_create<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/>mode_t<sp/>mode,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi);</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_unlink<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_write<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size,<sp/>off_t<sp/>offset,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi);</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_statfs<sp/>(<ref refid="ramdiskloader_8h_1a43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((unused))<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>statvfs<sp/>*stbuf);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_read<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size,<sp/>off_t<sp/>offset,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>fuse_file_info<sp/>*fi);</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">fuse_operations<sp/>fuse_operations;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_unlink<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>stgfs_statfs<sp/>(<ref refid="group__ramdiskloader_1ga43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((unused))<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>statvfs<sp/>*stbuf);</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">fuse_operations<sp/>fuse_operations;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref>;</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref>;</highlight></codeline>
@@ -492,33 +301,33 @@
 <codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref>;</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="84" refid="group__steg__functions_1gaa81009db58c5f4fca772082eaa247e6a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*<ref refid="group__steg__functions_1gaa81009db58c5f4fca772082eaa247e6a" kindref="member">steganofs_create_new_ramdisk</ref><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>disk_size);</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92" refid="group__steg__functions_1ga2d260be3e7055645cfd50fe72e45d1c2" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__steg__functions_1ga2d260be3e7055645cfd50fe72e45d1c2" kindref="member">steganofs_format</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*stegano_image_folder);</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100" refid="group__steg__functions_1ga7022eec647ed52c0002408d4e62aca39" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*<ref refid="group__steg__functions_1ga7022eec647ed52c0002408d4e62aca39" kindref="member">steganofs_load_ramdisk</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*stegano_image_folder);</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight></codeline>
-<codeline lineno="109" refid="group__steg__functions_1ga232a931e6eec402c4a7128a156ea2e63" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__steg__functions_1ga232a931e6eec402c4a7128a156ea2e63" kindref="member">steganofs_unload_ramdisk</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*stegano_folder);</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118" refid="group__steg__functions_1ga7caab2f11f17e63ca323bca9566d1779" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__steg__functions_1ga7caab2f11f17e63ca323bca9566d1779" kindref="member">steganofs_mount</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*mnt_point);</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="126" refid="group__steg__functions_1ga3dd49e298c2132b283578ea0c27f0cfc" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__steg__functions_1ga3dd49e298c2132b283578ea0c27f0cfc" kindref="member">steganofs_umount</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*mnt_point);</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="134" refid="group__steg__functions_1gaae5148742d37fc5acc1aabd3dda5df1b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__steg__functions_1gaae5148742d37fc5acc1aabd3dda5df1b" kindref="member">steganofs_show_fragmentation</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*output_message);</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight></codeline>
-<codeline lineno="143" refid="group__steg__functions_1ga6955400d2773e0cfb6e06101648debd6" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__steg__functions_1ga6955400d2773e0cfb6e06101648debd6" kindref="member">steganofs_fragmentation_array</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>**array);</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151" refid="group__steg__functions_1gaf6a900eaf9bef00c45c6b0461438eb3e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__steg__functions_1gaf6a900eaf9bef00c45c6b0461438eb3e" kindref="member">steganofs_check_integrity</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"></highlight></codeline>
-<codeline lineno="159" refid="group__steg__functions_1gae49425d025ea3dbb8c12075419eb7e53" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="group__steg__functions_1gae49425d025ea3dbb8c12075419eb7e53" kindref="member">steganofs_defragmentation_percent</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
+<codeline lineno="77" refid="group__steganofs_1gaa81009db58c5f4fca772082eaa247e6a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*<ref refid="group__steganofs_1gaa81009db58c5f4fca772082eaa247e6a" kindref="member">steganofs_create_new_ramdisk</ref><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>disk_size);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="group__steganofs_1ga2d260be3e7055645cfd50fe72e45d1c2" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__steganofs_1ga2d260be3e7055645cfd50fe72e45d1c2" kindref="member">steganofs_format</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*stegano_image_folder);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93" refid="group__steganofs_1ga7022eec647ed52c0002408d4e62aca39" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*<ref refid="group__steganofs_1ga7022eec647ed52c0002408d4e62aca39" kindref="member">steganofs_load_ramdisk</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*stegano_image_folder);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="group__steganofs_1ga232a931e6eec402c4a7128a156ea2e63" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__steganofs_1ga232a931e6eec402c4a7128a156ea2e63" kindref="member">steganofs_unload_ramdisk</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*stegano_folder);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="group__steganofs_1ga7caab2f11f17e63ca323bca9566d1779" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__steganofs_1ga7caab2f11f17e63ca323bca9566d1779" kindref="member">steganofs_mount</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*mnt_point);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119" refid="group__steganofs_1ga3dd49e298c2132b283578ea0c27f0cfc" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__steganofs_1ga3dd49e298c2132b283578ea0c27f0cfc" kindref="member">steganofs_umount</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*mnt_point);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127" refid="group__steganofs_1gaae5148742d37fc5acc1aabd3dda5df1b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__steganofs_1gaae5148742d37fc5acc1aabd3dda5df1b" kindref="member">steganofs_show_fragmentation</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*output_message);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="group__steganofs_1ga6955400d2773e0cfb6e06101648debd6" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__steganofs_1ga6955400d2773e0cfb6e06101648debd6" kindref="member">steganofs_fragmentation_array</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>**array);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144" refid="group__steganofs_1gaf6a900eaf9bef00c45c6b0461438eb3e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__steganofs_1gaf6a900eaf9bef00c45c6b0461438eb3e" kindref="member">steganofs_check_integrity</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152" refid="group__steganofs_1gae49425d025ea3dbb8c12075419eb7e53" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="group__steganofs_1gae49425d025ea3dbb8c12075419eb7e53" kindref="member">steganofs_defragmentation_percent</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159" refid="group__steganofs_1gad42e3a83dd715bf8dce2264852cb563e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__steganofs_1gad42e3a83dd715bf8dce2264852cb563e" kindref="member">steganofs_defragmentate_filesystem</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166" refid="group__steg__functions_1gad42e3a83dd715bf8dce2264852cb563e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__steg__functions_1gad42e3a83dd715bf8dce2264852cb563e" kindref="member">steganofs_defragmentate_filesystem</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="169"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="171"><highlight class="normal"></highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>_STEGANOFS_H_</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>_STEGANOFS_H_</highlight></codeline>
     </programlisting>
     <location file="/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h"/>
   </compounddef>

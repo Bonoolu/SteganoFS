@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="structSteganoProvider" kind="struct" language="C++" prot="public">
+    <compoundname>SteganoProvider</compoundname>
+    <includes refid="stegano__provider_8h" local="no">stegano_provider.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSteganoProvider_1a5ddbb8f4f2ab74fa511261b47644e25f" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* SteganoProvider::extension</definition>
+        <argsstring></argsstring>
+        <name>extension</name>
+        <qualifiedname>SteganoProvider::extension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>File extension associated with the provider. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" line="39" column="16" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSteganoProvider_1aa6dfd3bd103ca332cec0fe4f7386f768" prot="public" static="no" mutable="no">
+        <type><ref refid="group__stegano__provider_1ga04859071400c5ba02a785c74027a2932" kindref="member">ProviderRead</ref></type>
+        <definition>ProviderRead SteganoProvider::provider_read</definition>
+        <argsstring></argsstring>
+        <name>provider_read</name>
+        <qualifiedname>SteganoProvider::provider_read</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function pointer for reading data using the provider. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" line="40" column="18" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSteganoProvider_1a996698596f3e1935348d4e057942e775" prot="public" static="no" mutable="no">
+        <type><ref refid="group__stegano__provider_1ga5750853e0972c3514e40daa381d1b339" kindref="member">ProviderWrite</ref></type>
+        <definition>ProviderWrite SteganoProvider::provider_write</definition>
+        <argsstring></argsstring>
+        <name>provider_write</name>
+        <qualifiedname>SteganoProvider::provider_write</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function pointer for writing data using the provider. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" line="41" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure to represent a steganography provider and its operations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>SteganoFile</label>
+        <link refid="structSteganoFile"/>
+      </node>
+      <node id="1">
+        <label>SteganoProvider</label>
+        <link refid="structSteganoProvider"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>provider_read</edgelabel>
+          <edgelabel>provider_write</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" line="38" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" bodystart="38" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structSteganoProvider_1a5ddbb8f4f2ab74fa511261b47644e25f" prot="public" virt="non-virtual"><scope>SteganoProvider</scope><name>extension</name></member>
+      <member refid="structSteganoProvider_1aa6dfd3bd103ca332cec0fe4f7386f768" prot="public" virt="non-virtual"><scope>SteganoProvider</scope><name>provider_read</name></member>
+      <member refid="structSteganoProvider_1a996698596f3e1935348d4e057942e775" prot="public" virt="non-virtual"><scope>SteganoProvider</scope><name>provider_write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

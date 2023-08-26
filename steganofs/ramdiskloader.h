@@ -4,6 +4,9 @@
 /**
  * @file ramdiskloader.h
  * @brief This file contains the structures and function declarations for RAM disk loading and serialization.
+ * @defgroup ramdiskloader.h
+ * This file contains the structures and function declarations for RAM disk loading and serialization.
+ * @{
  */
 
 #include "hiddencluster.h"
@@ -122,5 +125,5 @@ HiddenFat *load_ramdisk (struct SerializedFilesystem serialized_filesystem);
  * @return Amount of blocks which will fit in this filesystem.
  */
 size_t calculate_amount_blocks (struct SerializedFilesystem serialized_filesystem);
-
+/** @} */
 #endif //_RAMDISKLOADER_H_

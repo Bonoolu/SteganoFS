@@ -4,6 +4,9 @@
 /**
  * @file runlengthencoding.h
  * @brief This file contains function declarations related to run-length encoding and decoding of serialized filesystems.
+ * @defgroup runlengthencoding.h
+ * This file contains function declarations related to run-length encoding and decoding of serialized filesystems.
+ * @{
  */
 
 #include "ramdiskloader.h"
@@ -29,5 +32,5 @@ void run_length_encoding (struct SerializedFilesystem *serialized_filesystem);
  * @param serialized_filesystem A pointer to the serialized filesystem structure to be decoded.
  */
 void run_length_decoding (struct SerializedFilesystem *serialized_filesystem);
-
+/** @} */
 #endif //_RUNLENGTHENCODING_H_

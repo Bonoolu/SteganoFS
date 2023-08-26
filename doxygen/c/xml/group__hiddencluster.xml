@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="group__hiddencluster" kind="group">
+    <compoundname>hiddencluster</compoundname>
+    <title>.h</title>
+    <innerclass refid="structHiddenCluster" prot="public">HiddenCluster</innerclass>
+    <innerclass refid="structHiddenFile" prot="public">HiddenFile</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__hiddencluster_1ga5d74787dedbc4e11c1ab15bf487e61f8" prot="public" static="no" strong="no">
+        <type></type>
+        <name>State</name>
+        <enumvalue id="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8acc62d1576546f3245237e1b232d838b6" prot="public">
+          <name>FREE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Cluster is free. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8afe4c21755babfece7188666f75c7386b" prot="public">
+          <name>RESERVED</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Cluster is reserved. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8a75cf2fc3540bab5798174669c0a59dab" prot="public">
+          <name>DEFECT</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Cluster is defective. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8a6a8a5583659fbcdf64186aacaf55cece" prot="public">
+          <name>ALLOCATED</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Cluster is allocated. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enumeration representing the state of a hidden cluster. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="41" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="41" bodyend="46"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__hiddencluster_1ga5d20d745f1e4b035611657dee1a4d079" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref></type>
+        <definition>typedef struct HiddenFat HiddenFat</definition>
+        <argsstring></argsstring>
+        <name>HiddenFat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="22" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__hiddencluster_1ga40699a8d553e39aaac086ea4aa89de45" prot="public" static="no">
+        <type>struct <ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref></type>
+        <definition>typedef struct HiddenCluster HiddenCluster</definition>
+        <argsstring></argsstring>
+        <name>HiddenCluster</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="28" column="28" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__hiddencluster_1ga3d041f6fe5a8bb36ed5fb5b29da1f89f" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref></type>
+        <definition>typedef struct HiddenFile HiddenFile</definition>
+        <argsstring></argsstring>
+        <name>HiddenFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="35" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__hiddencluster_1ga1736049385c7bf194f6a0fec32f0f508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool swap_hidden_clusters</definition>
+        <argsstring>(HiddenFat *hidden_fat, size_t b_index_a, size_t b_index_b)</argsstring>
+        <name>swap_hidden_clusters</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>b_index_a</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>b_index_b</declname>
+        </param>
+        <briefdescription>
+<para>Swaps two hidden clusters within a hidden FAT. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function swaps two hidden clusters within a hidden FAT.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b_index_a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the first cluster to be swapped. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b_index_b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the second cluster to be swapped. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns true if the swap is successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="71" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" declline="71" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__hiddencluster_1ga80b5c17506983811bc3cbdee5b84ff3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool extend_hidden_cluster</definition>
+        <argsstring>(HiddenFat *hidden_fat, HiddenFile *p_file)</argsstring>
+        <name>extend_hidden_cluster</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> *</type>
+          <declname>p_file</declname>
+        </param>
+        <briefdescription>
+<para>Extends a hidden cluster for a hidden file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function extends a hidden cluster for a hidden file in a hidden FAT.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns true if the extension is successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="82" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" declline="82" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Header file for hidden cluster operations. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

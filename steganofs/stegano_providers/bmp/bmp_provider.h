@@ -4,6 +4,9 @@
 /**
  * @file bmp_provider.h
  * @brief Header file for BMP steganography provider.
+ * @defgroup bmp_provider.h
+ * Header file for BMP steganography provider.
+ * @{
  */
 
 #include <stdio.h>
@@ -85,4 +88,5 @@ struct SteganoFile read_bmp (const char *path);
  * @return The number of payload bytes successfully written.
  */
 size_t write_bmp (struct SteganoFile);
+/** @} */
 #endif // _BMP_PROVIDER_H_

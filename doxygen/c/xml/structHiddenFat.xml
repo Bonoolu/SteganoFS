@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="35" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="35" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="41" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenFat_1a144f5ab7576fc5298eefc696b22f115b" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="36" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="36" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="42" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenFat_1ab6df0cd5efebf3262475c24e96461212" prot="public" static="no" mutable="no">
         <type>unsigned char *</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="37" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="37" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="43" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenFat_1ac8e226121f293d809ab3926c5556b967" prot="public" static="no" mutable="no">
         <type><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref> *</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="38" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="38" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="44" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenFat_1abd8c32306c3ae16943bfa4234e45a32c" prot="public" static="no" mutable="no">
         <type><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> *</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="39" column="16" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="39" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="45" column="16" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -115,7 +115,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="34" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="34" bodyend="40"/>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="40" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="40" bodyend="46"/>
     <listofallmembers>
       <member refid="structHiddenFat_1a144f5ab7576fc5298eefc696b22f115b" prot="public" virt="non-virtual"><scope>HiddenFat</scope><name>amount_blocks</name></member>
       <member refid="structHiddenFat_1afeb0b7a473eb138a8ddaf8bfeee30f3f" prot="public" virt="non-virtual"><scope>HiddenFat</scope><name>block_size</name></member>

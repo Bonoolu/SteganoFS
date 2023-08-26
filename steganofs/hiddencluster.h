@@ -4,6 +4,9 @@
 /**
  * @file hiddencluster.h
  * @brief Header file for hidden cluster operations.
+ * @defgroup hiddencluster.h
+ * Header file for hidden cluster operations.
+ * @{
  */
 
 #include <stdbool.h>
@@ -77,5 +80,5 @@ bool swap_hidden_clusters (HiddenFat *hidden_fat, size_t b_index_a, size_t b_ind
  * @return Returns true if the extension is successful, false otherwise.
  */
 bool extend_hidden_cluster (HiddenFat *hidden_fat, HiddenFile *p_file);
-
+/** @} */
 #endif //_HIDDENCLUSTER_H_

@@ -4,6 +4,9 @@
 /**
  * @file hiddenfile.h
  * @brief This file contains the structures and function declarations for hidden file operations.
+ * @defgroup hiddenfile.h
+ * This file contains the structures and function declarations for hidden file operations.
+ * @{
  */
 
 #include "hiddenfat.h"
@@ -75,5 +78,5 @@ HiddenFile *find_file_by_path (HiddenFat *hidden_fat, const char *path);
  * @return A pointer to the HiddenFile pointer if created successfully, otherwise NULL.
  */
 HiddenFile **create_hidden_file (HiddenFat *hidden_fat, const char *filename, long timestamp);
-
+/** @} */
 #endif //_HIDDENFILE_H_

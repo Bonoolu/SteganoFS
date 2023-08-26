@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="stegano__provider_8h" kind="file" language="C++">
+    <compoundname>stegano_provider.h</compoundname>
+    <includes refid="ramdiskloader_8h" local="yes">../../steganofs/ramdiskloader.h</includes>
+    <includes local="yes">raw/raw_provider.h</includes>
+    <includes local="yes">bmp/bmp_provider.h</includes>
+    <includes refid="stegano__file_8h" local="yes">stegano_file.h</includes>
+    <includes local="no">sys/types.h</includes>
+    <includes local="no">sys/stat.h</includes>
+    <includes local="no">dirent.h</includes>
+    <includes local="no">ctype.h</includes>
+    <includes local="no">unistd.h</includes>
+    <includedby refid="steganofs_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>hiddenfat.h</label>
+        <link refid="hiddenfat_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>../../steganofs/ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>stegano_file.h</label>
+        <link refid="stegano__file_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h</label>
+        <link refid="stegano__provider_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>bmp/bmp_provider.h</label>
+      </node>
+      <node id="21">
+        <label>ctype.h</label>
+      </node>
+      <node id="20">
+        <label>dirent.h</label>
+      </node>
+      <node id="9">
+        <label>errno.h</label>
+      </node>
+      <node id="8">
+        <label>fuse3/fuse.h</label>
+      </node>
+      <node id="15">
+        <label>raw/raw_provider.h</label>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="5">
+        <label>stddef.h</label>
+      </node>
+      <node id="13">
+        <label>stdio.h</label>
+      </node>
+      <node id="12">
+        <label>stdlib.h</label>
+      </node>
+      <node id="14">
+        <label>string.h</label>
+      </node>
+      <node id="19">
+        <label>sys/stat.h</label>
+      </node>
+      <node id="18">
+        <label>sys/types.h</label>
+      </node>
+      <node id="22">
+        <label>unistd.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</label>
+        <link refid="hiddenfat_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h</label>
+        <link refid="stegano__provider_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structSteganoProvider" prot="public">SteganoProvider</innerclass>
+      <sectiondef kind="typedef">
+      <member refid="group__stegano__provider_1ga04859071400c5ba02a785c74027a2932" kind="typedef"><name>ProviderRead</name></member>
+      <member refid="group__stegano__provider_1ga5750853e0972c3514e40daa381d1b339" kind="typedef"><name>ProviderWrite</name></member>
+      </sectiondef>
+      <sectiondef kind="func">
+      <member refid="group__stegano__provider_1ga5e40e8362b2976ad1e8e0594f06970e6" kind="function"><name>stegano_provider_read</name></member>
+      <member refid="group__stegano__provider_1ga3a5a8ce8130fa0ef64d4ec2497f9484f" kind="function"><name>stegano_provider_write</name></member>
+      </sectiondef>
+    <briefdescription>
+<para>Header file for steganography provider selection and operations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="group__stegano__provider_1ga04859071400c5ba02a785c74027a2932" refkind="member"><highlight class="preprocessor">#ifndef<sp/>_STEGANO_PROVIDER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_STEGANO_PROVIDER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../steganofs/ramdiskloader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;raw/raw_provider.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;bmp/bmp_provider.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="stegano__file_8h" kindref="compound">stegano_file.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/types.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/stat.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;dirent.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ctype.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unistd.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSteganoFile" kindref="compound">SteganoFile</ref><sp/>(*<ref refid="group__stegano__provider_1ga04859071400c5ba02a785c74027a2932" kindref="member">ProviderRead</ref>)<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="group__stegano__provider_1ga5750853e0972c3514e40daa381d1b339" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>size_t<sp/>(*<ref refid="group__stegano__provider_1ga5750853e0972c3514e40daa381d1b339" kindref="member">ProviderWrite</ref>)<sp/>(</highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSteganoFile" kindref="compound">SteganoFile</ref>);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="structSteganoProvider" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSteganoProvider" kindref="compound">SteganoProvider</ref><sp/>{</highlight></codeline>
+<codeline lineno="39" refid="structSteganoProvider_1a5ddbb8f4f2ab74fa511261b47644e25f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="structSteganoProvider_1a5ddbb8f4f2ab74fa511261b47644e25f" kindref="member">extension</ref>;<sp/></highlight></codeline>
+<codeline lineno="40" refid="structSteganoProvider_1aa6dfd3bd103ca332cec0fe4f7386f768" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__stegano__provider_1ga04859071400c5ba02a785c74027a2932" kindref="member">ProviderRead</ref><sp/><ref refid="structSteganoProvider_1aa6dfd3bd103ca332cec0fe4f7386f768" kindref="member">provider_read</ref>;<sp/></highlight></codeline>
+<codeline lineno="41" refid="structSteganoProvider_1a996698596f3e1935348d4e057942e775" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__stegano__provider_1ga5750853e0972c3514e40daa381d1b339" kindref="member">ProviderWrite</ref><sp/><ref refid="structSteganoProvider_1a996698596f3e1935348d4e057942e775" kindref="member">provider_write</ref>;<sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="group__stegano__provider_1ga5e40e8362b2976ad1e8e0594f06970e6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref><sp/><ref refid="group__stegano__provider_1ga5e40e8362b2976ad1e8e0594f06970e6" kindref="member">stegano_provider_read</ref><sp/>(const<sp/>char<sp/>*path);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="group__stegano__provider_1ga3a5a8ce8130fa0ef64d4ec2497f9484f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__stegano__provider_1ga3a5a8ce8130fa0ef64d4ec2497f9484f" kindref="member">stegano_provider_write</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref><sp/>serialized_filesystem,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//_STEGANO_PROVIDER_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h"/>
+  </compounddef>
+</doxygen>

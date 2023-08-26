@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="group__runlengthencoding" kind="group">
+    <compoundname>runlengthencoding</compoundname>
+    <title>.h</title>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__runlengthencoding_1ga7ab6831ce45342b46e7f2f0963d616cf" prot="public" static="no">
+        <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+        <definition>typedef struct SerializedFilesystem SerializedFilesystem</definition>
+        <argsstring></argsstring>
+        <name>SerializedFilesystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" line="14" column="35" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__runlengthencoding_1ga01ab5ef8f38349c9d5251cd7b3710c72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void run_length_encoding</definition>
+        <argsstring>(struct SerializedFilesystem *serialized_filesystem)</argsstring>
+        <name>run_length_encoding</name>
+        <param>
+          <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> *</type>
+          <declname>serialized_filesystem</declname>
+        </param>
+        <briefdescription>
+<para>Run-length encodes a serialized filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function performs run-length encoding on the provided serialized filesystem. It replaces consecutive zero bytes with a range specification for efficient storage.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>serialized_filesystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the serialized filesystem structure to be encoded. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" line="24" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" declline="24" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__runlengthencoding_1gad25093650710e37c1918a1a6b2e4bac9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void run_length_decoding</definition>
+        <argsstring>(struct SerializedFilesystem *serialized_filesystem)</argsstring>
+        <name>run_length_decoding</name>
+        <param>
+          <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> *</type>
+          <declname>serialized_filesystem</declname>
+        </param>
+        <briefdescription>
+<para>Run-length decodes a serialized filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function performs run-length decoding on a previously run-length encoded serialized filesystem. It reconstructs the original data by expanding the zero ranges specified during encoding.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>serialized_filesystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the serialized filesystem structure to be decoded. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" line="34" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" declline="34" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This file contains function declarations related to run-length encoding and decoding of serialized filesystems. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

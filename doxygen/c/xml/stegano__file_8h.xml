@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="stegano__file_8h" kind="file" language="C++">
+    <compoundname>stegano_file.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includedby refid="stegano__provider_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h</label>
+        <link refid="stegano__file_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</label>
+        <link refid="hiddenfat_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h</label>
+        <link refid="stegano__file_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h</label>
+        <link refid="stegano__provider_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structSteganoFile" prot="public">SteganoFile</innerclass>
+    <briefdescription>
+<para>Header file defining the <ref refid="structSteganoFile" kindref="compound">SteganoFile</ref> structure. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>STEGANOFS_MAIN_STEGANO_FILE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANOFS_MAIN_STEGANO_FILE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="structSteganoFile" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSteganoFile" kindref="compound">SteganoFile</ref><sp/>{</highlight></codeline>
+<codeline lineno="19" refid="structSteganoFile_1a4e10d246f18387ff59ddac6915df5534" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="structSteganoFile_1a4e10d246f18387ff59ddac6915df5534" kindref="member">path</ref>;<sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//FILE<sp/>*file;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="structSteganoFile_1af209e7ec68b67cbc56731e83e178840f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="structSteganoFile_1af209e7ec68b67cbc56731e83e178840f" kindref="member">payload</ref>;<sp/></highlight></codeline>
+<codeline lineno="22" refid="structSteganoFile_1a16fbd18ffe129349f15bcd0dc693a4aa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structSteganoFile_1a16fbd18ffe129349f15bcd0dc693a4aa" kindref="member">payload_length</ref>;<sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//STEGANOFS_MAIN_STEGANO_FILE_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h"/>
+  </compounddef>
+</doxygen>

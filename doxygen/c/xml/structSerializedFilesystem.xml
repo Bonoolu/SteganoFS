@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="86" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="86" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="89" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSerializedFilesystem_1a22cd8b44c2683729b44674eacf9bda11" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="87" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="87" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="90" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSerializedFilesystem_1a4849c9fc8e4e5fb167c77b954277923a" prot="public" static="no" mutable="no">
         <type>unsigned char *</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="88" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="88" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="91" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="91" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -55,7 +55,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="85" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="85" bodyend="89"/>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="88" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="88" bodyend="92"/>
     <listofallmembers>
       <member refid="structSerializedFilesystem_1a4849c9fc8e4e5fb167c77b954277923a" prot="public" virt="non-virtual"><scope>SerializedFilesystem</scope><name>buf</name></member>
       <member refid="structSerializedFilesystem_1a22cd8b44c2683729b44674eacf9bda11" prot="public" virt="non-virtual"><scope>SerializedFilesystem</scope><name>rle</name></member>

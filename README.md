@@ -80,7 +80,7 @@ If you're a developer interested in integrating SteganoFS functionality into you
 
 - **C Interface Documentation:** For C enthusiasts, we've documented the [steganofs.h Documentation](doxygen/c/doxygen.md) that defines the C interface of SteganoFS. This interface grants you direct access to SteganoFS functionality within your C projects.
 
-- **C++ Interface Documentation:** Check out the [SteganoFsAdapter.h Documentation](doxygen/cpp/doxygen.md) to see how you can seamlessly incorporate SteganoFS into your C++ projects. The C++ interface provides a user-friendly wrapper around the core functionality of SteganoFS.
+- **C++ Interface Documentation:** Check out the [SteganoFsAdapter.h Documentation](doxygen/cpp/doxygen.md#class-SteganoFsAdapter) to see how you can seamlessly incorporate SteganoFS into your C++ projects. The C++ interface provides a user-friendly wrapper around the core functionality of SteganoFS.
 
 By using these interfaces, you can experiment, innovate, and build upon the foundation of SteganoFS to create new and exciting applications. Feel free to contribute, extend, or modify these interfaces to suit your specific needs. We can't wait to see what you come up with!
 

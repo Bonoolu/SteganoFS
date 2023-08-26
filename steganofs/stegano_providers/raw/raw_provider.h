@@ -4,6 +4,9 @@
 /**
  * @file raw_provider.h
  * @brief Header file for raw data steganography provider.
+ * @defgroup raw_provider.h
+ * Header file for raw data steganography provider.
+ * @{
  */
 
 #include "../stegano_file.h"
@@ -33,5 +36,5 @@ struct SteganoFile read_raw (const char *path);
  * @return The number of payload bytes successfully written.
  */
 size_t write_raw (struct SteganoFile);
-
+/** @} */
 #endif //_RAW_PROVIDER_H_

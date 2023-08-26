@@ -4,7 +4,11 @@
 /**
  * @file steganofs.h
  * @brief This file contains function declarations and structures related to the SteganoFS FUSE filesystem.
+ * @defgroup steganofs.h
+ * This file contains function declarations and structures related to the SteganoFS FUSE filesystem.
+ * @{
  */
+
 
 #ifndef __cplusplus
 
@@ -44,10 +48,6 @@ extern struct fuse_operations fuse_operations;
 
 #ifdef __cplusplus
 extern "C" {
-/** @defgroup steg_structs Structures
-* Structures used in SteganoFS.
-* @{
-*/
 /**
  * @struct HiddenFile
  * @brief Represents a hidden file in the hidden FAT filesystem.
@@ -67,13 +67,6 @@ typedef struct HiddenCluster HiddenCluster;
 
 typedef struct HiddenFile HiddenFile;
 #endif
-
-/** @} */
-
-/** @defgroup steg_functions Functions
- * Function declarations for SteganoFS.
- * @{
- */
 
 /**
  * @brief Create a new RAM disk for SteganoFS.

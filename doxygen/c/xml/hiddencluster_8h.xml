@@ -24,18 +24,18 @@
       </node>
       <node id="4">
         <label>hiddenfat.h</label>
-        <link refid="hiddenfat_8h_source"/>
+        <link refid="hiddenfat_8h"/>
         <childnode refid="1" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -62,6 +62,34 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
+      <node id="14">
+        <label>stegano_file.h</label>
+        <link refid="stegano__file_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>stegano_providers/stegano_provider.h</label>
+        <link refid="stegano__provider_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
       <node id="5">
         <label>steganofs.h</label>
         <link refid="steganofs_8h"/>
@@ -82,11 +110,23 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
+      <node id="13">
+        <label>bmp/bmp_provider.h</label>
+      </node>
+      <node id="19">
+        <label>ctype.h</label>
+      </node>
+      <node id="18">
+        <label>dirent.h</label>
+      </node>
       <node id="7">
         <label>errno.h</label>
       </node>
       <node id="6">
         <label>fuse3/fuse.h</label>
+      </node>
+      <node id="12">
+        <label>raw/raw_provider.h</label>
       </node>
       <node id="2">
         <label>stdbool.h</label>
@@ -94,17 +134,23 @@
       <node id="3">
         <label>stddef.h</label>
       </node>
-      <node id="13">
+      <node id="15">
         <label>stdio.h</label>
       </node>
-      <node id="12">
+      <node id="21">
         <label>stdlib.h</label>
       </node>
-      <node id="11">
-        <label>stegano_providers/stegano_provider.h</label>
-      </node>
-      <node id="14">
+      <node id="22">
         <label>string.h</label>
+      </node>
+      <node id="17">
+        <label>sys/stat.h</label>
+      </node>
+      <node id="16">
+        <label>sys/types.h</label>
+      </node>
+      <node id="20">
+        <label>unistd.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -120,7 +166,7 @@
       </node>
       <node id="2">
         <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</label>
-        <link refid="hiddenfat_8h_source"/>
+        <link refid="hiddenfat_8h"/>
         <childnode refid="1" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
@@ -145,12 +191,20 @@
         <link refid="ramdiskloader_8h"/>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="5">
         <label>/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</label>
         <link refid="runlengthencoding_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h</label>
+        <link refid="stegano__provider_8h"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
@@ -163,195 +217,16 @@
     </invincdepgraph>
     <innerclass refid="structHiddenCluster" prot="public">HiddenCluster</innerclass>
       <sectiondef kind="enum">
-      <memberdef kind="enum" id="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8" prot="public" static="no" strong="no">
-        <type></type>
-        <name>State</name>
-        <enumvalue id="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8acc62d1576546f3245237e1b232d838b6" prot="public">
-          <name>FREE</name>
-          <initializer>= 0</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-<para>Cluster is free. </para>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8afe4c21755babfece7188666f75c7386b" prot="public">
-          <name>RESERVED</name>
-          <initializer>= 1</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-<para>Cluster is reserved. </para>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8a75cf2fc3540bab5798174669c0a59dab" prot="public">
-          <name>DEFECT</name>
-          <initializer>= 2</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-<para>Cluster is defective. </para>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8a6a8a5583659fbcdf64186aacaf55cece" prot="public">
-          <name>ALLOCATED</name>
-          <initializer>= 3</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-<para>Cluster is allocated. </para>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-<para>Enumeration representing the state of a hidden cluster. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="38" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="38" bodyend="43"/>
-      </memberdef>
+      <member refid="group__hiddencluster_1ga5d74787dedbc4e11c1ab15bf487e61f8" kind="enum"><name>State</name></member>
       </sectiondef>
       <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="hiddencluster_8h_1a5d20d745f1e4b035611657dee1a4d079" prot="public" static="no">
-        <type>struct <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref></type>
-        <definition>typedef struct HiddenFat HiddenFat</definition>
-        <argsstring></argsstring>
-        <name>HiddenFat</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="19" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="19" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="hiddencluster_8h_1a40699a8d553e39aaac086ea4aa89de45" prot="public" static="no">
-        <type>struct <ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref></type>
-        <definition>typedef struct HiddenCluster HiddenCluster</definition>
-        <argsstring></argsstring>
-        <name>HiddenCluster</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="25" column="28" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="25" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="hiddencluster_8h_1a3d041f6fe5a8bb36ed5fb5b29da1f89f" prot="public" static="no">
-        <type>struct <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref></type>
-        <definition>typedef struct HiddenFile HiddenFile</definition>
-        <argsstring></argsstring>
-        <name>HiddenFile</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="32" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="32" bodyend="-1"/>
-      </memberdef>
+      <member refid="group__hiddencluster_1ga5d20d745f1e4b035611657dee1a4d079" kind="typedef"><name>HiddenFat</name></member>
+      <member refid="group__hiddencluster_1ga40699a8d553e39aaac086ea4aa89de45" kind="typedef"><name>HiddenCluster</name></member>
+      <member refid="group__hiddencluster_1ga3d041f6fe5a8bb36ed5fb5b29da1f89f" kind="typedef"><name>HiddenFile</name></member>
       </sectiondef>
       <sectiondef kind="func">
-      <memberdef kind="function" id="hiddencluster_8h_1a1736049385c7bf194f6a0fec32f0f508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool swap_hidden_clusters</definition>
-        <argsstring>(HiddenFat *hidden_fat, size_t b_index_a, size_t b_index_b)</argsstring>
-        <name>swap_hidden_clusters</name>
-        <param>
-          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
-          <declname>hidden_fat</declname>
-        </param>
-        <param>
-          <type>size_t</type>
-          <declname>b_index_a</declname>
-        </param>
-        <param>
-          <type>size_t</type>
-          <declname>b_index_b</declname>
-        </param>
-        <briefdescription>
-<para>Swaps two hidden clusters within a hidden FAT. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>This function swaps two hidden clusters within a hidden FAT.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>hidden_fat</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>b_index_a</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Index of the first cluster to be swapped. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>b_index_b</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Index of the second cluster to be swapped. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>Returns true if the swap is successful, false otherwise. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="68" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" declline="68" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="hiddencluster_8h_1a80b5c17506983811bc3cbdee5b84ff3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool extend_hidden_cluster</definition>
-        <argsstring>(HiddenFat *hidden_fat, HiddenFile *p_file)</argsstring>
-        <name>extend_hidden_cluster</name>
-        <param>
-          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
-          <declname>hidden_fat</declname>
-        </param>
-        <param>
-          <type><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> *</type>
-          <declname>p_file</declname>
-        </param>
-        <briefdescription>
-<para>Extends a hidden cluster for a hidden file. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>This function extends a hidden cluster for a hidden file in a hidden FAT.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>hidden_fat</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>p_file</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Pointer to the <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> structure. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>Returns true if the extension is successful, false otherwise. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="79" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" declline="79" declcolumn="6"/>
-      </memberdef>
+      <member refid="group__hiddencluster_1ga1736049385c7bf194f6a0fec32f0f508" kind="function"><name>swap_hidden_clusters</name></member>
+      <member refid="group__hiddencluster_1ga80b5c17506983811bc3cbdee5b84ff3d" kind="function"><name>extend_hidden_cluster</name></member>
       </sectiondef>
     <briefdescription>
 <para>Header file for hidden cluster operations. </para>
@@ -362,39 +237,38 @@
 <codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>_HIDDENCLUSTER_H_</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_HIDDENCLUSTER_H_</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;hiddenfat.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddenfile_8h" kindref="compound">hiddenfile.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref>;</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref>;</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref>;</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38" refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8" kindref="member">State</ref><sp/>{</highlight></codeline>
-<codeline lineno="39" refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8acc62d1576546f3245237e1b232d838b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8acc62d1576546f3245237e1b232d838b6" kindref="member">FREE</ref><sp/>=<sp/>0,<sp/></highlight></codeline>
-<codeline lineno="40" refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8afe4c21755babfece7188666f75c7386b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8afe4c21755babfece7188666f75c7386b" kindref="member">RESERVED</ref><sp/>=<sp/>1,<sp/></highlight></codeline>
-<codeline lineno="41" refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8a75cf2fc3540bab5798174669c0a59dab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8a75cf2fc3540bab5798174669c0a59dab" kindref="member">DEFECT</ref><sp/>=<sp/>2,<sp/></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8a6a8a5583659fbcdf64186aacaf55cece" kindref="member">ALLOCATED</ref><sp/>=<sp/>3<sp/></highlight></codeline>
-<codeline lineno="43" refid="hiddencluster_8h_1a5d74787dedbc4e11c1ab15bf487e61f8a6a8a5583659fbcdf64186aacaf55cece" refkind="member"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49" refid="structHiddenCluster" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/>{</highlight></codeline>
-<codeline lineno="50" refid="structHiddenCluster_1a96430513b3e8409b48f2a62d5b093d64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structHiddenCluster_1a96430513b3e8409b48f2a62d5b093d64" kindref="member">b_index</ref>;<sp/></highlight></codeline>
-<codeline lineno="51" refid="structHiddenCluster_1ad1ccb71186feea9c1c1dc712c6d1c0e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structHiddenCluster_1ad1ccb71186feea9c1c1dc712c6d1c0e9" kindref="member">cluster_index</ref>;<sp/></highlight></codeline>
-<codeline lineno="52" refid="structHiddenCluster_1a3f0517210ea3d35ff5e7077d31557c76" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structHiddenCluster_1a3f0517210ea3d35ff5e7077d31557c76" kindref="member">state</ref>;<sp/></highlight></codeline>
-<codeline lineno="53" refid="structHiddenCluster_1a7367a00e100cafc547b57c5bb4fe5a08" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/>*<ref refid="structHiddenCluster_1a7367a00e100cafc547b57c5bb4fe5a08" kindref="member">prev</ref>;<sp/></highlight></codeline>
-<codeline lineno="54" refid="structHiddenCluster_1aa14a3e27d751de697ff9bcf576ca742c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/>*<ref refid="structHiddenCluster_1aa14a3e27d751de697ff9bcf576ca742c" kindref="member">next</ref>;<sp/></highlight></codeline>
-<codeline lineno="55" refid="structHiddenCluster_1a0adad5264fc41d3af45b74c0b0abf089" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/>*<ref refid="structHiddenCluster_1a0adad5264fc41d3af45b74c0b0abf089" kindref="member">file</ref>;<sp/></highlight></codeline>
-<codeline lineno="56"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68" refid="hiddencluster_8h_1a1736049385c7bf194f6a0fec32f0f508" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="hiddencluster_8h_1a1736049385c7bf194f6a0fec32f0f508" kindref="member">swap_hidden_clusters</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>b_index_a,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>b_index_b);</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79" refid="hiddencluster_8h_1a80b5c17506983811bc3cbdee5b84ff3d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="hiddencluster_8h_1a80b5c17506983811bc3cbdee5b84ff3d" kindref="member">extend_hidden_cluster</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/>*p_file);</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//_HIDDENCLUSTER_H_</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddenfat_8h" kindref="compound">hiddenfat.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddenfile_8h" kindref="compound">hiddenfile.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref>;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref>;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="group__hiddencluster_1ga5d74787dedbc4e11c1ab15bf487e61f8" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="group__hiddencluster_1ga5d74787dedbc4e11c1ab15bf487e61f8" kindref="member">State</ref><sp/>{</highlight></codeline>
+<codeline lineno="42" refid="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8acc62d1576546f3245237e1b232d838b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8acc62d1576546f3245237e1b232d838b6" kindref="member">FREE</ref><sp/>=<sp/>0,<sp/></highlight></codeline>
+<codeline lineno="43" refid="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8afe4c21755babfece7188666f75c7386b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8afe4c21755babfece7188666f75c7386b" kindref="member">RESERVED</ref><sp/>=<sp/>1,<sp/></highlight></codeline>
+<codeline lineno="44" refid="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8a75cf2fc3540bab5798174669c0a59dab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8a75cf2fc3540bab5798174669c0a59dab" kindref="member">DEFECT</ref><sp/>=<sp/>2,<sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8a6a8a5583659fbcdf64186aacaf55cece" kindref="member">ALLOCATED</ref><sp/>=<sp/>3<sp/></highlight></codeline>
+<codeline lineno="46" refid="group__hiddencluster_1gga5d74787dedbc4e11c1ab15bf487e61f8a6a8a5583659fbcdf64186aacaf55cece" refkind="member"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="structHiddenCluster" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/>{</highlight></codeline>
+<codeline lineno="53" refid="structHiddenCluster_1a96430513b3e8409b48f2a62d5b093d64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structHiddenCluster_1a96430513b3e8409b48f2a62d5b093d64" kindref="member">b_index</ref>;<sp/></highlight></codeline>
+<codeline lineno="54" refid="structHiddenCluster_1ad1ccb71186feea9c1c1dc712c6d1c0e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structHiddenCluster_1ad1ccb71186feea9c1c1dc712c6d1c0e9" kindref="member">cluster_index</ref>;<sp/></highlight></codeline>
+<codeline lineno="55" refid="structHiddenCluster_1a3f0517210ea3d35ff5e7077d31557c76" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structHiddenCluster_1a3f0517210ea3d35ff5e7077d31557c76" kindref="member">state</ref>;<sp/></highlight></codeline>
+<codeline lineno="56" refid="structHiddenCluster_1a7367a00e100cafc547b57c5bb4fe5a08" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/>*<ref refid="structHiddenCluster_1a7367a00e100cafc547b57c5bb4fe5a08" kindref="member">prev</ref>;<sp/></highlight></codeline>
+<codeline lineno="57" refid="structHiddenCluster_1aa14a3e27d751de697ff9bcf576ca742c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/>*<ref refid="structHiddenCluster_1aa14a3e27d751de697ff9bcf576ca742c" kindref="member">next</ref>;<sp/></highlight></codeline>
+<codeline lineno="58" refid="structHiddenCluster_1a0adad5264fc41d3af45b74c0b0abf089" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/>*<ref refid="structHiddenCluster_1a0adad5264fc41d3af45b74c0b0abf089" kindref="member">file</ref>;<sp/></highlight></codeline>
+<codeline lineno="59"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="group__hiddencluster_1ga1736049385c7bf194f6a0fec32f0f508" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__hiddencluster_1ga1736049385c7bf194f6a0fec32f0f508" kindref="member">swap_hidden_clusters</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>b_index_a,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>b_index_b);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="group__hiddencluster_1ga80b5c17506983811bc3cbdee5b84ff3d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__hiddencluster_1ga80b5c17506983811bc3cbdee5b84ff3d" kindref="member">extend_hidden_cluster</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/>*p_file);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//_HIDDENCLUSTER_H_</highlight></codeline>
     </programlisting>
     <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h"/>
   </compounddef>

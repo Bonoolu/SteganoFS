@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="group__stegano__file" kind="group">
+    <compoundname>stegano_file</compoundname>
+    <title>.h</title>
+    <innerclass refid="structSteganoFile" prot="public">SteganoFile</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Header file defining the <ref refid="structSteganoFile" kindref="compound">SteganoFile</ref> structure. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

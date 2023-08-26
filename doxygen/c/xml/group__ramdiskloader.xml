@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="group__ramdiskloader" kind="group">
+    <compoundname>ramdiskloader</compoundname>
+    <title>.h</title>
+    <innerclass refid="structSerializedFilesystem" prot="public">SerializedFilesystem</innerclass>
+    <innerclass refid="structHiddenFile" prot="public">HiddenFile</innerclass>
+    <innerclass refid="structHiddenCluster" prot="public">HiddenCluster</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__ramdiskloader_1ga5d20d745f1e4b035611657dee1a4d079" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref></type>
+        <definition>typedef struct HiddenFat HiddenFat</definition>
+        <argsstring></argsstring>
+        <name>HiddenFat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="20" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__ramdiskloader_1ga40699a8d553e39aaac086ea4aa89de45" prot="public" static="no">
+        <type>struct <ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref></type>
+        <definition>typedef struct HiddenCluster HiddenCluster</definition>
+        <argsstring></argsstring>
+        <name>HiddenCluster</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="26" column="28" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__ramdiskloader_1ga3d041f6fe5a8bb36ed5fb5b29da1f89f" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref></type>
+        <definition>typedef struct HiddenFile HiddenFile</definition>
+        <argsstring></argsstring>
+        <name>HiddenFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="33" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__ramdiskloader_1ga1ebc387032323ba5dae4dd4721329c2b" prot="public" static="no">
+        <type>struct <ref refid="group__ramdiskloader_1ga1ebc387032323ba5dae4dd4721329c2b" kindref="member">PackedCluster</ref></type>
+        <definition>typedef struct PackedCluster PackedCluster</definition>
+        <argsstring></argsstring>
+        <name>PackedCluster</name>
+        <briefdescription>
+<para>Represents a packed cluster for serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="38" column="28" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__ramdiskloader_1ga1d71c04960e04de5b8b9611d5a7ba398" prot="public" static="no">
+        <type>struct <ref refid="group__ramdiskloader_1ga1d71c04960e04de5b8b9611d5a7ba398" kindref="member">PackedFile</ref></type>
+        <definition>typedef struct PackedFile PackedFile</definition>
+        <argsstring></argsstring>
+        <name>PackedFile</name>
+        <briefdescription>
+<para>Represents a packed file for serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="43" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__ramdiskloader_1ga41fe4fa637733e335afc084cab095aaf" prot="public" static="no">
+        <type>struct <ref refid="group__ramdiskloader_1ga41fe4fa637733e335afc084cab095aaf" kindref="member">PackedFat</ref></type>
+        <definition>typedef struct PackedFat PackedFat</definition>
+        <argsstring></argsstring>
+        <name>PackedFat</name>
+        <briefdescription>
+<para>Represents a packed FAT structure for serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="48" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__ramdiskloader_1ga43c18e3e8d026268ff2a4e80b6e37c9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct</type>
+        <definition>struct __attribute__</definition>
+        <argsstring>((__packed__)) PackedFat</argsstring>
+        <name>__attribute__</name>
+        <param>
+          <type>(__packed__)</type>
+        </param>
+        <briefdescription>
+<para>Represents a packed FAT structure for serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Represents a packed file for serialization.</para>
+<para>Represents a packed cluster for serialization. </para>
+        </detaileddescription>
+        <inbodydescription>
+<para>&lt; Size of a disk block in bytes.</para>
+<para>&lt; Total number of blocks in the RAM disk.</para>
+<para>&lt; Offset to the packed cluster data within the serialized data.</para>
+<para>&lt; Offset to the packed file data within the serialized data.</para>
+<para>&lt; Number of root files in the filesystem.</para>
+<para>&lt; Offset to the disk data within the serialized data.</para>
+<para>&lt; Block index of the cluster in the RAM disk.</para>
+<para>&lt; Index of the cluster within the file.</para>
+<para>&lt; State of the cluster (FREE, ALLOCATED, RESERVED, etc.).</para>
+<para>&lt; Block index of the previous cluster in the linked list.</para>
+<para>&lt; Block index of the next cluster in the linked list.</para>
+<para>&lt; Size of the file in bytes.</para>
+<para>&lt; Real size of the file on disk including padding.</para>
+<para>&lt; Timestamp of the file&apos;s creation or modification.</para>
+<para>&lt; Block index of the first cluster of the file.</para>
+<para>&lt; Name of the file.</para>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="48" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="53" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="group__ramdiskloader_1gaa3a1976cfef20abebc813bfeabee092f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+        <definition>struct SerializedFilesystem serialize_filesystem</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>serialize_filesystem</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Serializes a <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure into a <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes a <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure and converts it into a serialized representation suitable for storage or transmission. This function allocates buf inside <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref>, which can be freed with free() by the caller of this function.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing the serialized data. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="105" column="27" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" declline="105" declcolumn="27"/>
+      </memberdef>
+      <memberdef kind="function" id="group__ramdiskloader_1ga0d12600694dbe9e21b394189a5c0fa6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+        <definition>HiddenFat * load_ramdisk</definition>
+        <argsstring>(struct SerializedFilesystem serialized_filesystem)</argsstring>
+        <name>load_ramdisk</name>
+        <param>
+          <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+          <declname>serialized_filesystem</declname>
+        </param>
+        <briefdescription>
+<para>Loads a RAM disk from a serialized filesystem data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes a <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing serialized data and reconstructs a <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure representing the RAM disk filesystem.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>serialized_filesystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing the serialized data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to the loaded <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure, or NULL if loading fails. This structure is allocated on the heap and can be freed with freeHiddenFat in <ref refid="hiddenfat_8h" kindref="compound">hiddenfat.h</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="117" column="11" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" declline="117" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__ramdiskloader_1ga9f182582224a7cc8b45be22e7596e76f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t calculate_amount_blocks</definition>
+        <argsstring>(struct SerializedFilesystem serialized_filesystem)</argsstring>
+        <name>calculate_amount_blocks</name>
+        <param>
+          <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+          <declname>serialized_filesystem</declname>
+        </param>
+        <briefdescription>
+<para>calculates how many blocks a serialized filesystem can hold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is useful for calculating the size of unformatted raw filesystems.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>serialized_filesystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing the serialized data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Amount of blocks which will fit in this filesystem. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="127" column="8" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" declline="127" declcolumn="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This file contains the structures and function declarations for RAM disk loading and serialization. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

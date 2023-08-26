@@ -4,6 +4,9 @@
 /**
  * @file stegano_provider.h
  * @brief Header file for steganography provider selection and operations.
+ * @defgroup stegano_provider.h
+ * Header file for steganography provider selection and operations.
+ * @{
  */
 
 #include "../../steganofs/ramdiskloader.h"
@@ -59,5 +62,5 @@ struct SerializedFilesystem stegano_provider_read (const char *path);
  * @return Returns true if writing is successful, false otherwise.
  */
 bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, const char *path);
-
+/** @} */
 #endif //_STEGANO_PROVIDER_H_

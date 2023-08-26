@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="50" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="50" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="53" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenCluster_1ad1ccb71186feea9c1c1dc712c6d1c0e9" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="51" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="51" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="54" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenCluster_1a3f0517210ea3d35ff5e7077d31557c76" prot="public" static="no" mutable="no">
         <type>unsigned int</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="52" column="18" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="52" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="55" column="18" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenCluster_1a7367a00e100cafc547b57c5bb4fe5a08" prot="public" static="no" mutable="no">
         <type><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref> *</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="53" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="53" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="56" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenCluster_1aa14a3e27d751de697ff9bcf576ca742c" prot="public" static="no" mutable="no">
         <type><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref> *</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="54" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="54" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="57" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenCluster_1a0adad5264fc41d3af45b74c0b0abf089" prot="public" static="no" mutable="no">
         <type><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> *</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="55" column="16" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="55" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="58" column="16" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -120,7 +120,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="49" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="49" bodyend="56"/>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="52" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="52" bodyend="59"/>
     <listofallmembers>
       <member refid="structHiddenCluster_1a96430513b3e8409b48f2a62d5b093d64" prot="public" virt="non-virtual"><scope>HiddenCluster</scope><name>b_index</name></member>
       <member refid="structHiddenCluster_1ad1ccb71186feea9c1c1dc712c6d1c0e9" prot="public" virt="non-virtual"><scope>HiddenCluster</scope><name>cluster_index</name></member>

@@ -1,6 +1,12 @@
 #ifndef _HIDDENFAT_H_
 #define _HIDDENFAT_H_
-
+/**
+ * @file hiddenfat.h
+ * @brief This file contains the structures and function declarations for hidden fat operations.
+ * @defgroup hiddenfat.h
+ * This file contains the structures and function declarations for hidden fat operations.
+ * @{
+ */
 #include "hiddencluster.h"
 #include "steganofs.h"
 #include <stddef.h>
@@ -136,5 +142,5 @@ int read_block (HiddenFat *hidden_fat, size_t b_index, const char *buffer, size_
  * @return The total number of blocks in the filesystem.
  */
 size_t get_fragmentation_array (HiddenFat *hidden_fat, size_t **array);
-
+/** @} */
 #endif //_HIDDENFAT_H_

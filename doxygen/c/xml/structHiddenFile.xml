@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="36" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="36" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="39" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenFile_1a4a4308f9072ed688e2f747f6645d15ed" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="37" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="37" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="40" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenFile_1a624f177eb3b7f3c6c85ff1ace59135c8" prot="public" static="no" mutable="no">
         <type>long</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="38" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="38" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="41" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenFile_1aac6a40bd10600e18dab5aafe76bde7f6" prot="public" static="no" mutable="no">
         <type><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref> *</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="39" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="39" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="42" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structHiddenFile_1a40261e5b168aa7a560d5a0120f902b60" prot="public" static="no" mutable="no">
         <type>char</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="40" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="40" bodyend="-1"/>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="43" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -100,7 +100,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="35" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="35" bodyend="41"/>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="38" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="38" bodyend="44"/>
     <listofallmembers>
       <member refid="structHiddenFile_1a40261e5b168aa7a560d5a0120f902b60" prot="public" virt="non-virtual"><scope>HiddenFile</scope><name>filename</name></member>
       <member refid="structHiddenFile_1abed2edf0dddffb8bf9c8658bdc06ed9a" prot="public" virt="non-virtual"><scope>HiddenFile</scope><name>filesize</name></member>

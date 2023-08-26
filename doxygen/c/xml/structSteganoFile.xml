@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="structSteganoFile" kind="struct" language="C++" prot="public">
+    <compoundname>SteganoFile</compoundname>
+    <includes refid="stegano__file_8h" local="no">stegano_file.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSteganoFile_1a4e10d246f18387ff59ddac6915df5534" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* SteganoFile::path</definition>
+        <argsstring></argsstring>
+        <name>path</name>
+        <qualifiedname>SteganoFile::path</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Path to the stegano file. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h" line="19" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSteganoFile_1af209e7ec68b67cbc56731e83e178840f" prot="public" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* SteganoFile::payload</definition>
+        <argsstring></argsstring>
+        <name>payload</name>
+        <qualifiedname>SteganoFile::payload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to the payload data. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h" line="21" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSteganoFile_1a16fbd18ffe129349f15bcd0dc693a4aa" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SteganoFile::payload_length</definition>
+        <argsstring></argsstring>
+        <name>payload_length</name>
+        <qualifiedname>SteganoFile::payload_length</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Length of the payload data. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h" line="22" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure to hold steganography-related file data. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h" line="18" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_file.h" bodystart="18" bodyend="23"/>
+    <listofallmembers>
+      <member refid="structSteganoFile_1a4e10d246f18387ff59ddac6915df5534" prot="public" virt="non-virtual"><scope>SteganoFile</scope><name>path</name></member>
+      <member refid="structSteganoFile_1af209e7ec68b67cbc56731e83e178840f" prot="public" virt="non-virtual"><scope>SteganoFile</scope><name>payload</name></member>
+      <member refid="structSteganoFile_1a16fbd18ffe129349f15bcd0dc693a4aa" prot="public" virt="non-virtual"><scope>SteganoFile</scope><name>payload_length</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

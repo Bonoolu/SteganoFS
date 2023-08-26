@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="group__stegano__provider" kind="group">
+    <compoundname>stegano_provider</compoundname>
+    <title>.h</title>
+    <innerclass refid="structSteganoProvider" prot="public">SteganoProvider</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__stegano__provider_1ga04859071400c5ba02a785c74027a2932" prot="public" static="no">
+        <type>struct <ref refid="structSteganoFile" kindref="compound">SteganoFile</ref>(*</type>
+        <definition>ProviderRead</definition>
+        <argsstring>)(const char *)</argsstring>
+        <name>ProviderRead</name>
+        <briefdescription>
+<para>Function pointer type for reading data using a specific provider. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" line="1" column="0" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__stegano__provider_1ga5750853e0972c3514e40daa381d1b339" prot="public" static="no">
+        <type>size_t(*</type>
+        <definition>ProviderWrite</definition>
+        <argsstring>)(struct SteganoFile)</argsstring>
+        <name>ProviderWrite</name>
+        <briefdescription>
+<para>Function pointer type for writing data using a specific provider. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" line="32" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__stegano__provider_1ga5e40e8362b2976ad1e8e0594f06970e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+        <definition>struct SerializedFilesystem stegano_provider_read</definition>
+        <argsstring>(const char *path)</argsstring>
+        <name>stegano_provider_read</name>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Reads a serialized filesystem from a path using steganography providers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function reads a serialized filesystem from a path, utilizing appropriate steganography providers.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path to the serialized filesystem data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing the read data. * This function allocates heap for buf inside <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref>, which can be freed with free() by the caller of this function. This buffer needs to be freed with free() by the caller of this function </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" line="53" column="27" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" declline="53" declcolumn="27"/>
+      </memberdef>
+      <memberdef kind="function" id="group__stegano__provider_1ga3a5a8ce8130fa0ef64d4ec2497f9484f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool stegano_provider_write</definition>
+        <argsstring>(struct SerializedFilesystem serialized_filesystem, const char *path)</argsstring>
+        <name>stegano_provider_write</name>
+        <param>
+          <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+          <declname>serialized_filesystem</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Writes a serialized filesystem to a path using steganography providers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function writes a serialized filesystem to a path, utilizing appropriate steganography providers.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>serialized_filesystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing data to be written. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path where the data should be written. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns true if writing is successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" line="64" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/stegano_provider.h" declline="64" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Header file for steganography provider selection and operations. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

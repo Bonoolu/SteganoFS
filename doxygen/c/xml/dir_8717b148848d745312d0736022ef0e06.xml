@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="dir_8717b148848d745312d0736022ef0e06" kind="dir">
+    <compoundname>/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers</compoundname>
+    <innerfile refid="stegano__file_8h">stegano_file.h</innerfile>
+    <innerfile refid="stegano__provider_8h">stegano_provider.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/stegano_providers/"/>
+  </compounddef>
+</doxygen>
