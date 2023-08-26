@@ -420,14 +420,13 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, [[ma
 
         QPixmap pixmap; // = QPixmap::fromImage(img, Qt::AutoColor);
 
-        if (fullPath.contains(QRegExp(".jpg")) | fullPath.contains(QRegExp(".bmp")) | fullPath.contains(QRegExp(".png"))
-            | fullPath.contains(QRegExp(".gif")) | fullPath.contains(QRegExp(".jpeg"))
-            | fullPath.contains(QRegExp(".tif"))) {
+        if (fullPath.contains(QRegExp("[.]jpg")) | fullPath.contains(QRegExp("[.]bmp")) | fullPath.contains(QRegExp("[.]png"))
+            | fullPath.contains(QRegExp("[.]gif")) | fullPath.contains(QRegExp("[.]jpeg")) | fullPath.contains(QRegExp("[.]tif"))) {
             pixmap = QPixmap::fromImage(img, Qt::AutoColor);
 
         }
-        else if (fullPath.contains(QRegExp(".mp4")) | fullPath.contains(QRegExp(".avi"))
-            | fullPath.contains(QRegExp(".mov")) | fullPath.contains(QRegExp(".flv"))) {
+        else if (fullPath.contains(QRegExp("[.]mp4")) | fullPath.contains(QRegExp("[.]avi")) | fullPath.contains(QRegExp("[.]mov"))
+                   | fullPath.contains(QRegExp("[.]flv")))  {
             //icon for video fullPath
             if (m_lightmodeOn == 0) {
                 pixmap = QPixmap(":/assets/img/play-button.png");
@@ -437,8 +436,8 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, [[ma
             }
 
         }
-        else if (fullPath.contains(QRegExp(".m4a")) | fullPath.contains(QRegExp(".mp3"))
-            | fullPath.contains(QRegExp(".wav")) | fullPath.contains(QRegExp(".flac"))) {
+        else if (fullPath.contains(QRegExp("[.]m4a")) | fullPath.contains(QRegExp("[.]mp3")) | fullPath.contains(QRegExp("[.]wav"))
+                   | fullPath.contains(QRegExp("[.]flac"))) {
             //icon for music fullPath
             if (m_lightmodeOn == 0) {
                 pixmap = QPixmap(":/assets/img/music-note.png");
@@ -448,7 +447,8 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, [[ma
             }
 
         }
-        else if (/*!fullPath.contains(QRegExp("*[.]*"))*/ QFileInfo(fullPath).isDir()) {
+        else if ( (!fullPath.contains(QRegExp("*[.]*")) && QFileInfo(fullPath).isDir()) | fullPath.contains(QRegExp("[.]zip$"))
+                       | fullPath.contains(QRegExp("[.]tar")) || fullPath.contains(QRegExp("[.]gz$")) ) {
             //icon for folders
             if (m_lightmodeOn == 0) {
                 pixmap = QPixmap(":/assets/img/folder_c.png");
@@ -458,10 +458,10 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, [[ma
             }
 
         }
-        else if (fullPath.contains(QRegExp(".c")) | fullPath.contains(QRegExp(".cpp"))
-            | fullPath.contains(QRegExp(".ui")) | fullPath.contains(QRegExp(".h")) | fullPath.contains(QRegExp(".html"))
-            | fullPath.contains(QRegExp(".css")) | fullPath.contains(QRegExp(".qss"))
-            | fullPath.contains(QRegExp(".java")) | fullPath.contains(QRegExp(".steganofs"))) {
+        else if (fullPath.contains(QRegExp("[.]c$")) | fullPath.contains(QRegExp("[.]cpp$")) | fullPath.contains(QRegExp("[.]ui$"))
+                   | fullPath.contains(QRegExp("[.]h$")) | fullPath.contains(QRegExp("[.]html$")) | fullPath.contains(QRegExp("[.]css$"))
+                   | fullPath.contains(QRegExp("[.]qss$")) | fullPath.contains(QRegExp("[.]java$"))
+                   | fullPath.contains(QRegExp("[.]steganofs$"))) {
             //icon for coding fullPath
             if (m_lightmodeOn == 0) {
                 pixmap = QPixmap(":/assets/img/coding.png");
