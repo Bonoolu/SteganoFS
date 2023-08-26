@@ -114,7 +114,10 @@ private:
      * @brief Updates the QListWidget with items from the given path.
      * @param sPath The path to update the QListWidget with.
      */
+    void updateViews(const QString &sPath);
     void updateListWidget(const QString &sPath);
+
+    void updateTreeView(const QString &sPath);
 };
 
 #endif // MAINWINDOW_H

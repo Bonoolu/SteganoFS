@@ -16,7 +16,11 @@ void Worker::mountFolder(const QVariant& qAdapt, const QString& s)
 
     auto *adapt = qvariant_cast<SteganoFsAdapter *>(qAdapt);
 
-    adapt->mount(s.toStdString());
+    try {
+        adapt->mount(s.toStdString());
+    }
+    catch (int e) {
+    }
 
     qDebug() << "Thread finished: " << QThread::currentThreadId();
 

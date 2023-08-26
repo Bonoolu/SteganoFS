@@ -140,7 +140,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_movingHistory->append(m_currentDir);
     ui->actionShow_Filesystem_information->setDisabled(true);
-
+    QDir dir = QDir(QDir::currentPath());
+    qDebug() << "Current Path: " << dir.absolutePath() << Qt::endl;
+    dir.cdUp();
+    dir.cdUp();
+    QString str = dir.absolutePath();
+    qDebug() << "Navigating to: " << str << Qt::endl;
+    updateViews(str);
 }
 
 MainWindow::~MainWindow()
@@ -162,9 +168,50 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::updateTreeView(const QString &sPath)
+{
+    QModelIndex index = m_dirmodel->index(QDir::rootPath());
+    ui->treeView->setExpanded(index, true);
+    for (const QString &component : sPath.split("/")) {
+        int row = -1;
+        for (int i = 0; i < m_dirmodel->rowCount(index); ++i) {
+            QModelIndex childIndex = index.child(i, 0);
+            if (childIndex.data().toString() == component) {
+                row = i;
+                break;
+            }
+        }
+
+        if (row != -1) {
+            index = index.child(row, 0);
+            ui->treeView->setExpanded(index, true);
+        }
+    }
+    QItemSelectionModel *selectionModel = ui->treeView->selectionModel();
+    selectionModel->clearSelection(); // Clear previous selections
+    selectionModel->select(index, QItemSelectionModel::Select);
+
+    if (sPath == m_currentDir)
+        disconnect(m_dirmodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateTreeView);
+}
+
 void MainWindow::updateListWidget(const QString &sPath)
 {
-    qDebug() << "Updating List Widget with: " << sPath << Qt::endl;
+    QModelIndex newIndex = m_filemodel->index(sPath);
+    //int rows = 0;
+    if (m_filemodel->isDir(newIndex)) {
+        ui->listWidget->setRootIndex(newIndex);
+        //rows =  m_filemodel->rowCount(newIndex);
+    }
+    ui->actionShow_Filesystem_information->setDisabled(true);
+
+//    qDebug() << "Filemodel root index" << sPath << Qt::endl;
+    qDebug() << "Requesting path:" << sPath << Qt::endl;
+//    qDebug() << "Is path valid?:" << (newIndex.isValid() ? "yes" : "no") << Qt::endl;
+//    qDebug() << "Number of entries inside path:" << rows << Qt::endl;
+//
+//    qDebug() << "Updating List Widget with: " << sPath << Qt::endl;
+
     if (m_stepsToGoBack == 0) {
         ui->backButton->setDisabled(true);
     }
@@ -180,15 +227,18 @@ void MainWindow::updateListWidget(const QString &sPath)
     ui->listWidget->setSpacing(20);
 
     QList<QString> pathList;
-    QModelIndex parentIndex = m_filemodel->index(m_currentDir);
-    int numRows = m_filemodel->rowCount(parentIndex);
-    qDebug() << "Filemodel root path" << m_filemodel->rootPath() << Qt::endl;
-    qDebug() << "Requesting path:" << m_currentDir << Qt::endl;
-    qDebug() << "Is path valid?:" << (parentIndex.isValid() ? "yes" : "no") << Qt::endl;
-    qDebug() << "Number of entries inside path:" << numRows << Qt::endl;
+    QModelIndex parentIndexFile = m_filemodel->index(m_currentDir);
+    m_filemodel->fetchMore(parentIndexFile);
+    QModelIndex parentIndexDir = m_dirmodel->index(m_currentDir);
+    m_dirmodel->fetchMore(parentIndexDir);
+    int numRows = m_filemodel->rowCount(parentIndexFile);
+//    qDebug() << "Filemodel root path" << m_filemodel->rootPath() << Qt::endl;
+//    qDebug() << "Requesting path:" << m_currentDir << Qt::endl;
+//    qDebug() << "Is path valid?:" << (parentIndex.isValid() ? "yes" : "no") << Qt::endl;
+//    qDebug() << "Number of entries inside path:" << numRows << Qt::endl;
 
     for (int row = 0; row < numRows; ++row) {
-        QModelIndex childIndex = m_filemodel->index(row, 0, parentIndex);
+        QModelIndex childIndex = m_filemodel->index(row, 0, parentIndexFile);
         QString path = m_filemodel->data(childIndex).toString();
         pathList.append(path);
     }
@@ -267,6 +317,28 @@ void MainWindow::updateListWidget(const QString &sPath)
     }
 
     pathList.clear();
+    if (sPath == m_currentDir)
+        disconnect(m_filemodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateListWidget);
+}
+
+void MainWindow::updateViews(const QString &sPath)
+{
+    QModelIndex newIndex = m_filemodel->index(sPath);
+    QModelIndex newIndex2 = m_dirmodel->index(sPath);
+//    int rows = 0;
+    if (m_filemodel->isDir(newIndex)) {
+        connect(m_filemodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateListWidget);
+        connect(m_dirmodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateTreeView);
+        m_currentDir = sPath;
+        m_dirmodel->fetchMore(newIndex2);
+        m_filemodel->fetchMore(newIndex);
+        m_filemodel->setRootPath(sPath);
+    }
+//    qDebug() << "Filemodel root index" << sPath << Qt::endl;
+//    qDebug() << "Requesting path:" << sPath << Qt::endl;
+//    qDebug() << "Is path valid?:" << (newIndex.isValid() ? "yes" : "no") << Qt::endl;
+//    qDebug() << "Number of entries inside path:" << rows << Qt::endl;
+//    return;
 }
 
 void MainWindow::on_treeView_clicked(const QModelIndex &index)
@@ -281,10 +353,10 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
 
         //ui->tableView->setRootIndex(m_filemodel->setRootPath(sPath));
         //ui->listWidget->setRootIndex(m_filemodel->setRootPath(sPath));
-        ui->listWidget->setRootIndex(m_filemodel->setRootPath(m_currentDir));
+        //ui->listWidget->setRootIndex(m_filemodel->setRootPath(m_currentDir)); // Markierung
         ui->pathLineEdit->setText(m_currentDir);
 
-        updateListWidget(m_currentDir);
+        updateViews(m_currentDir);
         ui->forwardButton->setDisabled(true);
         ui->backButton->setDisabled(false);
 
@@ -299,7 +371,7 @@ void MainWindow::handleSearchTextChanged(const QString &searchText)
 {
     m_filemodel->setNameFilters(QStringList() << "*" + searchText + "*");
     m_filemodel->setNameFilterDisables(false);
-    updateListWidget(m_currentDir);
+    updateViews(m_currentDir);
 }
 
 void MainWindow::refreshView()
@@ -328,10 +400,10 @@ void MainWindow::on_DisplayComboBox_currentIndexChanged(int index)
 void MainWindow::on_pathLineEdit_editingFinished()
 {
     QString newPath = ui->pathLineEdit->text();
-    qDebug() << "PathLineEdit finished! Updating dirmodel and filemodel to path:" <<  newPath << Qt::endl;
-    ui->treeView->setRootIndex(m_dirmodel->setRootPath(newPath));
-    ui->tableView->setRootIndex(m_filemodel->setRootPath(newPath));
-    updateListWidget(newPath);
+    qDebug() << "PathLineEdit finished! Updating dirmodel and filemodel to path:" << newPath << Qt::endl;
+    //ui->treeView->setRootIndex(m_dirmodel->setRootPath(newPath));  // Markierung
+    //ui->tableView->setRootIndex(m_filemodel->setRootPath(newPath)); // Markierung
+    updateViews(newPath);
 
 }
 
@@ -518,21 +590,18 @@ void MainWindow::on_darkModePushButton_clicked()
 
     }
 
-    updateListWidget(m_currentDir);
+    updateViews(m_currentDir);
 
 }
 
 void MainWindow::on_actionMount_triggered()
 {
-    // ZU BEGINN IMMER MOUNTEN: gibt segmentation fault
-    //steganoFsAdapter->umount();
-
-
     auto *err = new QErrorMessage;
 
     if (m_MFPDlg->exec() == QDialog::Accepted) {
 
         auto *sfa = new SteganoFsAdapter(m_MFPDlg->filesystemPath().toStdString());
+        bool u = sfa->umount(m_MFPDlg->mountingPath().toStdString());
 
         if (sfa->loadFilesytemFromSteganoProvider()) {
             ui->statusbar->showMessage(QString("Loaded file: " + m_MFPDlg->filesystemPath()), 10000);
@@ -550,7 +619,7 @@ void MainWindow::on_actionMount_triggered()
                 ui->actionDefragment->setDisabled(false);
                 steganoFsAdapter = sfa;
                 ui->statusbar->showMessage(QString("Mount of" + m_MFPDlg->mountingPath() + " successfull"), 18000);
-
+                updateViews(m_MFPDlg->mountingPath());
             }
             else {
                 ui->actionMount->setDisabled(false);
@@ -622,7 +691,7 @@ void MainWindow::on_actionDefragment_triggered()
 
 void MainWindow::on_actionFormat_Filesystem_triggered()
 {
-    /* TODO: Implement as soon as formatFileSystem() exists
+    /*
      * This is only copied from MFSDlg and roughly adjusted!
      */
     auto *err = new QErrorMessage;
@@ -632,7 +701,9 @@ void MainWindow::on_actionFormat_Filesystem_triggered()
         auto *sfa = new SteganoFsAdapter(m_FFSDlg->filesystemPath().toStdString());
         size_t filesystem_size = sfa->formatNewFilesystem();
         if (filesystem_size) {
-            ui->statusbar->showMessage(QString("Formatted new filesystem with size: ") + QString::number(filesystem_size), 10000);
+            ui->statusbar
+                ->showMessage(QString("Formatted new filesystem with size: ") + QString::number(filesystem_size),
+                              10000);
         }
         else {
             ui->statusbar->showMessage(QString("Failed to format new filesystem!"), 10000);
@@ -721,7 +792,7 @@ void MainWindow::on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetIte
 
 
             //std::future<QString> fut = std::async(m_filemodel->directoryLoaded(path));
-            updateListWidget(m_currentDir);
+            updateViews(m_currentDir);
 
 
             /*
@@ -759,7 +830,7 @@ void MainWindow::on_backButton_clicked()
 
         ui->statusbar->showMessage(m_currentDir);
 
-        updateListWidget(m_currentDir);
+        updateViews(m_currentDir);
         ui->pathLineEdit->clear();
         ui->pathLineEdit->setText(m_currentDir);
 
@@ -775,7 +846,7 @@ void MainWindow::on_forwardButton_clicked()
         m_stepsToGoBack++;
         m_currentDir = m_movingHistory->at(m_stepsToGoBack);
 
-        updateListWidget(m_currentDir);
+        updateViews(m_currentDir);
         ui->pathLineEdit->setText(m_currentDir);
 
     }
