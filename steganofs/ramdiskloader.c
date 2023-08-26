@@ -92,7 +92,9 @@ HiddenFat *load_ramdisk (struct SerializedFilesystem serialized_filesystem)
 
   HiddenFat *hidden_fat = create_hidden_fat (packed_fat->block_size * packed_fat->amount_blocks,
                                              packed_fat->block_size); // gets freed by free_hidden_fat()
-
+  if (hidden_fat == NULL) {
+      return NULL;
+  }
   HiddenFile **hidden_file_iterator = hidden_fat->files;
   struct PackedFile empty_file;
   memset (&empty_file, 0, sizeof (PackedFile));

@@ -65,7 +65,8 @@ bool SteganoFsAdapter::loadFilesytemFromSteganoProvider()
         std::cout << "[SteganoFS] Loaded existing Filesystem!" << std::endl;
     }
     else {
-        std::cout << "[SteganoFS] Error: Failed to load existing Filesystem!" << std::endl;
+        std::cout << "[SteganoFS] Error: Failed to load existing Filesystem! Maybe you need to format first."
+                  << std::endl;
     }
     return m_hiddenFat != nullptr;
 }
