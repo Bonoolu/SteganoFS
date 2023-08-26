@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="structHiddenCluster" kind="struct" language="C++" prot="public">
+    <compoundname>HiddenCluster</compoundname>
+    <includes refid="hiddencluster_8h" local="no">hiddencluster.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structHiddenCluster_1a96430513b3e8409b48f2a62d5b093d64" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t HiddenCluster::b_index</definition>
+        <argsstring></argsstring>
+        <name>b_index</name>
+        <qualifiedname>HiddenCluster::b_index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Index of the cluster within a block. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="50" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenCluster_1ad1ccb71186feea9c1c1dc712c6d1c0e9" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t HiddenCluster::cluster_index</definition>
+        <argsstring></argsstring>
+        <name>cluster_index</name>
+        <qualifiedname>HiddenCluster::cluster_index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Index of the cluster within the filesystem. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="51" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenCluster_1a3f0517210ea3d35ff5e7077d31557c76" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int HiddenCluster::state</definition>
+        <argsstring></argsstring>
+        <name>state</name>
+        <qualifiedname>HiddenCluster::state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>State of the cluster (enum State). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="52" column="18" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenCluster_1a7367a00e100cafc547b57c5bb4fe5a08" prot="public" static="no" mutable="no">
+        <type><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref> *</type>
+        <definition>HiddenCluster* HiddenCluster::prev</definition>
+        <argsstring></argsstring>
+        <name>prev</name>
+        <qualifiedname>HiddenCluster::prev</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to the previous cluster in the linked list. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="53" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenCluster_1aa14a3e27d751de697ff9bcf576ca742c" prot="public" static="no" mutable="no">
+        <type><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref> *</type>
+        <definition>HiddenCluster* HiddenCluster::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <qualifiedname>HiddenCluster::next</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to the next cluster in the linked list. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="54" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenCluster_1a0adad5264fc41d3af45b74c0b0abf089" prot="public" static="no" mutable="no">
+        <type><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> *</type>
+        <definition>HiddenFile* HiddenCluster::file</definition>
+        <argsstring></argsstring>
+        <name>file</name>
+        <qualifiedname>HiddenCluster::file</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to the file associated with the cluster. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="55" column="16" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure representing a hidden cluster. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>HiddenCluster</label>
+        <link refid="structHiddenCluster"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>next</edgelabel>
+          <edgelabel>prev</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>file</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>HiddenFile</label>
+        <link refid="structHiddenFile"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>hiddenCluster</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" line="49" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h" bodystart="49" bodyend="56"/>
+    <listofallmembers>
+      <member refid="structHiddenCluster_1a96430513b3e8409b48f2a62d5b093d64" prot="public" virt="non-virtual"><scope>HiddenCluster</scope><name>b_index</name></member>
+      <member refid="structHiddenCluster_1ad1ccb71186feea9c1c1dc712c6d1c0e9" prot="public" virt="non-virtual"><scope>HiddenCluster</scope><name>cluster_index</name></member>
+      <member refid="structHiddenCluster_1a0adad5264fc41d3af45b74c0b0abf089" prot="public" virt="non-virtual"><scope>HiddenCluster</scope><name>file</name></member>
+      <member refid="structHiddenCluster_1aa14a3e27d751de697ff9bcf576ca742c" prot="public" virt="non-virtual"><scope>HiddenCluster</scope><name>next</name></member>
+      <member refid="structHiddenCluster_1a7367a00e100cafc547b57c5bb4fe5a08" prot="public" virt="non-virtual"><scope>HiddenCluster</scope><name>prev</name></member>
+      <member refid="structHiddenCluster_1a3f0517210ea3d35ff5e7077d31557c76" prot="public" virt="non-virtual"><scope>HiddenCluster</scope><name>state</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

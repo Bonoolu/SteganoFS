@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="structHiddenFat" kind="struct" language="C++" prot="public">
+    <compoundname>HiddenFat</compoundname>
+    <includes refid="hiddenfat_8h" local="no">hiddenfat.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structHiddenFat_1afeb0b7a473eb138a8ddaf8bfeee30f3f" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t HiddenFat::block_size</definition>
+        <argsstring></argsstring>
+        <name>block_size</name>
+        <qualifiedname>HiddenFat::block_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Size of a block in bytes. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="35" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenFat_1a144f5ab7576fc5298eefc696b22f115b" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t HiddenFat::amount_blocks</definition>
+        <argsstring></argsstring>
+        <name>amount_blocks</name>
+        <qualifiedname>HiddenFat::amount_blocks</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Total number of blocks in the filesystem. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="36" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenFat_1ab6df0cd5efebf3262475c24e96461212" prot="public" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* HiddenFat::disk</definition>
+        <argsstring></argsstring>
+        <name>disk</name>
+        <qualifiedname>HiddenFat::disk</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to the disk data. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="37" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenFat_1ac8e226121f293d809ab3926c5556b967" prot="public" static="no" mutable="no">
+        <type><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref> *</type>
+        <definition>HiddenCluster* HiddenFat::clusters</definition>
+        <argsstring></argsstring>
+        <name>clusters</name>
+        <qualifiedname>HiddenFat::clusters</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to an array of <ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref> structures. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="38" column="19" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenFat_1abd8c32306c3ae16943bfa4234e45a32c" prot="public" static="no" mutable="no">
+        <type><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> *</type>
+        <definition>HiddenFile* HiddenFat::files[STEGANOFS_AMOUNT_ROOT_FILES]</definition>
+        <argsstring>[STEGANOFS_AMOUNT_ROOT_FILES]</argsstring>
+        <name>files</name>
+        <qualifiedname>HiddenFat::files</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Array of pointers to <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> structures. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="39" column="16" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure representing a hidden FAT filesystem. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>HiddenCluster</label>
+        <link refid="structHiddenCluster"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>next</edgelabel>
+          <edgelabel>prev</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>file</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>HiddenFat</label>
+        <link refid="structHiddenFat"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>clusters</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>files</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>HiddenFile</label>
+        <link refid="structHiddenFile"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>hiddenCluster</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="34" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="34" bodyend="40"/>
+    <listofallmembers>
+      <member refid="structHiddenFat_1a144f5ab7576fc5298eefc696b22f115b" prot="public" virt="non-virtual"><scope>HiddenFat</scope><name>amount_blocks</name></member>
+      <member refid="structHiddenFat_1afeb0b7a473eb138a8ddaf8bfeee30f3f" prot="public" virt="non-virtual"><scope>HiddenFat</scope><name>block_size</name></member>
+      <member refid="structHiddenFat_1ac8e226121f293d809ab3926c5556b967" prot="public" virt="non-virtual"><scope>HiddenFat</scope><name>clusters</name></member>
+      <member refid="structHiddenFat_1ab6df0cd5efebf3262475c24e96461212" prot="public" virt="non-virtual"><scope>HiddenFat</scope><name>disk</name></member>
+      <member refid="structHiddenFat_1abd8c32306c3ae16943bfa4234e45a32c" prot="public" virt="non-virtual"><scope>HiddenFat</scope><name>files</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,442 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="ramdiskloader_8h" kind="file" language="C++">
+    <compoundname>ramdiskloader.h</compoundname>
+    <includes refid="hiddencluster_8h" local="yes">hiddencluster.h</includes>
+    <includes refid="hiddenfat_8h" local="yes">hiddenfat.h</includes>
+    <includes refid="hiddenfile_8h" local="yes">hiddenfile.h</includes>
+    <includedby refid="runlengthencoding_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</includedby>
+    <includedby refid="steganofs_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>hiddenfat.h</label>
+        <link refid="hiddenfat_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="1" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>errno.h</label>
+      </node>
+      <node id="7">
+        <label>fuse3/fuse.h</label>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="4">
+        <label>stddef.h</label>
+      </node>
+      <node id="13">
+        <label>stdio.h</label>
+      </node>
+      <node id="12">
+        <label>stdlib.h</label>
+      </node>
+      <node id="11">
+        <label>stegano_providers/stegano_provider.h</label>
+      </node>
+      <node id="14">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</label>
+        <link refid="hiddenfat_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structSerializedFilesystem" prot="public">SerializedFilesystem</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ramdiskloader_8h_1a5d20d745f1e4b035611657dee1a4d079" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref></type>
+        <definition>typedef struct HiddenFat HiddenFat</definition>
+        <argsstring></argsstring>
+        <name>HiddenFat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="17" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="ramdiskloader_8h_1a40699a8d553e39aaac086ea4aa89de45" prot="public" static="no">
+        <type>struct <ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref></type>
+        <definition>typedef struct HiddenCluster HiddenCluster</definition>
+        <argsstring></argsstring>
+        <name>HiddenCluster</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="23" column="28" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="ramdiskloader_8h_1a3d041f6fe5a8bb36ed5fb5b29da1f89f" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref></type>
+        <definition>typedef struct HiddenFile HiddenFile</definition>
+        <argsstring></argsstring>
+        <name>HiddenFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="30" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="ramdiskloader_8h_1a1ebc387032323ba5dae4dd4721329c2b" prot="public" static="no">
+        <type>struct <ref refid="ramdiskloader_8h_1a1ebc387032323ba5dae4dd4721329c2b" kindref="member">PackedCluster</ref></type>
+        <definition>typedef struct PackedCluster PackedCluster</definition>
+        <argsstring></argsstring>
+        <name>PackedCluster</name>
+        <briefdescription>
+<para>Represents a packed cluster for serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="35" column="28" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="ramdiskloader_8h_1a1d71c04960e04de5b8b9611d5a7ba398" prot="public" static="no">
+        <type>struct <ref refid="ramdiskloader_8h_1a1d71c04960e04de5b8b9611d5a7ba398" kindref="member">PackedFile</ref></type>
+        <definition>typedef struct PackedFile PackedFile</definition>
+        <argsstring></argsstring>
+        <name>PackedFile</name>
+        <briefdescription>
+<para>Represents a packed file for serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="40" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="ramdiskloader_8h_1a41fe4fa637733e335afc084cab095aaf" prot="public" static="no">
+        <type>struct <ref refid="ramdiskloader_8h_1a41fe4fa637733e335afc084cab095aaf" kindref="member">PackedFat</ref></type>
+        <definition>typedef struct PackedFat PackedFat</definition>
+        <argsstring></argsstring>
+        <name>PackedFat</name>
+        <briefdescription>
+<para>Represents a packed FAT structure for serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="45" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ramdiskloader_8h_1a43c18e3e8d026268ff2a4e80b6e37c9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct</type>
+        <definition>struct __attribute__</definition>
+        <argsstring>((__packed__)) PackedFat</argsstring>
+        <name>__attribute__</name>
+        <param>
+          <type>(__packed__)</type>
+        </param>
+        <briefdescription>
+<para>Represents a packed FAT structure for serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Represents a packed file for serialization.</para>
+<para>Represents a packed cluster for serialization. </para>
+        </detaileddescription>
+        <inbodydescription>
+<para>&lt; Size of a disk block in bytes.</para>
+<para>&lt; Total number of blocks in the RAM disk.</para>
+<para>&lt; Offset to the packed cluster data within the serialized data.</para>
+<para>&lt; Offset to the packed file data within the serialized data.</para>
+<para>&lt; Number of root files in the filesystem.</para>
+<para>&lt; Offset to the disk data within the serialized data.</para>
+<para>&lt; Block index of the cluster in the RAM disk.</para>
+<para>&lt; Index of the cluster within the file.</para>
+<para>&lt; State of the cluster (FREE, ALLOCATED, RESERVED, etc.).</para>
+<para>&lt; Block index of the previous cluster in the linked list.</para>
+<para>&lt; Block index of the next cluster in the linked list.</para>
+<para>&lt; Size of the file in bytes.</para>
+<para>&lt; Real size of the file on disk including padding.</para>
+<para>&lt; Timestamp of the file&apos;s creation or modification.</para>
+<para>&lt; Block index of the first cluster of the file.</para>
+<para>&lt; Name of the file.</para>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="45" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="50" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="ramdiskloader_8h_1aa3a1976cfef20abebc813bfeabee092f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+        <definition>struct SerializedFilesystem serialize_filesystem</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>serialize_filesystem</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Serializes a <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure into a <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes a <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure and converts it into a serialized representation suitable for storage or transmission. This function allocates buf inside <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref>, which can be freed with free() by the caller of this function.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing the serialized data. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="102" column="27" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" declline="102" declcolumn="27"/>
+      </memberdef>
+      <memberdef kind="function" id="ramdiskloader_8h_1a0d12600694dbe9e21b394189a5c0fa6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+        <definition>HiddenFat * load_ramdisk</definition>
+        <argsstring>(struct SerializedFilesystem serialized_filesystem)</argsstring>
+        <name>load_ramdisk</name>
+        <param>
+          <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+          <declname>serialized_filesystem</declname>
+        </param>
+        <briefdescription>
+<para>Loads a RAM disk from a serialized filesystem data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes a <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing serialized data and reconstructs a <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure representing the RAM disk filesystem.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>serialized_filesystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing the serialized data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to the loaded <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure, or NULL if loading fails. This structure is allocated on the heap and can be freed with freeHiddenFat in <ref refid="hiddenfat_8h_source" kindref="compound">hiddenfat.h</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="114" column="11" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" declline="114" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="ramdiskloader_8h_1a9f182582224a7cc8b45be22e7596e76f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t calculate_amount_blocks</definition>
+        <argsstring>(struct SerializedFilesystem serialized_filesystem)</argsstring>
+        <name>calculate_amount_blocks</name>
+        <param>
+          <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+          <declname>serialized_filesystem</declname>
+        </param>
+        <briefdescription>
+<para>calculates how many blocks a serialized filesystem can hold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is useful for calculating the size of unformatted raw filesystems.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>serialized_filesystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> structure containing the serialized data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Amount of blocks which will fit in this filesystem. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="124" column="8" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" declline="124" declcolumn="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains the structures and function declarations for RAM disk loading and serialization. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>_RAMDISKLOADER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_RAMDISKLOADER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddencluster_8h" kindref="compound">hiddencluster.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;hiddenfat.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddenfile_8h" kindref="compound">hiddenfile.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref>;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref>;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="ramdiskloader_8h_1a1ebc387032323ba5dae4dd4721329c2b" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="ramdiskloader_8h_1a1ebc387032323ba5dae4dd4721329c2b" kindref="member">PackedCluster</ref><sp/><ref refid="ramdiskloader_8h_1a1ebc387032323ba5dae4dd4721329c2b" kindref="member">PackedCluster</ref>;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="ramdiskloader_8h_1a1d71c04960e04de5b8b9611d5a7ba398" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="ramdiskloader_8h_1a1d71c04960e04de5b8b9611d5a7ba398" kindref="member">PackedFile</ref><sp/><ref refid="ramdiskloader_8h_1a1d71c04960e04de5b8b9611d5a7ba398" kindref="member">PackedFile</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="ramdiskloader_8h_1a43c18e3e8d026268ff2a4e80b6e37c9d" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="ramdiskloader_8h_1a41fe4fa637733e335afc084cab095aaf" kindref="member">PackedFat</ref><sp/><ref refid="ramdiskloader_8h_1a41fe4fa637733e335afc084cab095aaf" kindref="member">PackedFat</ref>;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="ramdiskloader_8h_1a43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((__packed__))<sp/><ref refid="ramdiskloader_8h_1a41fe4fa637733e335afc084cab095aaf" kindref="member">PackedFat</ref><sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>u_int16_t<sp/>block_size;<sp/></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>u_int64_t<sp/>amount_blocks;<sp/></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>u_int32_t<sp/>clusters_offset;<sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>u_int32_t<sp/>files_offset;<sp/></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>u_int8_t<sp/>amount_root_files;<sp/></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>u_int32_t<sp/>disk_offset;<sp/></highlight></codeline>
+<codeline lineno="57"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="ramdiskloader_8h_1a43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((__packed__))<sp/><ref refid="ramdiskloader_8h_1a1ebc387032323ba5dae4dd4721329c2b" kindref="member">PackedCluster</ref><sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>u_int64_t<sp/>b_index;<sp/></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/>u_int16_t<sp/>cluster_index;<sp/></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>u_int8_t<sp/>state;<sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>int64_t<sp/>prev_cluster_b_index;<sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>int64_t<sp/>next_cluster_b_index;<sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="ramdiskloader_8h_1a43c18e3e8d026268ff2a4e80b6e37c9d" kindref="member">__attribute__</ref>((__packed__))<sp/><ref refid="ramdiskloader_8h_1a1d71c04960e04de5b8b9611d5a7ba398" kindref="member">PackedFile</ref><sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>u_int64_t<sp/>filesize;<sp/></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>u_int64_t<sp/>real_filesize;<sp/></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>u_int32_t<sp/>timestamp;<sp/></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>int64_t<sp/>hidden_cluster_b_index;<sp/></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>filename[12];<sp/></highlight></codeline>
+<codeline lineno="79"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="structSerializedFilesystem" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref><sp/>{</highlight></codeline>
+<codeline lineno="86" refid="structSerializedFilesystem_1a829c1e5e7c501c1baf86841d9ac668a3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structSerializedFilesystem_1a829c1e5e7c501c1baf86841d9ac668a3" kindref="member">size</ref>;<sp/></highlight></codeline>
+<codeline lineno="87" refid="structSerializedFilesystem_1a22cd8b44c2683729b44674eacf9bda11" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structSerializedFilesystem_1a22cd8b44c2683729b44674eacf9bda11" kindref="member">rle</ref>;<sp/></highlight></codeline>
+<codeline lineno="88" refid="structSerializedFilesystem_1a4849c9fc8e4e5fb167c77b954277923a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="structSerializedFilesystem_1a4849c9fc8e4e5fb167c77b954277923a" kindref="member">buf</ref>;<sp/></highlight></codeline>
+<codeline lineno="89"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="ramdiskloader_8h_1aa3a1976cfef20abebc813bfeabee092f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref><sp/><ref refid="ramdiskloader_8h_1aa3a1976cfef20abebc813bfeabee092f" kindref="member">serialize_filesystem</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="ramdiskloader_8h_1a0d12600694dbe9e21b394189a5c0fa6f" refkind="member"><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*<ref refid="ramdiskloader_8h_1a0d12600694dbe9e21b394189a5c0fa6f" kindref="member">load_ramdisk</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref><sp/>serialized_filesystem);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124" refid="ramdiskloader_8h_1a9f182582224a7cc8b45be22e7596e76f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="ramdiskloader_8h_1a9f182582224a7cc8b45be22e7596e76f" kindref="member">calculate_amount_blocks</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref><sp/>serialized_filesystem);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//_RAMDISKLOADER_H_</highlight></codeline>
+    </programlisting>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h"/>
+  </compounddef>
+</doxygen>

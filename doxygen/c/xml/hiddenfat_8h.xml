@@ -1,0 +1,734 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="hiddenfat_8h" kind="file" language="C++">
+    <compoundname>hiddenfat.h</compoundname>
+    <includes refid="hiddencluster_8h" local="yes">hiddencluster.h</includes>
+    <includes refid="steganofs_8h" local="yes">steganofs.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">string.h</includes>
+    <includedby refid="hiddencluster_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h</includedby>
+    <includedby refid="hiddenfile_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h</includedby>
+    <includedby refid="ramdiskloader_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h</includedby>
+    <includedby refid="steganofs_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</label>
+        <link refid="hiddenfat_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>errno.h</label>
+      </node>
+      <node id="8">
+        <label>fuse3/fuse.h</label>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="4">
+        <label>stddef.h</label>
+      </node>
+      <node id="13">
+        <label>stdio.h</label>
+      </node>
+      <node id="12">
+        <label>stdlib.h</label>
+      </node>
+      <node id="11">
+        <label>stegano_providers/stegano_provider.h</label>
+      </node>
+      <node id="14">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</label>
+        <link refid="hiddenfat_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="1" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structHiddenFat" prot="public">HiddenFat</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="hiddenfat_8h_1a5d20d745f1e4b035611657dee1a4d079" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref></type>
+        <definition>typedef struct HiddenFat HiddenFat</definition>
+        <argsstring></argsstring>
+        <name>HiddenFat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="15" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="hiddenfat_8h_1a40699a8d553e39aaac086ea4aa89de45" prot="public" static="no">
+        <type>struct <ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref></type>
+        <definition>typedef struct HiddenCluster HiddenCluster</definition>
+        <argsstring></argsstring>
+        <name>HiddenCluster</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="21" column="28" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="hiddenfat_8h_1a3d041f6fe5a8bb36ed5fb5b29da1f89f" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref></type>
+        <definition>typedef struct HiddenFile HiddenFile</definition>
+        <argsstring></argsstring>
+        <name>HiddenFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="28" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="hiddenfat_8h_1a904c71f61eddd57d65ceae01c9d4378c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+        <definition>HiddenFat * create_hidden_fat</definition>
+        <argsstring>(size_t disk_size, size_t block_size)</argsstring>
+        <name>create_hidden_fat</name>
+        <param>
+          <type>size_t</type>
+          <declname>disk_size</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>block_size</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>disk_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The total size of the disk in bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of each block in bytes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to the newly created <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure, or NULL on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="49" column="11" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="49" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1a9f7586a9218be752acddeadb571a7804" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void free_hidden_fat</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>free_hidden_fat</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Frees the memory associated with a hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure to be freed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="56" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="56" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1ac6ce3884ddeee6b87d7ad7727a602d79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t get_amount_entries</definition>
+        <argsstring>(HiddenFat *hidden_fat, const char *path)</argsstring>
+        <name>get_amount_entries</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Gets the amount of entries (files and directories) in a given path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the directory to be checked. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The amount of entries in the directory. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="65" column="8" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="65" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1a894c009cdba4bee0f12d0ff9dedbd822" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t get_free_disk_space</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>get_free_disk_space</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Gets the amount of free disk space in bytes in the hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The amount of free disk space in bytes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="73" column="8" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="73" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1a1160b2a46bcda6fc11a0e7a5315dbe30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void show_hidden_fat</definition>
+        <argsstring>(HiddenFat *hidden_fat, char *output_message)</argsstring>
+        <name>show_hidden_fat</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>output_message</declname>
+        </param>
+        <briefdescription>
+<para>Shows the structure of the hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>output_message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If not NULL, the output will be copied to this string. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="81" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="81" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1aa08a06a00394ffa6d3b3f7f5de0f788c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool check_integrity</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>check_integrity</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Checks the integrity of the hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the filesystem has integrity, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="89" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="89" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1addfb4b08dfa28015d50b9b3a5f945af8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float check_for_fragmentation</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>check_for_fragmentation</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Checks the filesystem for fragmentation and calculates the fragmentation percentage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The fragmentation percentage. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="97" column="7" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="97" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1a5982a0473fe70151bafc156a8798aa11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void defragmentate</definition>
+        <argsstring>(HiddenFat *hidden_fat)</argsstring>
+        <name>defragmentate</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <briefdescription>
+<para>Defragments the hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="104" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="104" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1a38b16e6c06594f8de19e978adf9f64d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int write_block</definition>
+        <argsstring>(HiddenFat *hidden_fat, size_t b_index, const char *buffer, size_t offset, size_t length)</argsstring>
+        <name>write_block</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>b_index</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Writes data to a block in the hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the block to write to. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer containing the data to be written. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The offset within the block to start writing. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length of data to be written. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of bytes written, or -1 on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="116" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="116" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1a46ee12149f2a68e98266d5731f0f7b54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int read_block</definition>
+        <argsstring>(HiddenFat *hidden_fat, size_t b_index, const char *buffer, size_t offset, size_t length)</argsstring>
+        <name>read_block</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>b_index</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Reads data from a block in the hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the block to read from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer to store the read data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The offset within the block to start reading. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length of data to be read. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of bytes read, or -1 on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="128" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="128" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfat_8h_1a79b176f531157c6cee0550a517801164" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t get_fragmentation_array</definition>
+        <argsstring>(HiddenFat *hidden_fat, size_t **array)</argsstring>
+        <name>get_fragmentation_array</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>size_t **</type>
+          <declname>array</declname>
+        </param>
+        <briefdescription>
+<para>Gets an array indicating the fragmentation status of blocks in the hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>array</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to an array that will be allocated to hold the fragmentation data. This array is allocated on the heap an can freed with free() by the caller of this function </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The total number of blocks in the filesystem. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" line="138" column="8" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h" declline="138" declcolumn="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>_HIDDENFAT_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_HIDDENFAT_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hiddencluster_8h" kindref="compound">hiddencluster.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="steganofs_8h" kindref="compound">steganofs.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref>;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="structHiddenFat" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>{</highlight></codeline>
+<codeline lineno="35" refid="structHiddenFat_1afeb0b7a473eb138a8ddaf8bfeee30f3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structHiddenFat_1afeb0b7a473eb138a8ddaf8bfeee30f3f" kindref="member">block_size</ref>;<sp/></highlight></codeline>
+<codeline lineno="36" refid="structHiddenFat_1a144f5ab7576fc5298eefc696b22f115b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structHiddenFat_1a144f5ab7576fc5298eefc696b22f115b" kindref="member">amount_blocks</ref>;<sp/></highlight></codeline>
+<codeline lineno="37" refid="structHiddenFat_1ab6df0cd5efebf3262475c24e96461212" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="structHiddenFat_1ab6df0cd5efebf3262475c24e96461212" kindref="member">disk</ref>;<sp/></highlight></codeline>
+<codeline lineno="38" refid="structHiddenFat_1ac8e226121f293d809ab3926c5556b967" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/>*<ref refid="structHiddenFat_1ac8e226121f293d809ab3926c5556b967" kindref="member">clusters</ref>;<sp/></highlight></codeline>
+<codeline lineno="39" refid="structHiddenFat_1abd8c32306c3ae16943bfa4234e45a32c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/>*<ref refid="structHiddenFat_1abd8c32306c3ae16943bfa4234e45a32c" kindref="member">files</ref>[STEGANOFS_AMOUNT_ROOT_FILES];<sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*create_hidden_fat<sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>disk_size,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>block_size);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>free_hidden_fat<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>get_amount_entries<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>get_free_disk_space<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>show_hidden_fat<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*output_message);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>check_integrity<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>check_for_fragmentation<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>defragmentate<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>write_block<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>b_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buffer,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>offset,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>length);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>read_block<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>b_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buffer,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>offset,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>length);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>get_fragmentation_array<sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>**array);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//_HIDDENFAT_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h"/>
+  </compounddef>
+</doxygen>

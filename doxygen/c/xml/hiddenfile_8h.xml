@@ -1,0 +1,412 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="hiddenfile_8h" kind="file" language="C++">
+    <compoundname>hiddenfile.h</compoundname>
+    <includes refid="hiddenfat_8h" local="yes">hiddenfat.h</includes>
+    <includes local="no">errno.h</includes>
+    <includedby refid="hiddencluster_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h</includedby>
+    <includedby refid="ramdiskloader_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h</includedby>
+    <includedby refid="steganofs_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>hiddenfat.h</label>
+        <link refid="hiddenfat_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>errno.h</label>
+      </node>
+      <node id="7">
+        <label>fuse3/fuse.h</label>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="5">
+        <label>stddef.h</label>
+      </node>
+      <node id="13">
+        <label>stdio.h</label>
+      </node>
+      <node id="12">
+        <label>stdlib.h</label>
+      </node>
+      <node id="11">
+        <label>stegano_providers/stegano_provider.h</label>
+      </node>
+      <node id="14">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</label>
+        <link refid="hiddenfat_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structHiddenFile" prot="public">HiddenFile</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="hiddenfile_8h_1a5d20d745f1e4b035611657dee1a4d079" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref></type>
+        <definition>typedef struct HiddenFat HiddenFat</definition>
+        <argsstring></argsstring>
+        <name>HiddenFat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="16" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="hiddenfile_8h_1a40699a8d553e39aaac086ea4aa89de45" prot="public" static="no">
+        <type>struct <ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref></type>
+        <definition>typedef struct HiddenCluster HiddenCluster</definition>
+        <argsstring></argsstring>
+        <name>HiddenCluster</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="22" column="28" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="hiddenfile_8h_1a3d041f6fe5a8bb36ed5fb5b29da1f89f" prot="public" static="no">
+        <type>struct <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref></type>
+        <definition>typedef struct HiddenFile HiddenFile</definition>
+        <argsstring></argsstring>
+        <name>HiddenFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="29" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="hiddenfile_8h_1a1b6af287c5fd23063b62c72a3bdac3ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int delete_hidden_file</definition>
+        <argsstring>(HiddenFat *hidden_fat, const char *filename)</argsstring>
+        <name>delete_hidden_file</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+<para>Deletes a hidden file from the hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the file to be deleted. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, or -ENOENT if the file was not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="50" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" declline="50" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfile_8h_1a15ad97f3f11ca281808f9bf0e32db5be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int count_path_components</definition>
+        <argsstring>(const char *path)</argsstring>
+        <name>count_path_components</name>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Counts the number of components in a given path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path string to be analyzed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of components in the path. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="58" column="5" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" declline="58" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfile_8h_1a62a86090d8eb7104b665dda1c7ea7e58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> *</type>
+        <definition>HiddenFile * find_file_by_path</definition>
+        <argsstring>(HiddenFat *hidden_fat, const char *path)</argsstring>
+        <name>find_file_by_path</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Finds a hidden file by its path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path of the file to be found. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to the <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> structure if found, otherwise NULL. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="67" column="12" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" declline="67" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="hiddenfile_8h_1af5053a4b545f4e6dad4353492493eccb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> **</type>
+        <definition>HiddenFile ** create_hidden_file</definition>
+        <argsstring>(HiddenFat *hidden_fat, const char *filename, long timestamp)</argsstring>
+        <name>create_hidden_file</name>
+        <param>
+          <type><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> *</type>
+          <declname>hidden_fat</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>long</type>
+          <declname>timestamp</declname>
+        </param>
+        <briefdescription>
+<para>Creates a hidden file in the hidden FAT filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hidden_fat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the <ref refid="structHiddenFat" kindref="compound">HiddenFat</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the file to be created. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timestamp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timestamp of the file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to the <ref refid="structHiddenFile" kindref="compound">HiddenFile</ref> pointer if created successfully, otherwise NULL. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="77" column="12" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" declline="77" declcolumn="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains the structures and function declarations for hidden file operations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>_HIDDENFILE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_HIDDENFILE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;hiddenfat.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;errno.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/><ref refid="structHiddenFat" kindref="compound">HiddenFat</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref>;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="structHiddenFile" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>filesize;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>real_filesize;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>timestamp;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref><sp/>*hiddenCluster;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>filename[12];</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="hiddenfile_8h_1a1b6af287c5fd23063b62c72a3bdac3ab" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="hiddenfile_8h_1a1b6af287c5fd23063b62c72a3bdac3ab" kindref="member">delete_hidden_file</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*filename);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="hiddenfile_8h_1a15ad97f3f11ca281808f9bf0e32db5be" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="hiddenfile_8h_1a15ad97f3f11ca281808f9bf0e32db5be" kindref="member">count_path_components</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="hiddenfile_8h_1a62a86090d8eb7104b665dda1c7ea7e58" refkind="member"><highlight class="normal"><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/>*<ref refid="hiddenfile_8h_1a62a86090d8eb7104b665dda1c7ea7e58" kindref="member">find_file_by_path</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="hiddenfile_8h_1af5053a4b545f4e6dad4353492493eccb" refkind="member"><highlight class="normal"><ref refid="structHiddenFile" kindref="compound">HiddenFile</ref><sp/>**<ref refid="hiddenfile_8h_1af5053a4b545f4e6dad4353492493eccb" kindref="member">create_hidden_file</ref><sp/>(<ref refid="structHiddenFat" kindref="compound">HiddenFat</ref><sp/>*hidden_fat,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*filename,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>timestamp);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//_HIDDENFILE_H_</highlight></codeline>
+    </programlisting>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h"/>
+  </compounddef>
+</doxygen>

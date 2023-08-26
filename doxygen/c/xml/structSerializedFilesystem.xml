@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="structSerializedFilesystem" kind="struct" language="C++" prot="public">
+    <compoundname>SerializedFilesystem</compoundname>
+    <includes refid="ramdiskloader_8h" local="no">ramdiskloader.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSerializedFilesystem_1a829c1e5e7c501c1baf86841d9ac668a3" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SerializedFilesystem::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <qualifiedname>SerializedFilesystem::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Size of the serialized data in bytes. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="86" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSerializedFilesystem_1a22cd8b44c2683729b44674eacf9bda11" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SerializedFilesystem::rle</definition>
+        <argsstring></argsstring>
+        <name>rle</name>
+        <qualifiedname>SerializedFilesystem::rle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Flag if the Fielsystem is compressed with Run-Length Encoding flag. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="87" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSerializedFilesystem_1a4849c9fc8e4e5fb167c77b954277923a" prot="public" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* SerializedFilesystem::buf</definition>
+        <argsstring></argsstring>
+        <name>buf</name>
+        <qualifiedname>SerializedFilesystem::buf</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to the serialized data buffer. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="88" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a serialized filesystem that holds the serialized data. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" line="85" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h" bodystart="85" bodyend="89"/>
+    <listofallmembers>
+      <member refid="structSerializedFilesystem_1a4849c9fc8e4e5fb167c77b954277923a" prot="public" virt="non-virtual"><scope>SerializedFilesystem</scope><name>buf</name></member>
+      <member refid="structSerializedFilesystem_1a22cd8b44c2683729b44674eacf9bda11" prot="public" virt="non-virtual"><scope>SerializedFilesystem</scope><name>rle</name></member>
+      <member refid="structSerializedFilesystem_1a829c1e5e7c501c1baf86841d9ac668a3" prot="public" virt="non-virtual"><scope>SerializedFilesystem</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

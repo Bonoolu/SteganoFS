@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="dir_4760e09f6a83cc8ddfc2af2d6fdddeee" kind="dir">
+    <compoundname>/home/admin/CLionProjects/SteganoFS/steganofs</compoundname>
+    <innerfile refid="hiddencluster_8h">hiddencluster.h</innerfile>
+    <innerfile refid="hiddenfat_8h">hiddenfat.h</innerfile>
+    <innerfile refid="hiddenfile_8h">hiddenfile.h</innerfile>
+    <innerfile refid="ramdiskloader_8h">ramdiskloader.h</innerfile>
+    <innerfile refid="runlengthencoding_8h">runlengthencoding.h</innerfile>
+    <innerfile refid="steganofs_8h">steganofs.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/"/>
+  </compounddef>
+</doxygen>

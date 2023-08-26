@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="structHiddenFile" kind="struct" language="C++" prot="public">
+    <compoundname>HiddenFile</compoundname>
+    <includes refid="hiddencluster_8h" local="no">hiddencluster.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structHiddenFile_1abed2edf0dddffb8bf9c8658bdc06ed9a" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t HiddenFile::filesize</definition>
+        <argsstring></argsstring>
+        <name>filesize</name>
+        <qualifiedname>HiddenFile::filesize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="36" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenFile_1a4a4308f9072ed688e2f747f6645d15ed" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t HiddenFile::real_filesize</definition>
+        <argsstring></argsstring>
+        <name>real_filesize</name>
+        <qualifiedname>HiddenFile::real_filesize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="37" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenFile_1a624f177eb3b7f3c6c85ff1ace59135c8" prot="public" static="no" mutable="no">
+        <type>long</type>
+        <definition>long HiddenFile::timestamp</definition>
+        <argsstring></argsstring>
+        <name>timestamp</name>
+        <qualifiedname>HiddenFile::timestamp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="38" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenFile_1aac6a40bd10600e18dab5aafe76bde7f6" prot="public" static="no" mutable="no">
+        <type><ref refid="structHiddenCluster" kindref="compound">HiddenCluster</ref> *</type>
+        <definition>HiddenCluster* HiddenFile::hiddenCluster</definition>
+        <argsstring></argsstring>
+        <name>hiddenCluster</name>
+        <qualifiedname>HiddenFile::hiddenCluster</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="39" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structHiddenFile_1a40261e5b168aa7a560d5a0120f902b60" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char HiddenFile::filename[12]</definition>
+        <argsstring>[12]</argsstring>
+        <name>filename</name>
+        <qualifiedname>HiddenFile::filename</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="40" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a hidden file in the hidden FAT filesystem. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>HiddenCluster</label>
+        <link refid="structHiddenCluster"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>next</edgelabel>
+          <edgelabel>prev</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>file</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>HiddenFile</label>
+        <link refid="structHiddenFile"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>hiddenCluster</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" line="35" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h" bodystart="35" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structHiddenFile_1a40261e5b168aa7a560d5a0120f902b60" prot="public" virt="non-virtual"><scope>HiddenFile</scope><name>filename</name></member>
+      <member refid="structHiddenFile_1abed2edf0dddffb8bf9c8658bdc06ed9a" prot="public" virt="non-virtual"><scope>HiddenFile</scope><name>filesize</name></member>
+      <member refid="structHiddenFile_1aac6a40bd10600e18dab5aafe76bde7f6" prot="public" virt="non-virtual"><scope>HiddenFile</scope><name>hiddenCluster</name></member>
+      <member refid="structHiddenFile_1a4a4308f9072ed688e2f747f6645d15ed" prot="public" virt="non-virtual"><scope>HiddenFile</scope><name>real_filesize</name></member>
+      <member refid="structHiddenFile_1a624f177eb3b7f3c6c85ff1ace59135c8" prot="public" virt="non-virtual"><scope>HiddenFile</scope><name>timestamp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

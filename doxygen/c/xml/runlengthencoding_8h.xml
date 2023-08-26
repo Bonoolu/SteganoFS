@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="runlengthencoding_8h" kind="file" language="C++">
+    <compoundname>runlengthencoding.h</compoundname>
+    <includes refid="ramdiskloader_8h" local="yes">ramdiskloader.h</includes>
+    <includedby refid="steganofs_8h" local="yes">/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>hiddenfat.h</label>
+        <link refid="hiddenfat_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>errno.h</label>
+      </node>
+      <node id="8">
+        <label>fuse3/fuse.h</label>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="5">
+        <label>stddef.h</label>
+      </node>
+      <node id="13">
+        <label>stdio.h</label>
+      </node>
+      <node id="12">
+        <label>stdlib.h</label>
+      </node>
+      <node id="11">
+        <label>stegano_providers/stegano_provider.h</label>
+      </node>
+      <node id="14">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddencluster.h</label>
+        <link refid="hiddencluster_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfat.h</label>
+        <link refid="hiddenfat_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/hiddenfile.h</label>
+        <link refid="hiddenfile_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/ramdiskloader.h</label>
+        <link refid="ramdiskloader_8h"/>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h</label>
+        <link refid="runlengthencoding_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/admin/CLionProjects/SteganoFS/steganofs/steganofs.h</label>
+        <link refid="steganofs_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="runlengthencoding_8h_1a7ab6831ce45342b46e7f2f0963d616cf" prot="public" static="no">
+        <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref></type>
+        <definition>typedef struct SerializedFilesystem SerializedFilesystem</definition>
+        <argsstring></argsstring>
+        <name>SerializedFilesystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" line="11" column="35" bodyfile="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="runlengthencoding_8h_1a01ab5ef8f38349c9d5251cd7b3710c72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void run_length_encoding</definition>
+        <argsstring>(struct SerializedFilesystem *serialized_filesystem)</argsstring>
+        <name>run_length_encoding</name>
+        <param>
+          <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> *</type>
+          <declname>serialized_filesystem</declname>
+        </param>
+        <briefdescription>
+<para>Run-length encodes a serialized filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function performs run-length encoding on the provided serialized filesystem. It replaces consecutive zero bytes with a range specification for efficient storage.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>serialized_filesystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the serialized filesystem structure to be encoded. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" line="21" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" declline="21" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="runlengthencoding_8h_1ad25093650710e37c1918a1a6b2e4bac9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void run_length_decoding</definition>
+        <argsstring>(struct SerializedFilesystem *serialized_filesystem)</argsstring>
+        <name>run_length_decoding</name>
+        <param>
+          <type>struct <ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref> *</type>
+          <declname>serialized_filesystem</declname>
+        </param>
+        <briefdescription>
+<para>Run-length decodes a serialized filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function performs run-length decoding on a previously run-length encoded serialized filesystem. It reconstructs the original data by expanding the zero ranges specified during encoding.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>serialized_filesystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the serialized filesystem structure to be decoded. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" line="31" column="6" declfile="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h" declline="31" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains function declarations related to run-length encoding and decoding of serialized filesystems. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>_RUNLENGTHENCODING_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_RUNLENGTHENCODING_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ramdiskloader_8h" kindref="compound">ramdiskloader.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref><sp/><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="runlengthencoding_8h_1a01ab5ef8f38349c9d5251cd7b3710c72" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="runlengthencoding_8h_1a01ab5ef8f38349c9d5251cd7b3710c72" kindref="member">run_length_encoding</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref><sp/>*serialized_filesystem);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="runlengthencoding_8h_1ad25093650710e37c1918a1a6b2e4bac9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="runlengthencoding_8h_1ad25093650710e37c1918a1a6b2e4bac9" kindref="member">run_length_decoding</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structSerializedFilesystem" kindref="compound">SerializedFilesystem</ref><sp/>*serialized_filesystem);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//_RUNLENGTHENCODING_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/admin/CLionProjects/SteganoFS/steganofs/runlengthencoding.h"/>
+  </compounddef>
+</doxygen>

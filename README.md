@@ -14,6 +14,7 @@ SteganoFS is a developing project designed to explore the concept of concealing 
 - [Architecture](#architecture)
 - [Stegano Providers Interface](#stegano-providers-interface)
 - [Subprocess Provider](#subprocess-provider)
+- [Library Interfaces](#library-interfaces)
 - [File Compatibility](#file-compatibility)
 - [Documentation](#documentation)
 - [Known Issues and Limitations](#known-issues-and-limitations)
@@ -72,6 +73,16 @@ Stegano Providers are fundamental to SteganoFS's versatility. To implement a new
 ## Subprocess Provider
 
 The Subprocess Provider feature allows you to spawn subprocesses from provider code, enabling integration of steganographic techniques in various languages. For an example and instructions, refer to the [Subprocess Provider Guide](../docs/stegano_providers_interface.md#subprocess-provider).
+
+## Library Interfaces ##
+
+If you're a developer interested in integrating SteganoFS functionality into your projects, we've got you covered!
+
+- **C Interface Documentation:** For C enthusiasts, we've documented the [steganofs.h Documentation](doxygen/c/doxygen.md) that defines the C interface of SteganoFS. This interface grants you direct access to SteganoFS functionality within your C projects.
+
+- **C++ Interface Documentation:** Check out the [SteganoFsAdapter.h Documentation](doxygen/cpp/doxygen.md) to see how you can seamlessly incorporate SteganoFS into your C++ projects. The C++ interface provides a user-friendly wrapper around the core functionality of SteganoFS.
+
+By using these interfaces, you can experiment, innovate, and build upon the foundation of SteganoFS to create new and exciting applications. Feel free to contribute, extend, or modify these interfaces to suit your specific needs. We can't wait to see what you come up with!
 
 ## File Compatibility
 
