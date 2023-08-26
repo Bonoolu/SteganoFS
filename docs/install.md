@@ -12,10 +12,10 @@ To install SteganoFS and its dependencies, follow these steps:
       sudo apt-get install libfuse3-dev   # For Debian/Ubuntu
       ```
 
-    - **Qt6:** If you plan to use the Graphical User Interface (GUI), you'll need Qt6. Install it using your package manager.
+    - **Qt5:** If you plan to use the Graphical User Interface (GUI), you'll need Qt5. Install it using your package manager. Installing qtcreator should pull all nessesary packages.
 
       ```bash
-      sudo apt-get install qt6-default   # For Debian/Ubuntu
+      sudo apt-get install qtcreator   # For Debian/Ubuntu
       ```
 
 3. **Clone the Repository:**
