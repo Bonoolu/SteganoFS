@@ -1,0 +1,456 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classSteganoFsAdapter" kind="class" language="C++" prot="public">
+    <compoundname>SteganoFsAdapter</compoundname>
+    <includes refid="SteganoFsAdapter_8h" local="no">SteganoFsAdapter.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSteganoFsAdapter_1a6c2e26ac04a4bb911c4bc3912720a1f8" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SteganoFsAdapter::m_mountPath</definition>
+        <argsstring></argsstring>
+        <name>m_mountPath</name>
+        <qualifiedname>SteganoFsAdapter::m_mountPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Mount path for the filesystem. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="24" column="15" bodyfile="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSteganoFsAdapter_1a096ddca33876d1cded5a27a4f5411fd3" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SteganoFsAdapter::m_steganoImageFolder</definition>
+        <argsstring></argsstring>
+        <name>m_steganoImageFolder</name>
+        <qualifiedname>SteganoFsAdapter::m_steganoImageFolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Path to the stegano image folder. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="25" column="15" bodyfile="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSteganoFsAdapter_1a91223bee3cfb5242e749b293b9dbd96a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::m_isMounted</definition>
+        <argsstring></argsstring>
+        <name>m_isMounted</name>
+        <qualifiedname>SteganoFsAdapter::m_isMounted</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Indicates if the filesystem is mounted. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="26" column="8" bodyfile="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSteganoFsAdapter_1ae75dc4e5eaba9afd734c700e73487d5c" prot="private" static="no" mutable="no">
+        <type>SteganoFS::HiddenFat *</type>
+        <definition>SteganoFS::HiddenFat* SteganoFsAdapter::m_hiddenFat</definition>
+        <argsstring></argsstring>
+        <name>m_hiddenFat</name>
+        <qualifiedname>SteganoFsAdapter::m_hiddenFat</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to the HiddenFat instance. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="27" column="24" bodyfile="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSteganoFsAdapter_1a8b16a46ebc14456614ec45e33b31d651" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SteganoFsAdapter::SteganoFsAdapter</definition>
+        <argsstring>(std::string steganoImageFolder)</argsstring>
+        <name>SteganoFsAdapter</name>
+        <qualifiedname>SteganoFsAdapter::SteganoFsAdapter</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>steganoImageFolder</declname>
+        </param>
+        <briefdescription>
+<para>Constructor for <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>steganoImageFolder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path to the stegano image folder. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="34" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1abe270fd7364b981e11ca8b95629d4d57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SteganoFsAdapter::~SteganoFsAdapter</definition>
+        <argsstring>()</argsstring>
+        <name>~SteganoFsAdapter</name>
+        <qualifiedname>SteganoFsAdapter::~SteganoFsAdapter</qualifiedname>
+        <briefdescription>
+<para>Destructor for <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="39" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1ab90da955cdb155d8c7ffdca00983ba38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t SteganoFsAdapter::formatNewFilesystem</definition>
+        <argsstring>()</argsstring>
+        <name>formatNewFilesystem</name>
+        <qualifiedname>SteganoFsAdapter::formatNewFilesystem</qualifiedname>
+        <briefdescription>
+<para>Creates a new filesystem the specified path of steganographic files. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The size of the new filesystem. 0 if fails. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="45" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1ad1064d64fa6aafa0561e4a83e044c7b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::createNewFilesystem</definition>
+        <argsstring>(size_t diskSize)</argsstring>
+        <name>createNewFilesystem</name>
+        <qualifiedname>SteganoFsAdapter::createNewFilesystem</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>diskSize</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new filesystem with the given disk size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>diskSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the disk in bytes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="52" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1ad7a36c1a7ac2f3be193e20c706c40f7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::loadFilesytemFromSteganoProvider</definition>
+        <argsstring>()</argsstring>
+        <name>loadFilesytemFromSteganoProvider</name>
+        <qualifiedname>SteganoFsAdapter::loadFilesytemFromSteganoProvider</qualifiedname>
+        <briefdescription>
+<para>Load the hidden filesystem from the steganographic image provider. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the filesystem was loaded successfully, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="58" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1ad79d549ad56dd0b3a1c9a85ed3a941f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::mount</definition>
+        <argsstring>(const std::string &amp;mntPoint)</argsstring>
+        <name>mount</name>
+        <qualifiedname>SteganoFsAdapter::mount</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>mntPoint</declname>
+        </param>
+        <briefdescription>
+<para>Mount the hidden filesystem to the given mount point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mntPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mount point for the filesystem. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the filesystem was mounted successfully, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="65" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1a8d668990c752bf8e3386ee1f80a59fa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::writeFilesystemToSteganoProvider</definition>
+        <argsstring>()</argsstring>
+        <name>writeFilesystemToSteganoProvider</name>
+        <qualifiedname>SteganoFsAdapter::writeFilesystemToSteganoProvider</qualifiedname>
+        <briefdescription>
+<para>Write the hidden filesystem back to the steganographic image provider. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the filesystem was written successfully, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="71" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1aa1e0bd5984e477759b299c354f682ab5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::umount</definition>
+        <argsstring>(std::string mntPoint=&quot;&quot;)</argsstring>
+        <name>umount</name>
+        <qualifiedname>SteganoFsAdapter::umount</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>mntPoint</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Unmount the hidden filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mntPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mount point for the filesystem. Can be omitted if set as member </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the filesystem was unmounted successfully, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="78" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1afd4cb6d986578c8ae3818fbe04d593e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float SteganoFsAdapter::getFragmentationInPercent</definition>
+        <argsstring>()</argsstring>
+        <name>getFragmentationInPercent</name>
+        <qualifiedname>SteganoFsAdapter::getFragmentationInPercent</qualifiedname>
+        <briefdescription>
+<para>Get the fragmentation of the hidden filesystem in percentage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Fragmentation percentage if the filesystem is loaded, otherwise -1. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="84" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1a44ebcbf79df3e7aaf3c8bb126c980fc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; size_t &gt;</type>
+        <definition>std::vector&lt; size_t &gt; SteganoFsAdapter::getFilesystemVector</definition>
+        <argsstring>()</argsstring>
+        <name>getFilesystemVector</name>
+        <qualifiedname>SteganoFsAdapter::getFilesystemVector</qualifiedname>
+        <briefdescription>
+<para>Get a vector containing fragmentation information of the filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Vector of fragmentation data if the filesystem is loaded, otherwise an empty vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="90" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1a1899628c9e7216a10172d8fde47b6f23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::checkFilesystemIntegrity</definition>
+        <argsstring>()</argsstring>
+        <name>checkFilesystemIntegrity</name>
+        <qualifiedname>SteganoFsAdapter::checkFilesystemIntegrity</qualifiedname>
+        <briefdescription>
+<para>Check the integrity of the hidden filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the filesystem is intact, false if integrity check fails. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="96" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1a0a59bee7c6dd614233441e77d18648b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::defragmentateFilesystem</definition>
+        <argsstring>()</argsstring>
+        <name>defragmentateFilesystem</name>
+        <qualifiedname>SteganoFsAdapter::defragmentateFilesystem</qualifiedname>
+        <briefdescription>
+<para>Defragment the hidden filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if defragmentation was successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="102" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1abb2a12ee096914a0b6983596ce93c1e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct statvfs</type>
+        <definition>struct statvfs SteganoFsAdapter::getFilesystemInfo</definition>
+        <argsstring>()</argsstring>
+        <name>getFilesystemInfo</name>
+        <qualifiedname>SteganoFsAdapter::getFilesystemInfo</qualifiedname>
+        <briefdescription>
+<para>Get information about the hidden filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Structure containing filesystem information. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="108" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1acd82f4904fdb30b50cf05416388cf395" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string SteganoFsAdapter::steganoImageFolder</definition>
+        <argsstring>() const</argsstring>
+        <name>steganoImageFolder</name>
+        <qualifiedname>SteganoFsAdapter::steganoImageFolder</qualifiedname>
+        <briefdescription>
+<para>Get the steganographic image folder path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Steganographic image folder path. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="114" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1a9dc809dc804b9c51ec834ae27c2f8c0d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::isMounted</definition>
+        <argsstring>() const</argsstring>
+        <name>isMounted</name>
+        <qualifiedname>SteganoFsAdapter::isMounted</qualifiedname>
+        <briefdescription>
+<para>Check if the filesystem is mounted. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the filesystem is mounted, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="120" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1a8cff00edd53804553a0c47f3cd54b3b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SteganoFsAdapter::isLoaded</definition>
+        <argsstring>() const</argsstring>
+        <name>isLoaded</name>
+        <qualifiedname>SteganoFsAdapter::isLoaded</qualifiedname>
+        <briefdescription>
+<para>Check if the filesystem is loaded. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the filesystem is loaded, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="126" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classSteganoFsAdapter_1ac30e2ac223e1f7f4a650ff411ce10594" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string SteganoFsAdapter::mountPath</definition>
+        <argsstring>() const</argsstring>
+        <name>mountPath</name>
+        <qualifiedname>SteganoFsAdapter::mountPath</qualifiedname>
+        <briefdescription>
+<para>Get the mount path of the filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Mount path of the filesystem. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="132" column="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Adapter class for interacting with the SteganoFS filesystem. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" line="22" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h" bodystart="22" bodyend="133"/>
+    <listofallmembers>
+      <member refid="classSteganoFsAdapter_1a1899628c9e7216a10172d8fde47b6f23" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>checkFilesystemIntegrity</name></member>
+      <member refid="classSteganoFsAdapter_1ad1064d64fa6aafa0561e4a83e044c7b2" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>createNewFilesystem</name></member>
+      <member refid="classSteganoFsAdapter_1a0a59bee7c6dd614233441e77d18648b9" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>defragmentateFilesystem</name></member>
+      <member refid="classSteganoFsAdapter_1ab90da955cdb155d8c7ffdca00983ba38" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>formatNewFilesystem</name></member>
+      <member refid="classSteganoFsAdapter_1abb2a12ee096914a0b6983596ce93c1e1" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>getFilesystemInfo</name></member>
+      <member refid="classSteganoFsAdapter_1a44ebcbf79df3e7aaf3c8bb126c980fc6" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>getFilesystemVector</name></member>
+      <member refid="classSteganoFsAdapter_1afd4cb6d986578c8ae3818fbe04d593e1" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>getFragmentationInPercent</name></member>
+      <member refid="classSteganoFsAdapter_1a8cff00edd53804553a0c47f3cd54b3b1" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>isLoaded</name></member>
+      <member refid="classSteganoFsAdapter_1a9dc809dc804b9c51ec834ae27c2f8c0d" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>isMounted</name></member>
+      <member refid="classSteganoFsAdapter_1ad7a36c1a7ac2f3be193e20c706c40f7a" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>loadFilesytemFromSteganoProvider</name></member>
+      <member refid="classSteganoFsAdapter_1ae75dc4e5eaba9afd734c700e73487d5c" prot="private" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>m_hiddenFat</name></member>
+      <member refid="classSteganoFsAdapter_1a91223bee3cfb5242e749b293b9dbd96a" prot="private" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>m_isMounted</name></member>
+      <member refid="classSteganoFsAdapter_1a6c2e26ac04a4bb911c4bc3912720a1f8" prot="private" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>m_mountPath</name></member>
+      <member refid="classSteganoFsAdapter_1a096ddca33876d1cded5a27a4f5411fd3" prot="private" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>m_steganoImageFolder</name></member>
+      <member refid="classSteganoFsAdapter_1ad79d549ad56dd0b3a1c9a85ed3a941f3" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>mount</name></member>
+      <member refid="classSteganoFsAdapter_1ac30e2ac223e1f7f4a650ff411ce10594" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>mountPath</name></member>
+      <member refid="classSteganoFsAdapter_1a8b16a46ebc14456614ec45e33b31d651" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>SteganoFsAdapter</name></member>
+      <member refid="classSteganoFsAdapter_1acd82f4904fdb30b50cf05416388cf395" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>steganoImageFolder</name></member>
+      <member refid="classSteganoFsAdapter_1aa1e0bd5984e477759b299c354f682ab5" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>umount</name></member>
+      <member refid="classSteganoFsAdapter_1a8d668990c752bf8e3386ee1f80a59fa8" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>writeFilesystemToSteganoProvider</name></member>
+      <member refid="classSteganoFsAdapter_1abe270fd7364b981e11ca8b95629d4d57" prot="public" virt="non-virtual"><scope>SteganoFsAdapter</scope><name>~SteganoFsAdapter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

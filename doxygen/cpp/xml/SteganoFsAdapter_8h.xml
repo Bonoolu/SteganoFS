@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="SteganoFsAdapter_8h" kind="file" language="C++">
+    <compoundname>SteganoFsAdapter.h</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">sys/statvfs.h</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">filesystem</includes>
+    <includes local="no">utility</includes>
+    <includes local="yes">../steganofs/steganofs.h</includes>
+    <includedby refid="defragmentdialog_8h" local="yes">/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h</includedby>
+    <includedby refid="formatfilesystemdialog_8h" local="yes">/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h</includedby>
+    <includedby refid="mainwindow_8h" local="yes">/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h</includedby>
+    <includedby refid="mountfrompathdialog_8h" local="yes">/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h</includedby>
+    <includedby refid="showfilesysteminfodialog_8h" local="yes">/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h</includedby>
+    <includedby refid="worker_8h" local="yes">/home/admin/CLionProjects/SteganoFS/stegano_gui/worker.h</includedby>
+    <incdepgraph>
+      <node id="8">
+        <label>../steganofs/steganofs.h</label>
+      </node>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h</label>
+        <link refid="SteganoFsAdapter_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>filesystem</label>
+      </node>
+      <node id="5">
+        <label>iostream</label>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="4">
+        <label>sys/statvfs.h</label>
+      </node>
+      <node id="7">
+        <label>utility</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h</label>
+        <link refid="SteganoFsAdapter_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h</label>
+        <link refid="defragmentdialog_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h</label>
+        <link refid="formatfilesystemdialog_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h</label>
+        <link refid="mainwindow_8h_source"/>
+      </node>
+      <node id="5">
+        <label>/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h</label>
+        <link refid="mountfrompathdialog_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h</label>
+        <link refid="showfilesysteminfodialog_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/admin/CLionProjects/SteganoFS/stegano_gui/worker.h</label>
+        <link refid="worker_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classSteganoFsAdapter" prot="public">SteganoFsAdapter</innerclass>
+    <innernamespace refid="namespaceSteganoFS">SteganoFS</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>STEGANO_FS_ADAPTER_STEGANOFSADAPTER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STEGANO_FS_ADAPTER_STEGANOFSADAPTER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/statvfs.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;filesystem&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SteganoFS</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../steganofs/steganofs.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classSteganoFsAdapter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>std::string<sp/>m_mountPath;<sp/></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>std::string<sp/>m_steganoImageFolder;<sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_isMounted<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>SteganoFS::HiddenFat<sp/>*m_hiddenFat<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="classSteganoFsAdapter_1a8b16a46ebc14456614ec45e33b31d651" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1a8b16a46ebc14456614ec45e33b31d651" kindref="member">SteganoFsAdapter</ref><sp/>(std::string<sp/><ref refid="classSteganoFsAdapter_1acd82f4904fdb30b50cf05416388cf395" kindref="member">steganoImageFolder</ref>);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="classSteganoFsAdapter_1abe270fd7364b981e11ca8b95629d4d57" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classSteganoFsAdapter_1abe270fd7364b981e11ca8b95629d4d57" kindref="member">~SteganoFsAdapter</ref><sp/>();</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="classSteganoFsAdapter_1ab90da955cdb155d8c7ffdca00983ba38" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1ab90da955cdb155d8c7ffdca00983ba38" kindref="member">formatNewFilesystem</ref><sp/>();</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="classSteganoFsAdapter_1ad1064d64fa6aafa0561e4a83e044c7b2" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1ad1064d64fa6aafa0561e4a83e044c7b2" kindref="member">createNewFilesystem</ref><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>diskSize);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="classSteganoFsAdapter_1ad7a36c1a7ac2f3be193e20c706c40f7a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1ad7a36c1a7ac2f3be193e20c706c40f7a" kindref="member">loadFilesytemFromSteganoProvider</ref><sp/>();</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="classSteganoFsAdapter_1ad79d549ad56dd0b3a1c9a85ed3a941f3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1ad79d549ad56dd0b3a1c9a85ed3a941f3" kindref="member">mount</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;mntPoint);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="classSteganoFsAdapter_1a8d668990c752bf8e3386ee1f80a59fa8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1a8d668990c752bf8e3386ee1f80a59fa8" kindref="member">writeFilesystemToSteganoProvider</ref><sp/>();</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="classSteganoFsAdapter_1aa1e0bd5984e477759b299c354f682ab5" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1aa1e0bd5984e477759b299c354f682ab5" kindref="member">umount</ref><sp/>(std::string<sp/>mntPoint<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="classSteganoFsAdapter_1afd4cb6d986578c8ae3818fbe04d593e1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1afd4cb6d986578c8ae3818fbe04d593e1" kindref="member">getFragmentationInPercent</ref><sp/>();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="classSteganoFsAdapter_1a44ebcbf79df3e7aaf3c8bb126c980fc6" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;size_t&gt;<sp/><ref refid="classSteganoFsAdapter_1a44ebcbf79df3e7aaf3c8bb126c980fc6" kindref="member">getFilesystemVector</ref><sp/>();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96" refid="classSteganoFsAdapter_1a1899628c9e7216a10172d8fde47b6f23" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1a1899628c9e7216a10172d8fde47b6f23" kindref="member">checkFilesystemIntegrity</ref><sp/>();</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="classSteganoFsAdapter_1a0a59bee7c6dd614233441e77d18648b9" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1a0a59bee7c6dd614233441e77d18648b9" kindref="member">defragmentateFilesystem</ref><sp/>();</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108" refid="classSteganoFsAdapter_1abb2a12ee096914a0b6983596ce93c1e1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">statvfs<sp/><ref refid="classSteganoFsAdapter_1abb2a12ee096914a0b6983596ce93c1e1" kindref="member">getFilesystemInfo</ref><sp/>();</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="classSteganoFsAdapter_1acd82f4904fdb30b50cf05416388cf395" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="classSteganoFsAdapter_1acd82f4904fdb30b50cf05416388cf395" kindref="member">steganoImageFolder</ref><sp/>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="classSteganoFsAdapter_1a9dc809dc804b9c51ec834ae27c2f8c0d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1a9dc809dc804b9c51ec834ae27c2f8c0d" kindref="member">isMounted</ref><sp/>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="classSteganoFsAdapter_1a8cff00edd53804553a0c47f3cd54b3b1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSteganoFsAdapter_1a8cff00edd53804553a0c47f3cd54b3b1" kindref="member">isLoaded</ref><sp/>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132" refid="classSteganoFsAdapter_1ac30e2ac223e1f7f4a650ff411ce10594" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="classSteganoFsAdapter_1ac30e2ac223e1f7f4a650ff411ce10594" kindref="member">mountPath</ref><sp/>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//STEGANO_FS_ADAPTER_STEGANOFSADAPTER_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/admin/CLionProjects/SteganoFS/cpp-wrapper/SteganoFsAdapter.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="dir_c56b81238196041958e27e80ad8786a6" kind="dir">
+    <compoundname>/home/admin/CLionProjects/SteganoFS/stegano_gui</compoundname>
+    <innerfile refid="defragmentdialog_8h">defragmentdialog.h</innerfile>
+    <innerfile refid="formatfilesystemdialog_8h">formatfilesystemdialog.h</innerfile>
+    <innerfile refid="fragmentationdiagram_8h">fragmentationdiagram.h</innerfile>
+    <innerfile refid="fragmentationdialog_8h">fragmentationdialog.h</innerfile>
+    <innerfile refid="fragmenttile_8h">fragmenttile.h</innerfile>
+    <innerfile refid="mainwindow_8h">mainwindow.h</innerfile>
+    <innerfile refid="mountfrompathdialog_8h">mountfrompathdialog.h</innerfile>
+    <innerfile refid="previewgraphicsview_8h">previewgraphicsview.h</innerfile>
+    <innerfile refid="showfilesysteminfodialog_8h">showfilesysteminfodialog.h</innerfile>
+    <innerfile refid="worker_8h">worker.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/"/>
+  </compounddef>
+</doxygen>

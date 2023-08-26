@@ -1,0 +1,982 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classMainWindow" kind="class" language="C++" prot="public">
+    <compoundname>MainWindow</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QMainWindow</basecompoundref>
+    <includes refid="mainwindow_8h" local="no">mainwindow.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classMainWindow_1a35466a70ed47252a0191168126a352a5" prot="private" static="no" mutable="no">
+        <type>Ui::MainWindow *</type>
+        <definition>Ui::MainWindow* MainWindow::ui</definition>
+        <argsstring></argsstring>
+        <name>ui</name>
+        <qualifiedname>MainWindow::ui</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="82" column="20" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a7e6ed674a00579a0f7f0e475bcb48b22" prot="private" static="no" mutable="no">
+        <type><ref refid="classDefragmentDialog" kindref="compound">DefragmentDialog</ref> *</type>
+        <definition>DefragmentDialog* MainWindow::m_DefragDlg</definition>
+        <argsstring></argsstring>
+        <name>m_DefragDlg</name>
+        <qualifiedname>MainWindow::m_DefragDlg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="83" column="22" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a629f996ac2e555f83bfcbaf4cb92f3cf" prot="private" static="no" mutable="no">
+        <type><ref refid="classMountFromPathDialog" kindref="compound">MountFromPathDialog</ref> *</type>
+        <definition>MountFromPathDialog* MainWindow::m_MFPDlg</definition>
+        <argsstring></argsstring>
+        <name>m_MFPDlg</name>
+        <qualifiedname>MainWindow::m_MFPDlg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="84" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a6e0800eaf6c8967e4ed1c2b38ac07e99" prot="private" static="no" mutable="no">
+        <type><ref refid="classShowFileSystemInfoDialog" kindref="compound">ShowFileSystemInfoDialog</ref> *</type>
+        <definition>ShowFileSystemInfoDialog* MainWindow::m_SFIdlg</definition>
+        <argsstring></argsstring>
+        <name>m_SFIdlg</name>
+        <qualifiedname>MainWindow::m_SFIdlg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="85" column="30" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a374b301150ecaeafd93f5e0d6de0731f" prot="private" static="no" mutable="no">
+        <type><ref refid="classFormatFileSystemDialog" kindref="compound">FormatFileSystemDialog</ref> *</type>
+        <definition>FormatFileSystemDialog* MainWindow::m_FFSDlg</definition>
+        <argsstring></argsstring>
+        <name>m_FFSDlg</name>
+        <qualifiedname>MainWindow::m_FFSDlg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="86" column="28" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1aa6e26cda92980fe0139fd5a8da4f8e72" prot="private" static="no" mutable="no">
+        <type>QGraphicsScene *</type>
+        <definition>QGraphicsScene* MainWindow::m_previewPicture</definition>
+        <argsstring></argsstring>
+        <name>m_previewPicture</name>
+        <qualifiedname>MainWindow::m_previewPicture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="87" column="20" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1aec221a75ad6bd0e6a7d77605d8f6447b" prot="private" static="no" mutable="no">
+        <type><ref refid="classPreviewGraphicsView" kindref="compound">PreviewGraphicsView</ref> *</type>
+        <definition>PreviewGraphicsView* MainWindow::m_pgv</definition>
+        <argsstring></argsstring>
+        <name>m_pgv</name>
+        <qualifiedname>MainWindow::m_pgv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="88" column="25" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1ad27b74313e23e7b7378860d3ff7aff37" prot="private" static="no" mutable="no">
+        <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> *</type>
+        <definition>SteganoFsAdapter* MainWindow::steganoFsAdapter</definition>
+        <argsstring></argsstring>
+        <name>steganoFsAdapter</name>
+        <qualifiedname>MainWindow::steganoFsAdapter</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="89" column="22" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a816962ad7b8cb9d66b1639598ef8359e" prot="private" static="no" mutable="no">
+        <type><ref refid="classWorker" kindref="compound">Worker</ref> *</type>
+        <definition>Worker* MainWindow::m_worker</definition>
+        <argsstring></argsstring>
+        <name>m_worker</name>
+        <qualifiedname>MainWindow::m_worker</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="90" column="12" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a43b3f1df6b99e309cfbd9a5429318c41" prot="private" static="no" mutable="no">
+        <type>QThread *</type>
+        <definition>QThread* MainWindow::m_thread</definition>
+        <argsstring></argsstring>
+        <name>m_thread</name>
+        <qualifiedname>MainWindow::m_thread</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="91" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1abff2bc4b6a43da734bcb3be31e032e89" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MainWindow::m_darkstyle</definition>
+        <argsstring></argsstring>
+        <name>m_darkstyle</name>
+        <qualifiedname>MainWindow::m_darkstyle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="92" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a19c6dffc664914670374e8884a01b5f6" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MainWindow::m_lightstyle</definition>
+        <argsstring></argsstring>
+        <name>m_lightstyle</name>
+        <qualifiedname>MainWindow::m_lightstyle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="93" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a03ba572db9add075f3753bb08a98d492" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MainWindow::m_bafButtonsStyle_dark</definition>
+        <argsstring></argsstring>
+        <name>m_bafButtonsStyle_dark</name>
+        <qualifiedname>MainWindow::m_bafButtonsStyle_dark</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="94" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a538fa861cbb4f468f57277e3273ef34a" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MainWindow::m_bafButtonsStyle_light</definition>
+        <argsstring></argsstring>
+        <name>m_bafButtonsStyle_light</name>
+        <qualifiedname>MainWindow::m_bafButtonsStyle_light</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="95" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1ac8d9e82d8d9a2f584e93e38b6acf4632" prot="private" static="no" mutable="no">
+        <type>QFileSystemModel *</type>
+        <definition>QFileSystemModel* MainWindow::m_dirmodel</definition>
+        <argsstring></argsstring>
+        <name>m_dirmodel</name>
+        <qualifiedname>MainWindow::m_dirmodel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="96" column="22" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1adc318830920907108e187fb18819df02" prot="private" static="no" mutable="no">
+        <type>QFileSystemModel *</type>
+        <definition>QFileSystemModel* MainWindow::m_filemodel</definition>
+        <argsstring></argsstring>
+        <name>m_filemodel</name>
+        <qualifiedname>MainWindow::m_filemodel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="97" column="22" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1ae8370d9932ee3505d48321d481bc4a7a" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MainWindow::m_currentDir</definition>
+        <argsstring></argsstring>
+        <name>m_currentDir</name>
+        <qualifiedname>MainWindow::m_currentDir</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="98" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a22d6a61b1213b3f83df26ad336e288ff" prot="private" static="no" mutable="no">
+        <type>QListWidgetItem *</type>
+        <definition>QListWidgetItem* MainWindow::m_currentFile</definition>
+        <argsstring></argsstring>
+        <name>m_currentFile</name>
+        <qualifiedname>MainWindow::m_currentFile</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="99" column="21" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a79886255f2c828f23b0cdc8149a96b1c" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MainWindow::m_currentFileString</definition>
+        <argsstring></argsstring>
+        <name>m_currentFileString</name>
+        <qualifiedname>MainWindow::m_currentFileString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="100" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a5c61052415d6615fac249baea0cc9ca1" prot="private" static="no" mutable="no">
+        <type>QList&lt; QString &gt; *</type>
+        <definition>QList&lt;QString&gt;* MainWindow::m_movingHistory</definition>
+        <argsstring></argsstring>
+        <name>m_movingHistory</name>
+        <qualifiedname>MainWindow::m_movingHistory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="101" column="11" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1ae803755e8ce0bfd14c05eb571ca8972e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int MainWindow::m_stepsToGoBack</definition>
+        <argsstring></argsstring>
+        <name>m_stepsToGoBack</name>
+        <qualifiedname>MainWindow::m_stepsToGoBack</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="102" column="9" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1af32d60011ed49fc3c518db346e1005cb" prot="private" static="no" mutable="no">
+        <type>QList&lt; QListWidgetItem &gt;</type>
+        <definition>QList&lt;QListWidgetItem&gt; MainWindow::selectedFiles</definition>
+        <argsstring></argsstring>
+        <name>selectedFiles</name>
+        <qualifiedname>MainWindow::selectedFiles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="103" column="11" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a5b9ae797c4409cf75dda21234c153d07" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MainWindow::m_lastDirectory</definition>
+        <argsstring></argsstring>
+        <name>m_lastDirectory</name>
+        <qualifiedname>MainWindow::m_lastDirectory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="104" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1ae3885c973caee1875f47dfac929af476" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MainWindow::m_nextDirectory</definition>
+        <argsstring></argsstring>
+        <name>m_nextDirectory</name>
+        <qualifiedname>MainWindow::m_nextDirectory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="105" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1ad154ebfec2b8d9b99e45e0c4c15a8d99" prot="private" static="no" mutable="no">
+        <type>QListWidget *</type>
+        <definition>QListWidget* MainWindow::listWidget</definition>
+        <argsstring></argsstring>
+        <name>listWidget</name>
+        <qualifiedname>MainWindow::listWidget</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="106" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a90866e624993aa14910a2c66eb2272d4" prot="private" static="no" mutable="no">
+        <type>QTreeView *</type>
+        <definition>QTreeView* MainWindow::treeView</definition>
+        <argsstring></argsstring>
+        <name>treeView</name>
+        <qualifiedname>MainWindow::treeView</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="107" column="15" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1aaef91190dce87c592aadd9b5929ac887" prot="private" static="no" mutable="no">
+        <type>QLineEdit *</type>
+        <definition>QLineEdit* MainWindow::searchLineEdit</definition>
+        <argsstring></argsstring>
+        <name>searchLineEdit</name>
+        <qualifiedname>MainWindow::searchLineEdit</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="108" column="15" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1adef40a0ea29b1545803a6f21cbdb2bff" prot="private" static="no" mutable="no">
+        <type>QPushButton *</type>
+        <definition>QPushButton* MainWindow::refreshButton</definition>
+        <argsstring></argsstring>
+        <name>refreshButton</name>
+        <qualifiedname>MainWindow::refreshButton</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="109" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1ab96244b1dec19b15d0352f56ec116ff2" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool MainWindow::m_preview_on</definition>
+        <argsstring></argsstring>
+        <name>m_preview_on</name>
+        <qualifiedname>MainWindow::m_preview_on</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="110" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMainWindow_1a8371d24c84465fc5baa4c51710d93a80" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool MainWindow::m_lightmodeOn</definition>
+        <argsstring></argsstring>
+        <name>m_lightmodeOn</name>
+        <qualifiedname>MainWindow::m_lightmodeOn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="111" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMainWindow_1a996c5a2b6f77944776856f08ec30858d" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MainWindow::MainWindow</definition>
+        <argsstring>(QWidget *parent=nullptr)</argsstring>
+        <name>MainWindow</name>
+        <qualifiedname>MainWindow::MainWindow</qualifiedname>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Constructor for the <ref refid="classMainWindow" kindref="compound">MainWindow</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent widget. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classMainWindow_1a1f7d2c56410fc1bfa135bb907d43313f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MainWindow::~MainWindow</definition>
+        <argsstring>() override</argsstring>
+        <name>~MainWindow</name>
+        <qualifiedname>MainWindow::~MainWindow</qualifiedname>
+        <briefdescription>
+<para>Destructor for the <ref refid="classMainWindow" kindref="compound">MainWindow</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="49" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="signal">
+      <memberdef kind="signal" id="classMainWindow_1ace748f1515a0654d9f2325d7bca9a02b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::pathChanged</definition>
+        <argsstring>()</argsstring>
+        <name>pathChanged</name>
+        <qualifiedname>MainWindow::pathChanged</qualifiedname>
+        <briefdescription>
+<para>Signal emitted when the path is changed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="55" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-slot">
+      <memberdef kind="slot" id="classMainWindow_1adc7d4b2b210efab401f0b14641f80464" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_treeView_clicked</definition>
+        <argsstring>(const QModelIndex &amp;index)</argsstring>
+        <name>on_treeView_clicked</name>
+        <qualifiedname>MainWindow::on_treeView_clicked</qualifiedname>
+        <param>
+          <type>const QModelIndex &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="58" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a657148a50d82e63cb74208ad57e004a9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::handleSearchTextChanged</definition>
+        <argsstring>(const QString &amp;searchText)</argsstring>
+        <name>handleSearchTextChanged</name>
+        <qualifiedname>MainWindow::handleSearchTextChanged</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>searchText</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="59" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a63bf7ced6e8af016befcdfa501c41d85" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::refreshView</definition>
+        <argsstring>()</argsstring>
+        <name>refreshView</name>
+        <qualifiedname>MainWindow::refreshView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="60" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a3ddd7ff6e24d56ac9a8c046e182c1a82" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_pathLineEdit_editingFinished</definition>
+        <argsstring>()</argsstring>
+        <name>on_pathLineEdit_editingFinished</name>
+        <qualifiedname>MainWindow::on_pathLineEdit_editingFinished</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="61" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a63f4303991bd3a9c846b458b9cfe98f4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_DisplayComboBox_currentIndexChanged</definition>
+        <argsstring>(int index)</argsstring>
+        <name>on_DisplayComboBox_currentIndexChanged</name>
+        <qualifiedname>MainWindow::on_DisplayComboBox_currentIndexChanged</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="62" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1ad9aa8836acd93d195c7724fd49033796" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_listWidget_currentItemChanged</definition>
+        <argsstring>(QListWidgetItem *current, QListWidgetItem *previous)</argsstring>
+        <name>on_listWidget_currentItemChanged</name>
+        <qualifiedname>MainWindow::on_listWidget_currentItemChanged</qualifiedname>
+        <param>
+          <type>QListWidgetItem *</type>
+          <declname>current</declname>
+        </param>
+        <param>
+          <type>QListWidgetItem *</type>
+          <declname>previous</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="63" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a84844b67d87832fabd59f34e5c906e06" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_previewToolButton_clicked</definition>
+        <argsstring>()</argsstring>
+        <name>on_previewToolButton_clicked</name>
+        <qualifiedname>MainWindow::on_previewToolButton_clicked</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="64" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1aba9595b34e78a2e4c4afedf0edb71f10" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_listWidget_itemClicked</definition>
+        <argsstring>(QListWidgetItem *item)</argsstring>
+        <name>on_listWidget_itemClicked</name>
+        <qualifiedname>MainWindow::on_listWidget_itemClicked</qualifiedname>
+        <param>
+          <type>QListWidgetItem *</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="65" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a76bd44bccc994fef6707bba0a353a9e2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_darkModePushButton_clicked</definition>
+        <argsstring>()</argsstring>
+        <name>on_darkModePushButton_clicked</name>
+        <qualifiedname>MainWindow::on_darkModePushButton_clicked</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="66" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a15ab69988e7982430f1f7a5951940520" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_actionDefragment_triggered</definition>
+        <argsstring>()</argsstring>
+        <name>on_actionDefragment_triggered</name>
+        <qualifiedname>MainWindow::on_actionDefragment_triggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="67" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a7ce007cb7298e0c668b9a03bf6273377" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_actionShow_Filesystem_information_triggered</definition>
+        <argsstring>()</argsstring>
+        <name>on_actionShow_Filesystem_information_triggered</name>
+        <qualifiedname>MainWindow::on_actionShow_Filesystem_information_triggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="68" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a911408fd8018ddd2c76d1167c9d0e918" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_actionMount_triggered</definition>
+        <argsstring>()</argsstring>
+        <name>on_actionMount_triggered</name>
+        <qualifiedname>MainWindow::on_actionMount_triggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="69" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1adb5390e07d47a00f363ab92b7c92e892" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_actionUnmount_triggered</definition>
+        <argsstring>()</argsstring>
+        <name>on_actionUnmount_triggered</name>
+        <qualifiedname>MainWindow::on_actionUnmount_triggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="70" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a6f00f907e426ae38bc6225830aa9043d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_actionShow_Fragmentation_triggered</definition>
+        <argsstring>()</argsstring>
+        <name>on_actionShow_Fragmentation_triggered</name>
+        <qualifiedname>MainWindow::on_actionShow_Fragmentation_triggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="71" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1aba7f4fc3c739ebe0b794c101d0f88ace" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_listWidget_itemDoubleClicked</definition>
+        <argsstring>(QListWidgetItem *item)</argsstring>
+        <name>on_listWidget_itemDoubleClicked</name>
+        <qualifiedname>MainWindow::on_listWidget_itemDoubleClicked</qualifiedname>
+        <param>
+          <type>QListWidgetItem *</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="72" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1ac950f9a7d9f79984c61cdd13994d5101" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::refreshPreviewOnResize</definition>
+        <argsstring>()</argsstring>
+        <name>refreshPreviewOnResize</name>
+        <qualifiedname>MainWindow::refreshPreviewOnResize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="73" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a2dbe79cf6ee322a7d0c6fea43d3df45c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_backButton_clicked</definition>
+        <argsstring>()</argsstring>
+        <name>on_backButton_clicked</name>
+        <qualifiedname>MainWindow::on_backButton_clicked</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="74" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a4091c4a638039381084acb6b0d43ba06" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_forwardButton_clicked</definition>
+        <argsstring>()</argsstring>
+        <name>on_forwardButton_clicked</name>
+        <qualifiedname>MainWindow::on_forwardButton_clicked</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="75" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1aed8d1d79f052e31c5e8d54d684ac58b5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::updateHistory</definition>
+        <argsstring>()</argsstring>
+        <name>updateHistory</name>
+        <qualifiedname>MainWindow::updateHistory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="76" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a45450a93fd294369cb319aa0b30c6fa2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_sortComboBox_currentIndexChanged</definition>
+        <argsstring>(int index)</argsstring>
+        <name>on_sortComboBox_currentIndexChanged</name>
+        <qualifiedname>MainWindow::on_sortComboBox_currentIndexChanged</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="77" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMainWindow_1a5425aa8918424d377b09b66610b1ed45" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::on_actionFormat_Filesystem_triggered</definition>
+        <argsstring>()</argsstring>
+        <name>on_actionFormat_Filesystem_triggered</name>
+        <qualifiedname>MainWindow::on_actionFormat_Filesystem_triggered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="79" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classMainWindow_1ad27f0769629adb526457b279ae4d53d8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::updateViews</definition>
+        <argsstring>(const QString &amp;sPath)</argsstring>
+        <name>updateViews</name>
+        <qualifiedname>MainWindow::updateViews</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>sPath</declname>
+        </param>
+        <briefdescription>
+<para>Updates the QListWidget with items from the given path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to update the QListWidget with. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="117" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classMainWindow_1a3e6c8daee859181db26d8852b073403c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::updateListWidget</definition>
+        <argsstring>(const QString &amp;sPath)</argsstring>
+        <name>updateListWidget</name>
+        <qualifiedname>MainWindow::updateListWidget</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>sPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="118" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classMainWindow_1ad9f1b11913d2324809e1ceedb9826506" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MainWindow::updateTreeView</definition>
+        <argsstring>(const QString &amp;sPath)</argsstring>
+        <name>updateTreeView</name>
+        <qualifiedname>MainWindow::updateTreeView</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>sPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="120" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classMainWindow" kindref="compound">MainWindow</ref> class is the main GUI window for the application. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class handles various UI interactions, signals, and slots. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>MainWindow</label>
+        <link refid="classMainWindow"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QMainWindow</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>MainWindow</label>
+        <link refid="classMainWindow"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QMainWindow</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" line="35" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mainwindow.h" bodystart="36" bodyend="121"/>
+    <listofallmembers>
+      <member refid="classMainWindow_1a657148a50d82e63cb74208ad57e004a9" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>handleSearchTextChanged</name></member>
+      <member refid="classMainWindow_1ad154ebfec2b8d9b99e45e0c4c15a8d99" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>listWidget</name></member>
+      <member refid="classMainWindow_1a03ba572db9add075f3753bb08a98d492" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_bafButtonsStyle_dark</name></member>
+      <member refid="classMainWindow_1a538fa861cbb4f468f57277e3273ef34a" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_bafButtonsStyle_light</name></member>
+      <member refid="classMainWindow_1ae8370d9932ee3505d48321d481bc4a7a" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_currentDir</name></member>
+      <member refid="classMainWindow_1a22d6a61b1213b3f83df26ad336e288ff" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_currentFile</name></member>
+      <member refid="classMainWindow_1a79886255f2c828f23b0cdc8149a96b1c" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_currentFileString</name></member>
+      <member refid="classMainWindow_1abff2bc4b6a43da734bcb3be31e032e89" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_darkstyle</name></member>
+      <member refid="classMainWindow_1a7e6ed674a00579a0f7f0e475bcb48b22" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_DefragDlg</name></member>
+      <member refid="classMainWindow_1ac8d9e82d8d9a2f584e93e38b6acf4632" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_dirmodel</name></member>
+      <member refid="classMainWindow_1a374b301150ecaeafd93f5e0d6de0731f" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_FFSDlg</name></member>
+      <member refid="classMainWindow_1adc318830920907108e187fb18819df02" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_filemodel</name></member>
+      <member refid="classMainWindow_1a5b9ae797c4409cf75dda21234c153d07" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_lastDirectory</name></member>
+      <member refid="classMainWindow_1a8371d24c84465fc5baa4c51710d93a80" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_lightmodeOn</name></member>
+      <member refid="classMainWindow_1a19c6dffc664914670374e8884a01b5f6" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_lightstyle</name></member>
+      <member refid="classMainWindow_1a629f996ac2e555f83bfcbaf4cb92f3cf" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_MFPDlg</name></member>
+      <member refid="classMainWindow_1a5c61052415d6615fac249baea0cc9ca1" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_movingHistory</name></member>
+      <member refid="classMainWindow_1ae3885c973caee1875f47dfac929af476" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_nextDirectory</name></member>
+      <member refid="classMainWindow_1aec221a75ad6bd0e6a7d77605d8f6447b" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_pgv</name></member>
+      <member refid="classMainWindow_1ab96244b1dec19b15d0352f56ec116ff2" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_preview_on</name></member>
+      <member refid="classMainWindow_1aa6e26cda92980fe0139fd5a8da4f8e72" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_previewPicture</name></member>
+      <member refid="classMainWindow_1a6e0800eaf6c8967e4ed1c2b38ac07e99" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_SFIdlg</name></member>
+      <member refid="classMainWindow_1ae803755e8ce0bfd14c05eb571ca8972e" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_stepsToGoBack</name></member>
+      <member refid="classMainWindow_1a43b3f1df6b99e309cfbd9a5429318c41" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_thread</name></member>
+      <member refid="classMainWindow_1a816962ad7b8cb9d66b1639598ef8359e" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>m_worker</name></member>
+      <member refid="classMainWindow_1a996c5a2b6f77944776856f08ec30858d" prot="public" virt="non-virtual"><scope>MainWindow</scope><name>MainWindow</name></member>
+      <member refid="classMainWindow_1a15ab69988e7982430f1f7a5951940520" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_actionDefragment_triggered</name></member>
+      <member refid="classMainWindow_1a5425aa8918424d377b09b66610b1ed45" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_actionFormat_Filesystem_triggered</name></member>
+      <member refid="classMainWindow_1a911408fd8018ddd2c76d1167c9d0e918" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_actionMount_triggered</name></member>
+      <member refid="classMainWindow_1a7ce007cb7298e0c668b9a03bf6273377" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_actionShow_Filesystem_information_triggered</name></member>
+      <member refid="classMainWindow_1a6f00f907e426ae38bc6225830aa9043d" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_actionShow_Fragmentation_triggered</name></member>
+      <member refid="classMainWindow_1adb5390e07d47a00f363ab92b7c92e892" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_actionUnmount_triggered</name></member>
+      <member refid="classMainWindow_1a2dbe79cf6ee322a7d0c6fea43d3df45c" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_backButton_clicked</name></member>
+      <member refid="classMainWindow_1a76bd44bccc994fef6707bba0a353a9e2" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_darkModePushButton_clicked</name></member>
+      <member refid="classMainWindow_1a63f4303991bd3a9c846b458b9cfe98f4" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_DisplayComboBox_currentIndexChanged</name></member>
+      <member refid="classMainWindow_1a4091c4a638039381084acb6b0d43ba06" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_forwardButton_clicked</name></member>
+      <member refid="classMainWindow_1ad9aa8836acd93d195c7724fd49033796" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_listWidget_currentItemChanged</name></member>
+      <member refid="classMainWindow_1aba9595b34e78a2e4c4afedf0edb71f10" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_listWidget_itemClicked</name></member>
+      <member refid="classMainWindow_1aba7f4fc3c739ebe0b794c101d0f88ace" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_listWidget_itemDoubleClicked</name></member>
+      <member refid="classMainWindow_1a3ddd7ff6e24d56ac9a8c046e182c1a82" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_pathLineEdit_editingFinished</name></member>
+      <member refid="classMainWindow_1a84844b67d87832fabd59f34e5c906e06" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_previewToolButton_clicked</name></member>
+      <member refid="classMainWindow_1a45450a93fd294369cb319aa0b30c6fa2" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_sortComboBox_currentIndexChanged</name></member>
+      <member refid="classMainWindow_1adc7d4b2b210efab401f0b14641f80464" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>on_treeView_clicked</name></member>
+      <member refid="classMainWindow_1ace748f1515a0654d9f2325d7bca9a02b" prot="public" virt="non-virtual"><scope>MainWindow</scope><name>pathChanged</name></member>
+      <member refid="classMainWindow_1adef40a0ea29b1545803a6f21cbdb2bff" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>refreshButton</name></member>
+      <member refid="classMainWindow_1ac950f9a7d9f79984c61cdd13994d5101" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>refreshPreviewOnResize</name></member>
+      <member refid="classMainWindow_1a63bf7ced6e8af016befcdfa501c41d85" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>refreshView</name></member>
+      <member refid="classMainWindow_1aaef91190dce87c592aadd9b5929ac887" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>searchLineEdit</name></member>
+      <member refid="classMainWindow_1af32d60011ed49fc3c518db346e1005cb" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>selectedFiles</name></member>
+      <member refid="classMainWindow_1ad27b74313e23e7b7378860d3ff7aff37" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>steganoFsAdapter</name></member>
+      <member refid="classMainWindow_1a90866e624993aa14910a2c66eb2272d4" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>treeView</name></member>
+      <member refid="classMainWindow_1a35466a70ed47252a0191168126a352a5" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>ui</name></member>
+      <member refid="classMainWindow_1aed8d1d79f052e31c5e8d54d684ac58b5" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>updateHistory</name></member>
+      <member refid="classMainWindow_1a3e6c8daee859181db26d8852b073403c" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>updateListWidget</name></member>
+      <member refid="classMainWindow_1ad9f1b11913d2324809e1ceedb9826506" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>updateTreeView</name></member>
+      <member refid="classMainWindow_1ad27f0769629adb526457b279ae4d53d8" prot="private" virt="non-virtual"><scope>MainWindow</scope><name>updateViews</name></member>
+      <member refid="classMainWindow_1a1f7d2c56410fc1bfa135bb907d43313f" prot="public" virt="non-virtual"><scope>MainWindow</scope><name>~MainWindow</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

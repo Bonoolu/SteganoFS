@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classFormatFileSystemDialog" kind="class" language="C++" prot="public">
+    <compoundname>FormatFileSystemDialog</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QDialog</basecompoundref>
+    <includes refid="formatfilesystemdialog_8h" local="no">formatfilesystemdialog.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classFormatFileSystemDialog_1ac491e418d2cec873f60cf322ba133318" prot="private" static="no" mutable="no">
+        <type>Ui::FormatFileSystemDialog *</type>
+        <definition>Ui::FormatFileSystemDialog* FormatFileSystemDialog::ui</definition>
+        <argsstring></argsstring>
+        <name>ui</name>
+        <qualifiedname>FormatFileSystemDialog::ui</qualifiedname>
+        <briefdescription>
+<para>The UI components. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="78" column="32" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classFormatFileSystemDialog_1a710287b3a8a0a568cc54569193790678" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString FormatFileSystemDialog::m_filesystemPath</definition>
+        <argsstring></argsstring>
+        <name>m_filesystemPath</name>
+        <qualifiedname>FormatFileSystemDialog::m_filesystemPath</qualifiedname>
+        <briefdescription>
+<para>The selected filesystem path. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="79" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classFormatFileSystemDialog_1a8a8a03ad7e4c86461c072dcea1a0c042" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool FormatFileSystemDialog::m_lightmodeOn</definition>
+        <argsstring></argsstring>
+        <name>m_lightmodeOn</name>
+        <qualifiedname>FormatFileSystemDialog::m_lightmodeOn</qualifiedname>
+        <briefdescription>
+<para>Flag indicating light mode status. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="80" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classFormatFileSystemDialog_1ab3c8dfc23e73d4fc910aacb359ce3449" prot="private" static="no" mutable="no">
+        <type>QFileDialog *</type>
+        <definition>QFileDialog* FormatFileSystemDialog::m_fsDlg</definition>
+        <argsstring></argsstring>
+        <name>m_fsDlg</name>
+        <qualifiedname>FormatFileSystemDialog::m_fsDlg</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Dialog for selecting filesystem path. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="81" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classFormatFileSystemDialog_1ab20deb56d5f7275bec995175b9d3d8e1" prot="private" static="no" mutable="no">
+        <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> *</type>
+        <definition>SteganoFsAdapter* FormatFileSystemDialog::m_adapter</definition>
+        <argsstring></argsstring>
+        <name>m_adapter</name>
+        <qualifiedname>FormatFileSystemDialog::m_adapter</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Associated <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="82" column="22" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classFormatFileSystemDialog_1aaba29f0e2d89c8822c1a53fbcec16a3c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FormatFileSystemDialog::FormatFileSystemDialog</definition>
+        <argsstring>(QWidget *parent=nullptr)</argsstring>
+        <name>FormatFileSystemDialog</name>
+        <qualifiedname>FormatFileSystemDialog::FormatFileSystemDialog</qualifiedname>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="27" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classFormatFileSystemDialog_1abbfaf02cde260941c5b03f5ba17b1a90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FormatFileSystemDialog::~FormatFileSystemDialog</definition>
+        <argsstring>() override</argsstring>
+        <name>~FormatFileSystemDialog</name>
+        <qualifiedname>FormatFileSystemDialog::~FormatFileSystemDialog</qualifiedname>
+        <briefdescription>
+<para>Destructs the <ref refid="classFormatFileSystemDialog" kindref="compound">FormatFileSystemDialog</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="32" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classFormatFileSystemDialog_1afecfd82a5095388be528f89a2eb37c99" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool FormatFileSystemDialog::lightmodeOn</definition>
+        <argsstring>() const</argsstring>
+        <name>lightmodeOn</name>
+        <qualifiedname>FormatFileSystemDialog::lightmodeOn</qualifiedname>
+        <briefdescription>
+<para>Checks if light mode is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if light mode is enabled, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="38" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classFormatFileSystemDialog_1a20822de12d768b26a74311d156bc4349" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FormatFileSystemDialog::setLightmodeOn</definition>
+        <argsstring>(bool newLightmodeOn)</argsstring>
+        <name>setLightmodeOn</name>
+        <qualifiedname>FormatFileSystemDialog::setLightmodeOn</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>newLightmodeOn</declname>
+        </param>
+        <briefdescription>
+<para>Sets the light mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newLightmodeOn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True to enable light mode, false to disable. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="44" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classFormatFileSystemDialog_1af22d96618f70f44242656405a580370b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>QString</type>
+        <definition>QString FormatFileSystemDialog::filesystemPath</definition>
+        <argsstring>() const</argsstring>
+        <name>filesystemPath</name>
+        <qualifiedname>FormatFileSystemDialog::filesystemPath</qualifiedname>
+        <briefdescription>
+<para>Returns the selected filesystem path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The selected filesystem path. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="50" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classFormatFileSystemDialog_1a95011a39226ae36584ffc95fd276080a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FormatFileSystemDialog::setFilesystemPath</definition>
+        <argsstring>(const QString &amp;newFilesystemPath)</argsstring>
+        <name>setFilesystemPath</name>
+        <qualifiedname>FormatFileSystemDialog::setFilesystemPath</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>newFilesystemPath</declname>
+        </param>
+        <briefdescription>
+<para>Sets the filesystem path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newFilesystemPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new filesystem path. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="56" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classFormatFileSystemDialog_1a5a1a3f337eeb4998e6182ef1ad348b51" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> *</type>
+        <definition>SteganoFsAdapter * FormatFileSystemDialog::adapter</definition>
+        <argsstring>() const</argsstring>
+        <name>adapter</name>
+        <qualifiedname>FormatFileSystemDialog::adapter</qualifiedname>
+        <briefdescription>
+<para>Returns the associated <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The associated <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="62" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classFormatFileSystemDialog_1addcb99c6141a0e15df6565dc5f8b806b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FormatFileSystemDialog::setAdapter</definition>
+        <argsstring>(SteganoFsAdapter *newAdapter)</argsstring>
+        <name>setAdapter</name>
+        <qualifiedname>FormatFileSystemDialog::setAdapter</qualifiedname>
+        <param>
+          <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> *</type>
+          <declname>newAdapter</declname>
+        </param>
+        <briefdescription>
+<para>Sets the <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newAdapter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="68" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-slot">
+      <memberdef kind="slot" id="classFormatFileSystemDialog_1acd3c2c6853b02eda15af6eddfa5c5dc0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FormatFileSystemDialog::on_fileSystemLineEdit_textChanged</definition>
+        <argsstring>(const QString &amp;arg1)</argsstring>
+        <name>on_fileSystemLineEdit_textChanged</name>
+        <qualifiedname>FormatFileSystemDialog::on_fileSystemLineEdit_textChanged</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>arg1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="71" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classFormatFileSystemDialog_1a92e458d91c2c68b49ca9e013ef4af7c4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FormatFileSystemDialog::on_browseButton_clicked</definition>
+        <argsstring>()</argsstring>
+        <name>on_browseButton_clicked</name>
+        <qualifiedname>FormatFileSystemDialog::on_browseButton_clicked</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="73" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classFormatFileSystemDialog_1a794bfe2166f924e4b7a08fa999342813" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FormatFileSystemDialog::on_buttonBox_accepted</definition>
+        <argsstring>()</argsstring>
+        <name>on_buttonBox_accepted</name>
+        <qualifiedname>FormatFileSystemDialog::on_buttonBox_accepted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="75" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Dialog for mounting a filesystem from a specific path. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class provides a dialog for selecting a mounting path and filesystem path, along with additional settings like light mode. It also allows connecting a <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> to handle the mounting process. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FormatFileSystemDialog</label>
+        <link refid="classFormatFileSystemDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FormatFileSystemDialog</label>
+        <link refid="classFormatFileSystemDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" line="13" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/formatfilesystemdialog.h" bodystart="14" bodyend="83"/>
+    <listofallmembers>
+      <member refid="classFormatFileSystemDialog_1a5a1a3f337eeb4998e6182ef1ad348b51" prot="public" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>adapter</name></member>
+      <member refid="classFormatFileSystemDialog_1af22d96618f70f44242656405a580370b" prot="public" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>filesystemPath</name></member>
+      <member refid="classFormatFileSystemDialog_1aaba29f0e2d89c8822c1a53fbcec16a3c" prot="public" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>FormatFileSystemDialog</name></member>
+      <member refid="classFormatFileSystemDialog_1afecfd82a5095388be528f89a2eb37c99" prot="public" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>lightmodeOn</name></member>
+      <member refid="classFormatFileSystemDialog_1ab20deb56d5f7275bec995175b9d3d8e1" prot="private" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>m_adapter</name></member>
+      <member refid="classFormatFileSystemDialog_1a710287b3a8a0a568cc54569193790678" prot="private" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>m_filesystemPath</name></member>
+      <member refid="classFormatFileSystemDialog_1ab3c8dfc23e73d4fc910aacb359ce3449" prot="private" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>m_fsDlg</name></member>
+      <member refid="classFormatFileSystemDialog_1a8a8a03ad7e4c86461c072dcea1a0c042" prot="private" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>m_lightmodeOn</name></member>
+      <member refid="classFormatFileSystemDialog_1a92e458d91c2c68b49ca9e013ef4af7c4" prot="private" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>on_browseButton_clicked</name></member>
+      <member refid="classFormatFileSystemDialog_1a794bfe2166f924e4b7a08fa999342813" prot="private" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>on_buttonBox_accepted</name></member>
+      <member refid="classFormatFileSystemDialog_1acd3c2c6853b02eda15af6eddfa5c5dc0" prot="private" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>on_fileSystemLineEdit_textChanged</name></member>
+      <member refid="classFormatFileSystemDialog_1addcb99c6141a0e15df6565dc5f8b806b" prot="public" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>setAdapter</name></member>
+      <member refid="classFormatFileSystemDialog_1a95011a39226ae36584ffc95fd276080a" prot="public" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>setFilesystemPath</name></member>
+      <member refid="classFormatFileSystemDialog_1a20822de12d768b26a74311d156bc4349" prot="public" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>setLightmodeOn</name></member>
+      <member refid="classFormatFileSystemDialog_1ac491e418d2cec873f60cf322ba133318" prot="private" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>ui</name></member>
+      <member refid="classFormatFileSystemDialog_1abbfaf02cde260941c5b03f5ba17b1a90" prot="public" virt="non-virtual"><scope>FormatFileSystemDialog</scope><name>~FormatFileSystemDialog</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

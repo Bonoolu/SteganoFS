@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classFragmentationDiagram" kind="class" language="C++" prot="public">
+    <compoundname>FragmentationDiagram</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QWidget</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classFragmentationDiagram_1abee15a11fed33d7c82ca83d1dd869721" prot="private" static="no" mutable="no">
+        <type>Ui::FragmentationDiagram *</type>
+        <definition>Ui::FragmentationDiagram* FragmentationDiagram::ui</definition>
+        <argsstring></argsstring>
+        <name>ui</name>
+        <qualifiedname>FragmentationDiagram::ui</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdiagram.h" line="21" column="30" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdiagram.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classFragmentationDiagram_1a16e9f71232923b5c10e2d986f232001b" prot="private" static="no" mutable="no">
+        <type>QList&lt; <ref refid="classFragmentTile" kindref="compound">FragmentTile</ref> * &gt; *</type>
+        <definition>QList&lt;FragmentTile *&gt;* FragmentationDiagram::tiles</definition>
+        <argsstring></argsstring>
+        <name>tiles</name>
+        <qualifiedname>FragmentationDiagram::tiles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdiagram.h" line="22" column="11" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdiagram.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classFragmentationDiagram_1aae4ee9ece57258ffb064fc0d7e1f2f24" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FragmentationDiagram::FragmentationDiagram</definition>
+        <argsstring>(QWidget *parent=nullptr)</argsstring>
+        <name>FragmentationDiagram</name>
+        <qualifiedname>FragmentationDiagram::FragmentationDiagram</qualifiedname>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdiagram.h" line="17" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classFragmentationDiagram_1acdffba03285bc7e7eaea907d561a097b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FragmentationDiagram::~FragmentationDiagram</definition>
+        <argsstring>() override</argsstring>
+        <name>~FragmentationDiagram</name>
+        <qualifiedname>FragmentationDiagram::~FragmentationDiagram</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdiagram.h" line="18" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FragmentationDiagram</label>
+        <link refid="classFragmentationDiagram"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QWidget</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FragmentationDiagram</label>
+        <link refid="classFragmentationDiagram"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QWidget</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdiagram.h" line="12" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdiagram.h" bodystart="13" bodyend="23"/>
+    <listofallmembers>
+      <member refid="classFragmentationDiagram_1aae4ee9ece57258ffb064fc0d7e1f2f24" prot="public" virt="non-virtual"><scope>FragmentationDiagram</scope><name>FragmentationDiagram</name></member>
+      <member refid="classFragmentationDiagram_1a16e9f71232923b5c10e2d986f232001b" prot="private" virt="non-virtual"><scope>FragmentationDiagram</scope><name>tiles</name></member>
+      <member refid="classFragmentationDiagram_1abee15a11fed33d7c82ca83d1dd869721" prot="private" virt="non-virtual"><scope>FragmentationDiagram</scope><name>ui</name></member>
+      <member refid="classFragmentationDiagram_1acdffba03285bc7e7eaea907d561a097b" prot="public" virt="non-virtual"><scope>FragmentationDiagram</scope><name>~FragmentationDiagram</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

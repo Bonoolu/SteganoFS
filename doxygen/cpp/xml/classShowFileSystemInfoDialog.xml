@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classShowFileSystemInfoDialog" kind="class" language="C++" prot="public">
+    <compoundname>ShowFileSystemInfoDialog</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QDialog</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classShowFileSystemInfoDialog_1a66041300b8b2b13ba4ccdf3eb1caecdd" prot="private" static="no" mutable="no">
+        <type>Ui::ShowFileSystemInfoDialog *</type>
+        <definition>Ui::ShowFileSystemInfoDialog* ShowFileSystemInfoDialog::ui</definition>
+        <argsstring></argsstring>
+        <name>ui</name>
+        <qualifiedname>ShowFileSystemInfoDialog::ui</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The UI components. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" line="48" column="34" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classShowFileSystemInfoDialog_1ac885ba20bdd391d4d0ef817491ed3f22" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ShowFileSystemInfoDialog::m_lightmodeOn</definition>
+        <argsstring></argsstring>
+        <name>m_lightmodeOn</name>
+        <qualifiedname>ShowFileSystemInfoDialog::m_lightmodeOn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The state of light mode. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" line="49" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classShowFileSystemInfoDialog_1a6dbcf3f3fb4799581ea35d8c13d2a320" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ShowFileSystemInfoDialog::ShowFileSystemInfoDialog</definition>
+        <argsstring>(QWidget *parent=nullptr)</argsstring>
+        <name>ShowFileSystemInfoDialog</name>
+        <qualifiedname>ShowFileSystemInfoDialog::ShowFileSystemInfoDialog</qualifiedname>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classShowFileSystemInfoDialog" kindref="compound">ShowFileSystemInfoDialog</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent widget. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" line="22" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classShowFileSystemInfoDialog_1a15669c5dfeeb0d78c07d52868cd63142" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ShowFileSystemInfoDialog::~ShowFileSystemInfoDialog</definition>
+        <argsstring>() override</argsstring>
+        <name>~ShowFileSystemInfoDialog</name>
+        <qualifiedname>ShowFileSystemInfoDialog::~ShowFileSystemInfoDialog</qualifiedname>
+        <briefdescription>
+<para>Destructor for <ref refid="classShowFileSystemInfoDialog" kindref="compound">ShowFileSystemInfoDialog</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" line="27" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classShowFileSystemInfoDialog_1a6aa47a76fc6b885456ada85780966c00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ShowFileSystemInfoDialog::setLightmodeOn</definition>
+        <argsstring>(bool newLightmodeOn)</argsstring>
+        <name>setLightmodeOn</name>
+        <qualifiedname>ShowFileSystemInfoDialog::setLightmodeOn</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>newLightmodeOn</declname>
+        </param>
+        <briefdescription>
+<para>Sets the light mode state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newLightmodeOn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new light mode state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" line="33" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classShowFileSystemInfoDialog_1a0510202431ad37d11d18c0e72216eb89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ShowFileSystemInfoDialog::showFilesystemInfo</definition>
+        <argsstring>(SteganoFsAdapter &amp;sfa)</argsstring>
+        <name>showFilesystemInfo</name>
+        <qualifiedname>ShowFileSystemInfoDialog::showFilesystemInfo</qualifiedname>
+        <param>
+          <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> &amp;</type>
+          <declname>sfa</declname>
+        </param>
+        <briefdescription>
+<para>Displays filesystem information. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sfa</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> for filesystem access. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" line="39" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-slot">
+      <memberdef kind="slot" id="classShowFileSystemInfoDialog_1ac3b042e8bbae0efc973635611c69fb26" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ShowFileSystemInfoDialog::on_closeButton_clicked</definition>
+        <argsstring>()</argsstring>
+        <name>on_closeButton_clicked</name>
+        <qualifiedname>ShowFileSystemInfoDialog::on_closeButton_clicked</qualifiedname>
+        <briefdescription>
+<para>Slot function for the close button click event. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" line="45" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+      <node id="1">
+        <label>ShowFileSystemInfoDialog</label>
+        <link refid="classShowFileSystemInfoDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+      <node id="1">
+        <label>ShowFileSystemInfoDialog</label>
+        <link refid="classShowFileSystemInfoDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" line="13" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/showfilesysteminfodialog.h" bodystart="14" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classShowFileSystemInfoDialog_1ac885ba20bdd391d4d0ef817491ed3f22" prot="private" virt="non-virtual"><scope>ShowFileSystemInfoDialog</scope><name>m_lightmodeOn</name></member>
+      <member refid="classShowFileSystemInfoDialog_1ac3b042e8bbae0efc973635611c69fb26" prot="private" virt="non-virtual"><scope>ShowFileSystemInfoDialog</scope><name>on_closeButton_clicked</name></member>
+      <member refid="classShowFileSystemInfoDialog_1a6aa47a76fc6b885456ada85780966c00" prot="public" virt="non-virtual"><scope>ShowFileSystemInfoDialog</scope><name>setLightmodeOn</name></member>
+      <member refid="classShowFileSystemInfoDialog_1a0510202431ad37d11d18c0e72216eb89" prot="public" virt="non-virtual"><scope>ShowFileSystemInfoDialog</scope><name>showFilesystemInfo</name></member>
+      <member refid="classShowFileSystemInfoDialog_1a6dbcf3f3fb4799581ea35d8c13d2a320" prot="public" virt="non-virtual"><scope>ShowFileSystemInfoDialog</scope><name>ShowFileSystemInfoDialog</name></member>
+      <member refid="classShowFileSystemInfoDialog_1a66041300b8b2b13ba4ccdf3eb1caecdd" prot="private" virt="non-virtual"><scope>ShowFileSystemInfoDialog</scope><name>ui</name></member>
+      <member refid="classShowFileSystemInfoDialog_1a15669c5dfeeb0d78c07d52868cd63142" prot="public" virt="non-virtual"><scope>ShowFileSystemInfoDialog</scope><name>~ShowFileSystemInfoDialog</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

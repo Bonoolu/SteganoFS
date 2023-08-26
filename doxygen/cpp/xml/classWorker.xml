@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classWorker" kind="class" language="C++" prot="public">
+    <compoundname>Worker</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QObject</basecompoundref>
+    <includes refid="worker_8h" local="no">worker.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classWorker_1a013acfa37bedf294ece993aa4fcfb59f" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Worker::Worker</definition>
+        <argsstring>(QObject *parent=nullptr)</argsstring>
+        <name>Worker</name>
+        <qualifiedname>Worker::Worker</qualifiedname>
+        <param>
+          <type>QObject *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Constructor for the <ref refid="classWorker" kindref="compound">Worker</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent QObject for this worker. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/worker.h" line="21" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-slot">
+      <memberdef kind="slot" id="classWorker_1a9de036625c9508479d832b6b20a30f76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Worker::mountFolder</definition>
+        <argsstring>(const QVariant &amp;qAdapt, const QString &amp;s)</argsstring>
+        <name>mountFolder</name>
+        <qualifiedname>Worker::mountFolder</qualifiedname>
+        <param>
+          <type>const QVariant &amp;</type>
+          <declname>qAdapt</declname>
+        </param>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Mounts a folder using the provided adapter and path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>qAdapt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The QVariant containing a pointer to the <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the folder to be mounted. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/worker.h" line="29" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classWorker" kindref="compound">Worker</ref> class represents a worker object that performs tasks asynchronously. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class inherits from QObject and provides slots for performing various tasks. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>QObject</label>
+      </node>
+      <node id="1">
+        <label>Worker</label>
+        <link refid="classWorker"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>QObject</label>
+      </node>
+      <node id="1">
+        <label>Worker</label>
+        <link refid="classWorker"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/worker.h" line="13" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/worker.h" bodystart="14" bodyend="31"/>
+    <listofallmembers>
+      <member refid="classWorker_1a9de036625c9508479d832b6b20a30f76" prot="public" virt="non-virtual"><scope>Worker</scope><name>mountFolder</name></member>
+      <member refid="classWorker_1a013acfa37bedf294ece993aa4fcfb59f" prot="public" virt="non-virtual"><scope>Worker</scope><name>Worker</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

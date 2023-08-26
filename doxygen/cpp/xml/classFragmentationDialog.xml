@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classFragmentationDialog" kind="class" language="C++" prot="public">
+    <compoundname>FragmentationDialog</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QDialog</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classFragmentationDialog_1ab7a9d5e62995a0830ce12bb6453db2ba" prot="private" static="no" mutable="no">
+        <type>Ui::FragmentationDialog *</type>
+        <definition>Ui::FragmentationDialog* FragmentationDialog::ui</definition>
+        <argsstring></argsstring>
+        <name>ui</name>
+        <qualifiedname>FragmentationDialog::ui</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdialog.h" line="20" column="29" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdialog.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classFragmentationDialog_1ac7cce577cee2b686bafcd1e32cfa6e34" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FragmentationDialog::FragmentationDialog</definition>
+        <argsstring>(QWidget *parent=nullptr)</argsstring>
+        <name>FragmentationDialog</name>
+        <qualifiedname>FragmentationDialog::FragmentationDialog</qualifiedname>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdialog.h" line="16" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classFragmentationDialog_1a70760f655d540eb0ace1a951de0e8311" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FragmentationDialog::~FragmentationDialog</definition>
+        <argsstring>() override</argsstring>
+        <name>~FragmentationDialog</name>
+        <qualifiedname>FragmentationDialog::~FragmentationDialog</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdialog.h" line="17" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FragmentationDialog</label>
+        <link refid="classFragmentationDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FragmentationDialog</label>
+        <link refid="classFragmentationDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdialog.h" line="11" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmentationdialog.h" bodystart="12" bodyend="22"/>
+    <listofallmembers>
+      <member refid="classFragmentationDialog_1ac7cce577cee2b686bafcd1e32cfa6e34" prot="public" virt="non-virtual"><scope>FragmentationDialog</scope><name>FragmentationDialog</name></member>
+      <member refid="classFragmentationDialog_1ab7a9d5e62995a0830ce12bb6453db2ba" prot="private" virt="non-virtual"><scope>FragmentationDialog</scope><name>ui</name></member>
+      <member refid="classFragmentationDialog_1a70760f655d540eb0ace1a951de0e8311" prot="public" virt="non-virtual"><scope>FragmentationDialog</scope><name>~FragmentationDialog</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

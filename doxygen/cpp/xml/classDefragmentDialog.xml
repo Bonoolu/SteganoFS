@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classDefragmentDialog" kind="class" language="C++" prot="public">
+    <compoundname>DefragmentDialog</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QDialog</basecompoundref>
+    <includes refid="defragmentdialog_8h" local="no">defragmentdialog.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classDefragmentDialog_1a98b60a750c25dc38a3dce3defefc2310" prot="private" static="no" mutable="no">
+        <type>Ui::DefragmentDialog *</type>
+        <definition>Ui::DefragmentDialog* DefragmentDialog::ui</definition>
+        <argsstring></argsstring>
+        <name>ui</name>
+        <qualifiedname>DefragmentDialog::ui</qualifiedname>
+        <briefdescription>
+<para>The UI components of the dialog. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="67" column="26" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDefragmentDialog_1af0a8459645da35dc7b5e41e3d6a49438" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool DefragmentDialog::m_lightmodeOn</definition>
+        <argsstring></argsstring>
+        <name>m_lightmodeOn</name>
+        <qualifiedname>DefragmentDialog::m_lightmodeOn</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Stores the current light mode status. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="68" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDefragmentDialog_1a7c97e5ed331556cde2119d924ff13096" prot="private" static="no" mutable="no">
+        <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> *</type>
+        <definition>SteganoFsAdapter* DefragmentDialog::m_adapter</definition>
+        <argsstring></argsstring>
+        <name>m_adapter</name>
+        <qualifiedname>DefragmentDialog::m_adapter</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Pointer to the adapter used by the dialog. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="69" column="22" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classDefragmentDialog_1a36555d7df2bd9665e0e23ff33f318b1a" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>DefragmentDialog::DefragmentDialog</definition>
+        <argsstring>(QWidget *parent=nullptr)</argsstring>
+        <name>DefragmentDialog</name>
+        <qualifiedname>DefragmentDialog::DefragmentDialog</qualifiedname>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classDefragmentDialog" kindref="compound">DefragmentDialog</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent widget. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="27" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classDefragmentDialog_1ad9228d774583b1de71e35ea6c89975a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>DefragmentDialog::~DefragmentDialog</definition>
+        <argsstring>()</argsstring>
+        <name>~DefragmentDialog</name>
+        <qualifiedname>DefragmentDialog::~DefragmentDialog</qualifiedname>
+        <briefdescription>
+<para>Destroys the <ref refid="classDefragmentDialog" kindref="compound">DefragmentDialog</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="32" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classDefragmentDialog_1a35d90d7a9065c8b5bdbf07c52469048e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DefragmentDialog::setLightmodeOn</definition>
+        <argsstring>(bool newLightmodeOn)</argsstring>
+        <name>setLightmodeOn</name>
+        <qualifiedname>DefragmentDialog::setLightmodeOn</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>newLightmodeOn</declname>
+        </param>
+        <briefdescription>
+<para>Sets the light mode on/off. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newLightmodeOn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether light mode should be turned on. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="38" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classDefragmentDialog_1ad4aff2a176ddc99ac526395e63bac6e6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DefragmentDialog::lightmodeOn</definition>
+        <argsstring>() const</argsstring>
+        <name>lightmodeOn</name>
+        <qualifiedname>DefragmentDialog::lightmodeOn</qualifiedname>
+        <briefdescription>
+<para>Checks if light mode is on. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if light mode is on, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="44" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classDefragmentDialog_1ab2bb749a237464fed7a328be447c83a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DefragmentDialog::setFragmentation</definition>
+        <argsstring>(float f)</argsstring>
+        <name>setFragmentation</name>
+        <qualifiedname>DefragmentDialog::setFragmentation</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>Sets the fragmentation level. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new fragmentation level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="50" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classDefragmentDialog_1afcab0648f64b6f802d6ea226864365a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DefragmentDialog::setAdapter</definition>
+        <argsstring>(SteganoFsAdapter *newAdapter)</argsstring>
+        <name>setAdapter</name>
+        <qualifiedname>DefragmentDialog::setAdapter</qualifiedname>
+        <param>
+          <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> *</type>
+          <declname>newAdapter</declname>
+        </param>
+        <briefdescription>
+<para>Sets the adapter for the defragmentation dialog. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newAdapter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The adapter to be set. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="56" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-slot">
+      <memberdef kind="slot" id="classDefragmentDialog_1a778f23fcee53570701499bc3bfd88506" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DefragmentDialog::on_pushButton_clicked</definition>
+        <argsstring>()</argsstring>
+        <name>on_pushButton_clicked</name>
+        <qualifiedname>DefragmentDialog::on_pushButton_clicked</qualifiedname>
+        <briefdescription>
+<para>Slot for the button click event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This slot is called when the push button is clicked in the dialog. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="64" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classDefragmentDialog" kindref="compound">DefragmentDialog</ref> class represents a dialog for defragmentation settings. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class provides a dialog window to configure defragmentation settings for the application. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>DefragmentDialog</label>
+        <link refid="classDefragmentDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>DefragmentDialog</label>
+        <link refid="classDefragmentDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" line="18" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/defragmentdialog.h" bodystart="19" bodyend="70"/>
+    <listofallmembers>
+      <member refid="classDefragmentDialog_1a36555d7df2bd9665e0e23ff33f318b1a" prot="public" virt="non-virtual"><scope>DefragmentDialog</scope><name>DefragmentDialog</name></member>
+      <member refid="classDefragmentDialog_1ad4aff2a176ddc99ac526395e63bac6e6" prot="public" virt="non-virtual"><scope>DefragmentDialog</scope><name>lightmodeOn</name></member>
+      <member refid="classDefragmentDialog_1a7c97e5ed331556cde2119d924ff13096" prot="private" virt="non-virtual"><scope>DefragmentDialog</scope><name>m_adapter</name></member>
+      <member refid="classDefragmentDialog_1af0a8459645da35dc7b5e41e3d6a49438" prot="private" virt="non-virtual"><scope>DefragmentDialog</scope><name>m_lightmodeOn</name></member>
+      <member refid="classDefragmentDialog_1a778f23fcee53570701499bc3bfd88506" prot="private" virt="non-virtual"><scope>DefragmentDialog</scope><name>on_pushButton_clicked</name></member>
+      <member refid="classDefragmentDialog_1afcab0648f64b6f802d6ea226864365a3" prot="public" virt="non-virtual"><scope>DefragmentDialog</scope><name>setAdapter</name></member>
+      <member refid="classDefragmentDialog_1ab2bb749a237464fed7a328be447c83a4" prot="public" virt="non-virtual"><scope>DefragmentDialog</scope><name>setFragmentation</name></member>
+      <member refid="classDefragmentDialog_1a35d90d7a9065c8b5bdbf07c52469048e" prot="public" virt="non-virtual"><scope>DefragmentDialog</scope><name>setLightmodeOn</name></member>
+      <member refid="classDefragmentDialog_1a98b60a750c25dc38a3dce3defefc2310" prot="private" virt="non-virtual"><scope>DefragmentDialog</scope><name>ui</name></member>
+      <member refid="classDefragmentDialog_1ad9228d774583b1de71e35ea6c89975a8" prot="public" virt="non-virtual"><scope>DefragmentDialog</scope><name>~DefragmentDialog</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

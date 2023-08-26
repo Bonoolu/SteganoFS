@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classFragmentTile" kind="class" language="C++" prot="public">
+    <compoundname>FragmentTile</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QWidget</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classFragmentTile_1acff33d8109561e0fff04b807a4c3c708" prot="private" static="no" mutable="no">
+        <type>Ui::FragmentTile *</type>
+        <definition>Ui::FragmentTile* FragmentTile::ui</definition>
+        <argsstring></argsstring>
+        <name>ui</name>
+        <qualifiedname>FragmentTile::ui</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmenttile.h" line="21" column="22" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmenttile.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classFragmentTile_1ae2e01b74ff0ac19c82aeef4c19d68edd" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FragmentTile::FragmentTile</definition>
+        <argsstring>(QWidget *parent=nullptr, const QColor &amp;color=QColor(&quot;white&quot;))</argsstring>
+        <name>FragmentTile</name>
+        <qualifiedname>FragmentTile::FragmentTile</qualifiedname>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const QColor &amp;</type>
+          <declname>color</declname>
+          <defval>QColor(&quot;white&quot;)</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmenttile.h" line="16" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classFragmentTile_1a20ec9f6c163c9f5f2c5b054776cfbf6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FragmentTile::setColor</definition>
+        <argsstring>(const QColor &amp;color)</argsstring>
+        <name>setColor</name>
+        <qualifiedname>FragmentTile::setColor</qualifiedname>
+        <param>
+          <type>const QColor &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmenttile.h" line="17" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classFragmentTile_1a2ad9a8b38100a34f066f65fea6124782" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FragmentTile::~FragmentTile</definition>
+        <argsstring>() override</argsstring>
+        <name>~FragmentTile</name>
+        <qualifiedname>FragmentTile::~FragmentTile</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmenttile.h" line="18" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FragmentTile</label>
+        <link refid="classFragmentTile"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QWidget</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FragmentTile</label>
+        <link refid="classFragmentTile"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QWidget</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmenttile.h" line="11" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/fragmenttile.h" bodystart="12" bodyend="22"/>
+    <listofallmembers>
+      <member refid="classFragmentTile_1ae2e01b74ff0ac19c82aeef4c19d68edd" prot="public" virt="non-virtual"><scope>FragmentTile</scope><name>FragmentTile</name></member>
+      <member refid="classFragmentTile_1a20ec9f6c163c9f5f2c5b054776cfbf6a" prot="public" virt="non-virtual"><scope>FragmentTile</scope><name>setColor</name></member>
+      <member refid="classFragmentTile_1acff33d8109561e0fff04b807a4c3c708" prot="private" virt="non-virtual"><scope>FragmentTile</scope><name>ui</name></member>
+      <member refid="classFragmentTile_1a2ad9a8b38100a34f066f65fea6124782" prot="public" virt="non-virtual"><scope>FragmentTile</scope><name>~FragmentTile</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

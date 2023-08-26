@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classPreviewGraphicsView" kind="class" language="C++" prot="public">
+    <compoundname>PreviewGraphicsView</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QGraphicsView</basecompoundref>
+    <includes refid="previewgraphicsview_8h" local="no">previewgraphicsview.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classPreviewGraphicsView_1a45c98cad2a7523214a55490496da6d44" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PreviewGraphicsView::PreviewGraphicsView</definition>
+        <argsstring>(QWidget *parent=nullptr)</argsstring>
+        <name>PreviewGraphicsView</name>
+        <qualifiedname>PreviewGraphicsView::PreviewGraphicsView</qualifiedname>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classPreviewGraphicsView" kindref="compound">PreviewGraphicsView</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent QWidget of this view. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/previewgraphicsview.h" line="22" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classPreviewGraphicsView_1afa9e61b3319db87c1d9abc57bad6b539" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PreviewGraphicsView::resizeEvent</definition>
+        <argsstring>(QResizeEvent *event) override</argsstring>
+        <name>resizeEvent</name>
+        <qualifiedname>PreviewGraphicsView::resizeEvent</qualifiedname>
+        <param>
+          <type>QResizeEvent *</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Handles resize events for the view. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the QResizeEvent object containing event details. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/previewgraphicsview.h" line="28" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="signal">
+      <memberdef kind="signal" id="classPreviewGraphicsView_1a35941b72b1cf7893aa7f9e3e36bf2836" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PreviewGraphicsView::refreshScene</definition>
+        <argsstring>()</argsstring>
+        <name>refreshScene</name>
+        <qualifiedname>PreviewGraphicsView::refreshScene</qualifiedname>
+        <briefdescription>
+<para>Signal emitted when the scene needs to be refreshed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/previewgraphicsview.h" line="34" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classPreviewGraphicsView" kindref="compound">PreviewGraphicsView</ref> class provides a custom QGraphicsView for previewing graphics. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class extends QGraphicsView and adds functionality for handling resize events and emitting a signal to request a scene refresh. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>PreviewGraphicsView</label>
+        <link refid="classPreviewGraphicsView"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QGraphicsView</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>PreviewGraphicsView</label>
+        <link refid="classPreviewGraphicsView"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QGraphicsView</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/previewgraphicsview.h" line="13" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/previewgraphicsview.h" bodystart="14" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classPreviewGraphicsView_1a45c98cad2a7523214a55490496da6d44" prot="public" virt="non-virtual"><scope>PreviewGraphicsView</scope><name>PreviewGraphicsView</name></member>
+      <member refid="classPreviewGraphicsView_1a35941b72b1cf7893aa7f9e3e36bf2836" prot="public" virt="non-virtual"><scope>PreviewGraphicsView</scope><name>refreshScene</name></member>
+      <member refid="classPreviewGraphicsView_1afa9e61b3319db87c1d9abc57bad6b539" prot="public" virt="non-virtual"><scope>PreviewGraphicsView</scope><name>resizeEvent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

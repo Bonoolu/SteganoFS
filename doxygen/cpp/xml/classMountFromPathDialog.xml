@@ -1,0 +1,514 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.7" xml:lang="en-US">
+  <compounddef id="classMountFromPathDialog" kind="class" language="C++" prot="public">
+    <compoundname>MountFromPathDialog</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QDialog</basecompoundref>
+    <includes refid="mountfrompathdialog_8h" local="no">mountfrompathdialog.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classMountFromPathDialog_1ae1825a5b2488a99aabd58a2317c93922" prot="private" static="no" mutable="no">
+        <type>Ui::MountFromPathDialog *</type>
+        <definition>Ui::MountFromPathDialog* MountFromPathDialog::ui</definition>
+        <argsstring></argsstring>
+        <name>ui</name>
+        <qualifiedname>MountFromPathDialog::ui</qualifiedname>
+        <briefdescription>
+<para>The UI components. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="115" column="29" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMountFromPathDialog_1aad2744f4466fc67a2aaf28df5a1a483b" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MountFromPathDialog::m_mountingPath</definition>
+        <argsstring></argsstring>
+        <name>m_mountingPath</name>
+        <qualifiedname>MountFromPathDialog::m_mountingPath</qualifiedname>
+        <briefdescription>
+<para>The selected mounting path. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="116" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMountFromPathDialog_1a2882faf746dd6e46877d338add746ddc" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString MountFromPathDialog::m_filesystemPath</definition>
+        <argsstring></argsstring>
+        <name>m_filesystemPath</name>
+        <qualifiedname>MountFromPathDialog::m_filesystemPath</qualifiedname>
+        <briefdescription>
+<para>The selected filesystem path. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="117" column="13" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMountFromPathDialog_1a46c19546979c4f4f94aff7651b88b7a8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool MountFromPathDialog::m_lightmodeOn</definition>
+        <argsstring></argsstring>
+        <name>m_lightmodeOn</name>
+        <qualifiedname>MountFromPathDialog::m_lightmodeOn</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Flag indicating light mode status. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="118" column="10" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMountFromPathDialog_1af86f47e4cecc01e675ae677705e8cb33" prot="private" static="no" mutable="no">
+        <type>QFileDialog *</type>
+        <definition>QFileDialog* MountFromPathDialog::m_mountDlg</definition>
+        <argsstring></argsstring>
+        <name>m_mountDlg</name>
+        <qualifiedname>MountFromPathDialog::m_mountDlg</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Dialog for selecting mounting path. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="119" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMountFromPathDialog_1a6f34d8a0288ecf7d34bb2bffa0e97d99" prot="private" static="no" mutable="no">
+        <type>QFileDialog *</type>
+        <definition>QFileDialog* MountFromPathDialog::m_fsDlg</definition>
+        <argsstring></argsstring>
+        <name>m_fsDlg</name>
+        <qualifiedname>MountFromPathDialog::m_fsDlg</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Dialog for selecting filesystem path. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="120" column="17" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMountFromPathDialog_1a763e1f7b715e0660e5f196452d45a99d" prot="private" static="no" mutable="no">
+        <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> *</type>
+        <definition>SteganoFsAdapter* MountFromPathDialog::m_adapter</definition>
+        <argsstring></argsstring>
+        <name>m_adapter</name>
+        <qualifiedname>MountFromPathDialog::m_adapter</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Associated <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="121" column="22" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMountFromPathDialog_1ac0ffa4a61c9a0d1598cff9b0a925b755" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MountFromPathDialog::MountFromPathDialog</definition>
+        <argsstring>(QWidget *parent=nullptr)</argsstring>
+        <name>MountFromPathDialog</name>
+        <qualifiedname>MountFromPathDialog::MountFromPathDialog</qualifiedname>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classMountFromPathDialog" kindref="compound">MountFromPathDialog</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent widget. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="30" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classMountFromPathDialog_1ad0c342390443b00e9887a0d51bd5c190" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MountFromPathDialog::~MountFromPathDialog</definition>
+        <argsstring>() override</argsstring>
+        <name>~MountFromPathDialog</name>
+        <qualifiedname>MountFromPathDialog::~MountFromPathDialog</qualifiedname>
+        <briefdescription>
+<para>Destructs the <ref refid="classMountFromPathDialog" kindref="compound">MountFromPathDialog</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="35" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classMountFromPathDialog_1ad44022ed4523176f59bd94e7b07fe763" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MountFromPathDialog::setMountingPath</definition>
+        <argsstring>(const QString &amp;newMountingPath)</argsstring>
+        <name>setMountingPath</name>
+        <qualifiedname>MountFromPathDialog::setMountingPath</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>newMountingPath</declname>
+        </param>
+        <briefdescription>
+<para>Sets the mounting path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newMountingPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new mounting path. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="41" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classMountFromPathDialog_1a00e9bca483eb6268bce54510722050ab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>QString</type>
+        <definition>QString MountFromPathDialog::mountingPath</definition>
+        <argsstring>() const</argsstring>
+        <name>mountingPath</name>
+        <qualifiedname>MountFromPathDialog::mountingPath</qualifiedname>
+        <briefdescription>
+<para>Returns the selected mounting path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The selected mounting path. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classMountFromPathDialog_1ac67393a1ccbb1ea0e2bd8647e11a7fc4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool MountFromPathDialog::lightmodeOn</definition>
+        <argsstring>() const</argsstring>
+        <name>lightmodeOn</name>
+        <qualifiedname>MountFromPathDialog::lightmodeOn</qualifiedname>
+        <briefdescription>
+<para>Checks if light mode is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if light mode is enabled, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="53" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classMountFromPathDialog_1a3e4e30fae568277d4ade30ff744da027" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MountFromPathDialog::setLightmodeOn</definition>
+        <argsstring>(bool newLightmodeOn)</argsstring>
+        <name>setLightmodeOn</name>
+        <qualifiedname>MountFromPathDialog::setLightmodeOn</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>newLightmodeOn</declname>
+        </param>
+        <briefdescription>
+<para>Sets the light mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newLightmodeOn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True to enable light mode, false to disable. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="59" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classMountFromPathDialog_1a0d39744eee257c6e1664cf9b8b724c8e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>QString</type>
+        <definition>QString MountFromPathDialog::filesystemPath</definition>
+        <argsstring>() const</argsstring>
+        <name>filesystemPath</name>
+        <qualifiedname>MountFromPathDialog::filesystemPath</qualifiedname>
+        <briefdescription>
+<para>Returns the selected filesystem path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The selected filesystem path. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classMountFromPathDialog_1ad1dee511ad5ab72a032ad1e651bf567e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MountFromPathDialog::setFilesystemPath</definition>
+        <argsstring>(const QString &amp;newFilesystemPath)</argsstring>
+        <name>setFilesystemPath</name>
+        <qualifiedname>MountFromPathDialog::setFilesystemPath</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>newFilesystemPath</declname>
+        </param>
+        <briefdescription>
+<para>Sets the filesystem path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newFilesystemPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new filesystem path. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="71" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classMountFromPathDialog_1ac6cbcc62f1d2113a475348ba715f16c1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> *</type>
+        <definition>SteganoFsAdapter * MountFromPathDialog::adapter</definition>
+        <argsstring>() const</argsstring>
+        <name>adapter</name>
+        <qualifiedname>MountFromPathDialog::adapter</qualifiedname>
+        <briefdescription>
+<para>Returns the associated <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The associated <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="77" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classMountFromPathDialog_1aeaf4590f25a8bf5c44e77f70c6858e3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MountFromPathDialog::setAdapter</definition>
+        <argsstring>(SteganoFsAdapter *newAdapter)</argsstring>
+        <name>setAdapter</name>
+        <qualifiedname>MountFromPathDialog::setAdapter</qualifiedname>
+        <param>
+          <type><ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> *</type>
+          <declname>newAdapter</declname>
+        </param>
+        <briefdescription>
+<para>Sets the <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newAdapter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="83" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-slot">
+      <memberdef kind="slot" id="classMountFromPathDialog_1a6cf4fcf4a20ac875ae32a2fc2240ad64" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MountFromPathDialog::on_mountPathLineEdit_textChanged</definition>
+        <argsstring>(const QString &amp;arg1)</argsstring>
+        <name>on_mountPathLineEdit_textChanged</name>
+        <qualifiedname>MountFromPathDialog::on_mountPathLineEdit_textChanged</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>arg1</declname>
+        </param>
+        <briefdescription>
+<para>Slot called when the mounting path line edit text changes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arg1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new text. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="90" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMountFromPathDialog_1a8adc79f18a8c18f3c9a36b60ac606112" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MountFromPathDialog::on_filesystemPathLineEdit_textChanged</definition>
+        <argsstring>(const QString &amp;arg1)</argsstring>
+        <name>on_filesystemPathLineEdit_textChanged</name>
+        <qualifiedname>MountFromPathDialog::on_filesystemPathLineEdit_textChanged</qualifiedname>
+        <param>
+          <type>const QString &amp;</type>
+          <declname>arg1</declname>
+        </param>
+        <briefdescription>
+<para>Slot called when the filesystem path line edit text changes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arg1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new text. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="96" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMountFromPathDialog_1affc2c7bc9c8b46176c2ae32cf1b9a26c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MountFromPathDialog::on_browseDirButton_clicked</definition>
+        <argsstring>()</argsstring>
+        <name>on_browseDirButton_clicked</name>
+        <qualifiedname>MountFromPathDialog::on_browseDirButton_clicked</qualifiedname>
+        <briefdescription>
+<para>Slot called when the browse directory button is clicked. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="101" column="10"/>
+      </memberdef>
+      <memberdef kind="slot" id="classMountFromPathDialog_1a6ae91195c14ceb0bc47008e79716a84d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MountFromPathDialog::on_browseFsButton_clicked</definition>
+        <argsstring>()</argsstring>
+        <name>on_browseFsButton_clicked</name>
+        <qualifiedname>MountFromPathDialog::on_browseFsButton_clicked</qualifiedname>
+        <briefdescription>
+<para>Slot called when the browse filesystem button is clicked. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="106" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="signal">
+      <memberdef kind="signal" id="classMountFromPathDialog_1a02fabdeb1840a462564166b95fdf5722" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MountFromPathDialog::finishedMounting</definition>
+        <argsstring>()</argsstring>
+        <name>finishedMounting</name>
+        <qualifiedname>MountFromPathDialog::finishedMounting</qualifiedname>
+        <briefdescription>
+<para>Signal emitted when the mounting process is finished. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="112" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Dialog for mounting a filesystem from a specific path. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class provides a dialog for selecting a mounting path and filesystem path, along with additional settings like light mode. It also allows connecting a <ref refid="classSteganoFsAdapter" kindref="compound">SteganoFsAdapter</ref> to handle the mounting process. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>MountFromPathDialog</label>
+        <link refid="classMountFromPathDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>MountFromPathDialog</label>
+        <link refid="classMountFromPathDialog"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QDialog</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" line="21" column="1" bodyfile="/home/admin/CLionProjects/SteganoFS/stegano_gui/mountfrompathdialog.h" bodystart="22" bodyend="122"/>
+    <listofallmembers>
+      <member refid="classMountFromPathDialog_1ac6cbcc62f1d2113a475348ba715f16c1" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>adapter</name></member>
+      <member refid="classMountFromPathDialog_1a0d39744eee257c6e1664cf9b8b724c8e" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>filesystemPath</name></member>
+      <member refid="classMountFromPathDialog_1a02fabdeb1840a462564166b95fdf5722" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>finishedMounting</name></member>
+      <member refid="classMountFromPathDialog_1ac67393a1ccbb1ea0e2bd8647e11a7fc4" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>lightmodeOn</name></member>
+      <member refid="classMountFromPathDialog_1a763e1f7b715e0660e5f196452d45a99d" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>m_adapter</name></member>
+      <member refid="classMountFromPathDialog_1a2882faf746dd6e46877d338add746ddc" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>m_filesystemPath</name></member>
+      <member refid="classMountFromPathDialog_1a6f34d8a0288ecf7d34bb2bffa0e97d99" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>m_fsDlg</name></member>
+      <member refid="classMountFromPathDialog_1a46c19546979c4f4f94aff7651b88b7a8" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>m_lightmodeOn</name></member>
+      <member refid="classMountFromPathDialog_1af86f47e4cecc01e675ae677705e8cb33" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>m_mountDlg</name></member>
+      <member refid="classMountFromPathDialog_1aad2744f4466fc67a2aaf28df5a1a483b" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>m_mountingPath</name></member>
+      <member refid="classMountFromPathDialog_1ac0ffa4a61c9a0d1598cff9b0a925b755" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>MountFromPathDialog</name></member>
+      <member refid="classMountFromPathDialog_1a00e9bca483eb6268bce54510722050ab" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>mountingPath</name></member>
+      <member refid="classMountFromPathDialog_1affc2c7bc9c8b46176c2ae32cf1b9a26c" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>on_browseDirButton_clicked</name></member>
+      <member refid="classMountFromPathDialog_1a6ae91195c14ceb0bc47008e79716a84d" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>on_browseFsButton_clicked</name></member>
+      <member refid="classMountFromPathDialog_1a8adc79f18a8c18f3c9a36b60ac606112" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>on_filesystemPathLineEdit_textChanged</name></member>
+      <member refid="classMountFromPathDialog_1a6cf4fcf4a20ac875ae32a2fc2240ad64" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>on_mountPathLineEdit_textChanged</name></member>
+      <member refid="classMountFromPathDialog_1aeaf4590f25a8bf5c44e77f70c6858e3b" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>setAdapter</name></member>
+      <member refid="classMountFromPathDialog_1ad1dee511ad5ab72a032ad1e651bf567e" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>setFilesystemPath</name></member>
+      <member refid="classMountFromPathDialog_1a3e4e30fae568277d4ade30ff744da027" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>setLightmodeOn</name></member>
+      <member refid="classMountFromPathDialog_1ad44022ed4523176f59bd94e7b07fe763" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>setMountingPath</name></member>
+      <member refid="classMountFromPathDialog_1ae1825a5b2488a99aabd58a2317c93922" prot="private" virt="non-virtual"><scope>MountFromPathDialog</scope><name>ui</name></member>
+      <member refid="classMountFromPathDialog_1ad0c342390443b00e9887a0d51bd5c190" prot="public" virt="non-virtual"><scope>MountFromPathDialog</scope><name>~MountFromPathDialog</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
