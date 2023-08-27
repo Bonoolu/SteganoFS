@@ -3,6 +3,10 @@ project(tests C)
 
 set(CMAKE_C_STANDARD 99)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -coverage")
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -coverage")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -coverage")
+
 add_executable(test_bmp_provider_test_bmp_folder test_bmp_provider_test_bmp_folder.c)
 target_link_libraries(test_bmp_provider_test_bmp_folder PRIVATE steganofs)
 
