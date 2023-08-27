@@ -13,7 +13,6 @@ DefragmentDialog::DefragmentDialog(QWidget *parent)
 
 DefragmentDialog::~DefragmentDialog()
 {
-    delete m_adapter;
     delete ui;
 }
 

@@ -138,6 +138,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_movingHistory->append(m_currentDir);
     ui->actionShow_Filesystem_information->setDisabled(true);
+    ui->actionShow_Fragmentation->setDisabled(true);
     QDir dir = QDir(QDir::currentPath());
     qDebug() << "Current Path: " << dir.absolutePath() << Qt::endl;
     dir.cdUp();
@@ -630,6 +631,7 @@ void MainWindow::on_actionMount_triggered()
                                           Q_ARG(QString, m_MFPDlg->mountingPath()))) {
                 ui->actionMount->setDisabled(true);
                 ui->actionShow_Filesystem_information->setDisabled(false);
+                ui->actionShow_Fragmentation->setDisabled(false);
                 ui->actionUnmount->setDisabled(false);
                 ui->actionDefragment->setDisabled(false);
                 steganoFsAdapter = sfa;
@@ -644,6 +646,7 @@ void MainWindow::on_actionMount_triggered()
                 ui->actionMount->setDisabled(false);
                 ui->actionUnmount->setDisabled(true);
                 ui->actionShow_Filesystem_information->setDisabled(true);
+                ui->actionShow_Fragmentation->setDisabled(true);
                 steganoFsAdapter = nullptr;
                 delete sfa;
 
@@ -655,6 +658,7 @@ void MainWindow::on_actionMount_triggered()
             ui->actionMount->setDisabled(false);
             ui->actionUnmount->setDisabled(true);
             ui->actionShow_Filesystem_information->setDisabled(true);
+            ui->actionShow_Fragmentation->setDisabled(true);
             steganoFsAdapter = nullptr;
             delete sfa;
             err->showMessage("Unable to load file system!");
@@ -679,6 +683,7 @@ void MainWindow::on_actionUnmount_triggered()
             ui->actionMount->setDisabled(false);
             ui->actionDefragment->setDisabled(true);
             ui->actionShow_Filesystem_information->setDisabled(true);
+            ui->actionShow_Fragmentation->setDisabled(true);
             delete steganoFsAdapter;
             steganoFsAdapter = nullptr;
             ui->statusbar->showMessage("Successfully unmounted!", 18000);
@@ -708,7 +713,18 @@ void MainWindow::on_actionDefragment_triggered()
     // opens dialog for defragmentation
     m_DefragDlg->setAdapter(steganoFsAdapter);
     m_DefragDlg->setFragmentation(steganoFsAdapter->getFragmentationInPercent());
-    m_DefragDlg->exec();
+    if (m_DefragDlg->exec() == QDialog::Accepted) {
+        if (steganoFsAdapter->defragmentateFilesystem()) {
+            ui->statusbar
+                ->showMessage(QString("Defragmented Filesystem!"), 10000);
+        }
+        else {
+            ui->statusbar->showMessage(QString("Failed to defragment Filesystem!"), 10000);
+        }
+    }
+    else {
+        ui->statusbar->showMessage(QString("Defragmenting Aborted by user!"), 10000);
+    }
 }
 
 void MainWindow::on_actionFormat_Filesystem_triggered()
