@@ -8,7 +8,7 @@
  */
 int test_defragmenting ()
 {
-  SteganoFsAdapter steganoFsAdapter ("tests/example.steganofs");
+  SteganoFsAdapter steganoFsAdapter ("examples/pictures");
   bool status = steganoFsAdapter.loadFilesytemFromSteganoProvider ();
   if (!status)
     {

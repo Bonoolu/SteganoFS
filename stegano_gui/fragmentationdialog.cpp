@@ -3,13 +3,13 @@
 #include "fragmentationdiagram.h"
 #include <QLabel>
 
-FragmentationDialog::FragmentationDialog(QWidget *parent)
+FragmentationDialog::FragmentationDialog(QWidget *parent, SteganoFsAdapter *steganoFsAdapter)
     :
     QDialog(parent),
     ui(new Ui::FragmentationDialog)
 {
     ui->setupUi(this);
-    auto *fragDiagram = new FragmentationDiagram(this);
+    auto *fragDiagram = new FragmentationDiagram(this, steganoFsAdapter);
     layout()->replaceWidget(ui->widget, fragDiagram);
     ui->widget->hide();
 }

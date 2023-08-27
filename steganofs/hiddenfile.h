@@ -10,6 +10,7 @@
  */
 
 #include "hiddenfat.h"
+#include "steganofs.h"
 #include <errno.h>
 
 /**
@@ -40,7 +41,7 @@ struct HiddenFile {
   size_t real_filesize;
   long timestamp;
   HiddenCluster *hiddenCluster;
-  char filename[12];
+  char filename[STEGANOFS_MAX_FILENAME_LENGTH];
 };
 
 /**

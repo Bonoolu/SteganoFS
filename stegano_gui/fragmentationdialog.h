@@ -2,6 +2,7 @@
 #define FRAGMENTATIONDIALOG_H
 
 #include <QDialog>
+#include "../cpp-wrapper/SteganoFsAdapter.h"
 
 namespace Ui
 {
@@ -13,7 +14,7 @@ class FragmentationDialog: public QDialog
 Q_OBJECT
 
 public:
-    explicit FragmentationDialog(QWidget *parent = nullptr);
+    explicit FragmentationDialog(QWidget *parent = nullptr, SteganoFsAdapter *steganoFsAdapter = nullptr);
     ~FragmentationDialog() override;
 
 private:

@@ -734,7 +734,7 @@ void MainWindow::on_actionFormat_Filesystem_triggered()
 
 void MainWindow::on_actionShow_Fragmentation_triggered()
 {
-    auto *dialog = new FragmentationDialog(this);
+    auto *dialog = new FragmentationDialog(this, steganoFsAdapter);
     dialog->exec();
 }
 

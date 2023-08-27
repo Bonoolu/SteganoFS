@@ -10,14 +10,14 @@
  */
 
 
-#ifndef __cplusplus
 
 #define FUSE_USE_VERSION 31
-#define STEGANOFS_AMOUNT_ROOT_FILES 16
+#define STEGANOFS_AMOUNT_ROOT_FILES 40
 #define STEGANOFS_BLOCK_SIZE 512
-#define STEGANOFS_MAX_FILENAME_LENGTH 12
+#define STEGANOFS_MAX_FILENAME_LENGTH 30
 #define STEGANOFS_DEBUG
 
+#ifndef __cplusplus
 #include <fuse3/fuse.h>
 #include <errno.h>
 #include "hiddenfat.h"

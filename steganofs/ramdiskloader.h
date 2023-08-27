@@ -78,7 +78,7 @@ struct __attribute__((__packed__)) PackedFile {
   u_int64_t real_filesize; /**< Real size of the file on disk including padding. */
   u_int32_t timestamp; /**< Timestamp of the file's creation or modification. */
   int64_t hidden_cluster_b_index; /**< Block index of the first cluster of the file. */
-  char filename[12]; /**< Name of the file. */
+  char filename[STEGANOFS_MAX_FILENAME_LENGTH]; /**< Name of the file. */
 };
 
 /**
