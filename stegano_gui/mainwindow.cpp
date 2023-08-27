@@ -150,6 +150,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    if (steganoFsAdapter) {
+        steganoFsAdapter->writeFilesystemToSteganoProvider();
+        steganoFsAdapter->umount();
+    }
     m_thread->requestInterruption();
     m_thread->quit();
     m_thread->wait();
