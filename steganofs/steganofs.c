@@ -373,6 +373,16 @@ struct HiddenFat *steganofs_load_ramdisk (const char *stegano_image_folder)
 
 bool steganofs_unload_ramdisk (struct HiddenFat *hidden_fat, const char *stegano_folder)
 {
+    size_t a = 0, b = 0;
+    srand (time (NULL));
+
+    // shuffle blocks 1000 times
+    for (size_t i = 0; i < 58358; i++)
+    {
+        a = rand () % 58358;
+        b = rand () % 58358;
+        swap_hidden_clusters (hidden_fat, a, b);
+    }
   struct SerializedFilesystem serialized_filesystem = serialize_filesystem (hidden_fat);
   if (serialized_filesystem.size == 0)
     return false;
