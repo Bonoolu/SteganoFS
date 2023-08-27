@@ -367,33 +367,65 @@ void MainWindow::on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetIte
     else {
 
 
+//        if (QFileInfo(newdir).isDir()) {
+
+//            if (m_currentDir != newdir) {
+
+//                if (!m_movingHistory->empty()) {
+//                    while (m_currentDir != m_movingHistory->last()) {
+//                        m_movingHistory->removeLast();
+//                        m_stepsToGoBack--;
+//                        ui->forwardButton->setDisabled(true);
+
+//                    }
+
+//                }
+//                ui->pathLineEdit->clear();
+//                m_currentDir = newdir;
+//                m_movingHistory->append(m_currentDir);
+//                m_stepsToGoBack++;
+
+//                ui->backButton->setDisabled(false);
+//            }
+
+//            updateViews(m_currentDir);
+
+//            ui->pathLineEdit->setText(m_currentDir);
+//            m_movingHistory->append(m_currentDir);
+//        }
+
         if (QFileInfo(newdir).isDir()) {
+            m_stepsToGoBack++;
+            m_currentDir = newdir;
 
-            if (m_currentDir != newdir) {
 
-                if (!m_movingHistory->empty()) {
+            if (!m_movingHistory->empty()) {
+
+                if (m_stepsToGoBack < m_movingHistory->size()){
+
+                    m_movingHistory->replace(m_stepsToGoBack-1, m_currentDir);
+
                     while (m_currentDir != m_movingHistory->last()) {
                         m_movingHistory->removeLast();
                         m_stepsToGoBack--;
-                        ui->forwardButton->setDisabled(true);
 
                     }
-
+                    ui->forwardButton->setDisabled(true);
+                } else {
+                    m_movingHistory->append(m_currentDir);
                 }
-                ui->pathLineEdit->clear();
-                m_currentDir = newdir;
-                m_movingHistory->append(m_currentDir);
-                m_stepsToGoBack++;
-
-                ui->backButton->setDisabled(false);
             }
 
-            updateViews(m_currentDir);
 
+            ui->pathLineEdit->clear();
             ui->pathLineEdit->setText(m_currentDir);
-            m_movingHistory->append(m_currentDir);
-        }
+//                m_currentDir = newdir;
+//                m_movingHistory->append(m_currentDir);
 
+            ui->backButton->setDisabled(false);
+             updateViews(m_currentDir);
+
+        }
     }
 
 }
@@ -757,7 +789,9 @@ void MainWindow::on_backButton_clicked()
 
         ui->statusbar->showMessage(m_currentDir);
 
-        updateViews(m_currentDir);
+        //updateViews(m_currentDir);
+        updateListWidget(m_currentDir);
+        updateTreeView(m_currentDir);
         ui->pathLineEdit->clear();
         ui->pathLineEdit->setText(m_currentDir);
 
@@ -775,10 +809,13 @@ void MainWindow::on_forwardButton_clicked()
         m_stepsToGoBack++;
         m_currentDir = m_movingHistory->at(m_stepsToGoBack);
 
-        updateViews(m_currentDir);
+        //updateViews(m_currentDir);
+        updateListWidget(m_currentDir);
+        updateTreeView(m_currentDir);
         ui->pathLineEdit->setText(m_currentDir);
 
     }
+    emit forthButtonHit();
 }
 
 void MainWindow::updateHistoryBack()
