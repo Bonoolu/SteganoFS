@@ -1,5 +1,7 @@
 # SteganoFS
 
+![example workflow](https://github.com/Bonoolu/SteganoFS/actions/workflows/testsuit.yml/badge.svg)
+
 SteganoFS is a developing project designed to explore the concept of concealing an entire mountable filesystem within steganographic files. The project has reached a functional state, demonstrating its potential capabilities. However, it's important to note that while it functions, it's still in the developmental phase and not recommended for practical data security purposes at this stage.
 
 ![SteganoFS Demo](link_to_demo_image.png)
