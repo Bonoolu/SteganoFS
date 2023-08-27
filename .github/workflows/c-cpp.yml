@@ -17,9 +17,12 @@ jobs:
       run: sudo apt-get -y install libfuse3-dev qtcreator qtbase5-dev qt5-qmake cmake
     - name: mkdir build
       run: mkdir build
-    - name: cmake ../
-      run: cmake ../
+    - name: cmake
+      run: cmake ./  # Navigate to the project directory
+      working-directory: ./build  # Set the working directory to 'build'
     - name: make
       run: make
+      working-directory: ./build  # Set the working directory to 'build'
     - name: ctest
       run: ctest
+      working-directory: ./build  # Set the working directory to 'build'
