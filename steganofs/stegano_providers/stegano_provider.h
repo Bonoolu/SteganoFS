@@ -61,6 +61,6 @@ struct SerializedFilesystem stegano_provider_read (const char *path);
  * @param path Path where the data should be written.
  * @return Returns true if writing is successful, false otherwise.
  */
-bool stegano_provider_write (struct SerializedFilesystem *serialized_filesystem, const char *path);
+bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, const char *path);
 /** @} */
 #endif //_STEGANO_PROVIDER_H_

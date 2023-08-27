@@ -23,7 +23,6 @@ void run_length_encoding (struct SerializedFilesystem *serialized_filesystem)
   struct LinkedList *zero_ranges_begin = &linked_list;
   struct LinkedList *zero_ranges = &linked_list;
   printf ("Previous Disk size: %zu\n", serialized_filesystem->size);
-  size_t most_recent_data_block = 0;
   while (read_index < serialized_filesystem->size)
     {
       unsigned char *current_read_pointer = serialized_filesystem->buf + read_index;
@@ -41,7 +40,6 @@ void run_length_encoding (struct SerializedFilesystem *serialized_filesystem)
         }
       else
         {
-          most_recent_data_block = read_index;
           if (zero_count > 16)
             {
               printf ("Copying over bytes %zu to %zu  (%zu bytes)\n",
@@ -67,11 +65,11 @@ void run_length_encoding (struct SerializedFilesystem *serialized_filesystem)
 
   if (data_block_begin != 0)
     {
-      size_t length = most_recent_data_block - data_block_begin;
+      size_t length = serialized_filesystem->size - data_block_begin;
       unsigned char *move_from = serialized_filesystem->buf + length;
       unsigned char *move_to = serialized_filesystem->buf + write_index;
-      printf ("Datablock begin was: %zu. Copying over %zu bytes\n", data_block_begin, length - 1);
       memmove (move_to, move_from, length);
+      printf ("Datablock begin was: %zu. Copying over %zu bytes\n", data_block_begin, length);
     }
 
   size_t buffer_length = write_index;
