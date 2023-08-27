@@ -7,20 +7,20 @@
  */
 bool test_format_bmp_folder ()
 {
-  size_t filesystem_size = steganofs_format ("../examples/pictures");
+  size_t filesystem_size = steganofs_format ("examples/pictures");
   if (filesystem_size == 0)
     {
       printf ("test_format_bmp_folder test failed: formatted filesystem is of size 0.\n");
       return false;
     }
   printf ("Formatted filesystem is of size: %zu\n", filesystem_size);
-  HiddenFat *hidden_fat = steganofs_load_ramdisk ("../examples/pictures");
+  HiddenFat *hidden_fat = steganofs_load_ramdisk ("examples/pictures");
   if (hidden_fat == NULL)
     {
       printf ("test_format_bmp_folder test failed: Loading ramdisk failed!\n");
       return false;
     }
-  bool ret = steganofs_unload_ramdisk (hidden_fat, "../examples/pictures");
+  bool ret = steganofs_unload_ramdisk (hidden_fat, "examples/pictures");
   if (!ret)
     {
       printf ("test_format_bmp_folder test failed: Unloading ramdisk failed!\n");
