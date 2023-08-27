@@ -452,12 +452,13 @@ void MainWindow::on_DisplayComboBox_currentIndexChanged(int index)
 {
 
     if (index == 1) {
-        ui->tableView->hide();
-        ui->listWidget->show();
-    }
-    else {
         ui->listWidget->hide();
         ui->tableView->show();
+    }
+    else {
+
+        ui->tableView->hide();
+        ui->listWidget->show();
     }
 
 }
