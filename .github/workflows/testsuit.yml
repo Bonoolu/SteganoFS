@@ -15,8 +15,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set up Qt and Fuse
       run: sudo apt-get -y install libfuse3-dev qtcreator qtbase5-dev qt5-qmake cmake
-    - name: mkdir build
-      run: mkdir build
+    - name: mkdir ./build
+      run: mkdir ./build
     - name: cmake
       run: cmake ..  # Navigate to the project directory
       working-directory: ./build  # Set the working directory to 'build'
@@ -26,10 +26,16 @@ jobs:
     - name: ctest
       run: ctest
       working-directory: ./build  # Set the working directory to 'build'
+    - name: mkdir ./build/coverage
+      run: mkdir ./build/coverage
+    - name: find -name "*.gcno" -exec cp {} ./build/coverage \;
+      run: find -name "*.gcno" -exec cp {} ./build/coverage \;
+    - name: ls ./build/coverage
+      run: ls ./build/coverage
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       with:
-        directory: ./build
+        directory: ./build/coverage
         verbose: true
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
