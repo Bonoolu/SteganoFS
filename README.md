@@ -1,5 +1,9 @@
 # SteganoFS
 
+image:https://github.com/Bonoolu/SteagnoFS/workflows/CI/badge.svg["Build Status", link="https://github.com/Bonoolu/SteagnoFSactions?query=workflow%3ACI"]
+image:https://codecov.io/github/Bonoolu/SteagnoFS/coverage.svg?branch=main["coverage badge",link="https://codecov.io/github/Bonoolu/SteagnoFS?branch=main"]
+
+
 SteganoFS is a developing project designed to explore the concept of concealing an entire mountable filesystem within steganographic files. The project has reached a functional state, demonstrating its potential capabilities. However, it's important to note that while it functions, it's still in the developmental phase and not recommended for practical data security purposes at this stage.
 
 ![SteganoFS Demo](link_to_demo_image.png)
