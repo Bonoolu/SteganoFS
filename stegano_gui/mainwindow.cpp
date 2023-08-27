@@ -15,6 +15,8 @@
 #include <QRegularExpression>
 #include <QFileInfo>
 #include <QErrorMessage>
+#include <QFuture>
+#include <QtConcurrent>
 Q_DECLARE_METATYPE(SteganoFsAdapter*)
 
 MainWindow::MainWindow(QWidget *parent)
@@ -632,7 +634,11 @@ void MainWindow::on_actionMount_triggered()
                 ui->actionDefragment->setDisabled(false);
                 steganoFsAdapter = sfa;
                 ui->statusbar->showMessage(QString("Mount of" + m_MFPDlg->mountingPath() + " successfull"), 18000);
-                updateViews(m_MFPDlg->mountingPath());
+                QFuture<void> future = QtConcurrent::run([this]() {
+                    QThread::msleep(500);
+                    updateViews(m_MFPDlg->mountingPath());
+                });
+
             }
             else {
                 ui->actionMount->setDisabled(false);
