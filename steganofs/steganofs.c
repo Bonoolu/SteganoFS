@@ -349,7 +349,7 @@ size_t steganofs_format (const char *stegano_image_folder)
   serialized_filesystem = serialize_filesystem (hidden_fat);
   if (serialized_filesystem.size == 0)
     return 0;
-  bool ret = stegano_provider_write (serialized_filesystem, stegano_image_folder);
+  bool ret = stegano_provider_write (&serialized_filesystem, stegano_image_folder);
   free (serialized_filesystem.buf);
   if (ret)
     {
@@ -376,7 +376,7 @@ bool steganofs_unload_ramdisk (struct HiddenFat *hidden_fat, const char *stegano
   struct SerializedFilesystem serialized_filesystem = serialize_filesystem (hidden_fat);
   if (serialized_filesystem.size == 0)
     return false;
-  bool ret = stegano_provider_write (serialized_filesystem, stegano_folder);
+  bool ret = stegano_provider_write (&serialized_filesystem, stegano_folder);
   free (serialized_filesystem.buf);
   return ret;
 }

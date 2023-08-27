@@ -123,7 +123,7 @@ struct SerializedFilesystem stegano_provider_read (const char *path)
   return serialized_filesystem;
 }
 
-bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, const char *path)
+bool stegano_provider_write (struct SerializedFilesystem *serialized_filesystem, const char *path)
 {
 
   // check if path is a directory
@@ -136,7 +136,7 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
       struct stat file_info;
       struct dirent **namelist;
       const int n = scandir (path, &namelist, NULL, alphasort);
-      for (int file_index = 0; file_index < n && serialized_filesystem.size != bytes_written; file_index++)
+      for (int file_index = 0; file_index < n && serialized_filesystem->size != bytes_written; file_index++)
         {
           memset (&file_info, 0, sizeof (struct stat));
           char path_buffer[256];
@@ -172,13 +172,13 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
                 {
                   struct SteganoFile stegano_file = {};
                   stegano_file.path = strdup (full_path); // see free() below
-                  stegano_file.payload = serialized_filesystem.buf + bytes_written;
-                  stegano_file.payload_length = serialized_filesystem.size - bytes_written;
+                  stegano_file.payload = serialized_filesystem->buf + bytes_written;
+                  stegano_file.payload_length = serialized_filesystem->size - bytes_written;
                   size_t written = provider.provider_write (stegano_file);
                   free(stegano_file.path);
                   bytes_written += written;
                   printf ("Wrote %zu bytes of payload to %s\n", written, full_path);
-                  if (serialized_filesystem.size == bytes_written)
+                  if (serialized_filesystem->size == bytes_written)
                     {
                       break;
                     }
@@ -187,7 +187,7 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
             }
           free(extension);
         }
-      return serialized_filesystem.size == bytes_written;
+      return serialized_filesystem->size == bytes_written;
     }
 
   const char *dot = strrchr (path, '.');
@@ -200,7 +200,15 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
     {
       *i = (char) toupper (*i);
     }
-
+  if (strcmp(extension, "STEGANOFS") == 0) {
+      printf("Found filetype .steganofs. Compressing filesystem...\n");
+      size_t prev_size = serialized_filesystem->size;
+      run_length_encoding(serialized_filesystem);
+      size_t new_size = serialized_filesystem->size;
+      size_t percent = 100 - (size_t)(((float)new_size) / ((float)prev_size) * 100.0);
+      printf("Compressed filesystem! Filesystem was %zu bytes and is now %zu bytes. (-%zu%%)\n", prev_size, new_size,
+             percent);
+  }
   for (size_t i = 0; i < sizeof (providers) / sizeof (providers[0]); i++)
     {
       struct SteganoProvider provider = providers[i];
@@ -208,9 +216,9 @@ bool stegano_provider_write (struct SerializedFilesystem serialized_filesystem, 
         {
           struct SteganoFile stegano_file = {};
           stegano_file.path = strdup (path); // see free() below
-          stegano_file.payload = malloc (serialized_filesystem.size); // see free() below
-          memcpy (stegano_file.payload, serialized_filesystem.buf, serialized_filesystem.size);
-          stegano_file.payload_length = serialized_filesystem.size;
+          stegano_file.payload = malloc (serialized_filesystem->size); // see free() below
+          memcpy (stegano_file.payload, serialized_filesystem->buf, serialized_filesystem->size);
+          stegano_file.payload_length = serialized_filesystem->size;
           bool ret = provider.provider_write (stegano_file);
           free(stegano_file.payload);
           free(stegano_file.path);
