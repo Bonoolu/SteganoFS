@@ -32,6 +32,8 @@ jobs:
       run: find -name "*.gcno" -exec cp {} ./build/coverage \;
     - name: ls ./build/coverage
       run: ls ./build/coverage
+    - name: ln -s . ./SteganoFS
+      run: ln -s . ./SteganoFS
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       with:
