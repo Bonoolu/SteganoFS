@@ -316,28 +316,6 @@
           </item>
          </widget>
         </item>
-        <item>
-         <widget class="QComboBox" name="sortComboBox">
-          <property name="currentText">
-           <string>Alphabetically</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>Alphabetically</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Size</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Date</string>
-           </property>
-          </item>
-         </widget>
-        </item>
        </layout>
       </item>
       <item>
@@ -370,7 +348,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">

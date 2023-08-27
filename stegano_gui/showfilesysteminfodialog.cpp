@@ -9,18 +9,6 @@ ShowFileSystemInfoDialog::ShowFileSystemInfoDialog(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("Filesystem info");
 
-    /*   FÜR SYSTEMINFO
- *
- *     stbuf->f_bsize = hiddenFat->blockSize;    // Filesystem block size
-    stbuf->f_frsize = hiddenFat->blockSize;   // Fundamental filesystem block size
-    stbuf->f_blocks = hiddenFat->amountBlocks; // Total data blocks in filesystem
-    stbuf->f_bfree = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;   // Free blocks
-    stbuf->f_bavail = getFreeDiskSpace(hiddenFat) / hiddenFat->blockSize;  // Free blocks available to non-superuser
-    stbuf->f_namemax = STEGANOFS_MAX_FILENAME_LENGTH;
-*/
-
-
-
 }
 
 ShowFileSystemInfoDialog::~ShowFileSystemInfoDialog()
@@ -35,6 +23,8 @@ void ShowFileSystemInfoDialog::on_closeButton_clicked()
 
 void ShowFileSystemInfoDialog::showFilesystemInfo(SteganoFsAdapter &sfa)
 {
+    // returns relevant information about filesystem and displays them in a ShowFileSystemDialog
+
     struct statvfs info = sfa.getFilesystemInfo();
     QString text;
 

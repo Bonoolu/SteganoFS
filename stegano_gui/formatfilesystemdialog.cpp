@@ -8,6 +8,8 @@ FormatFileSystemDialog::FormatFileSystemDialog(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // initialize members of FormatFileSystemDialog
+
     m_filesystemPath = "";
     m_fsDlg = new QFileDialog;
     m_fsDlg->setDirectory(QDir("../examples/pictures").absolutePath());
@@ -18,6 +20,8 @@ FormatFileSystemDialog::FormatFileSystemDialog(QWidget *parent)
 
 FormatFileSystemDialog::~FormatFileSystemDialog()
 {
+    delete m_adapter;
+    delete m_fsDlg;
     delete ui;
 }
 
@@ -26,19 +30,11 @@ QString FormatFileSystemDialog::filesystemPath() const
     return m_filesystemPath;
 }
 
-[[maybe_unused]] void FormatFileSystemDialog::setFilesystemPath(const QString &newFilesystemPath)
-{
-    m_filesystemPath = newFilesystemPath;
-}
-
-[[maybe_unused]] bool FormatFileSystemDialog::lightmodeOn() const
-{
-    return m_lightmodeOn;
-}
-
 void FormatFileSystemDialog::setLightmodeOn(bool newLightmodeOn)
 {
     m_lightmodeOn = newLightmodeOn;
+
+    // set colors depending on lightmode status
 
     if (this->m_lightmodeOn) {
         this->setStyleSheet("background-color: #fafafa; color: #111111;");
@@ -77,6 +73,8 @@ void FormatFileSystemDialog::on_fileSystemLineEdit_textChanged(const QString &ar
 
 void FormatFileSystemDialog::on_browseButton_clicked()
 {
+    // opens FileDialog to select a file system to format
+
     if (m_fsDlg->exec() == QDialog::Accepted) {
 
         m_filesystemPath = m_fsDlg->selectedFiles().at(0);
@@ -101,8 +99,4 @@ void FormatFileSystemDialog::setAdapter(SteganoFsAdapter *newAdapter)
     m_adapter = newAdapter;
 }
 
-void FormatFileSystemDialog::on_buttonBox_accepted()
-{
-
-}
 

@@ -59,7 +59,6 @@ signals:
 private slots:
     void on_treeView_clicked(const QModelIndex &index);
     void handleSearchTextChanged(const QString &searchText);
-    void refreshView();
     void on_pathLineEdit_editingFinished();
     void on_DisplayComboBox_currentIndexChanged(int index);
     void on_listWidget_currentItemChanged(QListWidgetItem *current, [[maybe_unused]] QListWidgetItem *previous);
@@ -77,7 +76,6 @@ private slots:
     void on_forwardButton_clicked();
     void updateHistoryBack();
     void updateHistoryForth();
-    void on_sortComboBox_currentIndexChanged(int index);
 
     void on_actionFormat_Filesystem_triggered();
 

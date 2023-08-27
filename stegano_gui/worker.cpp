@@ -10,9 +10,10 @@ Worker::Worker(QObject *parent)
 
 }
 
+// Worker class for mounting folders
+
 void Worker::mountFolder(const QVariant& qAdapt, const QString& s)
 {
-    qDebug() << "RUnning thread: " << QThread::currentThreadId();
 
     auto *adapt = qvariant_cast<SteganoFsAdapter *>(qAdapt);
 
@@ -21,8 +22,6 @@ void Worker::mountFolder(const QVariant& qAdapt, const QString& s)
     }
     catch (int e) {
     }
-
-    qDebug() << "Thread finished: " << QThread::currentThreadId();
 
 }
 
