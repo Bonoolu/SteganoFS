@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFileDialog>
 #include "../cpp-wrapper/SteganoFsAdapter.h"
+#include <QMessageBox>
 
 
 namespace Ui
@@ -119,6 +120,7 @@ private:
     QFileDialog *m_mountDlg = nullptr; ///< Dialog for selecting mounting path.
     QFileDialog *m_fsDlg = nullptr;    ///< Dialog for selecting filesystem path.
     SteganoFsAdapter *m_adapter = nullptr; ///< Associated SteganoFsAdapter.
+    QMessageBox *m_info = nullptr; ///< Dialog for info messages.
 };
 
 #endif // MOUNTFROMPATHDIALOG_H

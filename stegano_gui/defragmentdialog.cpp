@@ -13,12 +13,15 @@ DefragmentDialog::DefragmentDialog(QWidget *parent)
 
 DefragmentDialog::~DefragmentDialog()
 {
+    delete m_adapter;
     delete ui;
 }
 
 void DefragmentDialog::setLightmodeOn(bool newLightmodeOn)
 {
     m_lightmodeOn = newLightmodeOn;
+
+    // set colors depending on lightmode status
 
     if (m_lightmodeOn) {
         setStyleSheet("background-color: #fafafa; color: #111111;");
@@ -45,6 +48,8 @@ void DefragmentDialog::setFragmentation(float f)
 
 void DefragmentDialog::on_pushButton_clicked()
 {
+    // returns defragment success
+
     bool defragmentResult = m_adapter->defragmentateFilesystem();
     qDebug() << "Disk defragmented: " << QString::number(defragmentResult);
 

@@ -72,8 +72,6 @@ private slots:
 
     void on_browseButton_clicked();
 
-    void on_buttonBox_accepted();
-
 private:
     Ui::FormatFileSystemDialog *ui; ///< The UI components.
     QString m_filesystemPath;    ///< The selected filesystem path.

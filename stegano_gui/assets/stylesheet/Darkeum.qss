@@ -714,7 +714,7 @@ QHeaderView::section::horizontal::only-one
 QHeaderView::section::horizontal
 {
     border-left: 1px solid #353635;
-    background-color: red;
+    background-color: #607cff;
 
 }
 

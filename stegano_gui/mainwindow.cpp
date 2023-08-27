@@ -23,12 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("Stegano File Explorer");
 
-    //qRegisterMetaType(SteganoFsAdapter*);
-
-    //    QFont roboto(":/assets/fonts/Roboto-Medium.ttf");
-    //    QFont garet(":/assets/fonts/Garet-Book.ttf");
-    //    this->setFont(garet);
-
     m_DefragDlg = new DefragmentDialog;
     m_DefragDlg->setLightmodeOn(false);
 
@@ -60,7 +54,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->statusbar->show();
 
-    // DARK/LIGHT STYLE
+    // set dark/light style
+
     QFile file(":/assets/stylesheet/Darkeum.qss");
     file.open(QFile::ReadOnly);
 
@@ -72,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_lightstyle = QLatin1String(file2.readAll());
 
 
-    // BACK AND FORTH BUTTONS
+    // styling back & forth buttons
     m_bafButtonsStyle_dark =
         "QPushButton {background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); height: 20px; width: 20px; border-radius: 15px;} QPushButton::disabled { background-color: #3f476b;} QPushButton::hover {background-color: #7990fc;} QPushButton::pressed {background-color: #899dfa;} )";
     m_bafButtonsStyle_light =
@@ -83,13 +78,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->backButton->setDisabled(true);
     ui->forwardButton->setDisabled(true);
 
+    // setting initial conditions
     ui->actionUnmount->setDisabled(true);
     ui->actionDefragment->setDisabled(true);
 
 
 
-    // LEFT SIDE - DISPLAYING FOLDERS
-    //QString sPath = "/home/minaboo/Bilder/example";
+    // building the left side - a tree view with folders
     QString sPath = "/";
     m_dirmodel = new QFileSystemModel(this);
     m_dirmodel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
@@ -102,8 +97,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->treeView->hideColumn(2);
     ui->treeView->hideColumn(3);
 
-    // RIGHT SIDE - DISPLAYING FILES
 
+    // the right side is displaying the selected folder's content
     m_filemodel = new QFileSystemModel(this);
 
     m_filemodel->setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
@@ -115,28 +110,29 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView->setModel(m_filemodel);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->searchLineEdit->setPlaceholderText("Search...");
-    ui->DisplayComboBox->setDisabled(true);
-
-
-    //ui->listWidget->hide();
-    ui->listWidget->setSortingEnabled(true);
-
-    ui->horizontalLayout_2->addWidget(m_pgv);
-
-    m_pgv->setAlignment(Qt::AlignCenter);
-    m_pgv->hide();
-
+    ui->DisplayComboBox->setDisabled(false);
 
     ui->listWidget->setViewMode(QListWidget::IconMode);
     ui->listWidget->setIconSize(QSize(200, 150));
     ui->listWidget->setResizeMode(QListWidget::Adjust);
 
 
-    // CONNECT SLOTS & SIGNALS
+    ui->listWidget->setSortingEnabled(true);
 
+    // add custom Widget PreviewGraphicsView
+    ui->horizontalLayout_2->addWidget(m_pgv);
+
+    m_pgv->setAlignment(Qt::AlignCenter);
+    m_pgv->hide();
+
+
+
+
+    // connecting slots and signals
     connect(ui->searchLineEdit, &QLineEdit::textChanged, this, &MainWindow::handleSearchTextChanged);
-
     connect(m_pgv, &PreviewGraphicsView::refreshScene, this, &MainWindow::refreshPreviewOnResize);
+    connect(this, &MainWindow::backButtonHit, this, &MainWindow::updateHistoryBack);
+    connect(this, &MainWindow::forthButtonHit, this, &MainWindow::updateHistoryForth);
 
     m_movingHistory->append(m_currentDir);
     ui->actionShow_Filesystem_information->setDisabled(true);
@@ -159,6 +155,9 @@ MainWindow::~MainWindow()
     delete m_DefragDlg;
     delete m_SFIdlg;
     delete m_FFSDlg;
+
+    delete m_filemodel;
+    delete m_dirmodel;
 
     delete m_movingHistory;
     delete m_thread;
@@ -198,19 +197,11 @@ void MainWindow::updateTreeView(const QString &sPath)
 void MainWindow::updateListWidget(const QString &sPath)
 {
     QModelIndex newIndex = m_filemodel->index(sPath);
-    //int rows = 0;
+
     if (m_filemodel->isDir(newIndex)) {
         ui->listWidget->setRootIndex(newIndex);
-        //rows =  m_filemodel->rowCount(newIndex);
-    }
-    ui->actionShow_Filesystem_information->setDisabled(true);
 
-//    qDebug() << "Filemodel root index" << sPath << Qt::endl;
-    qDebug() << "Requesting path:" << sPath << Qt::endl;
-//    qDebug() << "Is path valid?:" << (newIndex.isValid() ? "yes" : "no") << Qt::endl;
-//    qDebug() << "Number of entries inside path:" << rows << Qt::endl;
-//
-//    qDebug() << "Updating List Widget with: " << sPath << Qt::endl;
+    }
 
     if (m_stepsToGoBack == 0) {
         ui->backButton->setDisabled(true);
@@ -232,10 +223,7 @@ void MainWindow::updateListWidget(const QString &sPath)
     QModelIndex parentIndexDir = m_dirmodel->index(m_currentDir);
     m_dirmodel->fetchMore(parentIndexDir);
     int numRows = m_filemodel->rowCount(parentIndexFile);
-//    qDebug() << "Filemodel root path" << m_filemodel->rootPath() << Qt::endl;
-//    qDebug() << "Requesting path:" << m_currentDir << Qt::endl;
-//    qDebug() << "Is path valid?:" << (parentIndex.isValid() ? "yes" : "no") << Qt::endl;
-//    qDebug() << "Number of entries inside path:" << numRows << Qt::endl;
+
 
     for (int row = 0; row < numRows; ++row) {
         QModelIndex childIndex = m_filemodel->index(row, 0, parentIndexFile);
@@ -243,6 +231,8 @@ void MainWindow::updateListWidget(const QString &sPath)
         pathList.append(path);
     }
 
+
+    // differentiates between most common formats and applies icon according to file type
 
     for (const QString &file : pathList) {
         QString fullPath = sPath + "/" + file;
@@ -309,7 +299,7 @@ void MainWindow::updateListWidget(const QString &sPath)
 
         }
 
-
+        // add pixmap icon
         auto *item = new QListWidgetItem(QIcon(pixmap), QString(file));
         item->setSizeHint(QSize(210, 170));
         qDebug() << fullPath << Qt::endl;
@@ -325,7 +315,7 @@ void MainWindow::updateViews(const QString &sPath)
 {
     QModelIndex newIndex = m_filemodel->index(sPath);
     QModelIndex newIndex2 = m_dirmodel->index(sPath);
-//    int rows = 0;
+
     if (m_filemodel->isDir(newIndex)) {
         connect(m_filemodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateListWidget);
         connect(m_dirmodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateTreeView);
@@ -334,26 +324,20 @@ void MainWindow::updateViews(const QString &sPath)
         m_filemodel->fetchMore(newIndex);
         m_filemodel->setRootPath(sPath);
     }
-//    qDebug() << "Filemodel root index" << sPath << Qt::endl;
-//    qDebug() << "Requesting path:" << sPath << Qt::endl;
-//    qDebug() << "Is path valid?:" << (newIndex.isValid() ? "yes" : "no") << Qt::endl;
-//    qDebug() << "Number of entries inside path:" << rows << Qt::endl;
-//    return;
+
 }
 
 void MainWindow::on_treeView_clicked(const QModelIndex &index)
 {
+
     QString newdir = m_dirmodel->fileInfo(index).absoluteFilePath();
-    qDebug() << "Tree view clicked on: " << newdir << Qt::endl;
+
     if (m_currentDir != newdir) {
         m_currentFile = nullptr;
         m_stepsToGoBack++;
         ui->listWidget->setCurrentItem(nullptr);
         m_currentDir = newdir;
 
-        //ui->tableView->setRootIndex(m_filemodel->setRootPath(sPath));
-        //ui->listWidget->setRootIndex(m_filemodel->setRootPath(sPath));
-        //ui->listWidget->setRootIndex(m_filemodel->setRootPath(m_currentDir)); // Markierung
         ui->pathLineEdit->setText(m_currentDir);
 
         updateViews(m_currentDir);
@@ -367,18 +351,63 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
 
 }
 
+void MainWindow::on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetItem *item)
+{
+
+    QString newdir = m_currentDir + "/" + ui->listWidget->currentItem()->text();
+
+    if (ui->pathLineEdit->text() == "/") {
+
+        m_movingHistory->append(newdir);
+        ui->pathLineEdit->clear();
+        m_currentDir = "";
+        m_stepsToGoBack++;
+        m_lastDirectory = "/";
+    }
+    else {
+
+
+        if (QFileInfo(newdir).isDir()) {
+
+            if (m_currentDir != newdir) {
+
+                if (!m_movingHistory->empty()) {
+                    while (m_currentDir != m_movingHistory->last()) {
+                        m_movingHistory->removeLast();
+                        m_stepsToGoBack--;
+                        ui->forwardButton->setDisabled(true);
+
+                    }
+
+                }
+                ui->pathLineEdit->clear();
+                m_currentDir = newdir;
+                m_movingHistory->append(m_currentDir);
+                m_stepsToGoBack++;
+
+                ui->backButton->setDisabled(false);
+            }
+
+            updateViews(m_currentDir);
+
+            ui->pathLineEdit->setText(m_currentDir);
+            m_movingHistory->append(m_currentDir);
+        }
+
+    }
+
+}
+
+
 void MainWindow::handleSearchTextChanged(const QString &searchText)
 {
+    // functionality to search through displayed files
+
     m_filemodel->setNameFilters(QStringList() << "*" + searchText + "*");
     m_filemodel->setNameFilterDisables(false);
     updateViews(m_currentDir);
 }
 
-void MainWindow::refreshView()
-{
-    ui->tableView->reset();
-    ui->listWidget->clear();
-}
 
 void MainWindow::on_DisplayComboBox_currentIndexChanged(int index)
 {
@@ -386,29 +415,28 @@ void MainWindow::on_DisplayComboBox_currentIndexChanged(int index)
     if (index == 1) {
         ui->tableView->hide();
         ui->listWidget->show();
-
-        ui->sortComboBox->setDisabled(false);
     }
     else {
         ui->listWidget->hide();
         ui->tableView->show();
-        ui->sortComboBox->setDisabled(true);
     }
 
 }
 
 void MainWindow::on_pathLineEdit_editingFinished()
 {
+    // sets new current directory according to path text input
     QString newPath = ui->pathLineEdit->text();
-    qDebug() << "PathLineEdit finished! Updating dirmodel and filemodel to path:" << newPath << Qt::endl;
-    //ui->treeView->setRootIndex(m_dirmodel->setRootPath(newPath));  // Markierung
-    //ui->tableView->setRootIndex(m_filemodel->setRootPath(newPath)); // Markierung
+    ui->treeView->setRootIndex(m_dirmodel->setRootPath(newPath));
+    ui->tableView->setRootIndex(m_filemodel->setRootPath(newPath));
     updateViews(newPath);
 
 }
 
 void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, [[maybe_unused]] QListWidgetItem *previous)
 {
+
+    // sets the preview picture according to type of current selected file
 
     m_previewPicture->clear();
 
@@ -418,7 +446,7 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, [[ma
 
         QImage img = QImage(fullPath);
 
-        QPixmap pixmap; // = QPixmap::fromImage(img, Qt::AutoColor);
+        QPixmap pixmap;
 
         if (fullPath.contains(QRegExp("[.]jpg")) | fullPath.contains(QRegExp("[.]bmp")) | fullPath.contains(QRegExp("[.]png"))
             | fullPath.contains(QRegExp("[.]gif")) | fullPath.contains(QRegExp("[.]jpeg")) | fullPath.contains(QRegExp("[.]tif"))) {
@@ -482,28 +510,8 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, [[ma
 
         }
 
-        //        ui->previewLabel->setScaledContents(true);
-        //        //ui->previewLabel->setMaximumWidth(this->width() / 4);
-        //        ui->previewLabel->setPixmap(pixmap.scaledToWidth(w));
-
-
-        //m_previewPicture->setSceneRect(0,0,300,450);
-
-        //        PreviewGraphicsView *pgv = new PreviewGraphicsView;
-        //        int w = ui->graphicsView->width();
-        //        int h = ui->graphicsView->height();
-        //        m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
-        //        ui->horizontalLayout_2->addWidget(pgv);
-        //        ui->horizontalLayout_2->removeWidget(ui->graphicsView);
-        //        pgv->setScene(m_previewPicture);
-
-
-
         int w = m_pgv->width();
-        QGraphicsPixmapItem *pixitem = m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
-        //m_pgv->fitInView(*pixitem); // TODO ungenutze Variable pixitem
-
-
+        m_previewPicture->addPixmap(pixmap.scaledToWidth(w));
         m_pgv->setScene(m_previewPicture);
 
     }
@@ -512,8 +520,7 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, [[ma
 
 void MainWindow::on_previewToolButton_clicked()
 {
-
-
+    // show or hide the preview
     if (m_preview_on == 0) {
 
         m_pgv->show();
@@ -530,14 +537,12 @@ void MainWindow::on_previewToolButton_clicked()
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-
-
     m_currentFileString = item->text();
-
 }
 
 void MainWindow::on_darkModePushButton_clicked()
 {
+    // sets from light to dark mode and vice versa
 
     if (m_lightmodeOn == 0) {
         qApp->setStyleSheet(m_lightstyle);
@@ -599,8 +604,11 @@ void MainWindow::on_actionMount_triggered()
 {
     auto *err = new QErrorMessage;
 
+    // opens a dialog to mount a folder and load a filesystem
+
     if (m_MFPDlg->exec() == QDialog::Accepted) {
 
+        // dialog receives a SteganoFsAdapter pointer from which a QVariant will be initialized
         auto *sfa = new SteganoFsAdapter(m_MFPDlg->filesystemPath().toStdString());
         sfa->umount(m_MFPDlg->mountingPath().toStdString());
 
@@ -608,7 +616,11 @@ void MainWindow::on_actionMount_triggered()
             ui->statusbar->showMessage(QString("Loaded file: " + m_MFPDlg->filesystemPath()), 10000);
 
             m_thread->start();
+            // QVariant is needed to invoke Worker method
             QVariant qSteganoFsAdapter = QVariant::fromValue(sfa);
+
+
+            // mount has to be called in thread, otherwise GUI will freeze
 
             if (QMetaObject::invokeMethod(m_worker,
                                           "mountFolder",
@@ -654,6 +666,7 @@ void MainWindow::on_actionMount_triggered()
 
 void MainWindow::on_actionUnmount_triggered()
 {
+    // functionality to unmount a mounted folder
     if (steganoFsAdapter->umount()) {
         if (steganoFsAdapter->writeFilesystemToSteganoProvider()) {
             ui->actionUnmount->setDisabled(true);
@@ -678,6 +691,7 @@ void MainWindow::on_actionUnmount_triggered()
 
 void MainWindow::on_actionShow_Filesystem_information_triggered()
 {
+    // opens dialog to display File system Information in a seperate dialog
     m_SFIdlg->showFilesystemInfo(*steganoFsAdapter);
     m_SFIdlg->exec();
 
@@ -685,6 +699,7 @@ void MainWindow::on_actionShow_Filesystem_information_triggered()
 
 void MainWindow::on_actionDefragment_triggered()
 {
+    // opens dialog for defragmentation
     m_DefragDlg->setAdapter(steganoFsAdapter);
     m_DefragDlg->setFragmentation(steganoFsAdapter->getFragmentationInPercent());
     m_DefragDlg->exec();
@@ -692,9 +707,9 @@ void MainWindow::on_actionDefragment_triggered()
 
 void MainWindow::on_actionFormat_Filesystem_triggered()
 {
-    /*
-     * This is only copied from MFSDlg and roughly adjusted!
-     */
+
+    // opens dialog for formatting a loaded file system
+
     auto *err = new QErrorMessage;
 
     if (m_FFSDlg->exec() == QDialog::Accepted) {
@@ -709,36 +724,9 @@ void MainWindow::on_actionFormat_Filesystem_triggered()
         else {
             ui->statusbar->showMessage(QString("Failed to format new filesystem!"), 10000);
         }
-/*
-        if (sfa->loadFilesytemFromSteganoProvider()){
-            ui->statusbar->showMessage(QString("Loaded file: " + m_FFSDlg->filesystemPath()), 10000);
 
-            m_thread->start();
-            QVariant qSteganoFSAdapter = QVariant::fromValue(sfa);
-
-            if (QMetaObject::invokeMethod(m_worker, "mountFolder", Q_ARG(QVariant, qSteganoFSAdapter), Q_ARG(QString, m_FFSDlg->filesystemPath()))){
-                ui->actionMount->setDisabled(true);
-                ui->actionUnmount->setDisabled(false);
-                ui->actionDefragment->setDisabled(false);
-                steganoFsAdapter = sfa;
-                ui->statusbar->showMessage(QString("Mount of" + m_FFSDlg->filesystemPath() + " successfull"), 18000);
-
-            } else {
-                ui->actionMount->setDisabled(false);
-                ui->actionUnmount->setDisabled(true);
-                steganoFsAdapter = nullptr;
-                delete sfa;
-
-                err->showMessage("Unable to mount path!");
-            }
-*/
     }
     else {
-//            ui->actionMount->setDisabled(false);
-//            ui->actionUnmount->setDisabled(true);
-//            steganoFsAdapter = nullptr;
-//            delete sfa;
-//            err->showMessage("Unable to load file system!");
         ui->statusbar->showMessage(QString("Filesystem formatting aborted by user"), 10000);
     }
     delete err;
@@ -750,65 +738,7 @@ void MainWindow::on_actionShow_Fragmentation_triggered()
     dialog->exec();
 }
 
-void MainWindow::on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetItem *item)
-{
 
-    QString newdir = m_currentDir + "/" + ui->listWidget->currentItem()->text();
-
-
-    if (ui->pathLineEdit->text() == "/") {
-
-        m_movingHistory->append(newdir);
-        m_stepsToGoBack++;
-        ui->pathLineEdit->clear();
-        m_currentDir = "";
-        m_lastDirectory = "/";
-    }
-    else {
-
-
-        if (QFileInfo(newdir).isDir()) {
-
-            if (m_currentDir != newdir) {
-                ui->pathLineEdit->clear();
-                m_currentDir = newdir;
-                m_movingHistory->insert(m_stepsToGoBack, m_currentDir);
-                m_stepsToGoBack++;
-
-                if (!m_movingHistory->empty()) {
-                    while (m_currentDir != m_movingHistory->last()) {
-                        m_movingHistory->removeLast();
-                        m_stepsToGoBack--;
-                        ui->forwardButton->setDisabled(true);
-
-                    }
-
-                }
-                ui->backButton->setDisabled(false);
-            }
-
-
-
-
-
-
-            //std::future<QString> fut = std::async(m_filemodel->directoryLoaded(path));
-            updateViews(m_currentDir);
-
-
-            /*
-            if (ui->listWidget->count() != 0){
-                ui->listWidget->setCurrentRow(1);
-                m_currentFile = ui->listWidget->currentItem();
-            }*/
-
-            ui->pathLineEdit->setText(m_currentDir);
-            m_movingHistory->append(m_currentDir);
-        }
-
-    }
-
-}
 
 void MainWindow::refreshPreviewOnResize()
 {
@@ -818,14 +748,10 @@ void MainWindow::refreshPreviewOnResize()
 
 void MainWindow::on_backButton_clicked()
 {
-    //    QString tmp = m_currentDir;
-
-    //    m_currentDir = m_lastDirectory;
-    //    m_nextDirectory = tmp;
 
     if (m_stepsToGoBack != 0) {
 
-        m_currentDir = m_movingHistory->at(m_stepsToGoBack);
+        m_currentDir = m_movingHistory->at(m_stepsToGoBack-1);
         m_stepsToGoBack--;
 
 
@@ -837,7 +763,9 @@ void MainWindow::on_backButton_clicked()
 
         ui->forwardButton->setDisabled(false);
 
+        emit backButtonHit();
     }
+
 }
 
 void MainWindow::on_forwardButton_clicked()
@@ -851,31 +779,34 @@ void MainWindow::on_forwardButton_clicked()
         ui->pathLineEdit->setText(m_currentDir);
 
     }
-
-
-    /*
-     * CAN ONLY BE EXECUTED ONCE
-     * */
 }
 
-void MainWindow::updateHistory()
+void MainWindow::updateHistoryBack()
 {
-    // TODO! implement or delete me
+    if (m_movingHistory->isEmpty()){
+        ui->backButton->setDisabled(true);
+        ui->forwardButton->setDisabled(true);
+
+    }
+
+    if (m_stepsToGoBack == 0) {
+        ui->backButton->setDisabled(true);
+    }
+
 }
 
-void MainWindow::on_sortComboBox_currentIndexChanged(int index)
+void MainWindow::updateHistoryForth()
 {
-    // TODO! implement or delete me
+    if (!m_movingHistory->isEmpty()){
+        if (m_movingHistory->last() == m_currentDir) {
+            ui->backButton->setDisabled(false);
+            ui->forwardButton->setDisabled(true);
+        }
 
-    //    switch (index){
+    }
 
-    //    case 1:
-
-    //    break;
-
-    //    }
-
-
-
-
+    if (m_stepsToGoBack >= m_movingHistory->size()-1){
+        ui->forwardButton->setDisabled(true);
+    }
 }
+

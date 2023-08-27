@@ -5,6 +5,9 @@ MountFromPathDialog::MountFromPathDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MountFromPathDialog)
 {
+
+    // initializes a new MountFromPath Dialog (preset path for easier testing)
+
     ui->setupUi(this);
     this->setWindowTitle("Mount from path");
 
@@ -16,17 +19,10 @@ MountFromPathDialog::MountFromPathDialog(QWidget *parent) :
     m_mountDlg = new QFileDialog;
     m_mountDlg->setFileMode(QFileDialog::Directory);
     m_fsDlg->setDirectory(QDir("../examples/mnt").absolutePath());
+
+    m_info = new QMessageBox;
     ui->filesystemPathLineEdit->setText(QDir("../examples/pictures").absolutePath());
     ui->mountPathLineEdit->setText(QDir("../examples/mnt").absolutePath());
-
-    // ZWEITES EINGABEFELD MIT PFAD ZU DEM ORDNER IN DEM DAS FILESYSTEM VERSTECKT
-   // also der Code von loadFilesystem
-    /*
-     *
-     * loadFilesystemFromSteganoProvider nimmt
-     * QFileDialog nutzen!!
-     *
-     * */
 
 }
 
@@ -36,6 +32,7 @@ MountFromPathDialog::~MountFromPathDialog()
     delete m_fsDlg;
     delete m_mountDlg;
     delete m_adapter;
+    delete m_info;
     delete ui;
 }
 
@@ -62,10 +59,6 @@ void MountFromPathDialog::setFilesystemPath(const QString &newFilesystemPath)
 }
 
 
-void MountFromPathDialog::on_mountPathLineEdit_textChanged(const QString &arg1)
-{
-    m_mountingPath = ui->mountPathLineEdit->text();
-}
 
 
 bool MountFromPathDialog::lightmodeOn() const
@@ -77,6 +70,8 @@ void MountFromPathDialog::setLightmodeOn(bool newLightmodeOn)
 {
     m_lightmodeOn = newLightmodeOn;
 
+     // set colors depending on lightmode status
+
     if (this->m_lightmodeOn){
         this->setStyleSheet("background-color: #fafafa; color: #111111;");
         ui->mountPathLineEdit->setStyleSheet("background-color: #fafafa; color: #111111; border: 1px solid #1073b4; border-radius: 5px; padding: 2px 5px;");
@@ -87,6 +82,7 @@ void MountFromPathDialog::setLightmodeOn(bool newLightmodeOn)
         ui->pleaseTypeInLabel->setStyleSheet("background-color: transparent; color: #111111; ");
         m_fsDlg->setStyleSheet("QPushButton {border-radius: 5px; background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891);}");
         m_mountDlg->setStyleSheet("QPushButton {border-radius: 5px; background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891);}");
+        m_info->setStyleSheet("QPushButton {border-radius: 5px; background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1073b4, stop: 1 #015891);} QMessageBox {background-color: #fafafa; color: #111111;}");
 
     }
 
@@ -100,22 +96,18 @@ void MountFromPathDialog::setLightmodeOn(bool newLightmodeOn)
         ui->pleaseTypeInLabel->setStyleSheet("background-color: #444444; color: white; ");
         m_fsDlg->setStyleSheet("QPushButton {border-radius: 5px; background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); color: white;}");
         m_mountDlg->setStyleSheet("QPushButton {border-radius: 5px; background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); color: white;}");
+        m_info->setStyleSheet("QPushButton {border-radius: 5px; background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #607cff, stop: 1 #445cc9); color: white;} QMessageBox {background-color: #111111; color: white;}");
 
     }
 
 }
 
 
-
-
-void MountFromPathDialog::on_filesystemPathLineEdit_textChanged(const QString &arg1)
-{
-    m_filesystemPath = ui->filesystemPathLineEdit->text();
-}
-
+// User either selects a mounting path through typing in a path or by browsing a File Dialog
 
 void MountFromPathDialog::on_browseDirButton_clicked()
 {
+
     if (m_mountDlg->exec() == QDialog::Accepted) {
 
         m_mountingPath = m_mountDlg->selectedFiles().at(0);
@@ -125,13 +117,24 @@ void MountFromPathDialog::on_browseDirButton_clicked()
         ui->mountPathLineEdit->setText(m_mountingPath);
 
     } else {
-        //ui->pleaseMakeSureLabel->setText("NO FI");
+        m_info->setText("Warning: No directory selected!");
+        m_info->exec();
     }
+
 }
 
 
+void MountFromPathDialog::on_mountPathLineEdit_textChanged(const QString &arg1)
+{
+    m_mountingPath = ui->mountPathLineEdit->text();
+}
+
+
+// User either selects a file system through typing in a path or by browsing a File Dialog
+
 void MountFromPathDialog::on_browseFsButton_clicked()
 {
+
     if (m_fsDlg->exec() == QDialog::Accepted) {
 
         m_filesystemPath = m_fsDlg->selectedFiles().at(0);
@@ -140,9 +143,15 @@ void MountFromPathDialog::on_browseFsButton_clicked()
         ui->filesystemPathLineEdit->setText(m_filesystemPath);
 
         } else {
-        //ui->pleaseMakeSureLabel->setText(ui->pleaseMakeSureLabel->text() + "\n\n WARNING: no legit file selected!");
+        m_info->setText("Warning: No filesystem selected!");
+        m_info->exec();
     }
 
+}
+
+void MountFromPathDialog::on_filesystemPathLineEdit_textChanged(const QString &arg1)
+{
+    m_filesystemPath = ui->filesystemPathLineEdit->text();
 }
 
 SteganoFsAdapter *MountFromPathDialog::adapter() const
