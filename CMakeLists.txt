@@ -11,16 +11,27 @@ add_subdirectory(cli)
 add_subdirectory(tests)
 
 enable_testing()
-add_test(
-    NAME test_steganofs
-    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_steganofs/test_steganofs
-)
-add_test(
-        NAME test_bmp_provider
-        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_bmp_provider/test_bmp_provider
-)
-add_test( # this test defragments example.steganofs
-        NAME test_cpp_wrapper
-        COMMAND tests/test_cpp_wrapper/test_cpp_wrapper
-)
 
+add_test(NAME test_bmp_provider_test_bmp_folder COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_bmp_provider_test_bmp_folder)
+add_test(NAME test_bmp_provider_test_format_bmp_folder COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_bmp_provider_test_format_bmp_folder)
+add_test(NAME test_bmp_provider_test_generic_buffer COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_bmp_provider_test_generic_buffer)
+add_test(NAME test_bmp_provider_test_single_bmp_file COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_bmp_provider_test_single_bmp_file)
+add_test(NAME test_steganofs_test_create_file_linked_list COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_steganofs_test_create_file_linked_list)
+add_test(NAME test_steganofs_test_delete_file_valid COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_steganofs_test_delete_file_valid)
+add_test(NAME test_stegano_test_create_file_insufficient_memory COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_create_file_insufficient_memory)
+add_test(NAME test_stegano_test_create_file_no_available_file_slot COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_create_file_no_available_file_slot)
+add_test(NAME test_stegano_test_create_file_valid COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_create_file_valid)
+add_test(NAME test_stegano_test_create_hidden_fat COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_create_hidden_fat)
+add_test(NAME test_stegano_test_defragmentation COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_defragmentation)
+add_test(NAME test_stegano_test_delete_file_non_existent COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_delete_file_non_existent)
+add_test(NAME test_stegano_test_delete_file_with_clusters COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_delete_file_with_clusters)
+#add_test(NAME test_stegano_test_fuse COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_fuse)
+add_test(NAME test_stegano_test_get_free_disk_space_empty_fat COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_get_free_disk_space_empty_fat)
+add_test(NAME test_stegano_test_get_free_disk_space_full_disk COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_get_free_disk_space_full_disk)
+add_test(NAME test_stegano_test_get_free_disk_space_with_allocated_blocks COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_get_free_disk_space_with_allocated_blocks)
+add_test(NAME test_stegano_test_ramdiskloader COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_ramdiskloader)
+add_test(NAME test_stegano_test_rle COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_rle)
+add_test(NAME test_stegano_test_show_n_block_fat COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_show_n_block_fat)
+add_test(NAME test_stegano_test_swap_hidden_clusters_integrity COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_swap_hidden_clusters_integrity)
+add_test(NAME test_stegano_test_write_read COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_stegano_test_write_read)
+add_test(NAME test_cpp_wrapper_test_defragmenting COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tests/test_cpp_wrapper_test_defragmenting)
