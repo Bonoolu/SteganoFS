@@ -25,14 +25,17 @@ int SteganoCli::loadAndMount(const std::string &steganoPath, const std::string &
     auto *steganoFsAdapter = new SteganoFsAdapter(steganoPath);
     bool ret = steganoFsAdapter->loadFilesytemFromSteganoProvider();
     if (!ret) {
+        std::cout << "Failed to load filesystem from specified path!" << std::endl;
         return -1;
     }
     ret = steganoFsAdapter->mount(mntPath);
     if (!ret) {
+        std::cout << "Failed to mount!" << std::endl;
         return -1;
     }
     ret = steganoFsAdapter->writeFilesystemToSteganoProvider();
     if (!ret) {
+        std::cout << "Failed to write to filesystem!" << std::endl;
         return -1;
     }
     delete (steganoFsAdapter);
@@ -44,9 +47,11 @@ int SteganoCli::unmountAndUnload(const std::string &mntPath)
     auto *steganoFsAdapter = new SteganoFsAdapter("");
     bool ret = steganoFsAdapter->umount(mntPath);
     if (!ret) {
+        std::cout << "Failed to unmount!" << std::endl;
         return -1;
     }
     delete (steganoFsAdapter);
+    std::cout << "Successfully unmounted!" << std::endl;
     return 0;
 }
 
@@ -55,16 +60,22 @@ int SteganoCli::format(const std::string &steganoPath)
     auto *steganoFsAdapter = new SteganoFsAdapter(steganoPath);
     size_t size = steganoFsAdapter->formatNewFilesystem();
     delete (steganoFsAdapter);
-    if (size != 0)
+    if (size != 0){
+        std::cout << "Successfully formatted filesystem!" << std::endl;
         return 0;
-    else
+    }
+    else {
+        std::cout << "Failed to format filesystem at specified path." << std::endl;
         return -1;
+    }
+
 }
 
 int SteganoCli::info(const std::string &path)
 {
     struct statvfs parentFsStat{}, childFsStat{};
     if (statvfs(path.c_str(), &childFsStat) != 0) {
+        std::cout << "Failed to read statvfs from specified path." << std::endl;
         return -1;
     }
 
@@ -72,21 +83,25 @@ int SteganoCli::info(const std::string &path)
     size_t cwdSize = pathconf(".", _PC_PATH_MAX);
     if ((originalCwd = (char *) malloc((size_t) cwdSize)) != nullptr) { // see free() below
         if (getcwd(originalCwd, cwdSize) == nullptr) {
-            free(originalCwd);
+            std::cout << "Failed to get current working directory!" << std::endl;
             return -1;
         }
     }
     else {
+        std::cout << "Out of memory!" << std::endl;
         free(originalCwd);
         return -1;
     }
 
     if (chdir(path.c_str()) != 0) {
         free(originalCwd);
+        std::cout << "Failed to change directory!" << std::endl;
         return -1;
     }
 
     if (statvfs("..", &parentFsStat) != 0) {
+        std::cout << "Failed to read statvfs from specified path." << std::endl;
+        return -1;
     }
 
     if (childFsStat.f_fsid != parentFsStat.f_fsid) {
@@ -106,6 +121,7 @@ int SteganoCli::info(const std::string &path)
         auto *steganoFsAdapter = new SteganoFsAdapter(path);
         bool ret = steganoFsAdapter->loadFilesytemFromSteganoProvider();
         if (!ret) {
+            std::cout << "Failed to load filesystem at specified path." << std::endl;
             return -1;
         }
         float fragmentationInPercent = steganoFsAdapter->getFragmentationInPercent();
@@ -124,13 +140,16 @@ int SteganoCli::defragment(const std::string &steganoPath)
     auto *steganoFsAdapter = new SteganoFsAdapter(steganoPath);
     bool ret = steganoFsAdapter->loadFilesytemFromSteganoProvider();
     if (!ret) {
+        std::cout << "Failed to load filesystem at specified path." << std::endl;
         return -1;
     }
     ret = steganoFsAdapter->defragmentateFilesystem();
     if (!ret) {
+        std::cout << "Failed to defragment filesystem at specified path." << std::endl;
         return -1;
     }
     delete (steganoFsAdapter);
+    std::cout << "Successfully defragmented filesystem!" << std::endl;
     return 0;
 }
 
@@ -165,6 +184,5 @@ int SteganoCli::parse(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-    SteganoCli::parse(argc, argv);
-    return 0;
+    return SteganoCli::parse(argc, argv);
 }
