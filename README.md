@@ -1,10 +1,10 @@
 # SteganoFS
 
-![example workflow](https://github.com/Bonoolu/SteganoFS/actions/workflows/testsuit.yml/badge.svg)
+![test_suit_workflow](https://github.com/Bonoolu/SteganoFS/actions/workflows/testsuit.yml/badge.svg)
 
 SteganoFS is a developing project designed to explore the concept of concealing an entire mountable filesystem within steganographic files. The project has reached a functional state, demonstrating its potential capabilities. However, it's important to note that while it functions, it's still in the developmental phase and not recommended for practical data security purposes at this stage.
 
-![SteganoFS Demo](link_to_demo_image.png)
+<!-- ![SteganoFS Demo](link_to_demo_image.png) -->
 
 ## Table of Contents
 
@@ -17,6 +17,7 @@ SteganoFS is a developing project designed to explore the concept of concealing 
 - [Stegano Providers Interface](#stegano-providers-interface)
 - [Subprocess Provider](#subprocess-provider)
 - [Library Interfaces](#library-interfaces)
+- [Test Suit](#test-suit)
 - [File Compatibility](#file-compatibility)
 - [Documentation](#documentation)
 - [Known Issues and Limitations](#known-issues-and-limitations)
@@ -81,6 +82,12 @@ The Subprocess Provider pattern allows you to spawn subprocesses from provider c
 - **C Interface Documentation:** For C enthusiasts, we've documented the [steganofs.h Documentation](doxygen/c/steganofs.md) that defines the C interface of SteganoFS. This interface grants you direct access to SteganoFS functionality within your C projects.
 
 - **C++ Interface Documentation:** Check out the [SteganoFsAdapter.h Documentation](doxygen/cpp/doxygen.md#class-SteganoFsAdapter) to see how you can seamlessly incorporate SteganoFS into your C++ projects. The C++ interface provides a user-friendly wrapper around the core functionality of SteganoFS.
+
+## Test Suite
+
+SteganoFS comes equipped with a comprehensive test suite designed to ensure the reliability and functionality of its core components. This test suite covers a wide range of scenarios and functions, including filesystem behavior, RAM disk loader functionality, run-length encoding, and steganography.
+
+For detailed information about the types of tests available, how to run them, and how to contribute additional tests, please refer to the [Test Suite Documentation](./docs/tests.md). This documentation provides insights into the structure of the test suite, running tests, and guidelines for creating new tests.
 
 ## File Compatibility
 
