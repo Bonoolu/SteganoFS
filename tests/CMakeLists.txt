@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -coverage")
 set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -coverage")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -coverage")
 
-# This test modifies the example folder which is undesirable for presentation purposes
+# This was superceded by test_cpp_wrapper_test_defragmenting
 #add_executable(test_bmp_provider_test_bmp_folder test_bmp_provider_test_bmp_folder.c)
 #target_link_libraries(test_bmp_provider_test_bmp_folder PRIVATE steganofs)
 
@@ -50,7 +50,7 @@ target_link_libraries(test_stegano_test_delete_file_with_clusters PRIVATE stegan
 # This test blocks and waits for unmounting by user, which is undesirable for automated testing
 #add_executable(test_stegano_test_fuse test_stegano_test_fuse.c)
 #target_link_libraries(test_stegano_test_fuse PRIVATE steganofs)
-#
+
 add_executable(test_stegano_test_get_free_disk_space_empty_fat test_stegano_test_get_free_disk_space_empty_fat.c)
 target_link_libraries(test_stegano_test_get_free_disk_space_empty_fat PRIVATE steganofs)
 
@@ -84,7 +84,6 @@ add_custom_target(copy_example_steganofs
 )
 add_dependencies(test_bmp_provider_test_single_bmp_file copy_example_bmp)
 add_dependencies(test_bmp_provider_test_format_bmp_folder copy_example_folder)
-add_dependencies(test_bmp_provider_test_bmp_folder test_bmp_provider_test_bmp_folder)
 
 
 set(CMAKE_CXX_STANDARD 17)
@@ -93,4 +92,4 @@ add_executable(test_cpp_wrapper_test_defragmenting test_cpp_wrapper_test_defragm
         ../cpp-wrapper/SteganoFsAdapter.h)
 target_link_libraries(test_cpp_wrapper_test_defragmenting PRIVATE steganofs)
 
-add_dependencies(test_cpp_wrapper_test_defragmenting copy_example_steganofs)
+add_dependencies(test_cpp_wrapper_test_defragmenting copy_example_folder_cpp_wrapper)
