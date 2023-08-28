@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 project(steganofs_main)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -coverage")
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -coverage")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -coverage")
+
 add_custom_target(copy_example_folder
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/examples/ ${CMAKE_CURRENT_BINARY_DIR}/examples
 )

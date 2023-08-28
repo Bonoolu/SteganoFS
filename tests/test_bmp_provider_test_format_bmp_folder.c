@@ -7,7 +7,7 @@
  */
 bool test_format_bmp_folder ()
 {
-  size_t filesystem_size = steganofs_format ("examples/pictures");
+  size_t filesystem_size = steganofs_format ("tests/examples/pictures");
   if (filesystem_size == 0)
     {
       printf ("test_format_bmp_folder test failed: formatted filesystem is of size 0.\n");
@@ -27,7 +27,7 @@ bool test_format_bmp_folder ()
       printf ("test_format_bmp_folder test failed: Integrity check failed!\n");
       return false;
     }
-  ret = steganofs_unload_ramdisk (hidden_fat, "examples/pictures");
+  ret = steganofs_unload_ramdisk (hidden_fat, "tests/examples/pictures");
 
   if (!ret)
     {
