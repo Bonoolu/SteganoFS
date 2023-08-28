@@ -39,20 +39,20 @@ bool test_bmp_folder ()
       return false;
     }
   show_hidden_fat (hidden_fat, NULL);
-  bool ret = steganofs_unload_ramdisk (hidden_fat, "../examples/pictures");
+  bool ret = steganofs_unload_ramdisk (hidden_fat, "./examples/pictures");
   if (!ret)
     {
       printf ("test_bmp_folder test failed: Unloading ramdisk failed!\n");
       return false;
     }
   free_hidden_fat (hidden_fat);
-  hidden_fat = steganofs_load_ramdisk ("../examples/pictures");
+  hidden_fat = steganofs_load_ramdisk ("./examples/pictures");
   if (hidden_fat == NULL)
     {
       printf ("test_bmp_folder test failed: Loading ramdisk failed!\n");
       return false;
     }
-  ret = steganofs_unload_ramdisk (hidden_fat, "../examples/pictures");
+  ret = steganofs_unload_ramdisk (hidden_fat, "./examples/pictures");
   if (!ret)
     {
       printf ("test_bmp_folder test failed: Unloading ramdisk failed!\n");
