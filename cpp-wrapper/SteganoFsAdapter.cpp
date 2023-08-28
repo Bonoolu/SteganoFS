@@ -127,6 +127,7 @@ bool SteganoFsAdapter::writeFilesystemToSteganoProvider()
     bool ret = SteganoFS::steganofs_unload_ramdisk(m_hiddenFat, m_steganoImageFolder.c_str());
     if (ret) {
         std::cout << "[SteganoFS] Successfully wrote filesystem to : " << m_steganoImageFolder << std::endl;
+        m_hiddenFat = nullptr;
     }
     else {
         std::cout << "[SteganoFS] Error: Failed to write filesystem to : " << m_steganoImageFolder << std::endl;

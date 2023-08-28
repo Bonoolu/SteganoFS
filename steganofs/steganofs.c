@@ -378,6 +378,7 @@ bool steganofs_unload_ramdisk (struct HiddenFat *hidden_fat, const char *stegano
     return false;
   bool ret = stegano_provider_write (serialized_filesystem, stegano_folder);
   free (serialized_filesystem.buf);
+  free_hidden_fat(hidden_fat);
   return ret;
 }
 

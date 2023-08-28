@@ -12,7 +12,6 @@ bool test_single_bmp_file ()
   unsigned char testbuffer[4] = "abc";
   stgfs_write ("/test.txt", (char *) testbuffer, 4, 0, (struct fuse_file_info *) hidden_fat);
   steganofs_unload_ramdisk (hidden_fat, "tests/example.bmp");
-  free_hidden_fat (hidden_fat);
   hidden_fat = steganofs_load_ramdisk ("tests/example.bmp");
   if (!hidden_fat)
     {

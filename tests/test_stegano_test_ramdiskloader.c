@@ -44,17 +44,10 @@ bool test_ramdiskloader ()
       printf ("test_ramdiskloader test failed: Unloading ramdisk failed!\n");
       return false;
     }
-  free_hidden_fat (hidden_fat);
   hidden_fat = steganofs_load_ramdisk ("test_ramdiskloader.steganofs");
   if (hidden_fat == NULL)
     {
       printf ("test_ramdiskloader test failed: Loading ramdisk failed!\n");
-      return false;
-    }
-  ret = steganofs_unload_ramdisk (hidden_fat, "test_ramdiskloader.steganofs");
-  if (!ret)
-    {
-      printf ("test_ramdiskloader test failed: Unloading ramdisk failed!\n");
       return false;
     }
   show_hidden_fat (hidden_fat, NULL);
@@ -64,13 +57,20 @@ bool test_ramdiskloader ()
       printf ("test_ramdiskloader test failed: Integrity check failed!\n");
       return false;
     }
-  free_hidden_fat (hidden_fat);
+  ret = steganofs_unload_ramdisk (hidden_fat, "test_ramdiskloader.steganofs");
+  if (!ret)
+    {
+      printf ("test_ramdiskloader test failed: Unloading ramdisk failed!\n");
+      return false;
+    }
   return ret;
 }
 
-int main(int argc, char** argv) {
-    if (test_ramdiskloader()) {
-        return 0;
+int main (int argc, char **argv)
+{
+  if (test_ramdiskloader ())
+    {
+      return 0;
     }
-    return 1;
+  return 1;
 }

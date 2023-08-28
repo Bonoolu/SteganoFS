@@ -20,27 +20,29 @@ bool test_format_bmp_folder ()
       printf ("test_format_bmp_folder test failed: Loading ramdisk failed!\n");
       return false;
     }
-  bool ret = steganofs_unload_ramdisk (hidden_fat, "examples/pictures");
-  if (!ret)
-    {
-      printf ("test_format_bmp_folder test failed: Unloading ramdisk failed!\n");
-      return false;
-    }
   show_hidden_fat (hidden_fat, NULL);
-  ret = check_integrity (hidden_fat);
+  bool ret = check_integrity (hidden_fat);
   if (!ret)
     {
       printf ("test_format_bmp_folder test failed: Integrity check failed!\n");
       return false;
     }
-  free_hidden_fat (hidden_fat);
+  ret = steganofs_unload_ramdisk (hidden_fat, "examples/pictures");
+
+  if (!ret)
+    {
+      printf ("test_format_bmp_folder test failed: Unloading ramdisk failed!\n");
+      return false;
+    }
   return ret;
 }
 
-int main(int argc, char** argv) {
-    if (test_format_bmp_folder()) {
-        return 0;
+int main (int argc, char **argv)
+{
+  if (test_format_bmp_folder ())
+    {
+      return 0;
     }
-    return 1;
+  return 1;
 }
 
