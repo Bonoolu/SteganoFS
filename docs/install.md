@@ -12,7 +12,7 @@ To install SteganoFS and its dependencies, follow these steps:
       sudo apt-get install libfuse3-dev   # For Debian/Ubuntu
       ```
 
-    - **Qt5:** If you plan to use the Graphical User Interface (GUI), you'll need Qt5. Install it using your package manager..
+    - **Qt5:** If you plan to use the Graphical User Interface (GUI), you'll need Qt5. Install it using your package manager.
 
       ```bash
       sudo apt-get install qtcreator qtbase5-dev qt5-qmake cmake  # For Debian/Ubuntu
@@ -34,4 +34,4 @@ To install SteganoFS and its dependencies, follow these steps:
     make
    ```
    
-Done. You can now head to the [Usage Guide](./usage.md) to try out SteganoFS!
+Done. You can now run the [Test Suit](./tests.md) or head directly to the [Usage Guide](./usage.md) to try out SteganoFS!
