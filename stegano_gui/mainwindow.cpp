@@ -84,6 +84,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionUnmount->setDisabled(true);
     ui->actionDefragment->setDisabled(true);
 
+    // disable buttons without functions
+
+    ui->pastePushButton->setDisabled(true);
+    ui->newFilePushButton->setDisabled(true);
+    ui->newFolderPushButton->setDisabled(true);
+    ui->cutPushButton->setDisabled(true);
+    ui->copyPushButton->setDisabled(true);
+    ui->deletePushButton->setDisabled(true);
+
 
 
     // building the left side - a tree view with folders
@@ -111,6 +120,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView->setSortingEnabled(true);
     ui->tableView->setModel(m_filemodel);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
     ui->searchLineEdit->setPlaceholderText("Search...");
     ui->DisplayComboBox->setDisabled(false);
 
@@ -199,6 +209,13 @@ void MainWindow::updateTreeView(const QString &sPath)
 
     if (sPath == m_currentDir)
         disconnect(m_dirmodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateTreeView);
+}
+
+void MainWindow::updateTableView(const QString &sPath)
+{
+
+    ui->tableView->setRootIndex(m_filemodel->setRootPath(m_currentDir));
+
 }
 
 void MainWindow::updateListWidget(const QString &sPath)
@@ -326,6 +343,7 @@ void MainWindow::updateViews(const QString &sPath)
     if (m_filemodel->isDir(newIndex)) {
         connect(m_filemodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateListWidget);
         connect(m_dirmodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateTreeView);
+        connect(m_dirmodel, &QFileSystemModel::directoryLoaded, this, &MainWindow::updateTableView);
         m_currentDir = sPath;
         m_dirmodel->fetchMore(newIndex2);
         m_filemodel->fetchMore(newIndex);
@@ -348,9 +366,11 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
         ui->pathLineEdit->setText(m_currentDir);
 
         updateViews(m_currentDir);
+
         ui->forwardButton->setDisabled(true);
         ui->backButton->setDisabled(false);
-
+        ui->tableView->setModel(m_filemodel);
+        ui->tableView->update();
         if (m_currentDir != m_movingHistory->last()) {
             m_movingHistory->append(m_currentDir);
         }
@@ -372,34 +392,6 @@ void MainWindow::on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetIte
         m_lastDirectory = "/";
     }
     else {
-
-
-//        if (QFileInfo(newdir).isDir()) {
-
-//            if (m_currentDir != newdir) {
-
-//                if (!m_movingHistory->empty()) {
-//                    while (m_currentDir != m_movingHistory->last()) {
-//                        m_movingHistory->removeLast();
-//                        m_stepsToGoBack--;
-//                        ui->forwardButton->setDisabled(true);
-
-//                    }
-
-//                }
-//                ui->pathLineEdit->clear();
-//                m_currentDir = newdir;
-//                m_movingHistory->append(m_currentDir);
-//                m_stepsToGoBack++;
-
-//                ui->backButton->setDisabled(false);
-//            }
-
-//            updateViews(m_currentDir);
-
-//            ui->pathLineEdit->setText(m_currentDir);
-//            m_movingHistory->append(m_currentDir);
-//        }
 
         if (QFileInfo(newdir).isDir()) {
             m_stepsToGoBack++;
@@ -426,8 +418,6 @@ void MainWindow::on_listWidget_itemDoubleClicked([[maybe_unused]] QListWidgetIte
 
             ui->pathLineEdit->clear();
             ui->pathLineEdit->setText(m_currentDir);
-//                m_currentDir = newdir;
-//                m_movingHistory->append(m_currentDir);
 
             ui->backButton->setDisabled(false);
              updateViews(m_currentDir);
@@ -817,7 +807,6 @@ void MainWindow::on_backButton_clicked()
 
         ui->statusbar->showMessage(m_currentDir);
 
-        //updateViews(m_currentDir);
         updateListWidget(m_currentDir);
         updateTreeView(m_currentDir);
         ui->pathLineEdit->clear();
@@ -837,7 +826,6 @@ void MainWindow::on_forwardButton_clicked()
         m_stepsToGoBack++;
         m_currentDir = m_movingHistory->at(m_stepsToGoBack);
 
-        //updateViews(m_currentDir);
         updateListWidget(m_currentDir);
         updateTreeView(m_currentDir);
         ui->pathLineEdit->setText(m_currentDir);

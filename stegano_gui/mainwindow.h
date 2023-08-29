@@ -104,10 +104,6 @@ private:
     QList<QListWidgetItem> selectedFiles;
     QString m_lastDirectory;
     QString m_nextDirectory;
-    QListWidget *listWidget{};
-    QTreeView *treeView{};
-    QLineEdit *searchLineEdit{};
-    QPushButton *refreshButton{}; // TODO: Are these 4 pointers actually used?
     bool m_preview_on;
     bool m_lightmodeOn;
 
@@ -117,8 +113,9 @@ private:
      */
     void updateViews(const QString &sPath);
     void updateListWidget(const QString &sPath);
-
+    
     void updateTreeView(const QString &sPath);
+    void updateTableView(const QString &sPath);
 };
 
 #endif // MAINWINDOW_H

@@ -62,7 +62,7 @@ QMenuBar
 QMenuBar::disabled
 {
 	background-color: #404040;
-        color: #999999;
+        color: #cccccc;
         border-color: #b5d0eb;
 
 }
@@ -133,7 +133,7 @@ QMenu::item:selected
 
 QMenu::item:disabled
 {
-    color: #262626;
+    color: #cccccc;
 }
 
 
