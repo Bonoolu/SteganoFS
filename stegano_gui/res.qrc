@@ -42,5 +42,13 @@
         <file>assets/img/arrow-right.png</file>
         <file>assets/img/light/arrow-left.png</file>
         <file>assets/img/light/arrow-right.png</file>
+        <file>assets/img/steganoFSLogo1purple.png</file>
+        <file>assets/img/light/steganoFSLogo1blue.png</file>
+        <file>assets/img/pluto explorer logo long lila.png</file>
+        <file>assets/img/pluto windowicon purple c.png</file>
+        <file>assets/img/pluto windowicon purple nc.png</file>
+        <file>assets/img/light/pluto explorer logo long blau.png</file>
+        <file>assets/img/light/pluto windowicon blue nc.png</file>
+        <file>assets/img/light/pluto windowicon circle blue c.png</file>
     </qresource>
 </RCC>
