@@ -1,4 +1,4 @@
-## Pluto Explorer: Graphical User Interface (GUI)
+# Pluto Explorer: Graphical User Interface (GUI)
 
 The Pluto Explorer serves as the Graphical User Interface (GUI) for SteganoFS, providing an intuitive and familiar environment for interacting with concealed filesystems within steganographic image files. Built using C++ and the Qt framework, the Pluto Explorer closely resembles the widely recognized Windows File Explorer, ensuring ease of use for users. This section provides an overview of the Pluto Explorer's key features and functionalities.
 
