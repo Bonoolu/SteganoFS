@@ -33,8 +33,3 @@ Accessible from the menu bar option "File," the GUI provides essential filesyste
 
     Format and Unmount: Users have the ability to format the concealed filesystem or unmount a mounted folder, ensuring controlled access to the filesystem and its contents.
 
-User Assistance and Contact
-
-The Pluto Explorer provides an intuitive and user-friendly experience, supported by tooltips and contextual hints to guide users through various actions. Additionally, users seeking assistance, collaboration, or support can reach out via the provided contact information in the Contact and Support section of the readme.
-
-In summary, Pluto Explorer serves as a powerful and intuitive platform for interacting with concealed filesystems within steganographic image files. With its resemblance to familiar file explorers and a range of upcoming features, the GUI ensures efficient and user-friendly management of hidden data. Please note that, as with the overall project, Pluto Explorer is in active development, and additional features and enhancements are planned for future iterations.
