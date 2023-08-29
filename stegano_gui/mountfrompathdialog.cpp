@@ -1,3 +1,4 @@
+#include <QCoreApplication>
 #include "mountfrompathdialog.h"
 #include "ui_mountfrompathdialog.h"
 
@@ -14,15 +15,15 @@ MountFromPathDialog::MountFromPathDialog(QWidget *parent) :
     m_mountingPath = "";
     m_fsDlg = new QFileDialog;
     m_fsDlg->setFileMode(QFileDialog::ExistingFile);
-    m_fsDlg->setDirectory(QDir("../examples/pictures").absolutePath());
+    m_fsDlg->setDirectory(QDir(QCoreApplication::applicationDirPath() + "../examples/pictures").absolutePath());
 
     m_mountDlg = new QFileDialog;
     m_mountDlg->setFileMode(QFileDialog::Directory);
-    m_fsDlg->setDirectory(QDir("../examples/mnt").absolutePath());
+    m_fsDlg->setDirectory(QDir(QCoreApplication::applicationDirPath() + "../examples/mnt").absolutePath());
 
     m_info = new QMessageBox;
-    ui->filesystemPathLineEdit->setText(QDir("../examples/pictures").absolutePath());
-    ui->mountPathLineEdit->setText(QDir("../examples/mnt").absolutePath());
+    ui->filesystemPathLineEdit->setText(QDir(QCoreApplication::applicationDirPath() + "../examples/pictures").absolutePath());
+    ui->mountPathLineEdit->setText(QDir(QCoreApplication::applicationDirPath() + "../examples/mnt").absolutePath());
 
 }
 
