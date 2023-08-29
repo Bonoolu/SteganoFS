@@ -35,14 +35,14 @@ cd build/cli
 # Mount the filesystem (this blocks until unmount)
 ./steganofs_cli --mount ../examples/pictures ../examples/mnt
 
-# Perform operations on the mounted filesystem (from another terminal)
+# Perform operations on the mounted filesystem (from another terminal while in build/cli)
 ls ../examples/mnt
 cp ~/some_file ../examples/mnt
 
-# View filesystem information (from another terminal)
+# View filesystem information (from another terminal while in build/cli)
 ./steganofs_cli --info ../examples/mnt
 
-# Unmount the filesystem (from another terminal)
+# Unmount the filesystem (from another terminal while in build/cli)
 ./steganofs_cli --umount  ../examples/mnt
 `
 # You can also get filesystem information for an unmounted

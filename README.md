@@ -27,7 +27,7 @@ SteganoFS is a developing project designed to explore the concept of concealing 
 
 ## Introduction
 
-SteganoFS offers a solution for securely hiding files in a hostile environment, utilizing steganographic image files, primarily BMP files. A Developer Interface allows to add support for additional file types.
+SteganoFS offers a solution for hiding files in a hostile environment, utilizing steganographic image files, primarily BMP files. A Developer Interface allows to add support for additional file types.
 
 ## Features
 
@@ -77,7 +77,7 @@ SteganoFS comprises several essential components, including fuse3 for mounting, 
 
 ## Stegano Providers Interface
 
-Stegano Providers are fundamental to SteganoFS's versatility. To implement a new Stegano Provider, follow the guidelines provided in the [Stegano Providers Interface Documentation](./docs/stegano_providers_interface.md). The documentation includes an examples for PDF and subprocess providers.
+Stegano Providers are essential for extending SteganoFS's capabilities to different file types. To implement a new Stegano Provider, follow the guidelines provided in the [Stegano Providers Interface Documentation](./docs/stegano_providers_interface.md). The documentation includes an examples for PDF and subprocess providers.
 
 ## Subprocess Provider
 
