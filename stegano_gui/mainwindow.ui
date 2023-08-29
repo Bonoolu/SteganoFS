@@ -22,13 +22,6 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QLabel" name="logoLabel">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QGroupBox" name="groupBox">
@@ -360,16 +353,16 @@
    </property>
    <widget class="QMenu" name="menuDatei">
     <property name="title">
-     <string>Datei</string>
+     <string>File</string>
     </property>
     <addaction name="separator"/>
     <addaction name="actionMount"/>
     <addaction name="actionUnmount"/>
     <addaction name="separator"/>
+    <addaction name="actionShow_Fragmentation"/>
     <addaction name="actionShow_Filesystem_information"/>
     <addaction name="actionDefragment"/>
     <addaction name="actionFormat_Filesystem"/>
-    <addaction name="actionShow_Fragmentation"/>
    </widget>
    <addaction name="menuDatei"/>
   </widget>
