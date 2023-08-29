@@ -23,8 +23,7 @@
     - fuse3 handles the interactions between the operating system and the virtual filesystem, allowing users to perform operations as if they were interacting with a physical filesystem.
 
 3. **Filesystem Interactions:**
-    - Users can perform various filesystem operations such as reading files, creating directories, and modifying data within the mounted filesystem.
-    - Behind the scenes, these operations are managed by the filesystem implementation module.
+    - Users can perform various filesystem operations such as reading files, and modifying data within the mounted filesystem. Behind the scenes, these operations are managed by the filesystem implementation module.
 
 4. **Unmounting and Formatting:**
     - To unmount the filesystem, users can use the appropriate commands.
