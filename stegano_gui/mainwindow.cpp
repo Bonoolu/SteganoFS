@@ -445,6 +445,7 @@ void MainWindow::handleSearchTextChanged(const QString &searchText)
     m_filemodel->setNameFilters(QStringList() << "*" + searchText + "*");
     m_filemodel->setNameFilterDisables(false);
     updateViews(m_currentDir);
+    updateListWidget(m_currentDir);
 }
 
 
