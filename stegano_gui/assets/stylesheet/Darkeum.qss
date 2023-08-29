@@ -548,7 +548,7 @@ QRadioButton::indicator::unchecked
 
 QRadioButton::indicator::unchecked:hover
 { 
-	border: 2px solid #607cff; 
+        border: 2px solid #607cff;
 	border-radius: 5px; 
 	background-color:  #fff;
 	width: 9px; 
@@ -889,7 +889,7 @@ QSlider::groove:horizontal
 
 QSlider::sub-page:horizontal 
 {
-	background-color: #607cff;
+        background-color: #607cff;
 
 }
 
@@ -903,7 +903,7 @@ QSlider::add-page:horizontal
 
 QSlider::handle:horizontal 
 {
-	background-color: #607cff;
+        background-color: #607cff;
 	width: 14px;
 	margin-top: -6px;
 	margin-bottom: -6px;
@@ -914,7 +914,7 @@ QSlider::handle:horizontal
 
 QSlider::handle:horizontal:hover 
 {
-	background-color: #607cff;
+        background-color: #607cff;
 	border-radius: 3px;
 
 }
@@ -955,7 +955,7 @@ QSlider::groove:vertical
 
 QSlider::sub-page:vertical 
 {
-	background-color: #607cff;
+        background-color: #607cff;
 
 }
 
@@ -969,7 +969,7 @@ QSlider::add-page:vertical
 
 QSlider::handle:vertical 
 {
-	background-color: #607cff;
+        background-color: #607cff;
 	height: 14px;
 	margin-left: -6px;
 	margin-right: -6px;
@@ -980,7 +980,7 @@ QSlider::handle:vertical
 
 QSlider::handle:vertical:hover 
 {
-	background-color: #607cff;
+        background-color: #607cff;
 	border-radius: 3px;
 
 }
@@ -1014,7 +1014,7 @@ QSlider::handle:vertical:disabled
 /*-----QDial-----*/
 QDial
 {
-	background-color: #607cff;
+        background-color: #607cff;
 
 }
 
@@ -1171,7 +1171,7 @@ QProgressBar
 {
 	background-color: #383838;
 	color: #ffffff;
-	border: 1px solid #607cff;
+        border: 1px solid #607cff;
 	border-radius: 3px;
 	text-align: center;
 
@@ -1179,7 +1179,7 @@ QProgressBar
 
 
 QProgressBar::chunk {
-	background-color: #607cff;
+        background-color: #607cff;
 	color: #fff;
 
 }

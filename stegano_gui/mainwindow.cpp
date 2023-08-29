@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("Stegano File Explorer");
+    this->setWindowIcon(QIcon(":/assets/img/pluto windowicon purple c.png"));
+
 
     m_DefragDlg = new DefragmentDialog;
     m_DefragDlg->setLightmodeOn(false);
@@ -599,6 +601,10 @@ void MainWindow::on_darkModePushButton_clicked()
         ui->forwardButton->setIcon(QIcon(":/assets/img/light/arrow-forth.png"));
         ui->backButton->setIcon(QIcon(":/assets/img/light/arrow-back.png"));
 
+        this->setWindowIcon(QIcon(":/assets/img/light/pluto windowicon circle blue c.png"));
+
+
+
     }
     else {
 
@@ -623,6 +629,8 @@ void MainWindow::on_darkModePushButton_clicked()
 
         ui->forwardButton->setIcon(QIcon(":/assets/img/arrow-forth.png"));
         ui->backButton->setIcon(QIcon(":/assets/img/arrow-back.png"));
+
+        this->setWindowIcon(QIcon(":/assets/img/pluto windowicon purple c.png"));
 
     }
 
