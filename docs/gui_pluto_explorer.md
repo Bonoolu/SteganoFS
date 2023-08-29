@@ -1,8 +1,8 @@
-###Pluto Explorer: Graphical User Interface (GUI)
+### Pluto Explorer: Graphical User Interface (GUI)
 
 The Pluto Explorer serves as the Graphical User Interface (GUI) for SteganoFS, providing an intuitive and familiar environment for interacting with concealed filesystems within steganographic image files. Built using C++ and the Qt framework, the Pluto Explorer closely resembles the widely recognized Windows File Explorer, ensuring ease of use for users. This section provides an overview of the Pluto Explorer's key features and functionalities.
 
-##Navigation and Exploration
+#### Navigation and Exploration
 
 Pluto Explorer offers multiple ways to navigate and explore concealed filesystems:
 
@@ -12,7 +12,7 @@ Pluto Explorer offers multiple ways to navigate and explore concealed filesystem
 
 **Back and Forward Buttons:** Positioned to the left of the path-field, these buttons allow users to navigate back and forth through previously visited locations, enhancing the browsing experience.
 
-##Functionality Buttons
+#### Functionality Buttons
 
 The group box at the top of the GUI chosts several functional buttons, each designed to facilitate various actions:
 
@@ -22,7 +22,7 @@ The group box at the top of the GUI chosts several functional buttons, each desi
 
 **Paste, Delete, Cut, Copy, New Folder, New File:** While these buttons are currently placeholders and not fully implemented, they provide a glimpse of upcoming features for the GUI, enhancing its functionality over time.
 
-##Mounting and Filesystem Management
+#### Mounting and Filesystem Management
 
 Accessible from the menu bar option "File" the GUI provides essential filesystem management features:
 
