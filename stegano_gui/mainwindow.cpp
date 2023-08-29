@@ -203,13 +203,6 @@ void MainWindow::updateTreeView(const QString &sPath)
 
 void MainWindow::updateListWidget(const QString &sPath)
 {
-    QModelIndex newIndex = m_filemodel->index(sPath);
-
-    if (m_filemodel->isDir(newIndex)) {
-        ui->listWidget->setRootIndex(newIndex);
-
-    }
-
     if (m_stepsToGoBack == 0) {
         ui->backButton->setDisabled(true);
     }
