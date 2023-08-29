@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Stegano File Explorer");
+    this->setWindowTitle("Pluto Explorer");
     this->setWindowIcon(QIcon(":/assets/img/pluto windowicon purple c.png"));
 
 
@@ -705,6 +705,8 @@ void MainWindow::on_actionMount_triggered()
 
 void MainWindow::on_actionUnmount_triggered()
 {
+    QString tmp = QString::fromStdString(steganoFsAdapter->mountPath());
+
     // functionality to unmount a mounted folder
     if (steganoFsAdapter->umount()) {
         if (steganoFsAdapter->writeFilesystemToSteganoProvider()) {
@@ -713,9 +715,20 @@ void MainWindow::on_actionUnmount_triggered()
             ui->actionDefragment->setDisabled(true);
             ui->actionShow_Filesystem_information->setDisabled(true);
             ui->actionShow_Fragmentation->setDisabled(true);
+
+
+            QFuture<void> future = QtConcurrent::run([this, tmp]() {
+                QThread::msleep(500);
+                updateViews(tmp);
+                updateListWidget(tmp);
+
+            });
+
             delete steganoFsAdapter;
             steganoFsAdapter = nullptr;
             ui->statusbar->showMessage("Successfully unmounted!", 18000);
+
+
         }
         else {
             ui->statusbar->showMessage("Writing to filesystem failed!", 18000);
@@ -752,7 +765,7 @@ void MainWindow::on_actionDefragment_triggered()
         }
     }
     else {
-        ui->statusbar->showMessage(QString("Defragmenting Aborted by user!"), 10000);
+        ui->statusbar->showMessage(QString("Defragmenting aborted by user!"), 10000);
     }
 }
 

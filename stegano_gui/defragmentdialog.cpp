@@ -30,7 +30,7 @@ void DefragmentDialog::setLightmodeOn(bool newLightmodeOn)
     else {
         ui->buttonBox->setStyleSheet(
             "background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, stop: 0 #607cff, stop: 1 #445cc9); border-radius: 5px; color: white; padding: 2px 7px ; ");
-        setStyleSheet("background-color: #111111; color: #fafafa;");
+            setStyleSheet("background-color: #111111; color: #fafafa;");
     }
 }
 
@@ -45,22 +45,6 @@ void DefragmentDialog::setFragmentation(float f)
     ui->fragmentationPercentLabel->setText(s + "%");
 }
 
-void DefragmentDialog::on_pushButton_clicked()
-{
-    // returns defragment success
-
-    bool defragmentResult = m_adapter->defragmentateFilesystem();
-    qDebug() << "Disk defragmented: " << QString::number(defragmentResult);
-
-    if (defragmentResult) {
-        ui->actualStatusLabel->setStyleSheet("color: green;");
-        ui->actualStatusLabel->setText("DONE");
-    }
-    else {
-        ui->actualStatusLabel->setStyleSheet("color: red;");
-        ui->actualStatusLabel->setText("ERROR");
-    }
-}
 
 void DefragmentDialog::setAdapter(SteganoFsAdapter *newAdapter)
 {

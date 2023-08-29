@@ -55,13 +55,7 @@ public:
      */
     void setAdapter(SteganoFsAdapter *newAdapter);
 
-private slots:
-    /**
-     * @brief Slot for the button click event.
-     *
-     * This slot is called when the push button is clicked in the dialog.
-     */
-    void on_pushButton_clicked();
+
 
 private:
     Ui::DefragmentDialog *ui; ///< The UI components of the dialog.

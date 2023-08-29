@@ -9,6 +9,7 @@ FragmentationDialog::FragmentationDialog(QWidget *parent, SteganoFsAdapter *steg
     ui(new Ui::FragmentationDialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Fragmentation Diagramm");
     auto *fragDiagram = new FragmentationDiagram(this, steganoFsAdapter);
     layout()->replaceWidget(ui->widget, fragDiagram);
     ui->widget->hide();
