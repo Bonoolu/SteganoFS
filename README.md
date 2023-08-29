@@ -12,6 +12,7 @@ SteganoFS is a developing project designed to explore the concept of concealing 
 - [Features](#features)
 - [Installation and Dependencies](#installation-and-dependencies)
 - [Usage](#usage)
+- [GUI: Pluto Explorer](#gui-pluto-explorer)
 - [Contributing](#contributing)
 - [Architecture](#architecture)
 - [Stegano Providers Interface](#stegano-providers-interface)
@@ -60,6 +61,10 @@ steganofs_cli --info /mount/point
 #Unmount the filesystem from a different terminal
 steganofs_cli --umount /mount/point
 ```
+
+## GUI: Pluto Explorer
+The Pluto Explorer is a Graphical User Interface (GUI) used for **interacting with concealed filesystems within steganographic image files through the SteganoFS system**. Built using C++ and the Qt framework, it resembles Windows File Explorer and offers easy navigation. It includes features like a Tree View for hierarchy, a Path Input Field for quick navigation, and Back/Forward Buttons for location history. The GUI has functional buttons for Previewing files, switching to Light Mode, and upcoming functions like Paste, Delete, Cut, Copy, New Folder, and New File. It enables **mounting** of concealed filesystems from steganographic images, providing options for interacting with the files, viewing **filesystem information**, assessing the **fragmentation status** and **defragmenting the selected filesystem**, **formatting** the filesystem, and **unmounting** it for controlled access.
+You can find a more detailed description in the [GUI Documentation](./docs/gui_pluto_explorer.md)
 
 ## Contributing
 
