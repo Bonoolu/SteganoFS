@@ -58,9 +58,9 @@ struct SteganoFile read_bmp (const char *path)
   if (file)
     {
       fseek (file, 0L, SEEK_END);
-      size_t pixel_data_length = ftell (file) - 36;
+      size_t pixel_data_length = ftell (file) - 54;
       rewind (file);
-      fseek (file, 36, 0);
+      fseek (file, 54, 0);
       unsigned char *pixeldata = malloc (pixel_data_length); // see free() below
       if (pixeldata == NULL)
         {
@@ -78,12 +78,13 @@ struct SteganoFile read_bmp (const char *path)
 size_t write_bmp (struct SteganoFile stegano_file)
 {
   FILE *file = fopen (stegano_file.path, "rb");
+  unsigned char header[54];
   if (file)
     {
       fseek (file, 0L, SEEK_END);
-      size_t pixel_data_length = ftell (file) - 36;
+      size_t pixel_data_length = ftell (file) - 54;
       rewind (file);
-      fseek (file, 36, 0);
+      fread (header, 54, 1, file);
       unsigned char *pixeldata = malloc (pixel_data_length); // see free() below
       if (pixeldata == NULL)
         {
@@ -93,8 +94,8 @@ size_t write_bmp (struct SteganoFile stegano_file)
       fflush (file);
       fclose (file);
       size_t payload_written = embedd_payload (stegano_file, pixeldata, pixel_data_length);
-      fopen (stegano_file.path, "wb");
-      fseek (file, 36, 0);
+      file = fopen (stegano_file.path, "wb");
+      fwrite (header, 54, 1, file);
       fwrite (pixeldata, pixel_data_length, 1, file);
       fflush (file);
       free (pixeldata);

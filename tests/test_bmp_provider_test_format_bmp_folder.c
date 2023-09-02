@@ -14,7 +14,7 @@ bool test_format_bmp_folder ()
       return false;
     }
   printf ("Formatted filesystem is of size: %zu\n", filesystem_size);
-  HiddenFat *hidden_fat = steganofs_load_ramdisk ("examples/pictures");
+  HiddenFat *hidden_fat = steganofs_load_ramdisk ("tests/examples/pictures");
   if (hidden_fat == NULL)
     {
       printf ("test_format_bmp_folder test failed: Loading ramdisk failed!\n");
