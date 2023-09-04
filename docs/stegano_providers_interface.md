@@ -45,7 +45,7 @@ struct SteganoFile read_custom(const char *path) {
     struct SteganoFile result;
     result.payload = malloc(read_bytes);
     memcpy(result.payload, buffer, read_bytes);
-    result.payload_size = read_bytes;
+    result.payload_length = read_bytes;
 
     return result;
 }
