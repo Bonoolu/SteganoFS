@@ -19,7 +19,7 @@ SteganoFS is a developing project designed to explore the concept of concealing 
 - [Stegano Providers Interface](#stegano-providers-interface)
 - [Subprocess Provider](#subprocess-provider)
 - [Library Interfaces](#library-interfaces)
-- [Test Suit](#test-suit)
+- [Test Suit](#test-suite)
 - [File Compatibility](#file-compatibility)
 - [Documentation](#documentation)
 - [Known Issues and Limitations](#known-issues-and-limitations)
@@ -82,7 +82,7 @@ Stegano Providers are essential for extending SteganoFS's capabilities to differ
 
 ## Subprocess Provider
 
-The Subprocess Provider pattern allows you to spawn subprocesses from provider code, enabling integration of steganographic techniques in various languages. For an example and instructions, refer to the [Subprocess Provider Guide](../docs/stegano_providers_interface.md#subprocess-provider).
+The Subprocess Provider pattern allows you to spawn subprocesses from provider code, enabling integration of steganographic techniques in various languages. For an example and instructions, refer to the [Subprocess Provider Guide](./docs/stegano_providers_interface.md#subprocess-provider).
 
 ## Library Interfaces ##
 
